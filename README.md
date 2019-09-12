@@ -27,3 +27,9 @@ Geilstes Kino-Reservierungstool jemals
 - Filmdetailansicht
 - Datenbank mit mindestens Tabellen für Nutzer und Filmen
 - Nutzer: Admin, Gruppenmitglieder ( Email oder Benutzername , Passwort: Nachname des Gruppenmitglieds)
+- Filtern
+
+Meilensteine: 
+- Datenbank - 17.09.2019
+- Frontend - 19.09.2019
+- Backend - 20.09.2019
