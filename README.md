@@ -5,5 +5,5 @@ Geilstes Kino-Reservierungstool jemals
 
 ## Vorgehen
 
-- 
--
+- Aufgabenteilung in Frontend, Backend, Datenbank und Dokumentation
+  - Ansprechpartner: Datenbanken - Arthur Siebert
