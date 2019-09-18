@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMessage (View view){
-        //do something
+        int i = 12;
     }
 }
