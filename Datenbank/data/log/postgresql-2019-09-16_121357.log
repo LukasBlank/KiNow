@@ -1,0 +1,10 @@
+2019-09-16 12:13:57.584 GMT [5096] LOG:  Datenbanksystem wurde am 2019-09-16 12:13:42 GMT heruntergefahren
+2019-09-16 12:13:58.606 GMT [7972] LOG:  Datenbanksystem ist bereit, um Verbindungen anzunehmen
+2019-09-16 12:15:51.703 GMT [5760] FEHLER:  Syntaxfehler bei Â»CREATEÂ« bei Zeichen 21
+2019-09-16 12:15:51.703 GMT [5760] ANWEISUNG:  CREATE DATABASE bib
+	CREATE DATABASE bib
+	CREATE DATABASE bib;
+2019-09-16 15:09:14.819 GMT [1304] FATAL:  Datenbank »kiNOW« existiert nicht
+2019-09-16 15:10:11.243 GMT [6180] FATAL:  Datenbank »kiNOW« existiert nicht
+2019-09-16 15:10:36.541 GMT [10748] FEHLER:  Datenbank Â»kinowÂ« existiert bereits
+2019-09-16 15:10:36.541 GMT [10748] ANWEISUNG:  CREATE DATABASE kiNOW;
