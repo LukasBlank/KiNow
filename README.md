@@ -1,4 +1,4 @@
-# KiNow
+# kiNOW
 Geilstes Kino-Reservierungstool jemals
 +1<br>
 Take a look: https://developer.android.com/training/basics/firstapp <br><br>
