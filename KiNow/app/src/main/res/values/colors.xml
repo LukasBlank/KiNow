@@ -12,4 +12,8 @@
     <color name="colorRed">#e34758</color>
     <color name="colorRedLight">#ff7b85</color>
     <color name="colorRedDark">#ab002f</color>
+    
+    <!-- Black & White -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
