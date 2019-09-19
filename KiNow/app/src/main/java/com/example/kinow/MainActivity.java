@@ -11,6 +11,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
 
     }//onCreate
 
@@ -32,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE , message);
         startActivity(intent);
     }//sendMessage
+
+    private void connect (){
+       //toDo
+    }
 
 
 }//class
