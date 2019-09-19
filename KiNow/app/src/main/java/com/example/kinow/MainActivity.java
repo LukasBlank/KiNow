@@ -15,21 +15,26 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static String EXTRA_MESSAGE = ""; //statische Varible, welche bei Seitenwechsel übergeben wird,
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
 
-    }
+    }//onCreate
 
     public void sendMessage (View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.Textfeld);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        EditText Textfeld = (EditText) findViewById(R.id.Textfeld);
+        String message = Textfeld.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE , message);
         startActivity(intent);
-    }
-}
+    }//sendMessage
+
+
+}//class
 
 
 

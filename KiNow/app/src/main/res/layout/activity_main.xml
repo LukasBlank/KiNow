@@ -25,6 +25,7 @@
         android:layout_marginStart="160dp"
         android:layout_marginLeft="160dp"
         android:layout_marginTop="140dp"
+        android:onClick="sendMessage"
         android:text="@string/button_send"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
