@@ -1,5 +1,0 @@
-Server: localhost
-Database: postgres
-Port: 5432
-Username: postgres
-Passwort für Benutzer postgres: 123456

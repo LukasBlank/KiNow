@@ -1,6 +1,6 @@
-# KiNow
+# kiNOW
 Geilstes Kino-Reservierungstool jemals
-+1<br>
+<br>
 Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 # Besprechung 12.09.2018
 
@@ -30,7 +30,7 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 - Nutzer: Admin, Gruppenmitglieder ( Email oder Benutzername , Passwort: Nachname des Gruppenmitglieds)
 - Filtern
 
-Meilensteine: 
+## Meilensteine: 
 - Datenbank - 17.09.2019
 - Frontend - 19.09.2019
 - Backend - 20.09.2019
