@@ -2,21 +2,17 @@ package com.example.kinow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
+
+import org.postgresql.Driver;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,12 +38,14 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             Class.forName("org.postgresql.Driver");
-            Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/KiNow","postgres","postgres");
+            Connection c = null;
+            c = DriverManager.getConnection("jdbc:postgresql://10.0.2.2:5432/KiNow","postgres","postgres");
+            //^^ Versuch mit Datenbank zu verbinden
             EditText e = (EditText) findViewById(R.id.Textfeld);
             e.setText("EASY");
         } catch (Exception e){
             EditText ex = (EditText) findViewById(R.id.Textfeld);
-            ex.setText(e.getMessage());
+            ex.setText(e.fillInStackTrace().toString());
         }
     }//connect
 
