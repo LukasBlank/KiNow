@@ -3,6 +3,7 @@ package com.example.kinow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        connect();
     }//onCreate
 
     public void sendMessage (View view) {
@@ -38,12 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void connect (){
         try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            Class.forName("org.postgresql.Driver");
             Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/KiNow","postgres","postgres");
             EditText e = (EditText) findViewById(R.id.Textfeld);
             e.setText("EASY");
         } catch (Exception e){
             EditText ex = (EditText) findViewById(R.id.Textfeld);
-            ex.setText(e.fillInStackTrace().toString());
+            ex.setText(e.getMessage());
         }
     }//connect
 
