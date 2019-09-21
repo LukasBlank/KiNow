@@ -19,12 +19,20 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = ""; //statische Varible, welche bei Seitenwechsel übergeben wird,
+    public final static String EXTRA_MESSAGE = ""; //Variable die beim Wechseln der Ansicht übergeben wird
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/KiNow","postgres","postgres");
+            EditText e = (EditText) findViewById(R.id.Textfeld);
+            e.setText("EASY");
+        } catch (Exception e){
+            EditText ex = (EditText) findViewById(R.id.Textfeld);
+            ex.setText(e.fillInStackTrace().toString());
+        }
 
 
     }//onCreate
