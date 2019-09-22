@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = ""; //Variable die beim Wechseln der Ansicht übergeben wird
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
