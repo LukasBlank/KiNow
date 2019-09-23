@@ -41,6 +41,18 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 - Database
    - Die Datenbank ist erstellt und konfiguriert
 
+- Weitere Schritte:
+  - Suchen 
+    - Suchfunktion im SuchScreen einfügen 
+  - Filmansicht:
+    - Darstellung aller Filme einführen mit Daten aus der Datenbank
+    - Sortierfunktion für die Filme -> Genre, FSK, etc
+    - Filterfunktion für die Filme -> Vorstellungsdatum, Uhrzeit, Genre, etc.
+    - Detailansicht zu jedem Film erstellen mit Ticketbestellung
+  - Ticketansicht:
+    - Gekaufte Tickets sollen in einer Liste angezeigt werden
+  - Profil
+    - Name, Adresse usw verändern bzw. Anmeldung
 ## Meilensteine: 
 - Datenbank - 17.09.2019
 - Frontend - 19.09.2019
