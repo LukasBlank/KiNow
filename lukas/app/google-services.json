@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "169069555955",
+    "firebase_url": "https://kinow-46514.firebaseio.com",
+    "project_id": "kinow-46514",
+    "storage_bucket": "kinow-46514.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169069555955:android:7bde0fccfc606db0548786",
+        "android_client_info": {
+          "package_name": "com.example.kinow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169069555955-k7t7qra1r2959f5l02qtvnuv64jfh4p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaf2vX-qaYm47U8zPZdj8oZOAtGDIJCgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169069555955-k7t7qra1r2959f5l02qtvnuv64jfh4p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169069555955:android:c656ed73f606cd37548786",
+        "android_client_info": {
+          "package_name": "com.example.lukas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169069555955-u7midtl36oomcnnhlvcrpnalkstvmp8h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lukas",
+            "certificate_hash": "acf737cde68560945a83fa7c92ec1a46d361992a"
+          }
+        },
+        {
+          "client_id": "169069555955-k7t7qra1r2959f5l02qtvnuv64jfh4p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaf2vX-qaYm47U8zPZdj8oZOAtGDIJCgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169069555955-k7t7qra1r2959f5l02qtvnuv64jfh4p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169069555955:android:db901ef794dd410b548786",
+        "android_client_info": {
+          "package_name": "fm.feuermania.dennis.kinow_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169069555955-k7t7qra1r2959f5l02qtvnuv64jfh4p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaf2vX-qaYm47U8zPZdj8oZOAtGDIJCgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169069555955-k7t7qra1r2959f5l02qtvnuv64jfh4p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
