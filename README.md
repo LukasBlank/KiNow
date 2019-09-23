@@ -1,5 +1,5 @@
 # kiNOW
-Geilstes Kino-Reservierungstool jemals überhaupt
+Unser Kino-Reservierungstool
 <br>
 Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 # Besprechung 12.09.2018
