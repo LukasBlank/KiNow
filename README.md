@@ -30,18 +30,24 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 - Nutzer: Admin, Gruppenmitglieder ( Email oder Benutzername , Passwort: Nachname des Gruppenmitglieds)
 - Filtern
 
-## Erste Schritte stand 23.09.2019
-- Frontend 
+## Meilensteine: 
+- Datenbank - 17.09.2019
+- Frontend - 19.09.2019
+- Backend - 20.09.2019
+
+
+# Erste Schritte stand 23.09.2019
+## Frontend 
   - Ladebildschirm Vorhanden 
   - NavigationsBar ermöglicht das Wechseln zwischen verschiedenen Ansichten 
     - Suchen, Allgemeine Filmansicht, Ticketansicht und einer Profilansicht
 
-- Backend 
+## Backend 
     
-- Database
+## Database
    - Die Datenbank ist erstellt und konfiguriert
 
-- Weitere Schritte:
+## To Do's
   - Suchen 
     - Suchfunktion im SuchScreen einfügen 
   - Filmansicht:
@@ -53,7 +59,4 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
     - Gekaufte Tickets sollen in einer Liste angezeigt werden
   - Profil
     - Name, Adresse usw verändern bzw. Anmeldung
-## Meilensteine: 
-- Datenbank - 17.09.2019
-- Frontend - 19.09.2019
-- Backend - 20.09.2019
+    
