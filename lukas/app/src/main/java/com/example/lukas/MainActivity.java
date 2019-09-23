@@ -98,15 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
+                        List <Nutzer> nutzer = new List<Nutzer>();
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                            ;
-                        }
+                            nutzer.append(new Nutzer(documentSnapshot.getString("Vorname"),documentSnapshot.getString("Nachname")));
+                        }//for
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                ;
+                Toast.makeText(MainActivity.this, "Error.", Toast.LENGTH_SHORT).show();
+                Log.d("MainActivity",e.getMessage());
             }
         });
     }//getFilme
