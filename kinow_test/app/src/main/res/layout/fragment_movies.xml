@@ -107,11 +107,4 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/movies"
-        android:layout_gravity="center"
-        android:textColor="@color/white"/>
-
 </FrameLayout>
