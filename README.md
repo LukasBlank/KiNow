@@ -17,7 +17,7 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 
 ## Technologien
 
-- Datenbank: Firebase Realtime Database
+- Datenbank: Firebase Firestore
 - Front-/ Backend: Android Studio
 - Dokumentation: JSP Wiki / Git
 
