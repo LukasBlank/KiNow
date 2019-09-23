@@ -31,13 +31,14 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 - Filtern
 
 ## Erste Schritte stand 23.09.2019
-- Frontend: 
+- Frontend 
   - Ladebildschirm Vorhanden 
   - NavigationsBar ermöglicht das Wechseln zwischen verschiedenen Ansichten 
     - Suchen, Allgemeine Filmansicht, Ticketansicht und einer Profilansicht
- - Backend 
-   - 
- - Database
+
+- Backend 
+    
+- Database
    - Die Datenbank ist erstellt und konfiguriert
 
 ## Meilensteine: 
