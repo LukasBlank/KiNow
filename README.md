@@ -30,6 +30,16 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 - Nutzer: Admin, Gruppenmitglieder ( Email oder Benutzername , Passwort: Nachname des Gruppenmitglieds)
 - Filtern
 
+## Erste Schritte stand 23.09.2019
+- Frontend: 
+  - Ladebildschirm Vorhanden 
+  - NavigationsBar ermöglicht das Wechseln zwischen verschiedenen Ansichten 
+    - Suchen, Allgemeine Filmansicht, Ticketansicht und einer Profilansicht
+ - Backend 
+   - 
+ - Database
+   - Die Datenbank ist erstellt und konfiguriert
+
 ## Meilensteine: 
 - Datenbank - 17.09.2019
 - Frontend - 19.09.2019
