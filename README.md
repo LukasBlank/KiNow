@@ -1,5 +1,5 @@
 # kiNOW
-Geilstes Kino-Reservierungstool jemals überhaupt
+Unser Kino-Reservierungstool
 <br>
 Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 # Besprechung 12.09.2018
@@ -17,7 +17,7 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 
 ## Technologien
 
-- Datenbank: Firebase Realtime Database
+- Datenbank: Firebase Firestore
 - Front-/ Backend: Android Studio
 - Dokumentation: JSP Wiki / Git
 
@@ -34,3 +34,29 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
 - Datenbank - 17.09.2019
 - Frontend - 19.09.2019
 - Backend - 20.09.2019
+
+
+# Erste Schritte stand 23.09.2019
+## Frontend 
+  - Ladebildschirm Vorhanden 
+  - NavigationsBar ermöglicht das Wechseln zwischen verschiedenen Ansichten 
+    - Suchen, Allgemeine Filmansicht, Ticketansicht und einer Profilansicht
+
+## Backend 
+    
+## Database
+   - Die Datenbank ist erstellt und konfiguriert
+
+## To Do's
+  - Suchen 
+    - Suchfunktion im SuchScreen einfügen 
+  - Filmansicht:
+    - Darstellung aller Filme einführen mit Daten aus der Datenbank
+    - Sortierfunktion für die Filme -> Genre, FSK, etc
+    - Filterfunktion für die Filme -> Vorstellungsdatum, Uhrzeit, Genre, etc.
+    - Detailansicht zu jedem Film erstellen mit Ticketbestellung
+  - Ticketansicht:
+    - Gekaufte Tickets sollen in einer Liste angezeigt werden
+  - Profil
+    - Name, Adresse usw verändern bzw. Anmeldung
+    
