@@ -1,4 +1,0 @@
-#Sat Sep 21 11:15:54 CEST 2019
-base.0=C\:\\Users\\A704600\\Dropbox\\KiNow-Projekt\\KiNow\\KiNow\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
