@@ -1,21 +1,17 @@
 package com.example.demo;
 
-public class Zahlungsmethode {
-    int zId;
+public class Zahlungsmethode{
+    int methodeID;
     String methode;
 
-    public Zahlungsmethode(int zId, String methode) {
-        this.zId = zId;
+    public Zahlungsmethode(int methodeID, String methode) {
+        this.methodeID = methodeID;
         this.methode = methode;
     }
 
-    public int getzId() {
-        return zId;
-    }
+    public int getMethodeID() { return methodeID; }
 
-    public void setzId(int zId) {
-        this.zId = zId;
-    }
+    public void setMethodeID(int methodeID) { this.methodeID = methodeID; }
 
     public String getMethode() {
         return methode;
@@ -24,4 +20,10 @@ public class Zahlungsmethode {
     public void setMethode(String methode) {
         this.methode = methode;
     }
+
+    //Ermöglicht die Bestimmung der Gleichheit von Zahlungsmethoden
+    public boolean equals (Zahlungsmethode z){
+      if (this.getMethode().equals(z.getMethode()))return true;
+      else return false;
+    }//equals
 }

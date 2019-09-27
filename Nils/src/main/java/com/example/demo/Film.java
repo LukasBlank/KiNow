@@ -1,45 +1,55 @@
 package com.example.demo;
 
 public class Film {
-    int FID,FSK,dauer,bewertung;
-    String titel,beschreibung;
-    boolean dreiD;
+    int filmID,fsk,dauer,bewertung;
+    String titel,beschreibung,genre,regie,darsteller;
 
-    public Film(int FID, int FSK, int dauer, int bewertung, String titel, String beschreibung, boolean dreiD) {
-        this.FID = FID;
-        this.FSK = FSK;
+    public Film(int filmID, String titel, String genre, String regie, String darsteller, String beschreibung, int dauer, int fsk, int bewertung) {
+        this.filmID = filmID;
+        this.titel = titel;
+        this.genre = titel;
+        this.regie = regie;
+        this.darsteller = darsteller;
+        this.beschreibung = beschreibung;
+        this.fsk = fsk;
         this.dauer = dauer;
         this.bewertung = bewertung;
-        this.titel = titel;
-        this.beschreibung = beschreibung;
-        this.dreiD = dreiD;
-    }
+    }//Konstruktor
 
-    public int getFSK() {
-        return FSK;
-    }
+  public int getFilmID() {
+    return filmID;
+  }
 
-    public int getDauer() {
-        return dauer;
-    }
+  public int getFsk() {
+    return fsk;
+  }
 
-    public int getBewertung() {
-        return bewertung;
-    }
+  public int getDauer() {
+    return dauer;
+  }
 
-    public int getFID() {
-        return FID;
-    }
+  public int getBewertung() {
+    return bewertung;
+  }
 
-    public String getTitel() {
-        return titel;
-    }
+  public String getTitel() {
+    return titel;
+  }
 
-    public String getBeschreibung() {
-        return beschreibung;
-    }
+  public String getBeschreibung() {
+    return beschreibung;
+  }
 
-    public boolean isDreiD() {
-        return dreiD;
-    }
-}
+  public String getGenre() {
+    return genre;
+  }
+
+  public String getRegie() {
+    return regie;
+  }
+
+  public String getDarsteller() {
+    return darsteller;
+  }
+
+}//class

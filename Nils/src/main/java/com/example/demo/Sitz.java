@@ -2,16 +2,15 @@ package com.example.demo;
 
 public class Sitz {
 
-    int sitzID,saalID,reihe,sitzplatz;
-    boolean loge;
+    int sitzID,saalID;
+    boolean loge,barrierefrei;
 
-    public Sitz(int sitzID, int saalID, int reihe, int sitzplatz, boolean loge) {
+    public Sitz(int sitzID, int saalID, int reihe, int sitzplatz, boolean loge, boolean barrierefrei) {
         this.sitzID = sitzID;
         this.saalID = saalID;
-        this.reihe = reihe;
-        this.sitzplatz = sitzplatz;
         this.loge = loge;
-    }
+        this.barrierefrei = barrierefrei;
+    }//Konstruktor
 
     public int getSitzID() {
         return sitzID;
@@ -21,15 +20,7 @@ public class Sitz {
         return saalID;
     }
 
-    public int getReihe() {
-        return reihe;
-    }
+    public boolean getBarrierefrei() { return barrierefrei; }
 
-    public int getSitzplatz() {
-        return sitzplatz;
-    }
-
-    public boolean isLoge() {
-        return loge;
-    }
-}
+    public boolean isLoge() { return loge; }
+}//class

@@ -2,13 +2,13 @@ package com.example.demo;
 
 public class Kino {
     int kinoID;
-    String name,ort;
+    String name,adresse;
 
-    public Kino(int kinoID, String name, String ort) {
+    public Kino(int kinoID, String name, String adresse) {
         this.kinoID = kinoID;
         this.name = name;
-        this.ort = ort;
-    }
+        this.adresse = adresse;
+    }//Konstruktor
 
     public int getKinoID() {
         return kinoID;
@@ -19,6 +19,7 @@ public class Kino {
     }
 
     public String getOrt() {
-        return ort;
+        return adresse;
     }
-}
+
+}//class

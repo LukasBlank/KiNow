@@ -1,69 +1,88 @@
 package com.example.demo;
 
+import java.util.List;
 import javax.validation.constraints.Email;
 import java.util.Date;
+import sun.security.util.Password;
 
 public class Nutzer {
-    int Nid;
-    String Vorname,Nachname;
-    Date Geburtstag;
-    String email;
-    String passwort;
+    int nutzerID;
+    String email,vorname,nachname,geschlecht;
+    Date geburtstag;
+    Password passwort;
+    List<Zahlungsmethode> zahlungsmethoden;
 
-    public Nutzer(int nid, String vorname, String nachname, Date geburtstag, String email, String passwort) {
-        Nid = nid;
-        Vorname = vorname;
-        Nachname = nachname;
-        Geburtstag = geburtstag;
+    public Nutzer(int nutzerID, String email, String vorname, String nachname, String geschlecht, Date geburtstag, Password passwort) {
+        this.nutzerID = nutzerID;
         this.email = email;
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.geschlecht = geschlecht;
+        this.geburtstag = geburtstag;
         this.passwort = passwort;
-    }
+    }//Konstruktor
 
-    public int getNid() {
-        return Nid;
-    }
-
-    public void setNid(int nid) {
-        Nid = nid;
-    }
-
-    public String getVorname() {
-        return Vorname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setVorname(String vorname) {
-        Vorname = vorname;
-    }
-
-    public String getNachname() {
-        return Nachname;
+        this.vorname = vorname;
     }
 
     public void setNachname(String nachname) {
-        Nachname = nachname;
+        this.nachname = nachname;
     }
 
-    public Date getGeburtstag() {
-        return Geburtstag;
+    public void setGeschlecht(String geschlecht) {
+        this.geschlecht = geschlecht;
     }
 
     public void setGeburtstag(Date geburtstag) {
-        Geburtstag = geburtstag;
+        this.geburtstag = geburtstag;
+    }
+
+    public void setPasswort(Password passwort) {
+        this.passwort = passwort;
+    }
+
+    public int getNutzerID() {
+        return nutzerID;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getVorname() {
+        return vorname;
     }
 
-    public String getPasswort() {
+    public String getNachname() {
+        return nachname;
+    }
+
+    public String getGeschlecht() {
+        return geschlecht;
+    }
+
+    public Date getGeburtstag() {
+        return geburtstag;
+    }
+
+    public Password getPasswort() {
         return passwort;
     }
 
-    public void setPasswort(String passwort) {
-        this.passwort = passwort;
-    }
-}
+    public void addPayment (Zahlungsmethode z){
+      boolean neu = true;
+      int i = zahlungsmethoden.size();
+      //Prüfung auf Duplikate
+      for (int n = 0;n<i;n++){
+        Zahlungsmethode tmp = zahlungsmethoden.get(n);
+        if (tmp.equals(z))neu = false;
+      }//for
+      if (neu)zahlungsmethoden.add(z);
+    }//addPayment
+
+}//class
