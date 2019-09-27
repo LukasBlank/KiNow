@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">kiNOW</string>
+    <string name="contentDescription">Default Content Description</string>
+
+    <!-- Strings used for NavigationBar -->
+    <string name="search">Search</string>
+    <string name="movies">Movies</string>
+    <string name="cart">Purchases</string>
+    <string name="account">Account</string>
+</resources>
