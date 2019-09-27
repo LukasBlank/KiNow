@@ -1,0 +1,4 @@
+#Thu Sep 19 11:38:11 CEST 2019
+base.0=C\:\\Users\\A704600\\Dropbox\\KiNow-Projekt\\KiNow\\KiNow\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeDexDebugAndroidTest\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
