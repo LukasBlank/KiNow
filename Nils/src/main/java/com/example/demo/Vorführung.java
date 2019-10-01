@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Vorführung {
 
-    private int vid,gesamtdauer,grundpreis,gesamtpreis;
+    private int vid,gesamtdauer,grundpreis,gesamtpreis,frei;
     private Kinosaal saal;
     private Film film;
     private Date zeitpunkt;
@@ -19,14 +19,14 @@ public class Vorführung {
     public Vorführung(int vid, Kinosaal saal, int grundpreis, Film film, Date zeitpunkt, boolean dreiD, List<Werbung>werbungen, List<Preisvariation>preisvariationen) {
         this.vid = vid;
         this.saal = saal;
-        this.grundpreis = this.grundpreis;
+        this.grundpreis = grundpreis;
         this.film = film;
         this.zeitpunkt = zeitpunkt;
         this.dreiD = dreiD;
-        this.freieSitze = freieSitze;
         this.werbungen = werbungen;
         this.preisvariationen = preisvariationen;
         this.freieSitze = saal.getSitze();
+        this.frei = saal.getPlatzzahl();
     }//Konstruktor
 
    public Vorführung (){}
@@ -79,10 +79,42 @@ public class Vorführung {
         return preisvariationen;
     }
 
-    public void buchePlätze (List<Sitz> sitze){
-      for (int i = 0;i<sitze.size();i++){
+    public boolean buchePlätze (List<Sitz> sitze){
+      boolean möglich = true;
+      if (frei==0 || sitze.size()>frei)möglich=  false;
+      else {
+        for (int i = 0;i<sitze.size();i++){
+          Sitz tmp = sitze.get(i);
+          if (!freieSitze.contains(tmp))möglich = false;
+        }//for
+        if (möglich){
+          for (int i = 0;i<sitze.size();i++){
+            Sitz tmp = sitze.get(i);
+            belegteSitze.add(tmp);
+            freieSitze.remove(tmp);
+            frei--;
+          }//for
+        }//then
+      }//else
+      return möglich;
+    }//buchen
+
+  public boolean buchungMöglich (List<Sitz> sitze){
+    boolean möglich = true;
+    if (frei==0 || sitze.size()>frei)möglich = false;
+    else {
+      for (int i = 0; i < sitze.size(); i++) {
         Sitz tmp = sitze.get(i);
-        if (freieSitze.contains(sitze));
+        if (!freieSitze.contains(tmp))
+          möglich = false;
       }//for
-    }//setFreieSitze
+    }//else
+    return möglich;
+  }//buchungMöglich
+
+  public boolean equals (Vorführung vorführung){
+      if (this.vid == vorführung.getVid())return true;
+      else return false;
+  }//equals
+
 }//class

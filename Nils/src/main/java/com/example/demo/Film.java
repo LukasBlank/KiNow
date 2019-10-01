@@ -4,11 +4,12 @@ import java.util.List;
 
 public class Film {
     private int filmID,fsk,dauer,bewertung;
-    private String titel,beschreibung,regie;
+    private String titel,beschreibung;
     private List<Genre> genres;
     private List<Darsteller>darsteller;
+    private List<Regisseur>regie;
 
-    public Film(int filmID, String titel, String regie, String beschreibung, int dauer, int fsk, int bewertung, List<Genre> genres, List<Darsteller>darsteller){
+    public Film(int filmID, String titel, List<Regisseur> regie, String beschreibung, int dauer, int fsk, int bewertung, List<Genre> genres, List<Darsteller>darsteller){
       this.filmID = filmID;
       this.titel = titel;
       this.regie = regie;
@@ -46,7 +47,7 @@ public class Film {
     return beschreibung;
   }
 
-  public String getRegie() {
+  public List<Regisseur> getRegie() {
     return regie;
   }
 

@@ -11,6 +11,8 @@ public class Werbung {
     this.inhalt = inhalt;
   }//Konstruktor
 
+  public Werbung() {}
+
   public int getWerbungID() {
     return werbungID;
   }
@@ -22,4 +24,10 @@ public class Werbung {
   public String getInhalt() {
     return inhalt;
   }
+
+  public boolean equals (Werbung werbung){
+    if (this.werbungID==werbung.getWerbungID())return true;
+    else return false;
+  }//equals
+
 }//class

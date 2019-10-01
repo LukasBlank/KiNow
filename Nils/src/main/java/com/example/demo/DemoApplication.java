@@ -28,6 +28,7 @@ import com.google.firebase.FirebaseOptions;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import sun.security.util.Password;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -65,12 +66,11 @@ public class DemoApplication {
     private static Map<Integer, Nutzer> productRepo = new HashMap<>();
 
     static {
-      Nutzer honey = new Nutzer(1, "nils", "falk", new Date(1999), "nilsfalkneu@gmail.com",
-          "Hallo");
-      productRepo.put(honey.getNid(), honey);
+      Nutzer honey = new Nutzer(1,"nilsfalkneu@gmail.com","nils","falk","männlich",new Date(), null);
+      productRepo.put(honey.getNutzerID(), honey);
 
-      Nutzer almond = new Nutzer(2, "Hans", "Peter", new Date(100000), "lel@atos.com", "NEu");
-      productRepo.put(almond.getNid(), almond);
+      Nutzer almond = new Nutzer(2,"lelelel@gmail.com", "Hans", "Peter", "männlich", new Date(100000), null);
+      productRepo.put(almond.getNutzerID(), almond);
     }
 
     @RequestMapping(value = "/Person")
@@ -80,7 +80,7 @@ public class DemoApplication {
 
     @RequestMapping(value = "/Kino")
     public ResponseEntity<Object> getKino(@RequestHeader("kinoID") int kino) {
-      Kino k = new Kino(kino, "HAns", "Pad");
+      Kino k = new Kino(kino, "Hans", "Pad", null, null);
       Map<Integer, Kino> KinoRepo = new HashMap<>();
       KinoRepo.put(k.getKinoID(), k);
       return new ResponseEntity<>(KinoRepo.values(), HttpStatus.OK);

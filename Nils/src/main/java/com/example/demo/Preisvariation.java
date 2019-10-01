@@ -19,4 +19,10 @@ public class Preisvariation {
   public int getWert() {
     return wert;
   }
+
+  public boolean equals (Preisvariation preisvariation){
+    if (this.variationID==preisvariation.getVariationID())return true;
+    else return false;
+  }//equals
+
 }//class

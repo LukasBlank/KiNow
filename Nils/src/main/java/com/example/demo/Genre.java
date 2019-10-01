@@ -21,4 +21,9 @@ public class Genre {
     return name;
   }
 
+  public boolean equals (Genre genre){
+    if(this.genreID == genre.getGenreID())return true;
+    else return false;
+  }//equals
+
 }//class

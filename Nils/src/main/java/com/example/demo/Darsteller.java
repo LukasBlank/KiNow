@@ -42,4 +42,9 @@ public class Darsteller {
     if (neu) filme.add(film);
   }//addFilm
 
+  public boolean equals (Darsteller darsteller){
+    if (this.darstellerID==darsteller.getDarstellerID())return true;
+    else return false;
+  }//equals
+
 }//class

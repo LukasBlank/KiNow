@@ -71,7 +71,7 @@ public class Nutzer {
 
   public List<Zahlungsmethode> getZahlungsmethoden () { return zahlungsmethoden; }
 
-  public void addBestellung (Bestellung bestellung){ if(bestellung.getNutzerID()==this.nutzerID)bestellungen.add(bestellung); }
+  public void addBestellung (Bestellung bestellung){ if(bestellung.getNutzer().getNutzerID()==this.nutzerID)bestellungen.add(bestellung); }
 
   public List<Bestellung> getBestellungen () { return bestellungen; }
 

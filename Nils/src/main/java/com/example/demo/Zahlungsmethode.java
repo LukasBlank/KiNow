@@ -17,7 +17,6 @@ public class Zahlungsmethode{
         return methode;
     }
 
-    //Ermöglicht die Bestimmung der Gleichheit von Zahlungsmethoden
     public boolean equals (Zahlungsmethode z){
       if (this.getMethode().equals(z.getMethode()))return true;
       else return false;
