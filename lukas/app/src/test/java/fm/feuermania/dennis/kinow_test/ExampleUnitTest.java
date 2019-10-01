@@ -1,4 +1,4 @@
-package com.example.lukas;
+package fm.feuermania.dennis.kinow_test;
 
 import org.junit.Test;
 
