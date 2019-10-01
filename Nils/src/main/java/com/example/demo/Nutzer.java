@@ -6,11 +6,12 @@ import java.util.Date;
 import sun.security.util.Password;
 
 public class Nutzer {
-    int nutzerID;
-    String email,vorname,nachname,geschlecht;
-    Date geburtstag;
-    Password passwort;
-    List<Zahlungsmethode> zahlungsmethoden;
+    private int nutzerID;
+    private String email,vorname,nachname,geschlecht;
+    private Date geburtstag;
+    private Password passwort;
+    private List<Zahlungsmethode> zahlungsmethoden;
+    private List<Bestellung> bestellungen;
 
     public Nutzer(int nutzerID, String email, String vorname, String nachname, String geschlecht, Date geburtstag, Password passwort) {
         this.nutzerID = nutzerID;
@@ -22,29 +23,13 @@ public class Nutzer {
         this.passwort = passwort;
     }//Konstruktor
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
-
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
-    }
-
-    public void setGeschlecht(String geschlecht) {
-        this.geschlecht = geschlecht;
-    }
-
-    public void setGeburtstag(Date geburtstag) {
-        this.geburtstag = geburtstag;
-    }
+   public Nutzer (){}
 
     public void setPasswort(Password passwort) {
         this.passwort = passwort;
     }
+
+    public void setEmail(String email) { this.email = email; }
 
     public int getNutzerID() {
         return nutzerID;
@@ -76,13 +61,23 @@ public class Nutzer {
 
     public void addPayment (Zahlungsmethode z){
       boolean neu = true;
-      int i = zahlungsmethoden.size();
       //Prüfung auf Duplikate
-      for (int n = 0;n<i;n++){
-        Zahlungsmethode tmp = zahlungsmethoden.get(n);
+      for (int i = 0;i<zahlungsmethoden.size();i++){
+        Zahlungsmethode tmp = zahlungsmethoden.get(i);
         if (tmp.equals(z))neu = false;
       }//for
       if (neu)zahlungsmethoden.add(z);
     }//addPayment
+
+  public List<Zahlungsmethode> getZahlungsmethoden () { return zahlungsmethoden; }
+
+  public void addBestellung (Bestellung bestellung){ if(bestellung.getNutzerID()==this.nutzerID)bestellungen.add(bestellung); }
+
+  public List<Bestellung> getBestellungen () { return bestellungen; }
+
+  public boolean equals (Nutzer nutzer){
+      if (this.nutzerID == nutzer.getNutzerID())return true;
+      else return false;
+  }//equals
 
 }//class

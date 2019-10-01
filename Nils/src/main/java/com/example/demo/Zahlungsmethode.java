@@ -1,13 +1,15 @@
 package com.example.demo;
 
 public class Zahlungsmethode{
-    int methodeID;
-    String methode;
+    private int methodeID;
+    private  String methode;
 
     public Zahlungsmethode(int methodeID, String methode) {
         this.methodeID = methodeID;
         this.methode = methode;
     }
+
+    public Zahlungsmethode() {}
 
     public int getMethodeID() { return methodeID; }
 

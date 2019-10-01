@@ -2,8 +2,8 @@ package com.example.demo;
 
 public class Werbung {
 
-  int werbungID,dauer;
-  String inhalt;
+  private int werbungID,dauer;
+  private String inhalt;
 
   public Werbung(int werbungID, int dauer, String inhalt){
     this.werbungID = werbungID;

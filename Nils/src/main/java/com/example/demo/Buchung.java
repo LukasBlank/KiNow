@@ -1,25 +1,30 @@
 package com.example.demo;
 
+import java.util.List;
+
 public class Buchung {
-    int NID;
-    int BID;
-    int VID;
 
-    public Buchung(int NID, int BID, int VID) {
-        this.NID = NID;
-        this.BID = BID;
-        this.VID = VID;
-    }
+    private int buchungID, bestellungsnummer, vid;
+    private List<Sitz> sitze;
 
-    public int getNID() {
-        return NID;
-    }
+    public Buchung(int buchungID, int bestellungsnummer, int vid) {
+        this.buchungID = buchungID;
+        this.bestellungsnummer = bestellungsnummer;
+        this.vid = vid;
+        this.sitze = sitze;
+    }//Konstruktor
 
-    public int getBID() {
-        return BID;
-    }
+    public void bucheSitze (List<Sitz> sitze){
+        if (this.sitze.size()==0)this.sitze = sitze;
+        else {
+            for (int i = 0;i<sitze.size();i++){
+                Sitz tmp = sitze.get(i);
+                this.sitze .add(tmp);
+            }///for
+        }//else
 
-    public int getVID() {
-        return VID;
-    }
-}
+    }//bucheSitze
+
+
+
+}//class
