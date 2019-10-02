@@ -11,12 +11,11 @@ public class Vorführung {
     private Date zeitpunkt;
     private boolean dreiD;
     private List<Werbung> werbungen;
-    private List<Preisvariation>preisvariationen;
     private List<Sitz>freieSitze;
     private List<Sitz>belegteSitze;
 
 
-    public Vorführung(int vid, Kinosaal saal, int grundpreis, Film film, Date zeitpunkt, boolean dreiD, List<Werbung>werbungen, List<Preisvariation>preisvariationen) {
+    public Vorführung(int vid, Kinosaal saal, int grundpreis, Film film, Date zeitpunkt, boolean dreiD, List<Werbung>werbungen) {
         this.vid = vid;
         this.saal = saal;
         this.grundpreis = grundpreis;
@@ -24,7 +23,6 @@ public class Vorführung {
         this.zeitpunkt = zeitpunkt;
         this.dreiD = dreiD;
         this.werbungen = werbungen;
-        this.preisvariationen = preisvariationen;
         this.freieSitze = saal.getSitze();
         this.frei = saal.getPlatzzahl();
     }//Konstruktor
@@ -47,14 +45,6 @@ public class Vorführung {
       return tmp;
     }//getGesamtdauer
 
-    public int getGesamtpreis() {
-        int tmp = grundpreis;
-        for (int i = 0; i<preisvariationen.size();i++){
-          tmp += preisvariationen.get(i).getWert();
-        }//for
-      return tmp;
-    }//getGesamtpreis
-
     public List<Sitz> getFreieSitze() {
         return freieSitze;
     }
@@ -71,12 +61,10 @@ public class Vorführung {
         return dreiD;
     }
 
+    public int getGrundpreis() { return grundpreis; }
+
     public List<Werbung> getWerbungen() {
         return werbungen;
-    }
-
-    public List<Preisvariation> getPreisvariationen() {
-        return preisvariationen;
     }
 
     public boolean buchePlätze (List<Sitz> sitze){

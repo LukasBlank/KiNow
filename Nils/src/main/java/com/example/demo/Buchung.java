@@ -4,16 +4,19 @@ import java.util.List;
 
 public class Buchung {
 
-    private int buchungID,buchungspreis;
+    private int buchungID,buchungspreis,logezusatz;
     private Vorführung vorführung;
     private Bestellung bestellung;
     private List<Sitz> sitze;
+    private List<Preisvariation> preisvariationen;
 
-    public Buchung(int buchungID, Vorführung vorführung, Bestellung bestellung, List<Sitz> sitze) {
+    public Buchung(int buchungID, Vorführung vorführung, Bestellung bestellung, List<Sitz> sitze, List<Preisvariation> preisvariationen) {
         this.buchungID = buchungID;
         this.bestellung = bestellung;
         this.vorführung = vorführung;
         this.sitze = sitze;
+        this.preisvariationen = preisvariationen;
+        logezusatz = 2;
     }//Konstruktor
 
     public Buchung () {}
@@ -35,13 +38,14 @@ public class Buchung {
   }
 
   public int getBuchungspreis(){
-      //TODO
-      int zusatzLoge = 2;
-      int preis = vorführung.getGesamtpreis();
+      int preis = vorführung.getGrundpreis();
       int gesamt = sitze.size()*preis;
       for (int i = 0;i<sitze.size();i++){
-        if(sitze.get(i).isLoge())gesamt += zusatzLoge;
+        if(sitze.get(i).isLoge())gesamt += logezusatz;
       }//for
+    for (int i = 0;i<preisvariationen.size();i++){
+       gesamt += preisvariationen.get(i).getWert();
+    }//for
     return gesamt;
   }//getBuchungspreis
 
