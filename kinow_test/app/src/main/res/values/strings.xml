@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">kiNOW</string>
-    <string name="contentDescription">Default Content Description</string>
 
     <!-- Strings used for NavigationBar -->
-    <string name="search">Search</string>
+    <string name="location">Location</string>
     <string name="movies">Movies</string>
     <string name="cart">Purchases</string>
     <string name="account">Account</string>
+
+    <!-- Strings for Default Content -->
+    <string name="contentDescription">Default Content Description</string>
+    <string name="movieTitle">Title</string>
+    <string name="movieDescription">Description</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

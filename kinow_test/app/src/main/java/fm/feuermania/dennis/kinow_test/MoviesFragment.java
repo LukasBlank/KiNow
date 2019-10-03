@@ -4,9 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +31,12 @@ public class MoviesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // movieList RecyclerView
+    private RecyclerView movieList;
+    private View movieView;
+    MovieAdapter mAdapter;
+    String movies[]={"TestMovieOne","TestMovieTwo","Drei", "Vier", "Fuenf", "Sechs", "Sieben"};
 
     private OnFragmentInteractionListener mListener;
 
@@ -61,10 +72,31 @@ public class MoviesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movies, container, false);
+        movieView = inflater.inflate(R.layout.fragment_movies, container, false);
+
+        movieList = movieView.findViewById(R.id.movieList);
+        movieList.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        movieList.setLayoutManager(layoutManager);
+
+        ArrayList<String> list_of_movies = new ArrayList<>();
+        list_of_movies.add(movies[0]);
+        list_of_movies.add(movies[1]);
+        list_of_movies.add(movies[2]);
+        list_of_movies.add(movies[3]);
+        list_of_movies.add(movies[4]);
+        list_of_movies.add(movies[5]);
+        list_of_movies.add(movies[6]);
+
+        mAdapter = new MovieAdapter(list_of_movies,getActivity());
+        movieList.setAdapter(mAdapter);
+
+        movieList.getAdapter().notifyDataSetChanged();
+
+        return movieView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
