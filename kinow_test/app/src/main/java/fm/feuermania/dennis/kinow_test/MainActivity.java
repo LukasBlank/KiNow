@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
                     loadFragment(fragment);
                     return true;
                 case R.id.tab_location:
-                    kinowToolbar.setTitle("Search");
+                    kinowToolbar.setTitle("Location");
                     fragment = new LocationFragment();
                     loadFragment(fragment);
                     return true;

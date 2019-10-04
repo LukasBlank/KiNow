@@ -5,11 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".LocationFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/locationList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/location"
-        android:layout_gravity="center"
-        android:textColor="@color/white"/>
+        android:layout_height="match_parent" />
 
 </FrameLayout>

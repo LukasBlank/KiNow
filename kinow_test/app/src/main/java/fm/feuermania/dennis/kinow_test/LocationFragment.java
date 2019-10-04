@@ -4,9 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +30,13 @@ public class LocationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // locationList RecyclerView
+    private RecyclerView locationList;
+    private View locView;
+    LocationAdapter locAdapter;
+    String locations[]={"Frankfurt am Main","Mannheim","Berlin"};
+    String besch[]={"FFM Beschreibung","Mannheim Beschreibung","Berlin Beschreibung"};
 
     private OnFragmentInteractionListener mListener;
 
@@ -61,10 +72,33 @@ public class LocationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_location, container, false);
+        locView = inflater.inflate(R.layout.fragment_location, container, false);
+
+        locationList = locView.findViewById(R.id.locationList);
+        locationList.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        locationList.setLayoutManager(layoutManager);
+
+        ArrayList<String> list_of_locations = new ArrayList<>();
+        list_of_locations.add(locations[0]);
+        list_of_locations.add(locations[1]);
+        list_of_locations.add(locations[2]);
+
+        ArrayList<String> list_of_descriptions = new ArrayList<>();
+        list_of_descriptions.add(besch[0]);
+        list_of_descriptions.add(besch[1]);
+        list_of_descriptions.add(besch[2]);
+
+        locAdapter = new LocationAdapter(list_of_locations,getActivity());
+        locAdapter = new LocationAdapter(list_of_descriptions,getActivity());
+        locationList.setAdapter(locAdapter);
+
+        locationList.getAdapter().notifyDataSetChanged();
+
+        return locView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

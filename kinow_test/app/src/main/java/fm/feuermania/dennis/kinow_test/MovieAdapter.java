@@ -17,7 +17,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         ArrayList<String> movie_list;
         Context context;
 
-    public MovieAdapter(ArrayList<String> list, Context context) {
+        public MovieAdapter(ArrayList<String> list, Context context) {
             this.movie_list = list;
             this.context = context;
         }
