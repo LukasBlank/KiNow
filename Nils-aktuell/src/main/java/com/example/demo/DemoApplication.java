@@ -13,6 +13,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.internal.NonNull;
 import com.google.gson.Gson;
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
@@ -46,8 +47,11 @@ public class DemoApplication {
     try
     {
       //Pfad muss angepasst werden ggf. in Java einfügen
+      String path = "serviceAccountKey.json";
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
+
       FileInputStream serviceAccount =
-          new FileInputStream("C:/Users/Nils/Documents/serviceAccountKey.json");
+          new FileInputStream(url.getPath());
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
