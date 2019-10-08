@@ -126,6 +126,11 @@ public class DemoApplication {
       try {
         System.out.println("Update time : " + result.get().getUpdateTime());
       } catch (Exception e) {}
-    }
-  }
-}
+    }//getData
+
+    public void 
+
+
+  }//simpleController
+
+}//class

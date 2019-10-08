@@ -36,7 +36,7 @@ public class MoviesFragment extends Fragment {
     private RecyclerView movieList;
     private View movieView;
     MovieAdapter mAdapter;
-    String movies[]={"TestMovieOne","TestMovieTwo","Drei", "Vier", "Fuenf", "Sechs", "Sieben"};
+    String movies[]={"TestMovieOne","TestMovieTwo","Drei", "HAHA", "Fuenf", "Sechs", "Sieben"};
 
     private OnFragmentInteractionListener mListener;
 
