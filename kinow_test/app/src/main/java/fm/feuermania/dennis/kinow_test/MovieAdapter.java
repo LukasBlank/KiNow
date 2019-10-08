@@ -14,11 +14,12 @@ import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-        ArrayList<String> movie_list;
+        ArrayList<String> movie_list, description_list;
         Context context;
 
-        public MovieAdapter(ArrayList<String> list, Context context) {
+        public MovieAdapter(ArrayList<String> list, ArrayList<String> desc, Context context) {
             this.movie_list = list;
+            this.description_list = desc;
             this.context = context;
         }
 
@@ -32,6 +33,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             viewHolder.Title.setText(movie_list.get(i).toString());
+            viewHolder.Desc.setText(description_list.get(i).toString());
         }
 
         @Override

@@ -42,6 +42,7 @@ public class MoviesFragment extends Fragment {
     private View movieView;
     MovieAdapter mAdapter;
     String movies[]={"TestMovieOne","TestMovieTwo","Drei", "Vier", "Fuenf", "Sechs", "Sieben"};
+    String desc [] = {"Description 1", "Description 2", "Description 3", "Description 4", "Description 5", "Description 6", "Description 7"};
 
     private OnFragmentInteractionListener mListener;
 
@@ -96,7 +97,16 @@ public class MoviesFragment extends Fragment {
         list_of_movies.add(movies[5]);
         list_of_movies.add(movies[6]);
 
-        mAdapter = new MovieAdapter(list_of_movies,getActivity());
+        ArrayList<String> list_of_descriptions = new ArrayList<>();
+        list_of_descriptions.add(desc[0]);
+        list_of_descriptions.add(desc[1]);
+        list_of_descriptions.add(desc[2]);
+        list_of_descriptions.add(desc[3]);
+        list_of_descriptions.add(desc[4]);
+        list_of_descriptions.add(desc[5]);
+        list_of_descriptions.add(desc[6]);
+
+        mAdapter = new MovieAdapter(list_of_movies,list_of_descriptions, getActivity());
         movieList.setAdapter(mAdapter);
 
         movieList.getAdapter().notifyDataSetChanged();
