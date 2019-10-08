@@ -4,20 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SearchFragment.OnFragmentInteractionListener} interface
+ * {@link LocationFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link LocationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
+public class LocationFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,9 +31,16 @@ public class SearchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    // locationList RecyclerView
+    private RecyclerView locationList;
+    private View locView;
+    LocationAdapter locAdapter;
+    String locations[]={"Frankfurt am Main","Mannheim","Berlin"};
+    String besch[]={"FFM Beschreibung","Mannheim Beschreibung","Berlin Beschreibung"};
+
     private OnFragmentInteractionListener mListener;
 
-    public SearchFragment() {
+    public LocationFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +50,11 @@ public class SearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
+     * @return A new instance of fragment LocationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
+    public static LocationFragment newInstance(String param1, String param2) {
+        LocationFragment fragment = new LocationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,10 +72,33 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        locView = inflater.inflate(R.layout.fragment_location, container, false);
+
+        locationList = locView.findViewById(R.id.locationList);
+        locationList.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        locationList.setLayoutManager(layoutManager);
+
+        ArrayList<String> list_of_locations = new ArrayList<>();
+        list_of_locations.add(locations[0]);
+        list_of_locations.add(locations[1]);
+        list_of_locations.add(locations[2]);
+
+        ArrayList<String> list_of_descriptions = new ArrayList<>();
+        list_of_descriptions.add(besch[0]);
+        list_of_descriptions.add(besch[1]);
+        list_of_descriptions.add(besch[2]);
+
+        locAdapter = new LocationAdapter(list_of_locations,getActivity());
+        locAdapter = new LocationAdapter(list_of_descriptions,getActivity());
+        locationList.setAdapter(locAdapter);
+
+        locationList.getAdapter().notifyDataSetChanged();
+
+        return locView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

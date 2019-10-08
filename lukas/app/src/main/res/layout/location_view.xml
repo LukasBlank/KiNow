@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/rLayout">
+    android:id="@+id/relLayout">
 
-    <!-- CardView for MovieImage -->
-
+    <!-- CardView for LocationImage -->
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardViewLoc"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
@@ -21,11 +20,11 @@
 
             <ImageView
                 android:contentDescription="@string/contentDescription"
-                android:id="@+id/movieImage"
+                android:id="@+id/locImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/movie_sample_image"/>
+                android:src="@drawable/location_sample_image"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
@@ -34,16 +33,16 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cardView"
-        android:layout_alignTop="@+id/cardView"
+        android:layout_alignBottom="@+id/cardViewLoc"
+        android:layout_alignTop="@+id/cardViewLoc"
         android:layout_marginBottom="0dp"
         android:layout_marginEnd="10dp"
         android:layout_marginLeft="-20dp"
         android:layout_marginRight="10dp"
         android:layout_marginStart="-20dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/cardView"
-        android:layout_toRightOf="@+id/cardView"
+        android:layout_toEndOf="@+id/cardViewLoc"
+        android:layout_toRightOf="@+id/cardViewLoc"
         android:elevation="5dp"
         app:cardCornerRadius="5dp">
 
@@ -52,30 +51,28 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/locTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/movieTitle"
+                android:text="@string/locTitle"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/desc"
+                android:id="@+id/locDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:layout_marginStart="20dp"
+                android:layout_below="@+id/locTitle"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:maxLength="15"
-                android:text="@string/movieDescription"
+                android:maxLength="30"
+                android:text="@string/locDescription"
                 android:textSize="14sp" />
 
         </RelativeLayout>
-
     </android.support.v7.widget.CardView>
-
 </RelativeLayout>

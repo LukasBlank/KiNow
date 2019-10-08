@@ -1,4 +1,4 @@
-package com.example.demo;
+package lukas.java_classes;
 
 public class Genre {
   private int genreID;

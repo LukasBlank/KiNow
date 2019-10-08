@@ -92,8 +92,8 @@ public class LocationFragment extends Fragment {
         list_of_descriptions.add(besch[1]);
         list_of_descriptions.add(besch[2]);
 
-        locAdapter = new LocationAdapter(list_of_locations,getActivity());
-        locAdapter = new LocationAdapter(list_of_descriptions,getActivity());
+        //Hier Wird Zueg überschrieben
+        locAdapter = new LocationAdapter(list_of_locations, list_of_descriptions, getActivity());
         locationList.setAdapter(locAdapter);
 
         locationList.getAdapter().notifyDataSetChanged();

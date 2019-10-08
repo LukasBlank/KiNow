@@ -8,7 +8,12 @@ import com.google.cloud.firestore.v1.FirestoreAdminClient;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.internal.NonNull;
 import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -28,7 +33,6 @@ import com.google.firebase.FirebaseOptions;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import sun.security.util.Password;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -126,6 +130,10 @@ public class DemoApplication {
       try {
         System.out.println("Update time : " + result.get().getUpdateTime());
       } catch (Exception e) {}
-    }
-  }
-}
+    }//getData
+
+
+
+  }//simpleController
+
+}//class
