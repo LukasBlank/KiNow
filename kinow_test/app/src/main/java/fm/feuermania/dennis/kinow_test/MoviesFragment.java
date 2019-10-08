@@ -2,14 +2,19 @@ package fm.feuermania.dennis.kinow_test;
 
 import android.content.Context;
 import android.net.Uri;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -37,6 +42,7 @@ public class MoviesFragment extends Fragment {
     private View movieView;
     MovieAdapter mAdapter;
     String movies[]={"TestMovieOne","TestMovieTwo","Drei", "Vier", "Fuenf", "Sechs", "Sieben"};
+    String desc [] = {"Description 1", "Description 2", "Description 3", "Description 4", "Description 5", "Description 6", "Description 7"};
 
     private OnFragmentInteractionListener mListener;
 
@@ -91,13 +97,25 @@ public class MoviesFragment extends Fragment {
         list_of_movies.add(movies[5]);
         list_of_movies.add(movies[6]);
 
-        mAdapter = new MovieAdapter(list_of_movies,getActivity());
+        ArrayList<String> list_of_descriptions = new ArrayList<>();
+        list_of_descriptions.add(desc[0]);
+        list_of_descriptions.add(desc[1]);
+        list_of_descriptions.add(desc[2]);
+        list_of_descriptions.add(desc[3]);
+        list_of_descriptions.add(desc[4]);
+        list_of_descriptions.add(desc[5]);
+        list_of_descriptions.add(desc[6]);
+
+        mAdapter = new MovieAdapter(list_of_movies,list_of_descriptions, getActivity());
         movieList.setAdapter(mAdapter);
 
         movieList.getAdapter().notifyDataSetChanged();
 
+
         return movieView;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -116,6 +134,9 @@ public class MoviesFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
+
+
 
     @Override
     public void onDetach() {

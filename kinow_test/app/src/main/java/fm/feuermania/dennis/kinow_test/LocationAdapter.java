@@ -10,15 +10,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
 
-    ArrayList<String> location_list;
+    ArrayList<String> location_list, description_list;
     Context context;
 
-    public LocationAdapter(ArrayList<String> list, Context context) {
+    public LocationAdapter(ArrayList<String> list, ArrayList<String> desc, Context context) {
         this.location_list = list;
+        this.description_list = desc;
         this.context = context;
     }
 
@@ -32,7 +34,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull LocationAdapter.ViewHolder viewHolder, int i) {
         viewHolder.locTitle.setText(location_list.get(i).toString());
-        viewHolder.locDesc.setText(location_list.get(i).toString());
+        viewHolder.locDesc.setText(description_list.get(i).toString());
     }
 
     @Override
