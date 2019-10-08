@@ -33,7 +33,6 @@ import com.google.firebase.FirebaseOptions;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import sun.security.util.Password;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -132,6 +131,8 @@ public class DemoApplication {
         System.out.println("Update time : " + result.get().getUpdateTime());
       } catch (Exception e) {}
     }//getData
+
+
 
   }//simpleController
 

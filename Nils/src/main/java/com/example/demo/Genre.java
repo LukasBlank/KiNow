@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import com.sun.tools.javac.jvm.Gen;
-
 public class Genre {
   private int genreID;
   private String name;

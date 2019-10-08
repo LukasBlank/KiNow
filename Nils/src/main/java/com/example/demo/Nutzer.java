@@ -1,20 +1,18 @@
 package com.example.demo;
 
 import java.util.List;
-import javax.validation.constraints.Email;
 import java.util.Date;
-import sun.security.util.Password;
 import java.math.BigInteger;
 
 public class Nutzer {
     private int nutzerID;
     private String email,vorname,nachname,geschlecht;
     private Date geburtstag;
-    private Password passwort;
+    private String passwort;
     private List<Zahlungsmethode> zahlungsmethoden;
     private List<Bestellung> bestellungen;
 
-    public Nutzer(int nutzerID, String email, String vorname, String nachname, String geschlecht, Date geburtstag, Password passwort) {
+    public Nutzer(int nutzerID, String email, String vorname, String nachname, String geschlecht, Date geburtstag, String passwort) {
         this.nutzerID = nutzerID;
         this.email = email;
         this.vorname = vorname;
@@ -26,7 +24,7 @@ public class Nutzer {
 
    public Nutzer (){}
 
-    public void setPasswort(Password passwort) {
+    public void setPasswort(String passwort) {
 
         this.passwort = passwort;
     }
@@ -57,7 +55,7 @@ public class Nutzer {
         return geburtstag;
     }
 
-    public Password getPasswort() {
+    public String getPasswort() {
         return passwort;
     }
 
