@@ -1,0 +1,12 @@
+com\example\demo\DemoApplication.class
+com\example\demo\Sitz.class
+com\example\demo\Kunden_Zahlungsmethode.class
+com\example\demo\Kino.class
+com\example\demo\Vorführung.class
+com\example\demo\Platzbelegung.class
+com\example\demo\Zahlungsmethode.class
+com\example\demo\Nutzer.class
+com\example\demo\Kinosaal.class
+com\example\demo\Buchung.class
+com\example\demo\DemoApplication$SimpleController.class
+com\example\demo\Film.class
