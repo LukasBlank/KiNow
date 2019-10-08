@@ -38,18 +38,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+
 @SpringBootApplication
 public class DemoApplication {
-   static Firestore db;
+
+  static Firestore db;
 
   public static void main(String[] args) {
     SpringApplication.run(DemoApplication.class, args);
-    try
-    {
+    try {
       //Pfad muss angepasst werden ggf. in Java einfügen
       String path = "serviceAccountKey.json";
       URL url = DemoApplication.class.getClassLoader().getResource(path);
-
+      //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
           new FileInputStream(url.getPath());
 
@@ -59,17 +60,25 @@ public class DemoApplication {
           .build();
 
       FirebaseApp.initializeApp(options);
-    }catch(Exception e){}
+    } catch (Exception e) {
+      e.printStackTrace();
+    }//catch
+    db = FirestoreClient.getFirestore();
 
-     db = FirestoreClient.getFirestore();
-  }
+    //if that works get all movies and print them
+    SimpleController sc = new SimpleController();
+    ResponseEntity<Object> re = sc.getAllData("Filme");
+    System.out.println(re.toString());
+
+  }//main
 
   @RestController
   public static class SimpleController {
 
     @RequestMapping(value = "/Person")
     public ResponseEntity<Nutzer> getPerson() {
-      return new ResponseEntity<Nutzer>(new Nutzer(1,"Hans","peter",new Date(),"email@email.com","1234"), HttpStatus.OK);
+      return new ResponseEntity<Nutzer>(
+          new Nutzer(1, "Hans", "peter", new Date(), "email@email.com", "1234"), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/Kino")
@@ -101,8 +110,8 @@ public class DemoApplication {
         int Nid;
         querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        Nid= documents.size() + 1;
-        Nutzer n= new Nutzer(Nid,"Hans","Peter",new Date(),"Waveboardlukas@Sand.de","1234");
+        Nid = documents.size() + 1;
+        Nutzer n = new Nutzer(Nid, "Hans", "Peter", new Date(), "Waveboardlukas@Sand.de", "1234");
         DocumentReference docRef = db.collection("Nutzer").document();
         //Nutzer nutzer=gson.fromJson(body,Nutzer.class);
         ApiFuture<WriteResult> result = docRef.set(n);
@@ -118,83 +127,85 @@ public class DemoApplication {
     }
 
     @RequestMapping(value = "/getAllData")
-    public ResponseEntity<Object> getAllData(@RequestHeader ("head") String head) {
+    public ResponseEntity<Object> getAllData(@RequestHeader("head") String head) {
       // asynchronously retrieve all users
       ApiFuture<QuerySnapshot> query = db.collection(head).get();
       Map<String, Object> data = new HashMap<>();
 // ...
 // query.get() blocks on response
-      try{
-      QuerySnapshot querySnapshot = query.get();
-      List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-      for (QueryDocumentSnapshot document : documents) {
-        data.put(document.getId(),document.getData());
-      }}catch(Exception e){}
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+          data.put(document.getId(), document.getData());
+        }//for
+      } catch (Exception e) {
+      }//catch
 
       return new ResponseEntity<>(data.values(), HttpStatus.ACCEPTED);
-    }
+    }//getAllData
 
     @RequestMapping(value = "/getNutzerbyName")
-    public ResponseEntity<ArrayList> getNutzer(@RequestHeader ("name") String name) {
+    public ResponseEntity<ArrayList> getNutzer(@RequestHeader("name") String name) {
       // asynchronously retrieve all users
-      Query query = db.collection("Nutzer").whereEqualTo("nachname",name);
+      Query query = db.collection("Nutzer").whereEqualTo("nachname", name);
       ApiFuture<QuerySnapshot> querySnapshot = query.get();
-      ArrayList<Nutzer> list= new ArrayList<>();
+      ArrayList<Nutzer> list = new ArrayList<>();
       try {
-        Nutzer nutzer=new Nutzer();
+        Nutzer nutzer = new Nutzer();
         for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-           nutzer= document.toObject(Nutzer.class);
-           list.add(nutzer);
+          nutzer = document.toObject(Nutzer.class);
+          list.add(nutzer);
         }
 // ...
 // query.get() blocks on response
         return new ResponseEntity<ArrayList>(list, HttpStatus.ACCEPTED);
-      }catch(Exception e){}
+      } catch (Exception e) {
+      }
       return new ResponseEntity<ArrayList>(list, HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/getNutzerbyID")
-    public ResponseEntity<ArrayList> getNutzerbyID(@RequestHeader ("id") int id) {
+    public ResponseEntity<ArrayList> getNutzerbyID(@RequestHeader("id") int id) {
       // asynchronously retrieve all users
-      Query query = db.collection("Nutzer").whereEqualTo("nid",id);
+      Query query = db.collection("Nutzer").whereEqualTo("nid", id);
       ApiFuture<QuerySnapshot> querySnapshot = query.get();
-      ArrayList<Nutzer> list= new ArrayList<>();
+      ArrayList<Nutzer> list = new ArrayList<>();
       try {
-        Nutzer nutzer=new Nutzer();
+        Nutzer nutzer = new Nutzer();
         for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-          nutzer= document.toObject(Nutzer.class);
+          nutzer = document.toObject(Nutzer.class);
           list.add(nutzer);
         }
 // ...
 // query.get() blocks on response
-        System.out.println("Anfrage von id:" +id);
+        System.out.println("Anfrage von id:" + id);
         return new ResponseEntity<ArrayList>(list, HttpStatus.ACCEPTED);
-      }catch(Exception e){}
+      } catch (Exception e) {
+      }
       return new ResponseEntity<ArrayList>(list, HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value="/getFilmInKino")
-    public ResponseEntity <ArrayList> getFilmInKino(@RequestHeader ("kino") String kino){
+    @RequestMapping(value = "/getFilmInKino")
+    public ResponseEntity<ArrayList> getFilmInKino(@RequestHeader("kino") String kino) {
       // asynchronously retrieve all users
-      Query query = db.collection("Filme").whereEqualTo("nachname",kino);
+      Query query = db.collection("Filme").whereEqualTo("nachname", kino);
       ApiFuture<QuerySnapshot> querySnapshot = query.get();
-      ArrayList<Nutzer> list= new ArrayList<>();
+      ArrayList<Nutzer> list = new ArrayList<>();
       try {
-        Nutzer nutzer=new Nutzer();
+        Nutzer nutzer = new Nutzer();
         for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-          nutzer= document.toObject(Nutzer.class);
+          nutzer = document.toObject(Nutzer.class);
           list.add(nutzer);
         }
 // ...
 // query.get() blocks on response
         return new ResponseEntity<ArrayList>(list, HttpStatus.ACCEPTED);
-      }catch(Exception e){}
+      } catch (Exception e) {
+      }
       return new ResponseEntity<ArrayList>(list, HttpStatus.BAD_REQUEST);
 
-    }
-  }
+    }//getFilmKino
 
-
-
-
-}
+  }//Controller
+}//class
