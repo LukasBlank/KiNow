@@ -10,17 +10,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import lukas.java_classes.Film;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-        ArrayList<String> movie_list;
+        ArrayList<Film> filme;
         Context context;
 
-        public MovieAdapter(ArrayList<String> list, Context context) {
-            this.movie_list = list;
+        public MovieAdapter(ArrayList<String> list,ArrayList<Film> filme, Context context) {
             this.context = context;
-        }
+            this.filme = filme;
+        }//K
 
         @NonNull
         @Override
@@ -31,12 +34,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            viewHolder.Title.setText(movie_list.get(i).toString());
+            viewHolder.Title.setText(filme.get(i).getTitel());
         }
 
         @Override
         public int getItemCount() {
-            return movie_list.size();
+            return filme.size();
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {

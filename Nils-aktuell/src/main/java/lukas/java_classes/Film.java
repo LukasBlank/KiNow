@@ -23,6 +23,30 @@ public class Film {
 
   public Film(){}
 
+  public void setFilmID(int filmID) {
+    this.filmID = filmID;
+  }
+
+  public void setFsk(int fsk) {
+    this.fsk = fsk;
+  }
+
+  public void setDauer(int dauer) {
+    this.dauer = dauer;
+  }
+
+  public void setBewertung(int bewertung) {
+    this.bewertung = bewertung;
+  }
+
+  public void setTitel(String titel) {
+    this.titel = titel;
+  }
+
+  public void setBeschreibung(String beschreibung) {
+    this.beschreibung = beschreibung;
+  }
+
   public int getFilmID() {
     return filmID;
   }

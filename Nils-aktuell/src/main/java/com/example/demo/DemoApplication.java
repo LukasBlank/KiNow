@@ -16,6 +16,9 @@ import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import lukas.java_classes.Film;
+import lukas.java_classes.Nutzer;
+import lukas.java_classes.Parser;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,11 +41,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-
 @SpringBootApplication
 public class DemoApplication {
 
   static Firestore db;
+  static Parser ps;
 
   public static void main(String[] args) {
     SpringApplication.run(DemoApplication.class, args);
@@ -68,13 +71,14 @@ public class DemoApplication {
     //if that works get all movies and print them
     SimpleController sc = new SimpleController();
     ResponseEntity<Object> re = sc.getAllData("Filme");
-    System.out.println(re.toString());
-
+    //System.out.println(re.toString());
+    ps = new Parser();
   }//main
 
   @RestController
   public static class SimpleController {
 
+    /**
     @RequestMapping(value = "/Person")
     public ResponseEntity<Nutzer> getPerson() {
       return new ResponseEntity<Nutzer>(
@@ -125,10 +129,10 @@ public class DemoApplication {
       }
       //Nutzer nutzer=gson.fromJson(body,Nutzer.class);
     }
-
+    **/
     @RequestMapping(value = "/getAllData")
     public ResponseEntity<Object> getAllData(@RequestHeader("head") String head) {
-      // asynchronously retrieve all users
+      // asynchronously retrieve all documents of an collection
       ApiFuture<QuerySnapshot> query = db.collection(head).get();
       Map<String, Object> data = new HashMap<>();
 // ...
@@ -145,6 +149,7 @@ public class DemoApplication {
       return new ResponseEntity<>(data.values(), HttpStatus.ACCEPTED);
     }//getAllData
 
+    /**
     @RequestMapping(value = "/getNutzerbyName")
     public ResponseEntity<ArrayList> getNutzer(@RequestHeader("name") String name) {
       // asynchronously retrieve all users
@@ -206,6 +211,7 @@ public class DemoApplication {
       return new ResponseEntity<ArrayList>(list, HttpStatus.BAD_REQUEST);
 
     }//getFilmKino
+    **/
 
   }//Controller
 }//class

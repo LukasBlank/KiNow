@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import lukas.java_classes.Film;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +39,8 @@ public class MoviesFragment extends Fragment {
     private View movieView;
     MovieAdapter mAdapter;
     String movies[]={"TestMovieOne","TestMovieTwo","Drei", "HAHA", "Fuenf", "Sechs", "Sieben"};
+    ArrayList<Film> filme;
+    Requests request;
 
     private OnFragmentInteractionListener mListener;
 
@@ -82,6 +86,9 @@ public class MoviesFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         movieList.setLayoutManager(layoutManager);
 
+        request = new Requests();
+        filme = request.getFilme();
+
         ArrayList<String> list_of_movies = new ArrayList<>();
         list_of_movies.add(movies[0]);
         list_of_movies.add(movies[1]);
@@ -90,6 +97,8 @@ public class MoviesFragment extends Fragment {
         list_of_movies.add(movies[4]);
         list_of_movies.add(movies[5]);
         list_of_movies.add(movies[6]);
+
+
 
         mAdapter = new MovieAdapter(list_of_movies,getActivity());
         movieList.setAdapter(mAdapter);
