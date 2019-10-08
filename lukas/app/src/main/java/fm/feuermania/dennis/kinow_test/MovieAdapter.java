@@ -20,7 +20,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         ArrayList<Film> filme;
         Context context;
 
-        public MovieAdapter(ArrayList<String> list,ArrayList<Film> filme, Context context) {
+        public MovieAdapter(ArrayList<Film> filme, Context context) {
             this.context = context;
             this.filme = filme;
         }//K
@@ -35,6 +35,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             viewHolder.Title.setText(filme.get(i).getTitel());
+            viewHolder.Desc.setText(filme.get(i).getBeschreibung());
         }
 
         @Override

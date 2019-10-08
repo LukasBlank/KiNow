@@ -44,36 +44,36 @@ public class Parser {
               }//then
               else film = "";
               switch (attribut){
-                case "FilmID":
+                case "filmID":
                   if (akt.getFilmID()!=0)return null;
                   else {
                     int t = Integer.parseInt(tmp);
                     akt.setFilmID(t);
                   }//else
                   break;
-                case "Titel":
+                case "titel":
                   if (akt.getTitel()!=null)return null;
                   else akt.setTitel(tmp);
                   break;
-                case "Beschreibung":
+                case "beschreibung":
                   if (akt.getBeschreibung()!=null)return null;
                   else akt.setBeschreibung(tmp);
                   break;
-                case "Dauer":
+                case "dauer":
                   if (akt.getDauer()!=0)return null;
                   else {
                     int t = Integer.parseInt(tmp);
                     akt.setDauer(t);
                   }//else
                   break;
-                case "Bewertung":
+                case "bewertung":
                   if (akt.getBewertung()!=0)return null;
                   else {
                     int t = Integer.parseInt(tmp);
                     akt.setBewertung(t);
                   }//else
                   break;
-                case "FSK":
+                case "fsk":
                   if (akt.getFsk()!=0)return null;
                   else {
                     int t = Integer.parseInt(tmp);

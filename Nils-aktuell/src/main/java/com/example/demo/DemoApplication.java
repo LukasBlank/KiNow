@@ -1,45 +1,35 @@
 package com.example.demo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Query;
+import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import com.google.cloud.firestore.v1.FirestoreAdminClient;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import com.google.firebase.internal.NonNull;
-import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.net.URL;
-import java.util.ArrayList;
+
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lukas.java_classes.Film;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
-import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
-
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -67,12 +57,9 @@ public class DemoApplication {
       e.printStackTrace();
     }//catch
     db = FirestoreClient.getFirestore();
-
-    //if that works get all movies and print them
     SimpleController sc = new SimpleController();
-    ResponseEntity<Object> re = sc.getAllData("Filme");
-    //System.out.println(re.toString());
-    ps = new Parser();
+    sc.lukasTest();
+
   }//main
 
   @RestController
@@ -109,14 +96,14 @@ public class DemoApplication {
     @RequestMapping(value = "/setNutzer")
     public void setData() {
       ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
+      DocumentReference docRef = db.collection("Nutzer").document();
       QuerySnapshot querySnapshot = null;
       try {
-        int Nid;
+        int nutzerID;
         querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        Nid = documents.size() + 1;
-        Nutzer n = new Nutzer(Nid, "Hans", "Peter", new Date(), "Waveboardlukas@Sand.de", "1234");
-        DocumentReference docRef = db.collection("Nutzer").document();
+        nutzerID = documents.size() + 1;
+        Nutzer n = new Nutzer(nutzerID, "Hans", "Peter", new Date(), "Waveboardlukas@Sand.de", "1234");
         //Nutzer nutzer=gson.fromJson(body,Nutzer.class);
         ApiFuture<WriteResult> result = docRef.set(n);
         System.out.println(result.toString());
@@ -127,9 +114,27 @@ public class DemoApplication {
         System.out.println("Exception");
         e.printStackTrace();
       }
-      //Nutzer nutzer=gson.fromJson(body,Nutzer.class);
-    }
-    **/
+
+    }//setNutzer
+
+     **/
+
+    @RequestMapping(value = "/lukasTest")
+    public void lukasTest (){
+      ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
+      QuerySnapshot querySnapshot = null;
+      try {
+        int filmID = 1;
+        Film film =  new Film();
+        String eintrag = "" + film;
+        DocumentReference docRef = db.collection("Filme").document(eintrag);
+        ApiFuture<WriteResult> result = docRef.set(film);
+      } catch (Exception e){
+        e.printStackTrace();
+      }
+    }//lukasTest
+
+
     @RequestMapping(value = "/getAllData")
     public ResponseEntity<Object> getAllData(@RequestHeader("head") String head) {
       // asynchronously retrieve all documents of an collection

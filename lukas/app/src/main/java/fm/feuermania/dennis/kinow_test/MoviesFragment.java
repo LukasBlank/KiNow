@@ -38,7 +38,6 @@ public class MoviesFragment extends Fragment {
     private RecyclerView movieList;
     private View movieView;
     MovieAdapter mAdapter;
-    String movies[]={"TestMovieOne","TestMovieTwo","Drei", "HAHA", "Fuenf", "Sechs", "Sieben"};
     ArrayList<Film> filme;
     Requests request;
 
@@ -89,18 +88,8 @@ public class MoviesFragment extends Fragment {
         request = new Requests();
         filme = request.getFilme();
 
-        ArrayList<String> list_of_movies = new ArrayList<>();
-        list_of_movies.add(movies[0]);
-        list_of_movies.add(movies[1]);
-        list_of_movies.add(movies[2]);
-        list_of_movies.add(movies[3]);
-        list_of_movies.add(movies[4]);
-        list_of_movies.add(movies[5]);
-        list_of_movies.add(movies[6]);
 
-
-
-        mAdapter = new MovieAdapter(list_of_movies,getActivity());
+        mAdapter = new MovieAdapter(filme,getActivity());
         movieList.setAdapter(mAdapter);
 
         movieList.getAdapter().notifyDataSetChanged();
