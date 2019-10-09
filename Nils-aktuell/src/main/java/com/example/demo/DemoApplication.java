@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import com.google.api.client.json.Json;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
@@ -16,6 +17,7 @@ import java.io.FileInputStream;
 import java.net.URL;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -25,6 +27,9 @@ import java.util.concurrent.ExecutionException;
 import lukas.java_classes.Film;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -61,7 +66,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.lukasTest();
 
   }//main
 
@@ -112,17 +116,22 @@ public class DemoApplication {
         nutzerID = documents.size();
         DocumentReference docRef = db.collection("Nutzer").document(Integer.toString(nutzerID));
         nutzer.setNutzerID(nutzerID);
-        System.out.println(nutzer.toString());
+        System.out.println(body);
         //Nutzer nutzer=gson.fromJson(body,Nutzer.class);
         ApiFuture<WriteResult> result = docRef.set(nutzer);
         System.out.println(result.toString());
+        JSONObject jsonObject=new JSONObject(body);
+        System.out.println(jsonObject.toString(5));
       } catch (InterruptedException e) {
         System.out.println("InterruptException");
         e.printStackTrace();
       } catch (ExecutionException e) {
         System.out.println("Exception");
         e.printStackTrace();
-      }
+      }  catch (Exception e) {
+      System.out.println("Exception");
+      e.printStackTrace();
+    }
     }//setNutzer
 
 
@@ -147,18 +156,22 @@ public class DemoApplication {
       // asynchronously retrieve all documents of an collection
       ApiFuture<QuerySnapshot> query = db.collection(head).get();
       Map<String, Object> data = new HashMap<>();
+      Map<String, String> JsonString = new HashMap<>();
 // ...
 // query.get() blocks on response
       try {
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        int länge=documents.size();
         for (QueryDocumentSnapshot document : documents) {
           data.put(document.getId(), document.getData());
+          JsonString.put(document.getId(), document.getData().toString());
         }//for
+          JSONObject jsonObject=new JSONObject(JsonString);
+          System.out.println(jsonObject.toString(5));
       } catch (Exception e) {
       }//catch
-
-      return new ResponseEntity<>(data.values(), HttpStatus.ACCEPTED);
+      return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
     }//getAllData
 
     /**
