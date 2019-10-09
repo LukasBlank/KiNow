@@ -9,16 +9,16 @@ public class Film {
     private List<Darsteller>darsteller;
     private List<Regisseur>regie;
 
-    public Film(int filmID, String titel, /**List<Regisseur> regie,**/ String beschreibung, int dauer, int fsk, int bewertung/**, List<Genre> genres, List<Darsteller>darsteller**/){
+    public Film(int filmID, String titel, List<Regisseur> regie, String beschreibung, int dauer, int fsk, int bewertung, List<Genre> genres, List<Darsteller>darsteller){
       this.filmID = filmID;
       this.titel = titel;
-      //this.regie = regie;
+      this.regie = regie;
       this.beschreibung = beschreibung;
       this.dauer = dauer;
       this.fsk = fsk;
       this.bewertung = bewertung;
-      //this.genres = genres;
-      ///this.darsteller = darsteller;
+      this.genres = genres;
+      this.darsteller = darsteller;
     }//Konstruktor
 
   public Film(){}
@@ -71,7 +71,7 @@ public class Film {
     return beschreibung;
   }
 
-  /**
+
   public List<Regisseur> getRegie() {
     return regie;
   }
@@ -84,7 +84,7 @@ public class Film {
     return darsteller;
   }
 
-   **/
+
 
   public boolean equals (Film film){
       if (titel.equals(film.getTitel())) return true;
