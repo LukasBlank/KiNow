@@ -23,6 +23,8 @@ public class Nutzer {
 
    public Nutzer (){}
 
+   public void setNutzerID(int id){this.nutzerID= id;}
+
     public void setPasswort(String passwort) {
         this.passwort = passwort;
     }

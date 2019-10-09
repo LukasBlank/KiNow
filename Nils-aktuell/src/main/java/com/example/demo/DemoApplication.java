@@ -11,6 +11,7 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.net.URL;
 
@@ -20,6 +21,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import lukas.java_classes.Film;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
@@ -27,6 +29,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -93,19 +96,25 @@ public class DemoApplication {
       return new ResponseEntity<>(KinoRepo.values(), HttpStatus.BAD_REQUEST);
     }
 
+     **/
+
     @RequestMapping(value = "/setNutzer")
-    public void setData() {
+    public void setData(@RequestBody String body) {
+      Gson gson= new Gson();
+      Nutzer nutzer = gson.fromJson(body,Nutzer.class);
       ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
-      DocumentReference docRef = db.collection("Nutzer").document();
+
       QuerySnapshot querySnapshot = null;
       try {
         int nutzerID;
         querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        nutzerID = documents.size() + 1;
-        Nutzer n = new Nutzer(nutzerID, "Hans", "Peter", new Date(), "Waveboardlukas@Sand.de", "1234");
+        nutzerID = documents.size();
+        DocumentReference docRef = db.collection("Nutzer").document(Integer.toString(nutzerID));
+        nutzer.setNutzerID(nutzerID);
+        System.out.println(nutzer.toString());
         //Nutzer nutzer=gson.fromJson(body,Nutzer.class);
-        ApiFuture<WriteResult> result = docRef.set(n);
+        ApiFuture<WriteResult> result = docRef.set(nutzer);
         System.out.println(result.toString());
       } catch (InterruptedException e) {
         System.out.println("InterruptException");
@@ -114,10 +123,8 @@ public class DemoApplication {
         System.out.println("Exception");
         e.printStackTrace();
       }
-
     }//setNutzer
 
-     **/
 
     @RequestMapping(value = "/lukasTest")
     public void lukasTest (){
