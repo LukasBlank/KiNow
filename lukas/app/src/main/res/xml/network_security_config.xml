@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network_security_config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">http://v220191010515498885.nicesrv.de:8080/getAllData</domain>
+        <domain includeSubdomains="true">http://v220191010515498885.nicesrv.de</domain>
     </domain-config>
 </network_security_config>

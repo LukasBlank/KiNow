@@ -48,7 +48,9 @@ public class Requests {
             ps = new Parser();
             return ps.toFilmList(json);
 
-        }catch(Exception e){ String s = e.getMessage(); }
-        return null;
+        }catch(Exception e){
+            String s = e.getMessage();
+            return null;
+        }//catch
     }//getFilme
 }

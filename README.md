@@ -43,6 +43,9 @@ Take a look: https://developer.android.com/training/basics/firstapp <br><br>
     - Suchen, Allgemeine Filmansicht, Ticketansicht und einer Profilansicht
 
 ## Backend 
+  - Fachkonzeptschicht erstellt, Backend über Spring-App
+  - Gehostet wird über eigenen Server, Kommunikation über HttpsRequests
+  - Liefert immer Json-Dateien
     
 ## Database
    - Die Datenbank ist erstellt und konfiguriert
