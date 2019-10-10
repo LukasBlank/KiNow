@@ -1,6 +1,7 @@
 package fm.feuermania.dennis.kinow_test;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(context).inflate(R.layout.movie_view, viewGroup, false);
+
+            // OnItemClick -> Open MovieDetailScreen Activity
+            ViewHolder vHolder = new ViewHolder(v);
+            final Intent intent = new Intent(context, MovieDetailScreen.class);
+            vHolder.rLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(intent);
+                }
+            });
+
             return new ViewHolder(v);
         }
 
@@ -49,10 +61,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                movieImage  = itemView.findViewById(R.id.movieImage);
-                Title     = itemView.findViewById(R.id.title);
-                Desc      = itemView.findViewById(R.id.desc);
-                rLayout         = itemView.findViewById(R.id.rLayout);
+                movieImage = itemView.findViewById(R.id.movieImage);
+                Title = itemView.findViewById(R.id.title);
+                Desc = itemView.findViewById(R.id.desc);
+                rLayout = itemView.findViewById(R.id.rLayout);
             }
         }
 

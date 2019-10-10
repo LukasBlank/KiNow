@@ -50,9 +50,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            locImage  = itemView.findViewById(R.id.locImage);
-            locTitle     = itemView.findViewById(R.id.locTitle);
-            locDesc      = itemView.findViewById(R.id.locDesc);
+            locImage = itemView.findViewById(R.id.locImage);
+            locTitle = itemView.findViewById(R.id.locTitle);
+            locDesc = itemView.findViewById(R.id.locDesc);
             relLayout = itemView.findViewById(R.id.relLayout);
         }
     }

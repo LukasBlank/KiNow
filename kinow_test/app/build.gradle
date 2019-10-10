@@ -27,10 +27,6 @@ dependencies {
     //KenBurnsView
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
 
-    //BottomNavigation
-    //NOTE: Do not update this version, even if there is a new one
-    //implementation 'com.roughike:bottom-bar:1.4.0.1'
-
     //Google CardView
     implementation 'com.android.support:cardview-v7:28.0.0'
 

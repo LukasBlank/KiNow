@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
                     loadFragment(fragment);
                     return true;
                 case R.id.tab_cart:
-                    kinowToolbar.setTitle("Purchases");
+                    kinowToolbar.setTitle("ShoppingCart");
                     fragment = new ShoppingCartFragment();
                     loadFragment(fragment);
                     return true;
