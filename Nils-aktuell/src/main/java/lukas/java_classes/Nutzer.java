@@ -69,11 +69,11 @@ public class Nutzer {
       if (neu)zahlungsmethoden.add(z);
     }//addPayment
 
-  public List<Zahlungsmethode> getZahlungsmethoden () { return zahlungsmethoden; }
+  //public List<Zahlungsmethode> getZahlungsmethoden () { return zahlungsmethoden; }
 
   public void addBestellung (Bestellung bestellung){ if(bestellung.getNutzer().getNutzerID()==this.nutzerID)bestellungen.add(bestellung); }
 
-  public List<Bestellung> getBestellungen () { return bestellungen; }
+  //public List<Bestellung> getBestellungen () { return bestellungen; }
 
   public BigInteger hashPasswordWithRSA(String pass){
     String cString = "";
