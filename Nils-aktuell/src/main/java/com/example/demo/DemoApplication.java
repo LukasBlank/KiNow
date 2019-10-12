@@ -66,8 +66,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    ResponseEntity<Object> re = sc.lukasTest();
-    System.out.println(re.toString());
+    sc.lukasTest();
 
   }//main
 
@@ -138,20 +137,11 @@ public class DemoApplication {
 
 
     @RequestMapping(value = "/lukasTest")
-    public ResponseEntity<Object> lukasTest (){
+    public void lukasTest (){
       Map<String, Object> data = new HashMap<>();
-      try {
-        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document("1").collection("nutztZahlungsmethoden").get()  ;
-        QuerySnapshot querySnapshot = query.get();
+      Nutzer nutzer = new Nutzer(4,"nutzer@nutzer.de ", "nutzer","nutzermann","Weiblich","00.12123",".");
 
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (QueryDocumentSnapshot document : documents) {
-          data.put(document.getId(), document.getData());
-        }//for
-      } catch (Exception e){
-        e.printStackTrace();
-      }
-      return new ResponseEntity<>(data.values(),HttpStatus.ACCEPTED);
+      db.collection("Nutzer").document("4").set(nutzer);
     }//lukasTest
 
 
