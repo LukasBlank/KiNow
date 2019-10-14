@@ -66,7 +66,6 @@ public class DemoApplication {
     //sc.lukasTest();
     //sc.addSitzeToSaele();
     //sc.getTestArray();
-    sc.server();
 
   }//main
 
@@ -104,10 +103,8 @@ public class DemoApplication {
      **/
 
     @RequestMapping (value = "/server")
-    public void server (){
-        Map<String, Object> data = new HashMap<>();
-        data.put("dick",23);
-        db.collection("Kino").document("77").set(data);
+    public String server (){
+       return "Hallo.";
     }//lol
 
     @RequestMapping(value = "/setNutzer")
