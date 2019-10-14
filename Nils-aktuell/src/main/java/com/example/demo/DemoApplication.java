@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import com.google.protobuf.Api;
+import javafx.beans.binding.ObjectExpression;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
 import org.apache.commons.lang3.concurrent.ConcurrentException;
@@ -63,8 +64,9 @@ public class DemoApplication {
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
     //sc.lukasTest();
-    sc.addSitzeToSaele();
+    //sc.addSitzeToSaele();
     //sc.getTestArray();
+    sc.server();
 
   }//main
 
@@ -100,6 +102,13 @@ public class DemoApplication {
     }
 
      **/
+
+    @RequestMapping (value = "/server")
+    public void server (){
+        Map<String, Object> data = new HashMap<>();
+        data.put("dick",23);
+        db.collection("Kino").document("77").set(data);
+    }//lol
 
     @RequestMapping(value = "/setNutzer")
     public void setData(@RequestBody String body) {
