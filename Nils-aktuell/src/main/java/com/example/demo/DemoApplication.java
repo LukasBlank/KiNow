@@ -144,7 +144,6 @@ public class DemoApplication {
     public void lukasTest (){
       Map<String, Object> data = new HashMap<>();
       Nutzer nutzer = new Nutzer(4,"nutzer@nutzer.de ", "okoojkok","nutzermann","Weiblich","00.12123",".");
-
       db.collection("Nutzer").document("4").set(nutzer);
     }//lukasTest
 

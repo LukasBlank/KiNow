@@ -86,6 +86,7 @@ public class MoviesFragment extends Fragment {
         movieList.setLayoutManager(layoutManager);
 
         request = new Requests();
+        String test = request.connect();
         filme = request.getFilme();
 
 
