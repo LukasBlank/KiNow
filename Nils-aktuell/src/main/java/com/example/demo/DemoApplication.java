@@ -49,11 +49,15 @@ public class DemoApplication {
     SpringApplication.run(DemoApplication.class, args);
     try {
       //Pfad muss angepasst werden ggf. in Java einfügen
-      String path = "serviceAccountKey.json";
-      URL url = DemoApplication.class.getClassLoader().getResource(path);
+
+      //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
+      // und in FileInputStream url.getPath() einfügen
+      //String path = "serviceAccountKey.json";
+      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(url.getPath());
+          new FileInputStream("serviceAccountKey.json");
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
