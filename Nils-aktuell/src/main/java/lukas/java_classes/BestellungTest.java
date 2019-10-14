@@ -37,9 +37,7 @@ public class BestellungTest {
   }
 
   @Test
-  public void getBesetellungsnummer() {
-    Assert.assertEquals(1,testBestellung.getBesetellungsnummer());
-  }
+  public void getBesetellungsnummer() { Assert.assertEquals(1,testBestellung.getBesetellungsnummer()); }
 
   @Test
   public void getGesamtpreis() {
