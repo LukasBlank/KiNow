@@ -1,4 +1,4 @@
-package lukas.java_classes;
+package main.java.lukas.java_classes;
 
 public class Sitz {
 
