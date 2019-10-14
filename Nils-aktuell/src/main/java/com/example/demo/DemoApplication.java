@@ -59,8 +59,8 @@ public class DemoApplication {
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
     //sc.lukasTest();
-    //sc.addSaele();
-    sc.getTestArray();
+    sc.addSitzeToSaele();
+    //sc.getTestArray();
 
   }//main
 
@@ -141,11 +141,11 @@ public class DemoApplication {
     // Fügt Säle zu dem Dokument Kino hinzu. Jedes Kino hat seine eigenen Säle
     @RequestMapping(value = "/addSaele")
     public void addSaele () {
-      for (int i = 2; i <= 4; i++) {
+      for (int i = 5; i <= 10; i++) {
 
         Map<String, Object> docData = new HashMap<>();
-        docData.put("barrierefrei", true);
-        docData.put("platzzahl", 49);
+        docData.put("barrierefrei", false);
+        docData.put("platzzahl", 100);
         docData.put("saalnummer", i);
 
         String name = ""+i;
@@ -153,6 +153,73 @@ public class DemoApplication {
         db.collection("Kino").document("1").collection("HatSaele").document(name).set(docData);
 
         db.collection("Saele").document("2").set(docData);
+      }
+
+    }
+
+    @RequestMapping (value = "/addTestdata")
+    public void addSitzeToSaele (){
+
+      String sitzReihe = "";
+      String sitzID = "";
+
+      for (int i = 5; i<=10; i++) {
+        Map<String, Object> docData = new HashMap<>();
+
+       // docData.put("sitzID", "A1");
+        //docData.put("loge", true);
+        //docData.put("barriereFrei", false);
+
+        //add Sitz ID
+        for (int j = 1; j <= 10; j++) {
+
+          if (j == 1) {
+            sitzReihe = "A";
+          } else if (j == 2) {
+            sitzReihe = "B";
+          } else if (j == 3) {
+            sitzReihe = "C";
+          } else if (j == 4) {
+            sitzReihe = "D";
+          } else if (j == 5) {
+            sitzReihe = "E";
+          } else if (j == 6) {
+            sitzReihe = "F";
+          } else if (j == 7) {
+            sitzReihe = "G";
+          } else if (j == 8) {
+            sitzReihe = "G";
+          } else if (j == 9) {
+            sitzReihe = "G";
+          } else if (j == 10) {
+            sitzReihe = "G";
+          }
+
+
+          System.out.printf("CHECKPOINT 1");
+
+          for (int k = 1; k <= 10; k++) {
+            sitzID = sitzReihe + k;
+            docData.put("sitzID", sitzID);
+
+            if (i <= 2) {
+              docData.put("loge", true);
+              System.out.println("CHECKPOINT 2a");
+            } else {
+              docData.put("loge", false);
+              System.out.println("CHECKPOINT 2b");
+            }
+
+              docData.put("barriereFrei", false);
+              System.out.println("CHECKPOINT 3");
+
+
+            System.out.println("CHECKPOINT 5");
+            System.out.println(sitzID);
+            db.collection("Kino").document("1").collection("HatSaele").document("" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+          }
+        }
       }
 
     }
