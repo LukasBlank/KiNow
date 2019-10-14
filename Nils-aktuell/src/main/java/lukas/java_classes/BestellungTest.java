@@ -1,4 +1,4 @@
-package lukas.java_classes;
+package main.java.lukas.java_classes;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,9 +37,7 @@ public class BestellungTest {
   }
 
   @Test
-  public void getBesetellungsnummer() {
-    Assert.assertEquals(1,testBestellung.getBesetellungsnummer());
-  }
+  public void getBesetellungsnummer() { Assert.assertEquals(1,testBestellung.getBesetellungsnummer()); }
 
   @Test
   public void getGesamtpreis() {

@@ -1,4 +1,4 @@
-package lukas.java_classes;
+package main.java.lukas.java_classes;
 
 public class Zahlungsmethode{
     private int methodeID;
@@ -8,8 +8,6 @@ public class Zahlungsmethode{
         this.methodeID = methodeID;
         this.methode = methode;
     }
-
-    public Zahlungsmethode() {}
 
     public int getMethodeID() { return methodeID; }
 

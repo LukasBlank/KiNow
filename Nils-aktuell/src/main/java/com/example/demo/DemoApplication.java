@@ -1,14 +1,9 @@
 package com.example.demo;
 
 
-import com.google.api.client.json.Json;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -16,28 +11,25 @@ import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.net.URL;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
-import lukas.java_classes.Film;
+
+import com.google.protobuf.Api;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
-import org.apache.tomcat.util.json.JSONParser;
+import org.apache.commons.lang3.concurrent.ConcurrentException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.task.support.ConcurrentExecutorAdapter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.swing.text.Document;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -70,7 +62,9 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.lukasTest();
+    //sc.lukasTest();
+    sc.addSitzeToSaele();
+    //sc.getTestArray();
 
   }//main
 
@@ -140,14 +134,135 @@ public class DemoApplication {
     }//setNutzer
 
 
-    @RequestMapping(value = "/lukasTest")
+    //@RequestMapping(value = "/lukasTest")
     public void lukasTest (){
       Map<String, Object> data = new HashMap<>();
-      Nutzer nutzer = new Nutzer(4,"nutzer@nutzer.de ", "nutzer","nutzermann","Weiblich","00.12123",".");
+      Nutzer nutzer = new Nutzer(4,"nutzer@nutzer.de ", "okoojkok","nutzermann","Weiblich","00.12123",".");
 
       db.collection("Nutzer").document("4").set(nutzer);
     }//lukasTest
 
+    // Fügt Säle zu dem Dokument Kino hinzu. Jedes Kino hat seine eigenen Säle
+    @RequestMapping(value = "/addSaele")
+    public void addSaele () {
+      for (int i = 5; i <= 10; i++) {
+
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("barrierefrei", false);
+        docData.put("platzzahl", 100);
+        docData.put("saalnummer", i);
+
+        String name = ""+i;
+
+        db.collection("Kino").document("1").collection("HatSaele").document(name).set(docData);
+
+        db.collection("Saele").document("2").set(docData);
+      }
+
+    }
+
+    @RequestMapping (value = "/addTestdata")
+    public void addSitzeToSaele (){
+
+      String sitzReihe = "";
+      String sitzID = "";
+
+      for (int i = 5; i<=10; i++) {
+        Map<String, Object> docData = new HashMap<>();
+
+       // docData.put("sitzID", "A1");
+        //docData.put("loge", true);
+        //docData.put("barriereFrei", false);
+
+        //add Sitz ID
+        for (int j = 1; j <= 10; j++) {
+
+          if (j == 1) {
+            sitzReihe = "A";
+          } else if (j == 2) {
+            sitzReihe = "B";
+          } else if (j == 3) {
+            sitzReihe = "C";
+          } else if (j == 4) {
+            sitzReihe = "D";
+          } else if (j == 5) {
+            sitzReihe = "E";
+          } else if (j == 6) {
+            sitzReihe = "F";
+          } else if (j == 7) {
+            sitzReihe = "G";
+          } else if (j == 8) {
+            sitzReihe = "G";
+          } else if (j == 9) {
+            sitzReihe = "G";
+          } else if (j == 10) {
+            sitzReihe = "G";
+          }
+
+
+          System.out.printf("CHECKPOINT 1");
+
+          for (int k = 1; k <= 10; k++) {
+            sitzID = sitzReihe + k;
+            docData.put("sitzID", sitzID);
+
+            if (i <= 2) {
+              docData.put("loge", true);
+              System.out.println("CHECKPOINT 2a");
+            } else {
+              docData.put("loge", false);
+              System.out.println("CHECKPOINT 2b");
+            }
+
+              docData.put("barriereFrei", false);
+              System.out.println("CHECKPOINT 3");
+
+
+            System.out.println("CHECKPOINT 5");
+            System.out.println(sitzID);
+            db.collection("Kino").document("1").collection("HatSaele").document("" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+          }
+        }
+      }
+
+    }
+
+    @RequestMapping(value = "/getTestArray")
+    public void getTestArray() {
+      DocumentReference documentReference = db.collection("test").document("ArrayOrList");
+
+      ApiFuture<DocumentSnapshot> doc = documentReference.get();
+
+      try{
+        DocumentSnapshot document = doc.get();
+        Map<String, Object> list = document.getData();
+
+        if(document.exists()){
+          System.out.println("Document Data" +document.getData());
+        }else{
+          System.out.println("No such Document!");
+        }
+
+      }catch (InterruptedException e){
+        e.printStackTrace();
+      }catch (java.util.concurrent.ExecutionException e){
+        e.printStackTrace();
+      }
+
+    }
+
+
+    @RequestMapping(value = "/testArray")
+    public void testSäle(){
+
+      Map<String, Object> docData = new HashMap<>();
+
+      docData.put("numbers", Arrays.asList(1,2,3,4,5,6));
+
+      db.collection("Test").document("ArrayOrList").set(docData);
+
+    }
 
     @RequestMapping(value = "/getAllData")
     public ResponseEntity<Object> getAllData(@RequestHeader("head") String head) {
@@ -161,12 +276,15 @@ public class DemoApplication {
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
         int länge=documents.size();
+
         for (QueryDocumentSnapshot document : documents) {
           data.put(document.getId(), document.getData());
           JsonString.put(document.getId(), document.getData().toString());
         }//for
+
           JSONObject jsonObject=new JSONObject(JsonString);
           System.out.println(jsonObject.toString(5));
+
       } catch (Exception e) {
       }//catch
       return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
@@ -237,4 +355,4 @@ public class DemoApplication {
     **/
 
   }//Controller
-}//class
+}// class

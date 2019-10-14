@@ -1,4 +1,4 @@
-package lukas.java_classes;
+package main.java.lukas.java_classes;
 
 import java.math.BigInteger;
 import java.util.List;
