@@ -1,4 +1,4 @@
-package main.java.lukas.java_classes;
+package lukas.java_classes;
 
 
 public class Preisvariation {
