@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import com.google.protobuf.Api;
+import javafx.beans.binding.ObjectExpression;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
 import org.apache.commons.lang3.concurrent.ConcurrentException;
@@ -41,11 +42,15 @@ public class DemoApplication {
     SpringApplication.run(DemoApplication.class, args);
     try {
       //Pfad muss angepasst werden ggf. in Java einfügen
-      String path = "serviceAccountKey.json";
-      URL url = DemoApplication.class.getClassLoader().getResource(path);
+
+      //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
+      // und in FileInputStream url.getPath() einfügen
+      //String path = "serviceAccountKey.json";
+      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(url.getPath());
+          new FileInputStream("serviceAccountKey.json");
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -59,7 +64,7 @@ public class DemoApplication {
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
     //sc.lukasTest();
-    sc.addSitzeToSaele();
+    //sc.addSitzeToSaele();
     //sc.getTestArray();
 
   }//main
@@ -96,6 +101,11 @@ public class DemoApplication {
     }
 
      **/
+
+    @RequestMapping (value = "/server")
+    public String server (){
+       return "Hallo.";
+    }//lol
 
     @RequestMapping(value = "/setNutzer")
     public void setData(@RequestBody String body) {
@@ -134,7 +144,6 @@ public class DemoApplication {
     public void lukasTest (){
       Map<String, Object> data = new HashMap<>();
       Nutzer nutzer = new Nutzer(4,"nutzer@nutzer.de ", "okoojkok","nutzermann","Weiblich","00.12123",".");
-
       db.collection("Nutzer").document("4").set(nutzer);
     }//lukasTest
 
