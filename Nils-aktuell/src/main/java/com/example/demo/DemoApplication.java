@@ -58,10 +58,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    //sc.test2();
-    //sc.lukasTest();
-    //sc.addSitzeToSaele();
-    //sc.getTestArray();
+    sc.getFilme();
 
   }//main
 
@@ -147,19 +144,23 @@ public class DemoApplication {
     }//test2
 
     @RequestMapping(value = "/getFilme")
-    public List<QueryDocumentSnapshot> getFilme (){
+    public ArrayList<Map<String, Object>> getFilme (){
       ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
       QuerySnapshot querySnapshot = null;
       List<QueryDocumentSnapshot> documents = null;
+      ArrayList<Map<String,Object>> data = new ArrayList<>();
       try {
         querySnapshot = query.get();
         documents = querySnapshot.getDocuments();
+        for ( DocumentSnapshot documentSnapshot : documents){
+          data.add(documentSnapshot.getData());
+        }//for
       } catch (InterruptedException e) {
         e.printStackTrace();
       } catch (ExecutionException e) {
         e.printStackTrace();
       }//catch
-      return documents;
+      return data;
     }//getFilme
 
     @RequestMapping(value = "/setNutzer")
