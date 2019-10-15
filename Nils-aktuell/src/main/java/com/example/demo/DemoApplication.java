@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import com.google.protobuf.Api;
-import javafx.beans.binding.ObjectExpression;
+import lukas.java_classes.FilmLukas;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
 import org.apache.commons.lang3.concurrent.ConcurrentException;
@@ -45,12 +45,12 @@ public class DemoApplication {
 
       //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
       // und in FileInputStream url.getPath() einfügen
-      //String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      String path = "serviceAccountKey.json";
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream("serviceAccountKey.json");
+          new FileInputStream(url.getPath());
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -63,6 +63,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
+    //sc.test2();
     //sc.lukasTest();
     //sc.addSitzeToSaele();
     //sc.getTestArray();
@@ -107,6 +108,65 @@ public class DemoApplication {
        return "Hallo.";
     }//lol
 
+    @RequestMapping(value = "/lukasTest")
+    public void lukasTest (){
+      Map<String, Object> data = new HashMap<>();
+      data.put("filmID",7);
+      data.put("titel","Ich war noch niemals in New York");
+      data.put("beschreibung","Für Lisa Wartberg (Heike Makatsch), erfolgsverwöhnte Fernsehmoderatorin und Single, steht ihre Show an erster Stelle. Doch dann verliert ihre Mutter Maria (Katharina Thalbach) nach einem Unfall ihr Gedächtnis, kommt ins Krankenhaus und kann sich nur noch an eines erinnern: Sie war noch niemals in New York! Kurzentschlossen flieht Maria und schmuggelt sich als blinder Passagier an Bord eines luxuriösen Kreuzfahrtschiffes. Gemeinsam mit ihrem Maskenbildner Fred (Michael Ostrowski) macht sich Lisa auf die Suche nach ihrer Mutter und spürt sie tatsächlich auf der \"MS Maximiliane\" auf. Doch bevor die beiden Maria wieder von Bord bringen können, legt der Ozeandampfer auch schon ab und die drei finden sich auf einer unfreiwilligen Reise über den Atlantik wieder. Lisa lernt an Bord Axel Staudach (Moritz Bleibtreu) und dessen Sohn Florian (Marlon Schramm) kennen. Axel ist so gar nicht Lisas Typ, doch durch eine Reihe unglücklicher Missgeschicke kommen sich die beiden schließlich näher... Mutter Maria trifft auf Eintänzer Otto (Uwe Ochsenknecht), der behauptet, eine gemeinsame Vergangenheit mit ihr zu haben - was Maria mangels Gedächtnis natürlich nicht überprüfen kann. Und Fred verliebt sich Hals über Kopf in den griechischen Bordzauberer Costa (Pasquale Aleardi). So verläuft die turbulente Schiffsreise - mit mehrmaligem Finden und Verlieren der Liebe und jeder Menge Überraschungen - nach New York.");
+      data.put("dauer",128);
+      data.put("fsk",0);
+      data.put("bewertung",5);
+      ArrayList<String> genres = new ArrayList<>();
+      genres.add("Komödie"); genres.add("Musical");
+      data.put("genres",genres);
+      ArrayList<String> regie = new ArrayList<>();
+      regie.add("Philipp Stölzl");
+      data.put("regie",regie);
+      ArrayList<String> darsteller = new ArrayList<>();
+      darsteller.add("Heike Makatsch"); darsteller.add("Moritz Bleibtreu"); darsteller.add("Katharina Thalbach");
+      darsteller.add("Uwe Ochsenknecht"); darsteller.add( "Michael Ostrowski"); darsteller.add("Pasquale Aleardi");
+      darsteller.add("Marlon Schramm"); darsteller.add("Mat Schuh");
+      data.put("darsteller",darsteller);
+      db.collection("Filme").document("7").set(data);
+    }//lukasTest
+
+    @RequestMapping(value = "/test2")
+    public void test2 (){
+      ApiFuture<DocumentSnapshot> query = db.collection("Filme").document("7").get();
+      FilmLukas film = new FilmLukas();
+      try {
+        DocumentSnapshot documentSnapshot = query.get();
+        Map <String,Object> data = new HashMap<>();
+        data = documentSnapshot.getData();
+        String erg = data.toString();
+        for (Map.Entry<String, Object> entry : data.entrySet()){
+          film.set(entry.getKey(),entry.getValue());
+        }//for
+        int i = 23 * 45;
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }
+    }//test2
+
+    @RequestMapping(value = "/getFilme")
+    public List<QueryDocumentSnapshot> getFilme (){
+      ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
+      QuerySnapshot querySnapshot = null;
+      List<QueryDocumentSnapshot> documents = null;
+      try {
+        querySnapshot = query.get();
+        documents = querySnapshot.getDocuments();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return documents;
+    }//getFilme
+
     @RequestMapping(value = "/setNutzer")
     public void setData(@RequestBody String body) {
       Gson gson= new Gson();
@@ -138,14 +198,6 @@ public class DemoApplication {
       e.printStackTrace();
     }
     }//setNutzer
-
-
-    //@RequestMapping(value = "/lukasTest")
-    public void lukasTest (){
-      Map<String, Object> data = new HashMap<>();
-      Nutzer nutzer = new Nutzer(4,"nutzer@nutzer.de ", "okoojkok","nutzermann","Weiblich","00.12123",".");
-      db.collection("Nutzer").document("4").set(nutzer);
-    }//lukasTest
 
     // Fügt Säle zu dem Dokument Kino hinzu. Jedes Kino hat seine eigenen Säle
     @RequestMapping(value = "/addSaele")
