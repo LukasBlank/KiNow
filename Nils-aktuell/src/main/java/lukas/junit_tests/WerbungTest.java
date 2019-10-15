@@ -1,5 +1,6 @@
-package lukas.java_classes;
+package lukas.junit_tests;
 
+import lukas.java_classes.Werbung;
 import org.junit.Assert;
 import org.junit.Test;
 
