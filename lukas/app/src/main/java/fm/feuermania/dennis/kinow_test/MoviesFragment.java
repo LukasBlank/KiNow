@@ -87,7 +87,7 @@ public class MoviesFragment extends Fragment {
 
         request = new Requests();
         String test = request.connect();
-        filme = request.getFilme();
+
 
 
         mAdapter = new MovieAdapter(filme,getActivity());

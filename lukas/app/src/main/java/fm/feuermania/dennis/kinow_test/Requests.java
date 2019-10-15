@@ -31,38 +31,6 @@ public class Requests {
         filme = new ArrayList<Film>();
     }//K
 
-    public ArrayList<Film> getFilme (){
-
-        try {
-            //Verbindung aufbauen
-            URL url = new URL("http://94.16.123.237:8080/server");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.connect();
-            String response = con.getResponseMessage();
-            String content = con.getContent().toString();
-            return null;
-            /**
-            //JSON Datei holen
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer content = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }//while
-            in.close();
-            String json=content.toString();
-            ps = new Parser();
-            return ps.toFilmList(json);
-             **/
-
-        }catch(Exception e){
-            String s = e.getMessage();
-            return null;
-        }//catch
-    }//getFilme
-
     public String connect (){
         OkHttpClient client = new OkHttpClient();
         String url = "http://94.16.123.237:8080/getFilme";
@@ -76,8 +44,8 @@ public class Requests {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if(response.isSuccessful()) {
-                    o = response.body();
                     ausgabe = response.body().string();
+                    response.body().close();
                 }//then
             }//onResponse;
         });
