@@ -55,14 +55,22 @@ public class Requests {
                 }//then
             }//onResponse;
         });
-        try {
-            JSONObject js = new JSONObject(ausgabe);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         return ausgabe;
     }//connect
+
+    public Map convert (String eingabe){
+        try {
+            Map<String,Object> map = new ObjectMapper().readValue(eingabe,Map.class);
+            for (Map.Entry<String,Object> entry : map.entrySet()){
+                Map<String,Object> data = new ObjectMapper().readValue(entry.getValue().toString(),Map.class);
+            }//for
+            return null;
+        } catch (IOException e) {
+           e.printStackTrace();
+           return null;
+        }//catch
+    }//convert
 
 }

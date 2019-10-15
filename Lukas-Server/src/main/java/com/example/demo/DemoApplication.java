@@ -146,15 +146,14 @@ public class DemoApplication {
       ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
       QuerySnapshot querySnapshot = null;
       List<QueryDocumentSnapshot> documents = null;
-      ArrayList<Map<String,Object>> data = new ArrayList<>();
-      HashMap<Integer,String> map = new HashMap<>();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+
       try {
         querySnapshot = query.get();
         documents = querySnapshot.getDocuments();
 
         for ( DocumentSnapshot document : documents){
-          data.add(document.getData());
-          map.put(Integer.parseInt(document.getId()),document.getData().toString());
+          map.put(document.getId(),document.getData());
         }//for
 
       } catch (InterruptedException e) {
