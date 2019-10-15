@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Nils-aktuell.iml" filepath="$PROJECT_DIR$/.idea/Nils-aktuell.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo-REST.iml" filepath="$PROJECT_DIR$/demo-REST.iml" />
     </modules>
   </component>
