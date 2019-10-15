@@ -2,7 +2,6 @@ package lukas.java_classes;
 
 import com.google.gson.Gson;
 import java.util.ArrayList;
-import org.apache.catalina.LifecycleState;
 import org.springframework.http.ResponseEntity;
 
 public class Parser {
