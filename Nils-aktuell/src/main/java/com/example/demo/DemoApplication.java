@@ -14,23 +14,18 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-import com.google.protobuf.Api;
-import lukas.java_classes.FilmLukas;
+import lukas.classes.Film;
 import lukas.java_classes.Nutzer;
 import lukas.java_classes.Parser;
-import org.apache.commons.lang3.concurrent.ConcurrentException;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.task.support.ConcurrentExecutorAdapter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.swing.text.Document;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -134,7 +129,7 @@ public class DemoApplication {
     @RequestMapping(value = "/test2")
     public void test2 (){
       ApiFuture<DocumentSnapshot> query = db.collection("Filme").document("7").get();
-      FilmLukas film = new FilmLukas();
+      Film film = new Film();
       try {
         DocumentSnapshot documentSnapshot = query.get();
         Map <String,Object> data = new HashMap<>();
