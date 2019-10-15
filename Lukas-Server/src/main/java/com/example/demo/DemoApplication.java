@@ -142,27 +142,28 @@ public class DemoApplication {
     }//test2
 
     @RequestMapping(value = "/getFilme")
-    public String getFilme (){
+    public ResponseEntity<Object> getFilme (){
       ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
       QuerySnapshot querySnapshot = null;
       List<QueryDocumentSnapshot> documents = null;
       ArrayList<Map<String,Object>> data = new ArrayList<>();
-      HashMap<String,Object> map = new HashMap<>();
+      HashMap<Integer,String> map = new HashMap<>();
       try {
         querySnapshot = query.get();
         documents = querySnapshot.getDocuments();
-        /**
-        for ( DocumentSnapshot documentSnapshot : documents){
-          data.add(documentSnapshot.getData());
+
+        for ( DocumentSnapshot document : documents){
+          data.add(document.getData());
+          map.put(Integer.parseInt(document.getId()),document.getData().toString());
         }//for
-         **/
+
       } catch (InterruptedException e) {
         e.printStackTrace();
       } catch (ExecutionException e) {
         e.printStackTrace();
       }//catch
 
-      return documents.toString();
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getFilme
 
     @RequestMapping(value = "/setNutzer")

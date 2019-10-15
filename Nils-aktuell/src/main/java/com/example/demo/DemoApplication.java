@@ -153,7 +153,6 @@ public class DemoApplication {
         documents = querySnapshot.getDocuments();
         for ( DocumentSnapshot documentSnapshot : documents){
           data.add(documentSnapshot.getData());
-          erg += documentSnapshot.getData().toString();
         }//for
       } catch (InterruptedException e) {
         e.printStackTrace();

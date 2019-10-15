@@ -1,6 +1,8 @@
 package fm.feuermania.dennis.kinow_test;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -49,6 +51,13 @@ public class Requests {
                 }//then
             }//onResponse;
         });
+        try {
+            JSONObject js = new JSONObject(ausgabe);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return ausgabe;
     }//connect
 
