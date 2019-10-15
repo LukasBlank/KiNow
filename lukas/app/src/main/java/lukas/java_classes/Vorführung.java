@@ -3,6 +3,8 @@ package lukas.java_classes;
 import java.util.Date;
 import java.util.List;
 
+import lukas.classes.Film;
+
 public class Vorführung {
 
     private int vid,gesamtdauer,grundpreis,gesamtpreis,frei;
@@ -37,8 +39,8 @@ public class Vorführung {
         return saal;
     }
 
-    public int getGesamtdauer() {
-        int tmp = film.getDauer();
+    public long getGesamtdauer() {
+        long tmp = film.getDauer();
         for (int i = 0;i<werbungen.size();i++){
             tmp += werbungen.get(i).getDauer();
         }//for

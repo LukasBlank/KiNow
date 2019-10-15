@@ -3,19 +3,12 @@ package fm.feuermania.dennis.kinow_test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import lukas.java_classes.Film;
-import lukas.java_classes.Parser;
+import lukas.classes.Film;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -25,18 +18,19 @@ import okhttp3.Response;
 public class Requests {
 
     String ausgabe;
-    Parser ps;
-    ArrayList<Film> filme;
+    ArrayList<lukas.classes.Film> filme;
     Object o;
 
     public Requests (){
         o = null;
         ausgabe = "";
-        ps = new Parser();
         filme = new ArrayList<Film>();
     }//K
 
-    public String connect (){
+    public ArrayList<Film> getFilme (){
+        ausgabe = "";
+
+        //Connection zur Fachkonzeptschicht aufbauen
         OkHttpClient client = new OkHttpClient();
         String url = "http://94.16.123.237:8080/getFilme";
         Request request = new Request.Builder().url(url).build();
@@ -44,33 +38,49 @@ public class Requests {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 e.printStackTrace();
+                ausgabe = e.getMessage();
             }//onFailure
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if(response.isSuccessful()) {
+                    //Wenn erfolgreich eine Rückgabe erfolgt ist, bekommenen String zurück zu Hashmaps parsen
                     ausgabe = response.body().string();
-                    HashMap<Integer,String> map = new ObjectMapper().readValue(ausgabe,HashMap.class);
                     response.body().close();
                 }//then
             }//onResponse;
         });
 
 
-        return ausgabe;
-    }//connect
-
-    public Map convert (String eingabe){
+        //wait for the OkHttpRequest
         try {
-            Map<String,Object> map = new ObjectMapper().readValue(eingabe,Map.class);
-            for (Map.Entry<String,Object> entry : map.entrySet()){
-                Map<String,Object> data = new ObjectMapper().readValue(entry.getValue().toString(),Map.class);
-            }//for
-            return null;
-        } catch (IOException e) {
-           e.printStackTrace();
-           return null;
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }//catch
-    }//convert
+
+
+        //variablen
+            Map<String,Object> map = null;
+            lukas.classes.Film film = new lukas.classes.Film();
+            ArrayList<lukas.classes.Film> filme = new ArrayList<>();
+            try {
+                //map durchlaufen und einzelne Hashmaps holen
+                map = new ObjectMapper().readValue(ausgabe, Map.class);
+                for (Map.Entry<String,Object> entry : map.entrySet()){
+                    Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                    //jede einzelne Hashmap dann zu einem Film parsen und zur Filmliste hinzufügen
+                    film = new lukas.classes.Film();
+                    for (Map.Entry<String,Object> e : data.entrySet()){
+                        film.set(e.getKey(),e.getValue());
+                    }//for
+                    filme.add(film);
+                }//for
+            } catch (IOException e) {
+                e.printStackTrace();
+            }//catch
+            return filme;
+    }//getFilme
+
 
 }
