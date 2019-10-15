@@ -10,8 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import lukas.java_classes.Film;
 
@@ -87,7 +95,12 @@ public class MoviesFragment extends Fragment {
 
         request = new Requests();
         String test = request.connect();
-
+        try {
+            Map<String,Object> result = new ObjectMapper().readValue(test,Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int i = 23*23;
 
 
         mAdapter = new MovieAdapter(filme,getActivity());

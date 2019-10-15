@@ -147,20 +147,22 @@ public class DemoApplication {
       QuerySnapshot querySnapshot = null;
       List<QueryDocumentSnapshot> documents = null;
       ArrayList<Map<String,Object>> data = new ArrayList<>();
-      String erg = "";
+      HashMap<String,Object> map = new HashMap<>();
       try {
         querySnapshot = query.get();
         documents = querySnapshot.getDocuments();
+        /**
         for ( DocumentSnapshot documentSnapshot : documents){
           data.add(documentSnapshot.getData());
-          erg += documentSnapshot.getData().toString();
         }//for
+         **/
       } catch (InterruptedException e) {
         e.printStackTrace();
       } catch (ExecutionException e) {
         e.printStackTrace();
       }//catch
-      return erg;
+
+      return documents.toString();
     }//getFilme
 
     @RequestMapping(value = "/setNutzer")
