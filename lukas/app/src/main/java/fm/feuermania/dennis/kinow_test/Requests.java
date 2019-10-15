@@ -1,5 +1,7 @@
 package fm.feuermania.dennis.kinow_test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +50,7 @@ public class Requests {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if(response.isSuccessful()) {
                     ausgabe = response.body().string();
+                    HashMap<Integer,String> map = new ObjectMapper().readValue(ausgabe,HashMap.class);
                     response.body().close();
                 }//then
             }//onResponse;

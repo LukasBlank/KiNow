@@ -95,12 +95,7 @@ public class MoviesFragment extends Fragment {
 
         request = new Requests();
         String test = request.connect();
-        try {
-            Map<String,Object> result = new ObjectMapper().readValue(test,Map.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int i = 23*23;
+
 
 
         mAdapter = new MovieAdapter(filme,getActivity());
