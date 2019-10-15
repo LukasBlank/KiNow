@@ -1,4 +1,4 @@
-package lukas.java_classes;
+package lukas.junit_tests;
 
 import org.junit.Test;
 

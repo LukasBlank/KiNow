@@ -1,5 +1,6 @@
-package lukas.java_classes;
+package lukas.junit_tests;
 
+import lukas.java_classes.Zahlungsmethode;
 import org.junit.Assert;
 import org.junit.Test;
 
