@@ -56,7 +56,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.addSitzeToSaele();
+    sc.addVorstellungen();
   }//main
 
   @RestController
@@ -229,42 +229,43 @@ public class DemoApplication {
 
     }
 
+    //Fügt zu jedem Film Vorstellungen hinzu -> Muss zwar immer individuell angepasst werden
     @RequestMapping (value = "/addVorstellungen")
     public void addVorstellungen() {
 
         int film = 9;
 
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 3; i++) {
             Map<String, Object> docData = new HashMap<>();
 
-            docData.put("vorführungsID", "1_" + film + "_" + i); //Kino 1, Film 2, 1 Vorführung
+            docData.put("vorführungsID", "2_" + film + "_" + i); //Kino 1, Film 2, 1 Vorführung
             docData.put("filmID", film);
             docData.put("saalnummer", 6);
 
             if(i == 1){
-                docData.put("zeitpunkt", "12:30");
+                docData.put("zeitpunkt", "12:00");
             } else if (i == 2) {
-                docData.put("zeitpunkt", "15:30");
+                docData.put("zeitpunkt", "15:00");
             } else if (i == 3) {
-                docData.put("zeitpunkt", "19:00");
+                docData.put("zeitpunkt", "18:00");
             } else if (i == 4) {
-                docData.put("zeitpunkt", "21:00");
+                docData.put("zeitpunkt", "20:30");
             } else if (i == 5){
                 docData.put("zeitpunkt", "8:00");
             }
 
-            docData.put("gesamtdauer", 133);
+            docData.put("gesamtdauer", 137);
             docData.put("grundpreis", 7.00);
 
-            if(i == 2) {
-                docData.put("gesamtpreis", 11.00);
-                docData.put("3D", true);
-            } else {
+            //if(i == 2) {
+            //  docData.put("gesamtpreis", 11.00);
+            //  docData.put("3D", true);
+            //} else {
                 docData.put("gesamtpreis", 7.00);
                 docData.put("3D", false);
-            }
+            //}
 
-            db.collection("Kino").document("1").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("1_" + film + "_" + i).set(docData);
+            db.collection("Kino").document("2").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("2_" + film + "_" + i).set(docData);
         }
     }
 
