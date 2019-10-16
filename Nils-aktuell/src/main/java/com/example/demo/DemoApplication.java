@@ -56,7 +56,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.getFilme();
+    sc.addVorstellungen();
 
   }//main
 
@@ -107,18 +107,21 @@ public class DemoApplication {
       data.put("dauer",128);
       data.put("fsk",0);
       data.put("bewertung",5);
+
       ArrayList<String> genres = new ArrayList<>();
       genres.add("Komödie"); genres.add("Musical");
       data.put("genres",genres);
       ArrayList<String> regie = new ArrayList<>();
       regie.add("Philipp Stölzl");
       data.put("regie",regie);
+
       ArrayList<String> darsteller = new ArrayList<>();
       darsteller.add("Heike Makatsch"); darsteller.add("Moritz Bleibtreu"); darsteller.add("Katharina Thalbach");
       darsteller.add("Uwe Ochsenknecht"); darsteller.add( "Michael Ostrowski"); darsteller.add("Pasquale Aleardi");
       darsteller.add("Marlon Schramm"); darsteller.add("Mat Schuh");
       data.put("darsteller",darsteller);
       db.collection("Filme").document("7").set(data);
+
     }//lukasTest
 
     @RequestMapping(value = "/test2")
@@ -143,9 +146,10 @@ public class DemoApplication {
 
     @RequestMapping(value = "/getFilme")
     public String getFilme (){
+
       ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
-      QuerySnapshot querySnapshot = null;
-      List<QueryDocumentSnapshot> documents = null;
+      QuerySnapshot querySnapshot;
+      List<QueryDocumentSnapshot> documents;
       ArrayList<Map<String,Object>> data = new ArrayList<>();
       String erg = "";
       try {
@@ -213,6 +217,36 @@ public class DemoApplication {
 
     }
 
+    @RequestMapping (value = "/addVorstellungen")
+
+    public void addVorstellungen() {
+
+        for (int i = 1; i <= 3; i++) {
+            Map<String, Object> docData = new HashMap<>();
+
+            docData.put("vorführungsID", "1_5_" + i); //Kino 1, Film 2, 1 Vorführung
+            docData.put("filmID", "5");
+            docData.put("saalnummer", 3);
+
+            if(i == 1){
+                docData.put("zeitpunkt", "10:30");
+            } else if (i == 2) {
+                docData.put("zeitpunkt", "14:00");
+            } else if (i == 3) {
+                docData.put("zeitpunkt", "19:30");
+            } else if (i == 4) {
+                docData.put("zeitpunkt", "22:00");
+            }
+
+            docData.put("gesamtdauer", 110);
+            docData.put("grundpreis", 7.00);
+            docData.put("gesamtpreis", 7.00);
+            docData.put("3D", false);
+
+
+            db.collection("Kino").document("1").collection("spieltFilme").document("5").collection("Vorstellungen").document("1_11_" + i).set(docData);
+        }
+    }
     @RequestMapping (value = "/addTestdata")
     public void addSitzeToSaele (){
 
