@@ -56,8 +56,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.addVorstellungen();
-
+    sc.addSitzeToSaele();
   }//main
 
   @RestController
@@ -201,117 +200,171 @@ public class DemoApplication {
     // Fügt Säle zu dem Dokument Kino hinzu. Jedes Kino hat seine eigenen Säle
     @RequestMapping(value = "/addSaele")
     public void addSaele () {
-      for (int i = 5; i <= 10; i++) {
-
         Map<String, Object> docData = new HashMap<>();
-        docData.put("barrierefrei", false);
-        docData.put("platzzahl", 100);
-        docData.put("saalnummer", i);
 
-        String name = ""+i;
+        for (int l = 1; l <= 3; l++) {
 
-        db.collection("Kino").document("1").collection("HatSaele").document(name).set(docData);
+            for (int i = 1; i <= 4; i++) {
 
-        db.collection("Saele").document("2").set(docData);
-      }
+                String name = l + "_" + i;
+
+                docData.put("barrierefrei", true);
+                docData.put("platzzahl", 49);
+                docData.put("saalnummer", name);
+
+                db.collection("Kino").document(""+l).collection("HatSaele").document(name).set(docData);
+            }
+
+            for (int i = 5; i <= 10; i++) {
+
+                String name = l + "_" + i;
+
+                docData.put("barrierefrei", false);
+                docData.put("platzzahl", 100);
+                docData.put("saalnummer", name);
+
+                db.collection("Kino").document(""+l).collection("HatSaele").document(name).set(docData);
+            }
+        }
 
     }
 
     @RequestMapping (value = "/addVorstellungen")
-
     public void addVorstellungen() {
 
-        for (int i = 1; i <= 3; i++) {
+        int film = 9;
+
+        for (int i = 1; i <= 4; i++) {
             Map<String, Object> docData = new HashMap<>();
 
-            docData.put("vorführungsID", "1_5_" + i); //Kino 1, Film 2, 1 Vorführung
-            docData.put("filmID", "5");
-            docData.put("saalnummer", 3);
+            docData.put("vorführungsID", "1_" + film + "_" + i); //Kino 1, Film 2, 1 Vorführung
+            docData.put("filmID", film);
+            docData.put("saalnummer", 6);
 
             if(i == 1){
-                docData.put("zeitpunkt", "10:30");
+                docData.put("zeitpunkt", "12:30");
             } else if (i == 2) {
-                docData.put("zeitpunkt", "14:00");
+                docData.put("zeitpunkt", "15:30");
             } else if (i == 3) {
-                docData.put("zeitpunkt", "19:30");
+                docData.put("zeitpunkt", "19:00");
             } else if (i == 4) {
-                docData.put("zeitpunkt", "22:00");
+                docData.put("zeitpunkt", "21:00");
+            } else if (i == 5){
+                docData.put("zeitpunkt", "8:00");
             }
 
-            docData.put("gesamtdauer", 110);
+            docData.put("gesamtdauer", 133);
             docData.put("grundpreis", 7.00);
-            docData.put("gesamtpreis", 7.00);
-            docData.put("3D", false);
 
+            if(i == 2) {
+                docData.put("gesamtpreis", 11.00);
+                docData.put("3D", true);
+            } else {
+                docData.put("gesamtpreis", 7.00);
+                docData.put("3D", false);
+            }
 
-            db.collection("Kino").document("1").collection("spieltFilme").document("5").collection("Vorstellungen").document("1_11_" + i).set(docData);
+            db.collection("Kino").document("1").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("1_" + film + "_" + i).set(docData);
         }
     }
+
     @RequestMapping (value = "/addTestdata")
     public void addSitzeToSaele (){
 
       String sitzReihe = "";
       String sitzID = "";
+      Map<String, Object> docData = new HashMap<>();
 
-      for (int i = 5; i<=10; i++) {
-        Map<String, Object> docData = new HashMap<>();
+      for (int l = 1; l <= 3; l++) {
+          for (int i = 1; i <= 4; i++) {
 
-       // docData.put("sitzID", "A1");
-        //docData.put("loge", true);
-        //docData.put("barriereFrei", false);
+              for (int j = 1; j <= 7; j++) {
 
-        //add Sitz ID
-        for (int j = 1; j <= 10; j++) {
+                  if (j == 1) {
+                      sitzReihe = "A";
+                  } else if (j == 2) {
+                      sitzReihe = "B";
+                  } else if (j == 3) {
+                      sitzReihe = "C";
+                  } else if (j == 4) {
+                      sitzReihe = "D";
+                  } else if (j == 5) {
+                      sitzReihe = "E";
+                  } else if (j == 6) {
+                      sitzReihe = "F";
+                  } else if (j == 7) {
+                      sitzReihe = "G";
+                  } else if (j == 8) {
+                      sitzReihe = "H";
+                  } else if (j == 9) {
+                      sitzReihe = "I";
+                  } else if (j == 10) {
+                      sitzReihe = "J";
+                  }
 
-          if (j == 1) {
-            sitzReihe = "A";
-          } else if (j == 2) {
-            sitzReihe = "B";
-          } else if (j == 3) {
-            sitzReihe = "C";
-          } else if (j == 4) {
-            sitzReihe = "D";
-          } else if (j == 5) {
-            sitzReihe = "E";
-          } else if (j == 6) {
-            sitzReihe = "F";
-          } else if (j == 7) {
-            sitzReihe = "G";
-          } else if (j == 8) {
-            sitzReihe = "G";
-          } else if (j == 9) {
-            sitzReihe = "G";
-          } else if (j == 10) {
-            sitzReihe = "G";
+                  for (int k = 1; k <= 7; k++) {
+                      sitzID = l + "_" + i + "_" + sitzReihe + k;
+                      docData.put("sitzID", sitzID);
+
+                      if (i <= 2) {
+                          docData.put("loge", true);
+                      } else {
+                          docData.put("loge", false);
+                      }
+
+                      docData.put("barrierefrei", true);
+                      db.collection("Kino").document(l + "").collection("HatSaele").document(l + "_" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+                  }
+              }
           }
 
 
-          System.out.printf("CHECKPOINT 1");
+          for (int i = 5; i <= 10; i++) {
 
-          for (int k = 1; k <= 10; k++) {
-            sitzID = sitzReihe + k;
-            docData.put("sitzID", sitzID);
+              for (int j = 1; j <= 10; j++) {
 
-            if (i <= 2) {
-              docData.put("loge", true);
-              System.out.println("CHECKPOINT 2a");
-            } else {
-              docData.put("loge", false);
-              System.out.println("CHECKPOINT 2b");
-            }
+                  if (j == 1) {
+                      sitzReihe = "A";
+                  } else if (j == 2) {
+                      sitzReihe = "B";
+                  } else if (j == 3) {
+                      sitzReihe = "C";
+                  } else if (j == 4) {
+                      sitzReihe = "D";
+                  } else if (j == 5) {
+                      sitzReihe = "E";
+                  } else if (j == 6) {
+                      sitzReihe = "F";
+                  } else if (j == 7) {
+                      sitzReihe = "G";
+                  } else if (j == 8) {
+                      sitzReihe = "H";
+                  } else if (j == 9) {
+                      sitzReihe = "I";
+                  } else if (j == 10) {
+                      sitzReihe = "J";
+                  }
+                  System.out.printf("CHECKPOINT 1");
 
-              docData.put("barriereFrei", false);
-              System.out.println("CHECKPOINT 3");
+                  for (int k = 1; k <= 10; k++) {
+                      sitzID = l + "_" + i + "_" + sitzReihe + k;
+                      docData.put("sitzID", sitzID);
 
+                      if (i <= 2) {
+                          docData.put("loge", true);
+                      } else {
+                          docData.put("loge", false);
+                      }
 
-            System.out.println("CHECKPOINT 5");
-            System.out.println(sitzID);
-            db.collection("Kino").document("1").collection("HatSaele").document("" + i).collection("HatSitze").document("" + sitzID).set(docData);
+                      docData.put("barrierefrei", false);
 
+                      db.collection("Kino").document(l+"").collection("HatSaele").document(l + "_" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+                  }
+              }
           }
-        }
       }
-
     }
 
     @RequestMapping(value = "/getTestArray")
@@ -337,7 +390,6 @@ public class DemoApplication {
       }
 
     }
-
 
     @RequestMapping(value = "/testArray")
     public void testSäle(){
