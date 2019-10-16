@@ -1,6 +1,7 @@
 package lukas.java_classes;
 
 import java.util.List;
+import lukas.classes.Sitz;
 
 public class Buchung {
 
@@ -37,9 +38,9 @@ public class Buchung {
     return sitze;
   }
 
-  public int getBuchungspreis(){
-      int preis = vorführung.getGrundpreis();
-      int gesamt = sitze.size()*preis;
+  public long getBuchungspreis(){
+      long preis = vorführung.getGrundpreis();
+      long gesamt = sitze.size()*preis;
       for (int i = 0;i<sitze.size();i++){
         if(sitze.get(i).isLoge())gesamt += logezusatz;
       }//for

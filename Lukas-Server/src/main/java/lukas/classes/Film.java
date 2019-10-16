@@ -104,23 +104,23 @@ public class Film {
   public void set (String key, Object o){
     switch (key){
       case "titel": this.titel = (String)o;
-      break;
+        break;
       case "beschreibung": this.beschreibung = (String)o;
-      break;
+        break;
       case "regie": this.regie = (ArrayList<String>) o;
-      break;
+        break;
       case "darsteller": this.darsteller = (ArrayList<String>) o;
-      break;
+        break;
       case "genres": this.genres = (ArrayList<String>) o;
-      break;
-      case "filmID": this.filmID = (long) o;
-      break;
-      case "dauer": this.dauer = (long) o;
-      break;
-      case "fsk": this.fsk = (long) o;
-      break;
-      case "bewertung": this.bewertung = (long) o;
-      break;
+        break;
+      case "filmID": this.filmID = Long.parseLong(o.toString());
+        break;
+      case "dauer": this.dauer = Long.parseLong(o.toString());
+        break;
+      case "fsk": this.fsk = Long.parseLong(o.toString());
+        break;
+      case "bewertung": this.bewertung = Long.parseLong(o.toString());
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

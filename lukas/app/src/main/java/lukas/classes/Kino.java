@@ -2,5 +2,5 @@ package lukas.classes;
 
 public class Kino {
 
-    //TODO
+    //ToDO
 }//class

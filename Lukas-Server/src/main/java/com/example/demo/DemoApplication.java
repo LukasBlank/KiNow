@@ -14,8 +14,9 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-import lukas.classes.Film;
-import lukas.java_classes.Nutzer;
+import lukas.classes.Kino;
+import lukas.classes.Kinosaal;
+import lukas.classes.Sitz;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -56,7 +57,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    System.out.println(sc.getFilme("0").toString());
   }//main
 
   @RestController
@@ -149,6 +149,7 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getFilme
 
+    /**
     @RequestMapping(value = "/setNutzer")
     public void setData(@RequestBody String body) {
       Gson gson= new Gson();
