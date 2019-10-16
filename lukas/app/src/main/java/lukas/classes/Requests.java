@@ -1,21 +1,9 @@
-package fm.feuermania.dennis.kinow_test;
+package lukas.classes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
-
-import lukas.classes.Film;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class Requests {
 

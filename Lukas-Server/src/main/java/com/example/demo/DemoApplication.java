@@ -38,12 +38,12 @@ public class DemoApplication {
 
       //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
       // und in FileInputStream url.getPath() einfügen
-      //String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      String path = "serviceAccountKey.json";
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream( "serviceAccountKey.json");
+          new FileInputStream( url.getPath());
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -56,8 +56,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.getFilme();
-
   }//main
 
   @RestController
@@ -121,41 +119,25 @@ public class DemoApplication {
       db.collection("Filme").document("7").set(data);
     }//lukasTest
 
-    @RequestMapping(value = "/test2")
-    public void test2 (){
-      ApiFuture<DocumentSnapshot> query = db.collection("Filme").document("7").get();
-      Film film = new Film();
-      try {
-        DocumentSnapshot documentSnapshot = query.get();
-        Map <String,Object> data = new HashMap<>();
-        data = documentSnapshot.getData();
-        String erg = data.toString();
-        for (Map.Entry<String, Object> entry : data.entrySet()){
-          film.set(entry.getKey(),entry.getValue());
-        }//for
-        int i = 23 * 45;
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }
-    }//test2
-
     @RequestMapping(value = "/getFilme")
-    public ResponseEntity<Object> getFilme (){
-      ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
+    public ResponseEntity<Object> getFilme (@RequestHeader("kinoID") long kinoID){
+      //alle filme für Kino mit bestimmter ID holen, ggf. alle Filme holen
+      ApiFuture<QuerySnapshot> query;
+      if (kinoID==0) query = db.collection("Filme").get();
+      else {
+        query = db.collection("Kino").document((String.valueOf(kinoID))).collection("spieltFilme").get();
+      }//else
+
       QuerySnapshot querySnapshot = null;
       List<QueryDocumentSnapshot> documents = null;
       Map<String,Map<String,Object>> map = new HashMap<>();
-
       try {
         querySnapshot = query.get();
         documents = querySnapshot.getDocuments();
-
         for ( DocumentSnapshot document : documents){
           map.put(document.getId(),document.getData());
+          //maps für subcollections erstellen
         }//for
-
       } catch (InterruptedException e) {
         e.printStackTrace();
       } catch (ExecutionException e) {

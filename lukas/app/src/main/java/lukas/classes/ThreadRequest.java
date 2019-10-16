@@ -1,4 +1,4 @@
-package fm.feuermania.dennis.kinow_test;
+package lukas.classes;
 
 import org.jetbrains.annotations.NotNull;
 
