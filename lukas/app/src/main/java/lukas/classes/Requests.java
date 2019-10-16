@@ -19,12 +19,13 @@ public class Requests {
         filme = new ArrayList<Film>();
     }//K
 
-    public ArrayList<Film> getFilme (){
+    public ArrayList<Film> getFilme (int kinoID){
         ausgabe = "";
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/getFilme";
+        String SID = String.valueOf(kinoID);
         Request request = new Request.Builder()
-                .addHeader("kinoID","0")
+                .addHeader("kinoID",SID)
                 .url(url).build();
         tr.setRequest(request);
         tr.start();

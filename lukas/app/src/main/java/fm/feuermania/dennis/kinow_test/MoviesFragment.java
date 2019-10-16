@@ -41,6 +41,8 @@ public class MoviesFragment extends Fragment {
     private RecyclerView movieList;
     private View movieView;
 
+    //gesetztes Kino
+    private int kinoID;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,6 +71,7 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        kinoID = 0;
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -94,7 +97,7 @@ public class MoviesFragment extends Fragment {
 
 
         request = new Requests();
-        filme = request.getFilme();
+        filme = request.getFilme(kinoID);
 
         mAdapter = new MovieAdapter(filme,getActivity());
         movieList.setAdapter(mAdapter);
@@ -102,7 +105,8 @@ public class MoviesFragment extends Fragment {
         movieList.getAdapter().notifyDataSetChanged();
 
         return movieView;
-    }
+    }//onCreateView
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -142,4 +146,6 @@ public class MoviesFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-}
+
+
+}//class

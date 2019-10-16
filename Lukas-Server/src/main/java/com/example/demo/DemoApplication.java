@@ -38,12 +38,12 @@ public class DemoApplication {
 
       //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
       // und in FileInputStream url.getPath() einfügen
-      //String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      String path = "serviceAccountKey.json";
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream( "serviceAccountKey.json");
+          new FileInputStream( url.getPath());
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -56,6 +56,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
+    System.out.println(sc.getFilme("0").toString());
   }//main
 
   @RestController
