@@ -13,14 +13,20 @@
     <color name="colorRedLight">#ff7b85</color>
     <color name="colorRedDark">#ab002f</color>
 
-    <!-- Black & White & Grey -->
+    <!-- Black & White & Grey & Transparent-->
     <color name="white">#FFFFFF</color>
     <color name="grey">#CFD8DC</color>
     <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
     
     <!-- Colors used by the BottomNavigationBar -->
     <color name="mint">#1abc9c</color>
     <color name="brown">#5D4037</color>
     <color name="violet">#7B1FA2</color>
     <color name="red">#FF5252</color>
+
+    <!-- Colors for special Elements -->
+    <color name="editTextField">#DADADA</color>
+    <color name="textColor">#9A9A9A</color>
+    <color name="lineColor">#DADADA</color>
 </resources>

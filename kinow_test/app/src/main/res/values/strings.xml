@@ -37,4 +37,22 @@
     <string name="seek_to_hint">Seconds</string>
     <string name="trailer">Trailer</string>
 
+    <!-- Strings for Default Account Content -->
+    <string name="login">Login</string>
+    <string name="big_login">LOGIN</string>
+    <string name="sign_in">Sign In</string>
+    <string name="big_sign_in">SIGN IN</string>
+    <string name="register">Register</string>
+    <string name="big_register">REGISTER</string>
+    <string name="no_account_yet">Don´t have an account? Create one!</string>
+    <string name="email">E-Mail</string>
+    <string name="pwd">Password</string>
+    <string name="confirm_pwd">Confirm Password</string>
+    <string name="forgot_pwd">Forgot Password?</string>
+    <string name="new_pwd">Enter a new Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="username">Username</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+
 </resources>
