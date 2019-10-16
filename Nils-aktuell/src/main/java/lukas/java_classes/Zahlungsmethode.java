@@ -9,8 +9,6 @@ public class Zahlungsmethode{
         this.methode = methode;
     }
 
-    public Zahlungsmethode() {}
-
     public int getMethodeID() { return methodeID; }
 
     public String getMethode() {

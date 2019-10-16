@@ -1,14 +1,9 @@
 package com.example.demo;
 
 
-import com.google.api.client.json.Json;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -16,20 +11,12 @@ import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.net.URL;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
-import lukas.java_classes.Film;
+
+import lukas.classes.Film;
 import lukas.java_classes.Nutzer;
-import lukas.java_classes.Parser;
-import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -43,14 +30,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoApplication {
 
   static Firestore db;
-  static Parser ps;
 
   public static void main(String[] args) {
     SpringApplication.run(DemoApplication.class, args);
     try {
       //Pfad muss angepasst werden ggf. in Java einfügen
+
+      //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
+      // und in FileInputStream url.getPath() einfügen
       String path = "serviceAccountKey.json";
       URL url = DemoApplication.class.getClassLoader().getResource(path);
+
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
           new FileInputStream(url.getPath());
@@ -66,9 +56,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    ResponseEntity<Object> re = sc.lukasTest();
-    System.out.println(re.toString());
-
+    sc.addVorstellungen();
   }//main
 
   @RestController
@@ -104,6 +92,79 @@ public class DemoApplication {
 
      **/
 
+    @RequestMapping (value = "/server")
+    public String server (){
+       return "Hallo.";
+    }//lol
+
+    @RequestMapping(value = "/lukasTest")
+    public void lukasTest (){
+      Map<String, Object> data = new HashMap<>();
+      data.put("filmID",7);
+      data.put("titel","Ich war noch niemals in New York");
+      data.put("beschreibung","Für Lisa Wartberg (Heike Makatsch), erfolgsverwöhnte Fernsehmoderatorin und Single, steht ihre Show an erster Stelle. Doch dann verliert ihre Mutter Maria (Katharina Thalbach) nach einem Unfall ihr Gedächtnis, kommt ins Krankenhaus und kann sich nur noch an eines erinnern: Sie war noch niemals in New York! Kurzentschlossen flieht Maria und schmuggelt sich als blinder Passagier an Bord eines luxuriösen Kreuzfahrtschiffes. Gemeinsam mit ihrem Maskenbildner Fred (Michael Ostrowski) macht sich Lisa auf die Suche nach ihrer Mutter und spürt sie tatsächlich auf der \"MS Maximiliane\" auf. Doch bevor die beiden Maria wieder von Bord bringen können, legt der Ozeandampfer auch schon ab und die drei finden sich auf einer unfreiwilligen Reise über den Atlantik wieder. Lisa lernt an Bord Axel Staudach (Moritz Bleibtreu) und dessen Sohn Florian (Marlon Schramm) kennen. Axel ist so gar nicht Lisas Typ, doch durch eine Reihe unglücklicher Missgeschicke kommen sich die beiden schließlich näher... Mutter Maria trifft auf Eintänzer Otto (Uwe Ochsenknecht), der behauptet, eine gemeinsame Vergangenheit mit ihr zu haben - was Maria mangels Gedächtnis natürlich nicht überprüfen kann. Und Fred verliebt sich Hals über Kopf in den griechischen Bordzauberer Costa (Pasquale Aleardi). So verläuft die turbulente Schiffsreise - mit mehrmaligem Finden und Verlieren der Liebe und jeder Menge Überraschungen - nach New York.");
+      data.put("dauer",128);
+      data.put("fsk",0);
+      data.put("bewertung",5);
+
+      ArrayList<String> genres = new ArrayList<>();
+      genres.add("Komödie"); genres.add("Musical");
+      data.put("genres",genres);
+      ArrayList<String> regie = new ArrayList<>();
+      regie.add("Philipp Stölzl");
+      data.put("regie",regie);
+
+      ArrayList<String> darsteller = new ArrayList<>();
+      darsteller.add("Heike Makatsch"); darsteller.add("Moritz Bleibtreu"); darsteller.add("Katharina Thalbach");
+      darsteller.add("Uwe Ochsenknecht"); darsteller.add( "Michael Ostrowski"); darsteller.add("Pasquale Aleardi");
+      darsteller.add("Marlon Schramm"); darsteller.add("Mat Schuh");
+      data.put("darsteller",darsteller);
+      db.collection("Filme").document("7").set(data);
+
+    }//lukasTest
+
+    @RequestMapping(value = "/test2")
+    public void test2 (){
+      ApiFuture<DocumentSnapshot> query = db.collection("Filme").document("7").get();
+      Film film = new Film();
+      try {
+        DocumentSnapshot documentSnapshot = query.get();
+        Map <String,Object> data = new HashMap<>();
+        data = documentSnapshot.getData();
+        String erg = data.toString();
+        for (Map.Entry<String, Object> entry : data.entrySet()){
+          film.set(entry.getKey(),entry.getValue());
+        }//for
+        int i = 23 * 45;
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }
+    }//test2
+
+    @RequestMapping(value = "/getFilme")
+    public String getFilme (){
+
+      ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
+      QuerySnapshot querySnapshot;
+      List<QueryDocumentSnapshot> documents;
+      ArrayList<Map<String,Object>> data = new ArrayList<>();
+      String erg = "";
+      try {
+        querySnapshot = query.get();
+        documents = querySnapshot.getDocuments();
+        for ( DocumentSnapshot documentSnapshot : documents){
+          data.add(documentSnapshot.getData());
+        }//for
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return erg;
+    }//getFilme
+
     @RequestMapping(value = "/setNutzer")
     public void setData(@RequestBody String body) {
       Gson gson= new Gson();
@@ -136,24 +197,211 @@ public class DemoApplication {
     }
     }//setNutzer
 
+    // Fügt Säle zu dem Dokument Kino hinzu. Jedes Kino hat seine eigenen Säle
+    @RequestMapping(value = "/addSaele")
+    public void addSaele () {
+        Map<String, Object> docData = new HashMap<>();
 
-    @RequestMapping(value = "/lukasTest")
-    public ResponseEntity<Object> lukasTest (){
-      Map<String, Object> data = new HashMap<>();
-      try {
-        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document("1").collection("nutztZahlungsmethoden").get()  ;
-        QuerySnapshot querySnapshot = query.get();
+        for (int l = 1; l <= 3; l++) {
 
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (QueryDocumentSnapshot document : documents) {
-          data.put(document.getId(), document.getData());
-        }//for
-      } catch (Exception e){
+            for (int i = 1; i <= 4; i++) {
+
+                String name = l + "_" + i;
+
+                docData.put("barrierefrei", true);
+                docData.put("platzzahl", 49);
+                docData.put("saalnummer", name);
+
+                db.collection("Kino").document(""+l).collection("HatSaele").document(name).set(docData);
+            }
+
+            for (int i = 5; i <= 10; i++) {
+
+                String name = l + "_" + i;
+
+                docData.put("barrierefrei", false);
+                docData.put("platzzahl", 100);
+                docData.put("saalnummer", name);
+
+                db.collection("Kino").document(""+l).collection("HatSaele").document(name).set(docData);
+            }
+        }
+
+    }
+
+    //Fügt zu jedem Film Vorstellungen hinzu -> Muss zwar immer individuell angepasst werden
+    @RequestMapping (value = "/addVorstellungen")
+    public void addVorstellungen() {
+
+        int film = 9;
+
+        for (int i = 1; i <= 3; i++) {
+            Map<String, Object> docData = new HashMap<>();
+
+            docData.put("vorführungsID", "2_" + film + "_" + i); //Kino 1, Film 2, 1 Vorführung
+            docData.put("filmID", film);
+            docData.put("saalnummer", 6);
+
+            if(i == 1){
+                docData.put("zeitpunkt", "12:00");
+            } else if (i == 2) {
+                docData.put("zeitpunkt", "15:00");
+            } else if (i == 3) {
+                docData.put("zeitpunkt", "18:00");
+            } else if (i == 4) {
+                docData.put("zeitpunkt", "20:30");
+            } else if (i == 5){
+                docData.put("zeitpunkt", "8:00");
+            }
+
+            docData.put("gesamtdauer", 137);
+            docData.put("grundpreis", 7.00);
+
+            //if(i == 2) {
+            //  docData.put("gesamtpreis", 11.00);
+            //  docData.put("3D", true);
+            //} else {
+                docData.put("gesamtpreis", 7.00);
+                docData.put("3D", false);
+            //}
+
+            db.collection("Kino").document("2").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("2_" + film + "_" + i).set(docData);
+        }
+    }
+
+    @RequestMapping (value = "/addTestdata")
+    public void addSitzeToSaele (){
+
+      String sitzReihe = "";
+      String sitzID = "";
+      Map<String, Object> docData = new HashMap<>();
+
+      for (int l = 1; l <= 3; l++) {
+          for (int i = 1; i <= 4; i++) {
+
+              for (int j = 1; j <= 7; j++) {
+
+                  if (j == 1) {
+                      sitzReihe = "A";
+                  } else if (j == 2) {
+                      sitzReihe = "B";
+                  } else if (j == 3) {
+                      sitzReihe = "C";
+                  } else if (j == 4) {
+                      sitzReihe = "D";
+                  } else if (j == 5) {
+                      sitzReihe = "E";
+                  } else if (j == 6) {
+                      sitzReihe = "F";
+                  } else if (j == 7) {
+                      sitzReihe = "G";
+                  } else if (j == 8) {
+                      sitzReihe = "H";
+                  } else if (j == 9) {
+                      sitzReihe = "I";
+                  } else if (j == 10) {
+                      sitzReihe = "J";
+                  }
+
+                  for (int k = 1; k <= 7; k++) {
+                      sitzID = l + "_" + i + "_" + sitzReihe + k;
+                      docData.put("sitzID", sitzID);
+
+                      if (i <= 2) {
+                          docData.put("loge", true);
+                      } else {
+                          docData.put("loge", false);
+                      }
+
+                      docData.put("barrierefrei", true);
+                      db.collection("Kino").document(l + "").collection("HatSaele").document(l + "_" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+                  }
+              }
+          }
+
+
+          for (int i = 5; i <= 10; i++) {
+
+              for (int j = 1; j <= 10; j++) {
+
+                  if (j == 1) {
+                      sitzReihe = "A";
+                  } else if (j == 2) {
+                      sitzReihe = "B";
+                  } else if (j == 3) {
+                      sitzReihe = "C";
+                  } else if (j == 4) {
+                      sitzReihe = "D";
+                  } else if (j == 5) {
+                      sitzReihe = "E";
+                  } else if (j == 6) {
+                      sitzReihe = "F";
+                  } else if (j == 7) {
+                      sitzReihe = "G";
+                  } else if (j == 8) {
+                      sitzReihe = "H";
+                  } else if (j == 9) {
+                      sitzReihe = "I";
+                  } else if (j == 10) {
+                      sitzReihe = "J";
+                  }
+                  System.out.printf("CHECKPOINT 1");
+
+                  for (int k = 1; k <= 10; k++) {
+                      sitzID = l + "_" + i + "_" + sitzReihe + k;
+                      docData.put("sitzID", sitzID);
+
+                      if (i <= 2) {
+                          docData.put("loge", true);
+                      } else {
+                          docData.put("loge", false);
+                      }
+
+                      docData.put("barrierefrei", false);
+
+                      db.collection("Kino").document(l+"").collection("HatSaele").document(l + "_" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+                  }
+              }
+          }
+      }
+    }
+
+    @RequestMapping(value = "/getTestArray")
+    public void getTestArray() {
+      DocumentReference documentReference = db.collection("test").document("ArrayOrList");
+
+      ApiFuture<DocumentSnapshot> doc = documentReference.get();
+
+      try{
+        DocumentSnapshot document = doc.get();
+        Map<String, Object> list = document.getData();
+
+        if(document.exists()){
+          System.out.println("Document Data" +document.getData());
+        }else{
+          System.out.println("No such Document!");
+        }
+
+      }catch (InterruptedException e){
+        e.printStackTrace();
+      }catch (java.util.concurrent.ExecutionException e){
         e.printStackTrace();
       }
-      return new ResponseEntity<>(data.values(),HttpStatus.ACCEPTED);
-    }//lukasTest
 
+    }
+
+    @RequestMapping(value = "/testArray")
+    public void testSäle(){
+
+      Map<String, Object> docData = new HashMap<>();
+
+      docData.put("numbers", Arrays.asList(1,2,3,4,5,6));
+
+      db.collection("Test").document("ArrayOrList").set(docData);
+
+    }
 
     @RequestMapping(value = "/getAllData")
     public ResponseEntity<Object> getAllData(@RequestHeader("head") String head) {
@@ -167,12 +415,15 @@ public class DemoApplication {
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
         int länge=documents.size();
+
         for (QueryDocumentSnapshot document : documents) {
           data.put(document.getId(), document.getData());
           JsonString.put(document.getId(), document.getData().toString());
         }//for
+
           JSONObject jsonObject=new JSONObject(JsonString);
           System.out.println(jsonObject.toString(5));
+
       } catch (Exception e) {
       }//catch
       return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
@@ -243,4 +494,4 @@ public class DemoApplication {
     **/
 
   }//Controller
-}//class
+}// class

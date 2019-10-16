@@ -2,6 +2,8 @@ package lukas.java_classes;
 
 import java.util.List;
 
+import lukas.classes.Film;
+
 public class Kino {
     private int kinoID;
     private String name,ort;

@@ -13,14 +13,14 @@ import android.widget.TextView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import lukas.java_classes.Film;
+import lukas.classes.Film;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
         ArrayList<Film> filme;
         Context context;
 
-        public MovieAdapter(ArrayList<Film> filme, Context context) {
+        public MovieAdapter(ArrayList<lukas.classes.Film> filme, Context context) {
             this.context = context;
             this.filme = filme;
         }//K
@@ -40,8 +40,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         @Override
         public int getItemCount() {
-            return filme.size();
-        }
+            if (filme!=null) return filme.size();
+            else return -1;
+        }//getItemCount
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public ImageView movieImage;

@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
     //private BottomBar BottomBar;
     private ActionBar kinowToolbar;
 
+    //zwischenspeicher
+    private int kinoID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
 
         //Set default Fragment
         loadFragment(new MoviesFragment());
+
+        //set kinoID to default
+        kinoID = 0;
 
         //Bottom Navigation
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -68,10 +74,12 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
     };
 
     //Do NOT DELETE this method, it is necessary for the Fragments to work even if it is empty
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(int kinoID) {
         // The user selected an fragment
         // Do something here to display that fragment
-    }
+        this.kinoID = kinoID;
+        System.out.println(kinoID);
+    }//on
 
     // Load the Fragment
     private void loadFragment(Fragment fragment) {
@@ -81,4 +89,8 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
         transaction.commit();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

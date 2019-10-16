@@ -1,7 +1,6 @@
 package fm.feuermania.dennis.kinow_test;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Array;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 
-import lukas.java_classes.Film;
+import lukas.classes.Requests;
+import lukas.classes.Film;
 
 
 /**
@@ -37,9 +39,9 @@ public class MoviesFragment extends Fragment {
     // movieList RecyclerView
     private RecyclerView movieList;
     private View movieView;
-    MovieAdapter mAdapter;
-    ArrayList<Film> filme;
-    Requests request;
+
+    //gesetztes Kino
+    private int kinoID;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,6 +70,7 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        kinoID = 0;
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -76,6 +79,12 @@ public class MoviesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        MovieAdapter mAdapter;
+        ArrayList<Film> filme;
+        Requests request;
+        StorageReference storageReference;
+        storageReference = FirebaseStorage.getInstance().getReference();
+
         // Inflate the layout for this fragment
         movieView = inflater.inflate(R.layout.fragment_movies, container, false);
 
@@ -85,9 +94,10 @@ public class MoviesFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         movieList.setLayoutManager(layoutManager);
 
-        request = new Requests();
-        filme = request.getFilme();
 
+        request = new Requests();
+        filme = request.getFilme(kinoID);
+        onButtonPressed(kinoID);
 
         mAdapter = new MovieAdapter(filme,getActivity());
         movieList.setAdapter(mAdapter);
@@ -95,12 +105,13 @@ public class MoviesFragment extends Fragment {
         movieList.getAdapter().notifyDataSetChanged();
 
         return movieView;
-    }
+    }//onCreateView
+
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(int kinoID) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(kinoID);
         }
     }
 
@@ -133,6 +144,8 @@ public class MoviesFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int kinoID);
     }
-}
+
+
+}//class
