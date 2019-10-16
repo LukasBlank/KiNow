@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -17,7 +19,7 @@ import okhttp3.Response;
 
 public class Requests {
 
-    String ausgabe;
+    private String ausgabe;
     ArrayList<lukas.classes.Film> filme;
     Object o;
 
@@ -29,57 +31,41 @@ public class Requests {
 
     public ArrayList<Film> getFilme (){
         ausgabe = "";
-
-        //Connection zur Fachkonzeptschicht aufbauen
-        OkHttpClient client = new OkHttpClient();
-        String url = "http://94.16.123.237:8080/getFilme";
-        Request request = new Request.Builder().url(url).build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-                ausgabe = e.getMessage();
-            }//onFailure
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if(response.isSuccessful()) {
-                    //Wenn erfolgreich eine Rückgabe erfolgt ist, bekommenen String zurück zu Hashmaps parsen
-                    ausgabe = response.body().string();
-                    response.body().close();
-                }//then
-            }//onResponse;
-        });
-
-
-        //wait for the OkHttpRequest
+        ThreadRequest tr = new ThreadRequest();
+        tr.setUrl("http://94.16.123.237:8080/getFilme");
+        tr.start();
         try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }//catch
-
-
-        //variablen
-            Map<String,Object> map = null;
-            lukas.classes.Film film = new lukas.classes.Film();
-            ArrayList<lukas.classes.Film> filme = new ArrayList<>();
-            try {
-                //map durchlaufen und einzelne Hashmaps holen
-                map = new ObjectMapper().readValue(ausgabe, Map.class);
+            tr.join();
+            long anfang = System.currentTimeMillis();
+            long ende = anfang;
+            //warten bis Thread fertig ist // höchstens 5 Sekunden
+            do {
+                ende = System.currentTimeMillis();
+            } while (!tr.isFertig() && ende-anfang<5000);
+            if (!tr.isFertig()){
+                System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                return null;
+            }//then
+            else {
+                ausgabe = tr.getErg();
+                //gesamte Ausgabe zu einer Map parsen
+                Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                 for (Map.Entry<String,Object> entry : map.entrySet()){
                     Map<String,Object> data = (Map<String, Object>) entry.getValue();
-                    //jede einzelne Hashmap dann zu einem Film parsen und zur Filmliste hinzufügen
-                    film = new lukas.classes.Film();
+                    Film film = new Film();
+                    //Diese "SubMaps" wieder durchiterieren und zu Filmen parsen
                     for (Map.Entry<String,Object> e : data.entrySet()){
                         film.set(e.getKey(),e.getValue());
                     }//for
                     filme.add(film);
                 }//for
-            } catch (IOException e) {
-                e.printStackTrace();
-            }//catch
-            return filme;
+                return filme;
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }//catch
     }//getFilme
 
 

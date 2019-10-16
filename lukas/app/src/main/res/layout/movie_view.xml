@@ -69,7 +69,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:maxLength="15"
+                android:maxLength="200"
                 android:text="@string/movieDescription"
                 android:textSize="14sp" />
 

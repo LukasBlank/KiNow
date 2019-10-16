@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,8 +85,10 @@ public class MoviesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MovieAdapter mAdapter;
-        ArrayList<lukas.classes.Film> filme;
+        ArrayList<Film> filme;
         Requests request;
+        StorageReference storageReference;
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         // Inflate the layout for this fragment
         movieView = inflater.inflate(R.layout.fragment_movies, container, false);
