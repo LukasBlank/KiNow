@@ -38,12 +38,12 @@ public class DemoApplication {
 
       //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
       // und in FileInputStream url.getPath() einfügen
-      String path = "serviceAccountKey.json";
-      URL url = DemoApplication.class.getClassLoader().getResource(path);
+      //String path = "serviceAccountKey.json";
+      //URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream( url.getPath());
+          new FileInputStream( "serviceAccountKey.json");
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -120,9 +120,10 @@ public class DemoApplication {
     }//lukasTest
 
     @RequestMapping(value = "/getFilme")
-    public ResponseEntity<Object> getFilme (@RequestHeader("kinoID") long kinoID){
+    public ResponseEntity<Object> getFilme (@RequestHeader("kinoID") String SkinoID){
       //alle filme für Kino mit bestimmter ID holen, ggf. alle Filme holen
       ApiFuture<QuerySnapshot> query;
+      long kinoID = Long.parseLong(SkinoID);
       if (kinoID==0) query = db.collection("Filme").get();
       else {
         query = db.collection("Kino").document((String.valueOf(kinoID))).collection("spieltFilme").get();

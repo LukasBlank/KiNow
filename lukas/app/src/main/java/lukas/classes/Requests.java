@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Map;
 
+import okhttp3.Request;
+
 public class Requests {
 
     private String ausgabe;
@@ -20,7 +22,11 @@ public class Requests {
     public ArrayList<Film> getFilme (){
         ausgabe = "";
         ThreadRequest tr = new ThreadRequest();
-        tr.setUrl("http://94.16.123.237:8080/getFilme");
+        String url = "http://94.16.123.237:8080/getFilme";
+        Request request = new Request.Builder()
+                .addHeader("kinoID","0")
+                .url(url).build();
+        tr.setRequest(request);
         tr.start();
         try {
             tr.join();
