@@ -56,8 +56,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.getFilme();
-
+    sc.addVorstellungen();
   }//main
 
   @RestController
@@ -107,18 +106,21 @@ public class DemoApplication {
       data.put("dauer",128);
       data.put("fsk",0);
       data.put("bewertung",5);
+
       ArrayList<String> genres = new ArrayList<>();
       genres.add("Komödie"); genres.add("Musical");
       data.put("genres",genres);
       ArrayList<String> regie = new ArrayList<>();
       regie.add("Philipp Stölzl");
       data.put("regie",regie);
+
       ArrayList<String> darsteller = new ArrayList<>();
       darsteller.add("Heike Makatsch"); darsteller.add("Moritz Bleibtreu"); darsteller.add("Katharina Thalbach");
       darsteller.add("Uwe Ochsenknecht"); darsteller.add( "Michael Ostrowski"); darsteller.add("Pasquale Aleardi");
       darsteller.add("Marlon Schramm"); darsteller.add("Mat Schuh");
       data.put("darsteller",darsteller);
       db.collection("Filme").document("7").set(data);
+
     }//lukasTest
 
     @RequestMapping(value = "/test2")
@@ -143,9 +145,10 @@ public class DemoApplication {
 
     @RequestMapping(value = "/getFilme")
     public String getFilme (){
+
       ApiFuture<QuerySnapshot> query = db.collection("Filme").get();
-      QuerySnapshot querySnapshot = null;
-      List<QueryDocumentSnapshot> documents = null;
+      QuerySnapshot querySnapshot;
+      List<QueryDocumentSnapshot> documents;
       ArrayList<Map<String,Object>> data = new ArrayList<>();
       String erg = "";
       try {
@@ -197,20 +200,73 @@ public class DemoApplication {
     // Fügt Säle zu dem Dokument Kino hinzu. Jedes Kino hat seine eigenen Säle
     @RequestMapping(value = "/addSaele")
     public void addSaele () {
-      for (int i = 5; i <= 10; i++) {
-
         Map<String, Object> docData = new HashMap<>();
-        docData.put("barrierefrei", false);
-        docData.put("platzzahl", 100);
-        docData.put("saalnummer", i);
 
-        String name = ""+i;
+        for (int l = 1; l <= 3; l++) {
 
-        db.collection("Kino").document("1").collection("HatSaele").document(name).set(docData);
+            for (int i = 1; i <= 4; i++) {
 
-        db.collection("Saele").document("2").set(docData);
-      }
+                String name = l + "_" + i;
 
+                docData.put("barrierefrei", true);
+                docData.put("platzzahl", 49);
+                docData.put("saalnummer", name);
+
+                db.collection("Kino").document(""+l).collection("HatSaele").document(name).set(docData);
+            }
+
+            for (int i = 5; i <= 10; i++) {
+
+                String name = l + "_" + i;
+
+                docData.put("barrierefrei", false);
+                docData.put("platzzahl", 100);
+                docData.put("saalnummer", name);
+
+                db.collection("Kino").document(""+l).collection("HatSaele").document(name).set(docData);
+            }
+        }
+
+    }
+
+    //Fügt zu jedem Film Vorstellungen hinzu -> Muss zwar immer individuell angepasst werden
+    @RequestMapping (value = "/addVorstellungen")
+    public void addVorstellungen() {
+
+        int film = 9;
+
+        for (int i = 1; i <= 3; i++) {
+            Map<String, Object> docData = new HashMap<>();
+
+            docData.put("vorführungsID", "2_" + film + "_" + i); //Kino 1, Film 2, 1 Vorführung
+            docData.put("filmID", film);
+            docData.put("saalnummer", 6);
+
+            if(i == 1){
+                docData.put("zeitpunkt", "12:00");
+            } else if (i == 2) {
+                docData.put("zeitpunkt", "15:00");
+            } else if (i == 3) {
+                docData.put("zeitpunkt", "18:00");
+            } else if (i == 4) {
+                docData.put("zeitpunkt", "20:30");
+            } else if (i == 5){
+                docData.put("zeitpunkt", "8:00");
+            }
+
+            docData.put("gesamtdauer", 137);
+            docData.put("grundpreis", 7.00);
+
+            //if(i == 2) {
+            //  docData.put("gesamtpreis", 11.00);
+            //  docData.put("3D", true);
+            //} else {
+                docData.put("gesamtpreis", 7.00);
+                docData.put("3D", false);
+            //}
+
+            db.collection("Kino").document("2").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("2_" + film + "_" + i).set(docData);
+        }
     }
 
     @RequestMapping (value = "/addTestdata")
@@ -218,66 +274,98 @@ public class DemoApplication {
 
       String sitzReihe = "";
       String sitzID = "";
+      Map<String, Object> docData = new HashMap<>();
 
-      for (int i = 5; i<=10; i++) {
-        Map<String, Object> docData = new HashMap<>();
+      for (int l = 1; l <= 3; l++) {
+          for (int i = 1; i <= 4; i++) {
 
-       // docData.put("sitzID", "A1");
-        //docData.put("loge", true);
-        //docData.put("barriereFrei", false);
+              for (int j = 1; j <= 7; j++) {
 
-        //add Sitz ID
-        for (int j = 1; j <= 10; j++) {
+                  if (j == 1) {
+                      sitzReihe = "A";
+                  } else if (j == 2) {
+                      sitzReihe = "B";
+                  } else if (j == 3) {
+                      sitzReihe = "C";
+                  } else if (j == 4) {
+                      sitzReihe = "D";
+                  } else if (j == 5) {
+                      sitzReihe = "E";
+                  } else if (j == 6) {
+                      sitzReihe = "F";
+                  } else if (j == 7) {
+                      sitzReihe = "G";
+                  } else if (j == 8) {
+                      sitzReihe = "H";
+                  } else if (j == 9) {
+                      sitzReihe = "I";
+                  } else if (j == 10) {
+                      sitzReihe = "J";
+                  }
 
-          if (j == 1) {
-            sitzReihe = "A";
-          } else if (j == 2) {
-            sitzReihe = "B";
-          } else if (j == 3) {
-            sitzReihe = "C";
-          } else if (j == 4) {
-            sitzReihe = "D";
-          } else if (j == 5) {
-            sitzReihe = "E";
-          } else if (j == 6) {
-            sitzReihe = "F";
-          } else if (j == 7) {
-            sitzReihe = "G";
-          } else if (j == 8) {
-            sitzReihe = "G";
-          } else if (j == 9) {
-            sitzReihe = "G";
-          } else if (j == 10) {
-            sitzReihe = "G";
+                  for (int k = 1; k <= 7; k++) {
+                      sitzID = l + "_" + i + "_" + sitzReihe + k;
+                      docData.put("sitzID", sitzID);
+
+                      if (i <= 2) {
+                          docData.put("loge", true);
+                      } else {
+                          docData.put("loge", false);
+                      }
+
+                      docData.put("barrierefrei", true);
+                      db.collection("Kino").document(l + "").collection("HatSaele").document(l + "_" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+                  }
+              }
           }
 
 
-          System.out.printf("CHECKPOINT 1");
+          for (int i = 5; i <= 10; i++) {
 
-          for (int k = 1; k <= 10; k++) {
-            sitzID = sitzReihe + k;
-            docData.put("sitzID", sitzID);
+              for (int j = 1; j <= 10; j++) {
 
-            if (i <= 2) {
-              docData.put("loge", true);
-              System.out.println("CHECKPOINT 2a");
-            } else {
-              docData.put("loge", false);
-              System.out.println("CHECKPOINT 2b");
-            }
+                  if (j == 1) {
+                      sitzReihe = "A";
+                  } else if (j == 2) {
+                      sitzReihe = "B";
+                  } else if (j == 3) {
+                      sitzReihe = "C";
+                  } else if (j == 4) {
+                      sitzReihe = "D";
+                  } else if (j == 5) {
+                      sitzReihe = "E";
+                  } else if (j == 6) {
+                      sitzReihe = "F";
+                  } else if (j == 7) {
+                      sitzReihe = "G";
+                  } else if (j == 8) {
+                      sitzReihe = "H";
+                  } else if (j == 9) {
+                      sitzReihe = "I";
+                  } else if (j == 10) {
+                      sitzReihe = "J";
+                  }
+                  System.out.printf("CHECKPOINT 1");
 
-              docData.put("barriereFrei", false);
-              System.out.println("CHECKPOINT 3");
+                  for (int k = 1; k <= 10; k++) {
+                      sitzID = l + "_" + i + "_" + sitzReihe + k;
+                      docData.put("sitzID", sitzID);
 
+                      if (i <= 2) {
+                          docData.put("loge", true);
+                      } else {
+                          docData.put("loge", false);
+                      }
 
-            System.out.println("CHECKPOINT 5");
-            System.out.println(sitzID);
-            db.collection("Kino").document("1").collection("HatSaele").document("" + i).collection("HatSitze").document("" + sitzID).set(docData);
+                      docData.put("barrierefrei", false);
 
+                      db.collection("Kino").document(l+"").collection("HatSaele").document(l + "_" + i).collection("HatSitze").document("" + sitzID).set(docData);
+
+                  }
+              }
           }
-        }
       }
-
     }
 
     @RequestMapping(value = "/getTestArray")
@@ -303,7 +391,6 @@ public class DemoApplication {
       }
 
     }
-
 
     @RequestMapping(value = "/testArray")
     public void testSäle(){
