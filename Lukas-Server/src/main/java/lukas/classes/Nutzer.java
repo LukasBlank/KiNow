@@ -106,6 +106,10 @@ public class Nutzer {
     return erg;
   }//getBestellungen
 
+  public void addBestellung (Bestellung bestellung){
+    if (!this.bestellungen.contains(bestellung))bestellungen.add(bestellung);
+  }//addBestellung
+
   public boolean equals (Nutzer nutzer){
     if (this.nutzerID.equals(nutzer.getNutzerID()))return true;
     else return false;
