@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/registration_linLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/red"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/face_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="22sp"
+                    app:fontFamily="sans-serif-medium"
+                    android:text="@string/big_register"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/reg_square_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/square"
+                android:layout_below="@+id/registration_linLay"
+                android:contentDescription="@string/contentDescription"
+                android:layout_centerHorizontal="true"
+                android:tint="@color/red"
+                android:layout_marginTop="-10dp"
+                android:rotation="45"/>
+
+            <LinearLayout
+                android:id="@+id/relLay_reg_names"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:weightSum="10"
+                android:layout_below="@+id/reg_square_img">
+
+                <EditText
+                    android:id="@+id/reg_firstname_input"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZÖÜÄabcdefghijklmnopqrstuvwxyzöüä-"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:layout_weight="5"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:background="@color/editTextField"
+                    android:hint="@string/first_name"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/reg_lastname_input"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZÖÜÄabcdefghijklmnopqrstuvwxyzöüä-"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:layout_weight="5"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:background="@color/editTextField"
+                    android:hint="@string/last_name"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLay_reg_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/relLay_reg_names">
+
+                <ImageView
+                    android:id="@+id/reg_email_img"
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/email_icon"
+                    android:background="@color/red"/>
+
+                <EditText
+                    android:id="@+id/reg_email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/reg_email_img"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/reg_email_img"
+                    android:layout_toEndOf="@+id/reg_email_img"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:background="@color/editTextField"
+                    android:hint="@string/email"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLay_reg_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/relLay_reg_email">
+
+                <ImageView
+                    android:id="@+id/reg_lock_img"
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/lock_icon"
+                    android:background="@color/red"/>
+
+                <EditText
+                    android:id="@+id/reg_pwd_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:layout_alignBottom="@+id/reg_lock_img"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/reg_lock_img"
+                    android:layout_toEndOf="@+id/reg_lock_img"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/pwd"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLay_reg_confirm_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/relLay_reg_pwd">
+
+                <ImageView
+                    android:id="@+id/reg_lock_img2"
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/lock_icon"
+                    android:background="@color/red"/>
+
+                <EditText
+                    android:id="@+id/reg_confirm_pwd_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:layout_alignBottom="@+id/reg_lock_img2"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/reg_lock_img2"
+                    android:layout_toEndOf="@+id/reg_lock_img2"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/confirm_pwd"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLay_reg_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/relLay_reg_confirm_pwd">
+
+                <CheckBox
+                    android:id="@+id/checkbox_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terms"
+                    android:textColor="@color/textColor"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLay_reg_checkbox2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/relLay_reg_checkbox">
+
+                <CheckBox
+                    android:id="@+id/checkbox_sixteen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sixteen"
+                    android:textColor="@color/textColor"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/registration_btn"
+                android:onClick="registerUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relLay_reg_checkbox2"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/red"
+                app:fontFamily="sans-serif-medium"
+                android:text="@string/big_register"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:id="@+id/reg_line_img"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/registration_btn"
+                android:contentDescription="@string/contentDescription"
+                android:layerType="software"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/line"/>
+
+            <Button
+                android:id="@+id/already_member_btn"
+                android:onClick="openSignInPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:text="@string/already_member"
+                android:textColor="@color/textColor"
+                android:textAllCaps="false"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/reg_line_img"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

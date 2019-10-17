@@ -12,7 +12,6 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
-    //private BottomBar BottomBar;
     private ActionBar kinowToolbar;
 
     @Override
