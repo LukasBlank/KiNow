@@ -93,11 +93,11 @@ public class Kino {
   public void set (String key, Object o){
     switch (key){
       case "kinoID": this.kinoID = Long.parseLong(o.toString());
-      break;
+        break;
       case "name": this.name =  (String) o;
-      break;
+        break;
       case "ort": this.ort = (String) o;
-      break;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set
