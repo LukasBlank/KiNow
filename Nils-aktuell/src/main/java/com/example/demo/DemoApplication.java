@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.print.Doc;
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -56,7 +58,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.addVorstellungen();
+    sc.juliesPlayground();
   }//main
 
   @RestController
@@ -91,6 +93,133 @@ public class DemoApplication {
     }
 
      **/
+
+    @RequestMapping (value = "/juliesPlayground")
+    public void juliesPlayground(){
+        DocumentReference docRef = db.collection("Kino").document("1").collection("spieltFilme").document("11");
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+
+        try {
+            DocumentSnapshot document = future.get();
+            if (document.exists()){
+                System.out.println("Document Data: " + document.getData());
+            } else {
+                System.out.println("No such Document");
+            }
+        }catch(ExecutionException e){
+            e.printStackTrace();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        //für welchen Film wird die Vorstellung gemacht?
+        int film = 9;
+        int anzVorstellungen = 3;
+        int saal = 1;
+        int kino = 1;
+        Map<String, Object> docData = new HashMap<>();
+
+
+        for (int i = 1; i <= anzVorstellungen; i++) {
+
+            //je nach film ist die dauer anders
+            switch (film){
+                case 1:
+                    docData.put("gesamtdauer", 200);
+                    docData.put("grunddauer", 170);
+                    break;
+                case 2:
+                case 3:
+                    docData.put("gesamtdauer", 152);
+                    docData.put("grunddauer", 122);
+                    break;
+                case 4:
+                    docData.put("gesamtdauer", 149);
+                    docData.put("grunddauer", 119);
+                    break;
+                case 5:
+                    docData.put("gesamtdauer", 121);
+                    docData.put("grunddauer", 91);
+                    break;
+                case 6:
+                    docData.put("gesamtdauer", 127);
+                    docData.put("grunddauer", 97);
+                    break;
+                case 7:
+                    docData.put("gesamtdauer", 158);
+                    docData.put("grunddauer", 128);
+                    break;
+                case 8:
+                    docData.put("gesamtdauer", 147);
+                    docData.put("grunddauer", 117);
+                    break;
+                case 9:
+                    docData.put("gesamtdauer", 143);
+                    docData.put("grunddauer", 113);
+                    break;
+                case 10:
+                    docData.put("gesamtdauer", 148);
+                    docData.put("grunddauer", 118);
+                    break;
+                case 11:
+                    docData.put("gesamtdauer", 162);
+                    docData.put("grunddauer", 132);
+                    break;
+                case 12:
+                    docData.put("gesamtdauer", 132);
+                    docData.put("grunddauer", 102);
+                    break;
+
+
+            }
+
+            docData.put("vorführugnsID", kino + "_" + saal + "_" + film + "_" + i);
+            docData.put("saalnummer", kino + "_" + saal);
+
+            if(i == 1){
+                docData.put("zeitpunkt", "12:00");
+            } else if (i == 2) {
+                docData.put("zeitpunkt", "15:00");
+            } else if (i == 3) {
+                docData.put("zeitpunkt", "18:00");
+            } else if (i == 4) {
+                docData.put("zeitpunkt", "20:30");
+            } else if (i == 5){
+                docData.put("zeitpunkt", "8:00");
+            }
+
+
+            docData.put("grundpreis", 7.00);
+
+            // dreiD oder nicht
+            switch(film){
+                case 1:
+                    docData.put("gesamtpreis", 7.00);
+                    docData.put("3D", false);
+                    break;
+                case 10:
+                    if (anzVorstellungen == 3 || anzVorstellungen == 6 || anzVorstellungen == 9) {
+                        docData.put("gesamtpreis", 11.00);
+                        docData.put("dreiD", true);
+                    }
+                    else {
+                        docData.put("gesamtpreis", 7.00);
+                        docData.put("dreiD", false);
+                    }
+                    break;
+            }
+            //if(i == 2) {
+            //  docData.put("gesamtpreis", 11.00);
+            //  docData.put("3D", true);
+            //} else {
+            docData.put("gesamtpreis", 7.00);
+            docData.put("3D", false);
+            //}
+
+            db.collection("Kino").document("2").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("2_" + film + "_" + i).set(docData);
+        }
+
+    }
 
     @RequestMapping (value = "/server")
     public String server (){
