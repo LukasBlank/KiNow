@@ -55,27 +55,27 @@ public class RegisterUserActivity extends AppCompatActivity {
         boolean check = true;
         boolean checkboxes = true;
         if(firstname_input.matches("") || firstname_input.contains(" ")){
-            reg_firstName_field.setHint("Enter your first name");
+            reg_firstName_field.setHint("First Name *");
             reg_firstName_field.setHintTextColor(getResources().getColor(R.color.red));
             check = false;
         }
         if(lastname_input.matches("") || lastname_input.contains(" ")){
-            reg_lastName_field.setHint("Enter your last name");
+            reg_lastName_field.setHint("Last Name *");
             reg_lastName_field.setHintTextColor(getResources().getColor(R.color.red));
             check = false;
         }
         if(email_input.matches("") || email_input.contains(" ")){
-            reg_eMail_field.setHint("Enter valid e-mail address");
+            reg_eMail_field.setHint("E-Mail *");
             reg_eMail_field.setHintTextColor(getResources().getColor(R.color.red));
             check = false;
         }
         if(pwd_input.matches("") || pwd_input.contains(" ")){
-            reg_pwd_field.setHint("Enter your password");
+            reg_pwd_field.setHint("Password *");
             reg_pwd_field.setHintTextColor(getResources().getColor(R.color.red));
             check = false;
         }
         if(confirm_pwd_input.matches("") || confirm_pwd_input.contains(" ")){
-            reg_confirmPwd_field.setHint("Confirm your password");
+            reg_confirmPwd_field.setHint("Confirm Password *");
             reg_confirmPwd_field.setHintTextColor(getResources().getColor(R.color.red));
             check = false;
         }

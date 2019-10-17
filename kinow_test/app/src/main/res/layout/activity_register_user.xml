@@ -246,6 +246,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/terms"
                     android:textColor="@color/textColor"
+                    app:buttonTint="@color/red"
                     android:layout_centerVertical="true"/>
 
             </RelativeLayout>
@@ -265,6 +266,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sixteen"
                     android:textColor="@color/textColor"
+                    app:buttonTint="@color/red"
                     android:layout_centerVertical="true"/>
 
             </RelativeLayout>

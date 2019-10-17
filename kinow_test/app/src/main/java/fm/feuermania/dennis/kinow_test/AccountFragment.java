@@ -115,12 +115,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 // Check if E-Mail or Password field is empty
                 boolean check_fields = true;
                 if(email_field_input.matches("") || email_field_input.contains(" ")){
-                    email_field.setHint("Enter valid e-mail address");
+                    email_field.setHint("E-Mail *");
                     email_field.setHintTextColor(getResources().getColor(R.color.red));
                     check_fields = false;
                 }
                 if(pwd_field_input.matches("") || pwd_field_input.contains(" ")){
-                    pwd_field.setHint("Enter your password");
+                    pwd_field.setHint("Password *");
                     pwd_field.setHintTextColor(getResources().getColor(R.color.red));
                     check_fields = false;
                 }
