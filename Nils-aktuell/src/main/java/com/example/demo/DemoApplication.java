@@ -58,7 +58,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.juliesPlayground();
+    sc.juliesPlayground(1, 1, 11, 14);
   }//main
 
   @RestController
@@ -95,34 +95,14 @@ public class DemoApplication {
      **/
 
     @RequestMapping (value = "/juliesPlayground")
-    public void juliesPlayground(){
-        DocumentReference docRef = db.collection("Kino").document("1").collection("spieltFilme").document("11");
-        ApiFuture<DocumentSnapshot> future = docRef.get();
+    public void juliesPlayground(int kino, int saal, int film, int anzVorstellungen){
 
-        try {
-            DocumentSnapshot document = future.get();
-            if (document.exists()){
-                System.out.println("Document Data: " + document.getData());
-            } else {
-                System.out.println("No such Document");
-            }
-        }catch(ExecutionException e){
-            e.printStackTrace();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-
-        //für welchen Film wird die Vorstellung gemacht?
-        int film = 9;
-        int anzVorstellungen = 3;
-        int saal = 1;
-        int kino = 1;
         Map<String, Object> docData = new HashMap<>();
 
 
         for (int i = 1; i <= anzVorstellungen; i++) {
 
-            //je nach film ist die dauer anders
+            //je nach film ist die dauer anders -- setzen grunddauer und gesamtdauer
             switch (film){
                 case 1:
                     docData.put("gesamtdauer", 200);
@@ -173,31 +153,21 @@ public class DemoApplication {
 
             }
 
+            //VorführungsID
             docData.put("vorführugnsID", kino + "_" + saal + "_" + film + "_" + i);
+
+            //saalnummer
             docData.put("saalnummer", kino + "_" + saal);
-
-            if(i == 1){
-                docData.put("zeitpunkt", "12:00");
-            } else if (i == 2) {
-                docData.put("zeitpunkt", "15:00");
-            } else if (i == 3) {
-                docData.put("zeitpunkt", "18:00");
-            } else if (i == 4) {
-                docData.put("zeitpunkt", "20:30");
-            } else if (i == 5){
-                docData.put("zeitpunkt", "8:00");
-            }
-
 
             docData.put("grundpreis", 7.00);
 
             // dreiD oder nicht
             switch(film){
-                case 1:
+                case 1: case 2: case 3: case 4: case 5: case 7: case 8: case 9: case 11: case 12:
                     docData.put("gesamtpreis", 7.00);
                     docData.put("3D", false);
                     break;
-                case 10:
+                case 10: case 6:
                     if (anzVorstellungen == 3 || anzVorstellungen == 6 || anzVorstellungen == 9) {
                         docData.put("gesamtpreis", 11.00);
                         docData.put("dreiD", true);
@@ -208,15 +178,80 @@ public class DemoApplication {
                     }
                     break;
             }
-            //if(i == 2) {
-            //  docData.put("gesamtpreis", 11.00);
-            //  docData.put("3D", true);
-            //} else {
-            docData.put("gesamtpreis", 7.00);
-            docData.put("3D", false);
-            //}
 
-            db.collection("Kino").document("2").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("2_" + film + "_" + i).set(docData);
+            //Vorstellungen
+            int help = 8;
+
+            switch (anzVorstellungen){
+                case 7:
+                    //eine Vorstellung am Tag
+                    for (int k = 1; k <= anzVorstellungen; k++) {
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "13:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+
+                case 14:
+                    //zwei vorstellungen am Tag
+                    for (int k = 1; k <= anzVorstellungen/2; k++){
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "12:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    int cache = 1;
+                    for (int k = anzVorstellungen/2; k <= anzVorstellungen; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "18:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+
+                case 21:
+                    //drei Vorstellungen am Tag
+                    for (int k = 1; k <= anzVorstellungen/3; k++){
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "11:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = anzVorstellungen/3; k <= (anzVorstellungen/3)*2; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "15:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = (anzVorstellungen/3)*2; k <= anzVorstellungen; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "19:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+
+                case 28:
+                    //vier vorstellugen am Tag
+                    for (int k = 1; k <= anzVorstellungen/4; k++){
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "09:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = anzVorstellungen/4; k <= (anzVorstellungen/4)*2; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "13:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = (anzVorstellungen/4)*2; k <= (anzVorstellungen/4)*3; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "17:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = (anzVorstellungen/4)*3; k <= anzVorstellungen; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "21:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+            }
+
         }
 
     }
