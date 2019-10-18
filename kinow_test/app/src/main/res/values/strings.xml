@@ -45,13 +45,15 @@
     <string name="register">Register</string>
     <string name="big_register">REGISTER</string>
     <string name="no_account_yet">Don´t have an account? Create one!</string>
+    <string name="already_member">Already a member? Login here!</string>
+    <string name="terms">I agree to the Terms of Service.</string>
+    <string name="sixteen">I confirm that I am at least 16 years old.</string>
     <string name="email">E-Mail</string>
     <string name="pwd">Password</string>
     <string name="confirm_pwd">Confirm Password</string>
     <string name="forgot_pwd">Forgot Password?</string>
     <string name="new_pwd">Enter a new Password</string>
     <string name="remember_me">Remember Me</string>
-    <string name="username">Username</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
 

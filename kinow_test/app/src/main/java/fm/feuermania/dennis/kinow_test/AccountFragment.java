@@ -1,12 +1,18 @@
 package fm.feuermania.dennis.kinow_test;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
@@ -17,7 +23,7 @@ import android.view.ViewGroup;
  * Use the {@link AccountFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment {
+public class AccountFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,6 +32,18 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button registerButton;
+    Button signInButton;
+    Button forgotPwdButton;
+
+    EditText email_field;
+    EditText pwd_field;
+
+    CheckBox rememberMe;
+
+    private String email_field_input;
+    private String pwd_field_input;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,9 +82,87 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        registerButton = view.findViewById(R.id.register_btn);
+        registerButton.setOnClickListener(this);
+        signInButton = view.findViewById(R.id.sign_in_btn);
+        signInButton.setOnClickListener(this);
+        rememberMe = view.findViewById(R.id.checkbox_remember_me);
+        rememberMe.setOnCheckedChangeListener(this);
+        forgotPwdButton = view.findViewById(R.id.forgot_pwd_btn);
+        forgotPwdButton.setOnClickListener(this);
 
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        email_field = view.findViewById(R.id.email_input);
+        pwd_field = view.findViewById(R.id.pwd_input);
+
+        //return inflater.inflate(R.layout.fragment_account, container, false);
+        return view;
     }
+
+    @Override
+    public void onClick(View v) {
+
+        switch(v.getId()){
+
+            // Check in DB if User exists and if he/she used the correct e-mail and password
+            case R.id.sign_in_btn:
+                // Do some DB activity here
+
+                // Get text of EditTextFields
+                email_field_input = email_field.getText().toString();
+                pwd_field_input = pwd_field.getText().toString();
+
+                // Check if E-Mail or Password field is empty
+                boolean check_fields = true;
+                if(email_field_input.matches("") || email_field_input.contains(" ")){
+                    email_field.setHint("E-Mail *");
+                    email_field.setHintTextColor(getResources().getColor(R.color.red));
+                    check_fields = false;
+                }
+                if(pwd_field_input.matches("") || pwd_field_input.contains(" ")){
+                    pwd_field.setHint("Password *");
+                    pwd_field.setHintTextColor(getResources().getColor(R.color.red));
+                    check_fields = false;
+                }
+
+                // If data is correct, User will be signed-in
+                if(check_fields) {
+                    Toast.makeText(getActivity(), "SignIn - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            // Open RegisterUserActivity when register_btn is clicked
+            case R.id.register_btn:
+                Intent intent = new Intent(getActivity(), RegisterUserActivity.class);
+                startActivity(intent);
+                break;
+
+            // User can choose a new password
+            case R.id.forgot_pwd_btn:
+                // Do some DB activity here
+                // Send E-Mail to User, with Link to SetNewPassword Screen
+                // DB: Replace old pwd with new chosen pwd
+                Toast.makeText(getActivity(), "Forgot Pwd - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+    }
+
+    // Remember User if CheckBox is checked
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        if(isChecked) {
+            // Remember User and login
+            Toast.makeText(getActivity(), "Checked - Lösch diesen Toast bitte am Ende!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            // Do not remember User and login, if app gets closed User should be logged out automatically
+            Toast.makeText(getActivity(), "Un-Checked - Lösch diesen Toast bitte am Ende!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
