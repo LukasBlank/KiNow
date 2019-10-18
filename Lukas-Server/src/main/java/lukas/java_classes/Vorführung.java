@@ -1,5 +1,6 @@
 package lukas.java_classes;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lukas.classes.Film;
@@ -30,7 +31,8 @@ public class Vorführung {
         this.frei = saal.getPlatzzahl();
     }//Konstruktor
 
-   public Vorführung (){}
+   public Vorführung(String s, String s1, int i, long l, long l1, String s2, boolean b,
+       ArrayList<Werbung> testWerbung, ArrayList<Sitz> testSitze){}
 
     public long getVid() {
         return vid;
