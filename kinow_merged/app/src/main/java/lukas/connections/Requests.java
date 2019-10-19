@@ -3,6 +3,7 @@ package lukas.connections;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import lukas.classes.Film;
@@ -19,7 +20,7 @@ public class Requests {
         ausgabe = "";
     }//K
 
-    public ArrayList<Film> getFilme (int kinoID){
+    public ArrayList<Film> getFilme (long kinoID){
         ausgabe = "";
         ArrayList<lukas.classes.Film> filme = new ArrayList<Film>();
         ThreadRequest tr = new ThreadRequest();

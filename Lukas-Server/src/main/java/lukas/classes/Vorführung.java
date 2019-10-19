@@ -1,6 +1,5 @@
 package lukas.classes;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.util.ArrayList;
 
 public class Vorführung {

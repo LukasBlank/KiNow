@@ -10,7 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+import lukas.classes.Kino;
+import lukas.classes.Nutzer;
+
+public class MainActivity extends AppCompatActivity implements  MoviesFragment.OnKinoSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
     private ActionBar kinowToolbar;
 
@@ -19,6 +22,10 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
     Fragment locationFragment = null;
     Fragment shoppingCartFragment = null;
     Fragment accountFragment = null;
+
+    //saving selected kino
+    Kino kino;
+    Nutzer nutzer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
 
         //Set default Fragment
         loadFragment(new MoviesFragment());
+
+        //set selected kino = null
+        kino = new Kino();
+        kino.setKinoID(0);
+        nutzer = new Nutzer();
 
         //Bottom Navigation
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -84,5 +96,15 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    @Override
+    public void onKinoIDChanged(Kino kino) {
+        this.kino = kino;
+    }//onKinoIDChanged
+
+    @Override
+    public Kino getSelectedKino() {
+        return kino;
+    }//getSelectedKino
 
 }

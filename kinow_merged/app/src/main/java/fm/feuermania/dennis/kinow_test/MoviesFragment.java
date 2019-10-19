@@ -19,6 +19,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import lukas.classes.Film;
+import lukas.classes.Kino;
 import lukas.connections.Requests;
 
 
@@ -44,10 +45,12 @@ public class MoviesFragment extends Fragment {
     private RecyclerView movieList;
     private View movieView;
     MovieAdapter mAdapter;
-    private int kinoID;
+    private Kino kino;
+    private long alt;
     private ArrayList<Film> filme;
 
     private OnFragmentInteractionListener mListener;
+    private OnKinoSelectionListener onKinoSelectionListener;
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -78,7 +81,11 @@ public class MoviesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        kinoID = 0;
+        //setting params
+        filme = new ArrayList<Film>();
+        kino = new Kino();
+        kino.setKinoID(0);
+        alt = 0;
     }
 
     @Override
@@ -92,11 +99,17 @@ public class MoviesFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         movieList.setLayoutManager(layoutManager);
 
-        //Filme für bestimmtes Kino oder alle Filme
-        Requests request = new Requests();
-        filme = request.getFilme(kinoID);
+        //Beim ersten Mal alle Filme holen, danach nur neu holen, wenn sich das gewählte Kino ändert
+        onKinoSelectionListener = (OnKinoSelectionListener) getContext();
+        kino  = onKinoSelectionListener.getSelectedKino();
 
-        mAdapter = new MovieAdapter(filme, getActivity());
+        if (filme.size()==0 || kino.getKinoID()!=alt){
+            alt = kino.getKinoID();
+            Requests request = new Requests();
+            filme = request.getFilme(kino.getKinoID());
+            mAdapter = new MovieAdapter(filme, getActivity());
+        }//then
+
         movieList.setAdapter(mAdapter);
 
         movieList.getAdapter().notifyDataSetChanged();
@@ -148,4 +161,8 @@ public class MoviesFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public interface OnKinoSelectionListener {
+        Kino getSelectedKino ();
+    }//interface
 }

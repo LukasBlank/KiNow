@@ -1,14 +1,18 @@
 package fm.feuermania.dennis.kinow_test;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 
@@ -24,7 +28,7 @@ import lukas.connections.Requests;
  * Use the {@link LocationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LocationFragment extends Fragment {
+public class LocationFragment extends Fragment implements LocationAdapter.onLocationClickedListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,9 +42,12 @@ public class LocationFragment extends Fragment {
     private RecyclerView locationList;
     private View locView;
     LocationAdapter locAdapter;
+
+    //Kino Liste und ausgewähltes Kino
     ArrayList<Kino> kinos = new ArrayList<Kino>();
 
     private OnFragmentInteractionListener mListener;
+    private OnKinoIDChangedListener onKinoIDChangedListener;
 
     public LocationFragment() {
         // Required empty public constructor
@@ -81,21 +88,24 @@ public class LocationFragment extends Fragment {
         locationList = locView.findViewById(R.id.locationList);
         locationList.setHasFixedSize(true);
 
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         locationList.setLayoutManager(layoutManager);
 
         //alleKinos holen
-        Requests request = new Requests();
-        kinos = request.getKinos();
+        if(kinos.size()==0){
+            Requests request = new Requests();
+            kinos = request.getKinos();
+        }//then
 
-        //Hier Wird Zueg überschrieben
-        locAdapter = new LocationAdapter(kinos, getActivity());
+        if (locAdapter==null)locAdapter = new LocationAdapter(kinos, getActivity(),this);
+
         locationList.setAdapter(locAdapter);
-
         locationList.getAdapter().notifyDataSetChanged();
 
+
         return locView;
-    }
+    }//onCreateView
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -135,4 +145,15 @@ public class LocationFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    @Override
+    public void onKinoSelection(long id) {
+        Kino kino = kinos.get((int) id);
+        onKinoIDChangedListener = (OnKinoIDChangedListener)getContext();
+        onKinoIDChangedListener.onKinoIDChanged(kino);
+    }//onKinoSelection
+
+    public interface OnKinoIDChangedListener{
+        void onKinoIDChanged(Kino kino);
+    }//interface
 }

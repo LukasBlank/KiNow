@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
@@ -9,6 +10,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.gson.Gson;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 
 import java.util.*;
@@ -16,7 +18,9 @@ import java.util.concurrent.ExecutionException;
 
 import lukas.classes.Kino;
 import lukas.classes.Kinosaal;
+import lukas.classes.Nutzer;
 import lukas.classes.Sitz;
+import org.apache.catalina.connector.Response;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -39,12 +44,12 @@ public class DemoApplication {
 
       //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
       // und in FileInputStream url.getPath() einfügen
-      //String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      String path = "serviceAccountKey.json";
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream("serviceAccountKey.json" );
+          new FileInputStream(url.getPath());
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -57,6 +62,12 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
+
+    Map<String, Object> map = new HashMap<>();
+    map.put("nutzerID","10");map.put("vorname","Lukas");map.put("nachname","Blank");
+    String test = map.toString();
+
+    boolean success = sc.addNutzer(test);
   }//main
 
   @RestController
@@ -136,6 +147,31 @@ public class DemoApplication {
       }//catch
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getKinos
+
+    @RequestMapping(value = "/getNutzer")
+    public ResponseEntity<Object> getNutzer (){
+      ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+          map.put(document.getId(),document.getData());
+        }//for
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getNutzer
+
+    @RequestMapping(value = "/addNutzer")
+    public boolean addNutzer(@RequestHeader("nutzer")String nutzer){
+      //String zuverlässig zu einer Map parsen
+      return false;
+    }//addNutzer
+
 
   }//Controller
 }// class
