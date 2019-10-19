@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import lukas.classes.Sitz;
-import lukas.java_classes.Werbung;
+import lukas.classes.Werbung;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,8 +68,7 @@ public class VorführungTest {
 
   @Test
   public void getGesamtpreis() {
-    TestVorfuehrung.setGesamtpreis(7.9);
-    Assert.assertEquals(7.9,TestVorfuehrung.getGesamtpreis());
+    
   }
 
   @Test
