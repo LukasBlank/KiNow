@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relLay_login"
     tools:context=".AccountFragment">
 
     <android.support.v7.widget.CardView
@@ -74,7 +73,6 @@
                 <ImageView
                     android:id="@+id/email_img"
                     android:padding="5dp"
-
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:contentDescription="@string/contentDescription"
@@ -160,7 +158,7 @@
                     android:layout_centerVertical="true"/>
 
                 <Button
-                    android:id="@+id/forget_pwd_btn"
+                    android:id="@+id/forgot_pwd_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/forgot_pwd"
@@ -203,6 +201,7 @@
 
             <Button
                 android:id="@+id/register_btn"
+                android:onClick="openRegistrationPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"

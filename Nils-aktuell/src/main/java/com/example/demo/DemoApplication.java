@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.print.Doc;
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -56,7 +58,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.addVorstellungen();
+    sc.juliesPlayground(1, 1, 11, 14);
   }//main
 
   @RestController
@@ -91,6 +93,168 @@ public class DemoApplication {
     }
 
      **/
+
+    @RequestMapping (value = "/juliesPlayground")
+    public void juliesPlayground(int kino, int saal, int film, int anzVorstellungen){
+
+        Map<String, Object> docData = new HashMap<>();
+
+
+        for (int i = 1; i <= anzVorstellungen; i++) {
+
+            //je nach film ist die dauer anders -- setzen grunddauer und gesamtdauer
+            switch (film){
+                case 1:
+                    docData.put("gesamtdauer", 200);
+                    docData.put("grunddauer", 170);
+                    break;
+                case 2:
+                case 3:
+                    docData.put("gesamtdauer", 152);
+                    docData.put("grunddauer", 122);
+                    break;
+                case 4:
+                    docData.put("gesamtdauer", 149);
+                    docData.put("grunddauer", 119);
+                    break;
+                case 5:
+                    docData.put("gesamtdauer", 121);
+                    docData.put("grunddauer", 91);
+                    break;
+                case 6:
+                    docData.put("gesamtdauer", 127);
+                    docData.put("grunddauer", 97);
+                    break;
+                case 7:
+                    docData.put("gesamtdauer", 158);
+                    docData.put("grunddauer", 128);
+                    break;
+                case 8:
+                    docData.put("gesamtdauer", 147);
+                    docData.put("grunddauer", 117);
+                    break;
+                case 9:
+                    docData.put("gesamtdauer", 143);
+                    docData.put("grunddauer", 113);
+                    break;
+                case 10:
+                    docData.put("gesamtdauer", 148);
+                    docData.put("grunddauer", 118);
+                    break;
+                case 11:
+                    docData.put("gesamtdauer", 162);
+                    docData.put("grunddauer", 132);
+                    break;
+                case 12:
+                    docData.put("gesamtdauer", 132);
+                    docData.put("grunddauer", 102);
+                    break;
+
+
+            }
+
+            //VorführungsID
+            docData.put("vorführugnsID", kino + "_" + saal + "_" + film + "_" + i);
+
+            //saalnummer
+            docData.put("saalnummer", kino + "_" + saal);
+
+            docData.put("grundpreis", 7.00);
+
+            // dreiD oder nicht
+            switch(film){
+                case 1: case 2: case 3: case 4: case 5: case 7: case 8: case 9: case 11: case 12:
+                    docData.put("gesamtpreis", 7.00);
+                    docData.put("3D", false);
+                    break;
+                case 10: case 6:
+                    if (anzVorstellungen == 3 || anzVorstellungen == 6 || anzVorstellungen == 9) {
+                        docData.put("gesamtpreis", 11.00);
+                        docData.put("dreiD", true);
+                    }
+                    else {
+                        docData.put("gesamtpreis", 7.00);
+                        docData.put("dreiD", false);
+                    }
+                    break;
+            }
+
+            //Vorstellungen
+            int help = 8;
+
+            switch (anzVorstellungen){
+                case 7:
+                    //eine Vorstellung am Tag
+                    for (int k = 1; k <= anzVorstellungen; k++) {
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "13:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+
+                case 14:
+                    //zwei vorstellungen am Tag
+                    for (int k = 1; k <= anzVorstellungen/2; k++){
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "12:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    int cache = 1;
+                    for (int k = anzVorstellungen/2; k <= anzVorstellungen; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "18:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+
+                case 21:
+                    //drei Vorstellungen am Tag
+                    for (int k = 1; k <= anzVorstellungen/3; k++){
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "11:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = anzVorstellungen/3; k <= (anzVorstellungen/3)*2; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "15:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = (anzVorstellungen/3)*2; k <= anzVorstellungen; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "19:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+
+                case 28:
+                    //vier vorstellugen am Tag
+                    for (int k = 1; k <= anzVorstellungen/4; k++){
+                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "09:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = anzVorstellungen/4; k <= (anzVorstellungen/4)*2; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "13:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = (anzVorstellungen/4)*2; k <= (anzVorstellungen/4)*3; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "17:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    cache = 1;
+                    for (int k = (anzVorstellungen/4)*3; k <= anzVorstellungen; k++){
+                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "21:00");
+                        cache ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }
+                    break;
+            }
+
+        }
+
+    }
 
     @RequestMapping (value = "/server")
     public String server (){
