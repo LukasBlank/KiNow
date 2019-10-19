@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class FilmTest {
 
-
+  /**
   List<Film> TestFilme = new ArrayList<Film>();
   List<String> darsteller1 = new ArrayList<String>();
   ArrayList<String> genres1 = new ArrayList<String>();
@@ -155,4 +155,5 @@ public class FilmTest {
     Assert.assertEquals(90,TestFilm.getFsk());
     Assert.assertEquals(10,TestFilm.getBewertung());
   }
+  **/
 }
