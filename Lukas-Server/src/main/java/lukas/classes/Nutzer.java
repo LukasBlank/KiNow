@@ -1,8 +1,6 @@
 package lukas.classes;
 
 import java.util.ArrayList;
-import java.util.List;
-import lukas.java_classes.Bestellung;
 
 public class Nutzer {
 

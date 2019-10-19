@@ -1,7 +1,6 @@
 package lukas.classes;
 
 import java.util.ArrayList;
-import lukas.java_classes.Werbung;
 
 public class Vorführung {
 
