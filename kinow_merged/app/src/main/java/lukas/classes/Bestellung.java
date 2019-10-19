@@ -69,6 +69,8 @@ public class Bestellung {
     switch (key){
       case "bestellungsnummer": this.besetellungsnummer = (String) o;
       break;
+      case "gesamtpreis": this.gesamtpreis = Long.parseLong(o.toString());
+      break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

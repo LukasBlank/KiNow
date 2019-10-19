@@ -97,7 +97,7 @@ public class Nutzer {
     this.bestellungen = bestellungen;
   }
 
-  public Bestellung getBestellung (String bestellungsnummer){
+  public Bestellung getBestellung (int bestellungsnummer){
     Bestellung erg = null;
     for (Bestellung bestellung : bestellungen){
       if (bestellung.getBesetellungsnummer().equals(bestellungsnummer))erg = bestellung;

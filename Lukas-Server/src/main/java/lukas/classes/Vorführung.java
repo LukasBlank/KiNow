@@ -1,5 +1,6 @@
 package lukas.classes;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.util.ArrayList;
 
 public class Vorführung {
@@ -162,11 +163,15 @@ public class Vorführung {
       break;
       case "saalnummer": this.saalnummer = (String) saalnummer;
       break;
-      case "grundpreis": setGrundpreis(Long.parseLong(o.toString()));
+      case "grundpreis": this.grundpreis = Long.parseLong(o.toString());
       break;
-      case "grunddauer": setGrunddauer(Long.parseLong(o.toString()));
+      case "grunddauer": this.grunddauer = Long.parseLong(o.toString());
       break;
-      case "dreiD": setDreiD(Boolean.parseBoolean(o.toString()));
+      case "dreiD": this.dreiD = Boolean.parseBoolean(o.toString());
+      break;
+      case "gesamtpreis": this.gesamtpreis = Long.parseLong(o.toString());
+      break;
+      case "gesamtdauer": this.gesamtdauer = Long.parseLong(o.toString());
       break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch

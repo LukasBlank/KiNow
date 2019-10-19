@@ -3,16 +3,18 @@ package lukas.classes;
 import java.util.ArrayList;
 
 
+
 public class Film {
   private long filmID,fsk,dauer,bewertung;
   private String titel,beschreibung;
   private ArrayList<String> genres;
   private ArrayList<String> darsteller;
   private ArrayList<String> regie;
+  private ArrayList<Vorführung> vorführungen;
 
   public Film() {}
 
-  public Film(long filmID, String titel, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie){
+  public Film(long filmID, String titel, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie, ArrayList<Vorführung> vorführungen){
     this.filmID = filmID;
     this.titel = titel;
     this.beschreibung = beschreibung;
@@ -22,6 +24,7 @@ public class Film {
     this.genres = genres;
     this.darsteller = darsteller;
     this.regie = regie;
+    this.vorführungen = vorführungen;
   }//K
 
   public long getFilmID() {
@@ -95,6 +98,32 @@ public class Film {
   public void setRegie(ArrayList<String> regie) {
     this.regie = regie;
   }
+
+  public ArrayList<Vorführung> getVorführungen() {
+    return vorführungen;
+  }
+
+  public void setVorführungen(ArrayList<Vorführung> vorführungen) {
+    this.vorführungen = vorführungen;
+  }
+
+  public Vorführung getVorführung (String vorführungsID){
+    if (vorführungen!= null){
+      for (Vorführung v : vorführungen){
+        if (v.getVorführungsID().equals(vorführungsID))return v;
+      }//for
+      return null;
+    }//then
+    else return null;
+  }//Vorführung
+
+  public void addVorführung (Vorführung v){
+    if (!vorführungen.contains(v))vorführungen.add(v);
+  }//addVorführung
+
+  public void removeVorführung (Vorführung v){
+    if (vorführungen.contains(v))vorführungen.remove(v);
+  }//removeVorführung
 
   public boolean equals (Film film){
     if (this.filmID==film.getFilmID())return true;

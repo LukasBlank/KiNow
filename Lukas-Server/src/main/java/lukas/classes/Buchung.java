@@ -104,6 +104,8 @@ public class Buchung {
       break;
       case "vorführungsID": this.vorführungsID = (String) o;
       break;
+      case "buchungspreis": this.buchungspreis = Long.parseLong(o.toString());
+      break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set
