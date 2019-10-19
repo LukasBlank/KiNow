@@ -100,7 +100,7 @@ public class Nutzer {
   public Bestellung getBestellung (int bestellungsnummer){
     Bestellung erg = null;
     for (Bestellung bestellung : bestellungen){
-      if (bestellung.getBesetellungsnummer()==bestellungsnummer)erg = bestellung;
+      if (bestellung.getBesetellungsnummer().equals(bestellungsnummer))erg = bestellung;
     }//for
     return erg;
   }//getBestellungen

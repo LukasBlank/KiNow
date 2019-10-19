@@ -3,9 +3,9 @@ package lukas.arthur;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import lukas.classes.Bestellung;
+import lukas.classes.Buchung;
 import lukas.classes.Nutzer;
-import lukas.java_classes.Bestellung;
-import lukas.java_classes.Buchung;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -117,18 +117,12 @@ public class NutzerTest {
 
   @Test
   public void getBestellung() {
-    ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
-    Bestellung bestellungTest = new Bestellung(1, Ben, buchungen);
-    Ben.addBestellung(bestellungTest);
-    Assert.assertEquals(bestellungTest,Ben.getBestellung(1));
+
   }
 
   @Test
   public void addBestellung() {
-    ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
-    Bestellung bestellungTest = new Bestellung(1, Ben, buchungen);
-    Ben.addBestellung(bestellungTest);
-    Assert.assertEquals(bestellungTest,Ben.getBestellung(1));
+
   }
 
   @Test
