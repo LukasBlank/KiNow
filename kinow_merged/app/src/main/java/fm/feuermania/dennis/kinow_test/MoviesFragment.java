@@ -1,21 +1,25 @@
 package fm.feuermania.dennis.kinow_test;
 
 import android.content.Context;
+import android.net.Uri;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import lukas.classes.Requests;
 import lukas.classes.Film;
+import lukas.connections.Requests;
 
 
 /**
@@ -39,10 +43,11 @@ public class MoviesFragment extends Fragment {
     // movieList RecyclerView
     private RecyclerView movieList;
     private View movieView;
-
-    //gesetztes Kino
+    MovieAdapter mAdapter;
     private int kinoID;
     private ArrayList<Film> filme;
+    String movies[]={"TestMovieOne","TestMovieTwo","Drei", "Vier", "Fuenf", "Sechs", "Sieben"};
+    String desc [] = {"Description 1", "Description 2", "Description 3", "Description 4", "Description 5", "Description 6", "Description 7"};
 
     private OnFragmentInteractionListener mListener;
 
@@ -71,21 +76,15 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        kinoID = 0;
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        kinoID = 0;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MovieAdapter mAdapter;
-        ArrayList<Film> filme;
-        Requests request;
-        StorageReference storageReference;
-        storageReference = FirebaseStorage.getInstance().getReference();
-
         // Inflate the layout for this fragment
         movieView = inflater.inflate(R.layout.fragment_movies, container, false);
 
@@ -95,24 +94,25 @@ public class MoviesFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         movieList.setLayoutManager(layoutManager);
 
-
-        request = new Requests();
+        //Filme für bestimmtes Kino oder alle Filme
+        Requests request = new Requests();
         filme = request.getFilme(kinoID);
-        onButtonPressed(kinoID);
 
-        mAdapter = new MovieAdapter(filme,getActivity());
+        mAdapter = new MovieAdapter(filme, getActivity());
         movieList.setAdapter(mAdapter);
 
         movieList.getAdapter().notifyDataSetChanged();
 
+
         return movieView;
-    }//onCreateView
+    }
+
 
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(int kinoID) {
+    public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(kinoID);
+            mListener.onFragmentInteraction(uri);
         }
     }
 
@@ -126,6 +126,9 @@ public class MoviesFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
+
+
 
     @Override
     public void onDetach() {
@@ -145,8 +148,6 @@ public class MoviesFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(int kinoID);
+        void onFragmentInteraction(Uri uri);
     }
-
-
-}//class
+}

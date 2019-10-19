@@ -1,0 +1,60 @@
+<resources>
+
+    <string name="app_name">kiNOW</string>
+
+    <!-- Strings used for NavigationBar -->
+    <string name="location">Location</string>
+    <string name="movies">Movies</string>
+    <string name="cart">ShoppingCart</string>
+    <string name="account">Account</string>
+
+    <!-- Strings for Default Content -->
+    <string name="contentDescription">Default Content Description</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings for Default Movie Content -->
+    <string name="movieTitle">Title</string>
+    <string name="movieDescription">Description</string>
+    <string name="movieLongDescription">Description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</string>
+    <string name="duration">xxx Min</string>
+    <string name="fsk">FSK: xy</string>
+    <string name="rating">x/y Stars</string>
+    <string name="genre">Genre</string>
+    <string name="actor">Stephen Hawking</string>
+    <string name="regisseur">Steven Spielberg</string>
+    <string name="playtime">12:34</string>
+    <string name="year">2019</string>
+    <string name="place">Hollywood, LosAngeles</string>
+    <string name="published">2017</string>
+
+    <!-- Strings for Default Location Content -->
+    <string name="locTitle">LocationTitle</string>
+    <string name="locDescription">Description of Location</string>
+
+    <!-- Strings used by YouTubePlayer API -->
+    <string name="errorMessage">Error initializing YouTube player: %s</string>
+    <string name="seek_to">Jump To</string>
+    <string name="seek_to_hint">Seconds</string>
+    <string name="trailer">Trailer</string>
+
+    <!-- Strings for Default Account Content -->
+    <string name="login">Login</string>
+    <string name="big_login">LOGIN</string>
+    <string name="sign_in">Sign In</string>
+    <string name="big_sign_in">SIGN IN</string>
+    <string name="register">Register</string>
+    <string name="big_register">REGISTER</string>
+    <string name="no_account_yet">Don´t have an account? Create one!</string>
+    <string name="already_member">Already a member? Login here!</string>
+    <string name="terms">I agree to the Terms of Service.</string>
+    <string name="sixteen">I confirm that I am at least 16 years old.</string>
+    <string name="email">E-Mail</string>
+    <string name="pwd">Password</string>
+    <string name="confirm_pwd">Confirm Password</string>
+    <string name="forgot_pwd">Forgot Password?</string>
+    <string name="new_pwd">Enter a new Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+
+</resources>
