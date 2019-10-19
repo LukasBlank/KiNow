@@ -13,14 +13,15 @@ import android.widget.TextView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import lukas.classes.Kino;
+
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
 
-    ArrayList<String> location_list, description_list;
+    ArrayList<Kino> kinos;
     Context context;
 
-    public LocationAdapter(ArrayList<String> list, ArrayList<String> desc, Context context) {
-        this.location_list = list;
-        this.description_list = desc;
+    public LocationAdapter(ArrayList<Kino> kinos, Context context) {
+        this.kinos = kinos;
         this.context = context;
     }
 
@@ -33,13 +34,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull LocationAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.locTitle.setText(location_list.get(i).toString());
-        viewHolder.locDesc.setText(description_list.get(i).toString());
+        viewHolder.locTitle.setText(kinos.get(i).getName());
+        viewHolder.locDesc.setText(kinos.get(i).getOrt());
     }
 
     @Override
     public int getItemCount() {
-        return location_list.size();
+        if (kinos!=null)return kinos.size();
+        else return -1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

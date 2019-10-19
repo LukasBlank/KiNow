@@ -46,8 +46,6 @@ public class MoviesFragment extends Fragment {
     MovieAdapter mAdapter;
     private int kinoID;
     private ArrayList<Film> filme;
-    String movies[]={"TestMovieOne","TestMovieTwo","Drei", "Vier", "Fuenf", "Sechs", "Sieben"};
-    String desc [] = {"Description 1", "Description 2", "Description 3", "Description 4", "Description 5", "Description 6", "Description 7"};
 
     private OnFragmentInteractionListener mListener;
 

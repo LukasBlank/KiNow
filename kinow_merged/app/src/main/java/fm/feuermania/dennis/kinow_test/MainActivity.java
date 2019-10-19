@@ -14,6 +14,12 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
 
     private ActionBar kinowToolbar;
 
+    //save the opened fragments so that you do not have to open a new one every time
+    Fragment movieFragment = null;
+    Fragment locationFragment = null;
+    Fragment shoppingCartFragment = null;
+    Fragment accountFragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,27 +45,26 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.tab_movies:
                     kinowToolbar.setTitle("Movies");
-                    fragment = new MoviesFragment();
-                    loadFragment(fragment);
+                    if (movieFragment==null) movieFragment = new MoviesFragment();
+                    loadFragment(movieFragment);
                     return true;
                 case R.id.tab_location:
                     kinowToolbar.setTitle("Location");
-                    fragment = new LocationFragment();
-                    loadFragment(fragment);
+                    if (locationFragment==null)locationFragment = new LocationFragment();
+                    loadFragment(locationFragment);
                     return true;
                 case R.id.tab_cart:
                     kinowToolbar.setTitle("ShoppingCart");
-                    fragment = new ShoppingCartFragment();
-                    loadFragment(fragment);
+                    if(shoppingCartFragment==null)shoppingCartFragment = new ShoppingCartFragment();
+                    loadFragment(shoppingCartFragment);
                     return true;
                 case R.id.tab_account:
                     kinowToolbar.setTitle("Account");
-                    fragment = new AccountFragment();
-                    loadFragment(fragment);
+                    if(accountFragment==null)accountFragment = new AccountFragment();
+                    loadFragment(accountFragment);
                     return true;
             }
             return false;

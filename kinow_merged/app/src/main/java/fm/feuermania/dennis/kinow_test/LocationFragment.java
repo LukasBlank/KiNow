@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import lukas.classes.Kino;
+import lukas.connections.Requests;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,8 +38,7 @@ public class LocationFragment extends Fragment {
     private RecyclerView locationList;
     private View locView;
     LocationAdapter locAdapter;
-    String locations[]={"Frankfurt am Main","Mannheim","Berlin"};
-    String besch[]={"FFM Beschreibung","Mannheim Beschreibung","Berlin Beschreibung"};
+    ArrayList<Kino> kinos = new ArrayList<Kino>();
 
     private OnFragmentInteractionListener mListener;
 
@@ -82,18 +84,12 @@ public class LocationFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         locationList.setLayoutManager(layoutManager);
 
-        ArrayList<String> list_of_locations = new ArrayList<>();
-        list_of_locations.add(locations[0]);
-        list_of_locations.add(locations[1]);
-        list_of_locations.add(locations[2]);
-
-        ArrayList<String> list_of_descriptions = new ArrayList<>();
-        list_of_descriptions.add(besch[0]);
-        list_of_descriptions.add(besch[1]);
-        list_of_descriptions.add(besch[2]);
+        //alleKinos holen
+        Requests request = new Requests();
+        kinos = request.getKinos();
 
         //Hier Wird Zueg überschrieben
-        locAdapter = new LocationAdapter(list_of_locations, list_of_descriptions, getActivity());
+        locAdapter = new LocationAdapter(kinos, getActivity());
         locationList.setAdapter(locAdapter);
 
         locationList.getAdapter().notifyDataSetChanged();
