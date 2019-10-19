@@ -149,6 +149,24 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getFilme
 
+    @RequestMapping(value = "/getKinos")
+    public ResponseEntity<Object> getKinos (){
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").get();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+          map.put(document.getId(),document.getData());
+        }//for
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getKinos
+
     /**
     @RequestMapping(value = "/setNutzer")
     public void setData(@RequestBody String body) {

@@ -68,7 +68,7 @@ public class VorführungTest {
 
   @Test
   public void getGesamtpreis() {
-    
+
   }
 
   @Test
