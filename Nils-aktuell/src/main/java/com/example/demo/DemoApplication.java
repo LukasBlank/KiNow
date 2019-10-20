@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.net.URL;
 
+import java.rmi.MarshalledObject;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -58,12 +60,11 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.juliesPlayground(1, 1, 11, 14);
+    sc.updateFilm(7,3);
   }//main
 
   @RestController
   public static class SimpleController {
-
     /**
     @RequestMapping(value = "/Person")
     public ResponseEntity<Nutzer> getPerson() {
@@ -94,11 +95,114 @@ public class DemoApplication {
 
      **/
 
+    public void updateFilm(int film, int kino){
+        String link;
+        Map<String, Object> docData = new HashMap<>();
+
+        switch (film){
+            case 1:
+                // ES
+                link = "OYsSefoUdaw";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 2:
+                //Joker
+                link = "vVGJUj6Hh8s";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 3:
+                //downtown abbey
+                link = "sSDOSaipC9Q";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 4:
+                //gemini man
+                link = "geIcrgq55uA";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 5:
+                // eine ganz heiße nummer 2.0
+                link = "tg7xjbTpiCc";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 6:
+                //everest - ein yeti will hoch hinaus
+                link = "8Q7OY-NcTZM";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 7:
+                //ich war noch niemals in NY
+                link = "oPkzUhsRrGc";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 8:
+                //dem horizont so nah
+                link = "Xkxh6mrA5kI";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 9:
+                //after teh wedding
+                link = "M9I52xL3DPQ";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 10:
+                //maleficint
+                link = "xlB_ZwOF3Gk";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 11:
+                //parasite
+                link = "9qvaE99iMR0";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+            case 12:
+                //das kapitel im 21. jahrhundert
+                link = "zd7whXnRLbI";
+                docData.put("link", link);
+                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
+                break;
+        }
+        System.out.println("END");
+    }
+
+    public void addWerbung(int kino, int film, int saal, int vorstellung){
+        Map <String, Object> docData = new HashMap<>();
+
+        long werbungID, dauer;
+        String name;
+
+        werbungID = 0;
+
+        for (int i = 0; i <= 20; i++) {
+            docData.put("werbungID", werbungID+1);
+            db.collection("Kino").document(kino+"")
+                    .collection("spieltFilme").document(film+"")
+                    .collection("Vorstellungen").document(kino + "_" + saal + "_" + film + "_" + vorstellung)
+                    .collection("Werbung").document(kino + "_" + saal + "_" + film + "_" + vorstellung + "_" + werbungID).set(docData);
+        }
+    }
+
     @RequestMapping (value = "/juliesPlayground")
     public void juliesPlayground(int kino, int saal, int film, int anzVorstellungen){
 
         Map<String, Object> docData = new HashMap<>();
+        int cache = 1;
+        String [] date = {
+          "2019-10-21", "2019-10-22", "2019-10-23", "2019-10-24", "2019-10-25", "2019-10-26", "2019-10-27"
+        };
 
+        int local = 0;
 
         for (int i = 1; i <= anzVorstellungen; i++) {
 
@@ -180,80 +284,142 @@ public class DemoApplication {
             }
 
             //Vorstellungen
-            int help = 8;
 
-            switch (anzVorstellungen){
+            //Option 1
+            /*switch (anzVorstellungen){
                 case 7:
                     //eine Vorstellung am Tag
-                    for (int k = 1; k <= anzVorstellungen; k++) {
-                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "13:00");
+                        docData.put("zeitpunkt",  date [i-1] + "/" + "13:00");
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
-                    }
                     break;
 
                 case 14:
                     //zwei vorstellungen am Tag
-                    for (int k = 1; k <= anzVorstellungen/2; k++){
-                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "12:00");
-                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
-                    }
-                    int cache = 1;
-                    for (int k = anzVorstellungen/2; k <= anzVorstellungen; k++){
-                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "18:00");
-                        cache ++;
+                    if(i <= 7) {
+                        docData.put("zeitpunkt", date[i-1] + "/" + "12:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").collection("Vorstellungen").document(kino + "_" + saal + "_" + film + "_" + i).set(docData);
+                    }else{
+                        docData.put("zeitpunkt", date[local] + "/" + "18:00");
+                        System.out.println(cache);
+                        local ++;
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
                     }
                     break;
 
                 case 21:
-                    //drei Vorstellungen am Tag
-                    for (int k = 1; k <= anzVorstellungen/3; k++){
-                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "11:00");
+                    //drei Vorste   llungen am Tag
+                  if (i <= 7){
+                        docData.put("zeitpunkt", date[i-1]+ "/" + "11:00");
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
-                    }
-                    cache = 1;
-                    for (int k = anzVorstellungen/3; k <= (anzVorstellungen/3)*2; k++){
-                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "15:00");
-                        cache ++;
+                    }else if( i > 7 && i <= 14){
+                        docData.put("zeitpunkt", date[local] + "/" + "15:00");
+                        local ++;
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
-                    }
-                    cache = 1;
-                    for (int k = (anzVorstellungen/3)*2; k <= anzVorstellungen; k++){
-                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "19:00");
-                        cache ++;
+                    } else {
+                      if (local >= 7){
+                          local = 0;
+                      }
+                        docData.put("zeitpunkt", date[local] + "/" + "19:00");
+                        local ++;
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
                     }
                     break;
 
                 case 28:
                     //vier vorstellugen am Tag
-                    for (int k = 1; k <= anzVorstellungen/4; k++){
-                        docData.put("zeitpunkt", 10 + (help + k) + ".10.2019/" + "09:00");
+                    if (i <= 7){
+                        docData.put("zeitpunkt", date[i-1] + "/" + "09:00");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }else if ( i > 7 && i <= 14){
+                        docData.put("zeitpunkt", date[local] + "/" + "13:00");
+                        local ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }else if (i > 14&& i <= 21){
+                        if (local >= 7){
+                            local = 0;
+                        }
+                        docData.put("zeitpunkt", date[local] + "/" + "17:00");
+                        local ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    } else {
+                        if(local >= 7){
+                            local = 0;
+                        }
+                        docData.put("zeitpunkt", date[local] + "/" + "21:00");
+                        local ++;
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
                     }
-                    cache = 1;
-                    for (int k = anzVorstellungen/4; k <= (anzVorstellungen/4)*2; k++){
-                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "13:00");
-                        cache ++;
+                    break;
+            }*/
+
+            // Option 2
+            switch (anzVorstellungen){
+                case 7:
+                    //eine Vorstellung am Tag
+                    docData.put("zeitpunkt",  date [i-1] + "/" + "15:30");
+                    db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    break;
+
+                case 14:
+                    //zwei vorstellungen am Tag
+                    if(i <= 7) {
+                        docData.put("zeitpunkt", date[i-1] + "/" + "17:30");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").collection("Vorstellungen").document(kino + "_" + saal + "_" + film + "_" + i).set(docData);
+                    }else{
+                        docData.put("zeitpunkt", date[local] + "/" + "20:30");
+                        System.out.println(cache);
+                        local ++;
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
                     }
-                    cache = 1;
-                    for (int k = (anzVorstellungen/4)*2; k <= (anzVorstellungen/4)*3; k++){
-                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "17:00");
-                        cache ++;
+                    break;
+
+                case 21:
+                    //drei Vorste   llungen am Tag
+                    if (i <= 7){
+                        docData.put("zeitpunkt", date[i-1] + "/" + "10:30");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }else if( i > 7 && i <= 14){
+                        docData.put("zeitpunkt", date[local] + "/" + "16:30");
+                        local ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    } else {
+                        if (local >= 7){
+                            local = 0;
+                        }
+                        docData.put("zeitpunkt", date[local] + "/" + "19:30");
+                        local ++;
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
                     }
-                    cache = 1;
-                    for (int k = (anzVorstellungen/4)*3; k <= anzVorstellungen; k++){
-                        docData.put("zeitpunkt", 10 + (help + cache) + ".10.2019/" + "21:00");
-                        cache ++;
+                    break;
+
+                case 28:
+                    //vier vorstellugen am Tag
+                    if (i <= 7){
+                        docData.put("zeitpunkt", date[i-1] + "/" + "11:30");
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }else if ( i > 7 && i <= 14){
+                        docData.put("zeitpunkt", date[local] + "/" + "14:30");
+                        local ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    }else if (i > 14&& i <= 21){
+                        if (local >= 7){
+                            local = 0;
+                        }
+                        docData.put("zeitpunkt", date[local] + "/" + "17:30");
+                        local ++;
+                        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
+                    } else {
+                        if(local >= 7){
+                            local = 0;
+                        }
+                        docData.put("zeitpunkt", date[local] + "/" + "22:30");
+                        local ++;
                         db.collection("Kino").document(kino + "").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document(kino + "_" + saal + "_"+ film + "_" + i).set(docData);
                     }
                     break;
             }
-
         }
-
+        System.out.println("END");
     }
 
     @RequestMapping (value = "/server")
