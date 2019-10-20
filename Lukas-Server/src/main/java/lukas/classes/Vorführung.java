@@ -99,6 +99,11 @@ public class Vorführung {
     }//else
   }//Zeit
 
+  public String getDatum(){
+    if (this.zeitpunkt.indexOf('/')==-1)return null;
+    else return zeitpunkt.substring(0,zeitpunkt.indexOf('/'));
+  }//getDatum
+
   public boolean isDreiD() {
     return dreiD;
   }
