@@ -14,6 +14,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import lukas.classes.Nutzer;
+import lukas.connections.Requests;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -127,8 +130,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
 
                 // If data is correct, User will be signed-in
                 if(check_fields) {
+                    Requests r = new Requests();
+                    Nutzer n = r.LogIn(email_field_input,pwd_field_input);
+                    if (n==null) Toast.makeText(getContext(), "Anmeldung fehlgeschlagen.", Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(getContext(), "Als " + n.getVorname() + " " + n.getNachname() + " eingeloggt.", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(getActivity(), "SignIn - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
                 }
                 break;
 

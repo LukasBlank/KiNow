@@ -133,10 +133,14 @@ public class Requests {
             }//then
             else {
                 ausgabe = tr.getErg();
-                if (ausgabe.length()==0)return null;
+                if (ausgabe.indexOf(':')==-1)return null;
                 else {
                     //Ergebnis zu einer Map parsen, diese zu Nutzer parsen
-                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> gesamt = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> map = new HashMap<>();
+                    for (Map.Entry<String,Object> e : gesamt.entrySet()){
+                        map = (Map<String, Object>) e.getValue();
+                    }//for
                     Nutzer nutzer = new Nutzer();
                     for (Map.Entry<String,Object> entry : map.entrySet()){
                         nutzer.set(entry.getKey(),entry.getValue());

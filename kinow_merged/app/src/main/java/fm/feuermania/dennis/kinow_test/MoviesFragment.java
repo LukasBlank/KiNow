@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import lukas.classes.Film;
 import lukas.classes.Kino;
+import lukas.classes.Nutzer;
 import lukas.connections.Requests;
 
 

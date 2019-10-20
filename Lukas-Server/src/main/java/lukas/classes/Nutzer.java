@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Nutzer {
 
-  private String nutzerID;
+  private long nutzerID;
   private String email,vorname,nachname,geschlecht,geburtstag;
   private String passwort;
   private ArrayList<String> zahlungsmethoden;
@@ -13,7 +13,7 @@ public class Nutzer {
 
   public Nutzer (){}
 
-  public Nutzer (String nutzerID, String email, String vorname, String nachname,String geburtstag, String geschlecht,String passwort, ArrayList<String> zahlungsmethoden, ArrayList<Bestellung> bestellungen){
+  public Nutzer (long nutzerID, String email, String vorname, String nachname,String geburtstag, String geschlecht,String passwort, ArrayList<String> zahlungsmethoden, ArrayList<Bestellung> bestellungen){
     this.nutzerID = nutzerID;
     this.vorname = vorname;
     this.nachname = nachname;
@@ -25,11 +25,11 @@ public class Nutzer {
     this.bestellungen = bestellungen;
   }//K
 
-  public String getNutzerID() {
+  public long getNutzerID() {
     return nutzerID;
   }
 
-  public void setNutzerID(String nutzerID) {
+  public void setNutzerID(long nutzerID) {
     this.nutzerID = nutzerID;
   }
 
@@ -110,7 +110,7 @@ public class Nutzer {
   }//addBestellung
 
   public boolean equals (Nutzer nutzer){
-    if (this.nutzerID.equals(nutzer.getNutzerID()))return true;
+    if (this.nutzerID==nutzer.getNutzerID())return true;
     else return false;
   }//nutzer
 
@@ -128,7 +128,7 @@ public class Nutzer {
 
   public void set (String key, Object o){
     switch (key){
-      case "nutzerID": this.nutzerID = (String) o;
+      case "nutzerID": this.nutzerID = Long.parseLong(o.toString());
         break;
       case "vorname": this.vorname = (String) o;
         break;
