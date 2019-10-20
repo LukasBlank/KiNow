@@ -30,54 +30,60 @@
         app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linLay_times"
+    <GridLayout
+        android:id="@+id/gridLay_times"
+
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        android:weightSum="3"
-        android:gravity="center"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:columnCount="3"
+        android:rowCount="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4">
 
         <TextView
             android:id="@+id/time_one"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
             android:clickable="true"
             android:focusable="true"
+            android:background="@drawable/button_border"
             android:text="@string/playtime"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/time_two"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
             android:clickable="true"
             android:focusable="true"
+            android:layout_gravity="center"
+            android:background="@drawable/button_border"
             android:text="@string/playtime"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/time_three"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
             android:clickable="true"
             android:focusable="true"
+            android:background="@drawable/button_border"
             android:text="@string/playtime"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-    </LinearLayout>
+    </GridLayout>
 
     <TextView
         android:id="@+id/movieDescDetail"
@@ -92,7 +98,7 @@
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linLay_times" />
+        app:layout_constraintTop_toBottomOf="@+id/gridLay_times" />
 
     <TextView
         android:id="@+id/duration"

@@ -37,21 +37,21 @@ public class MovieDetailScreen extends AppCompatActivity{
             switch(view.getId()){
 
                 case R.id.time_one:
-                    timeOne.setBackgroundColor(getResources().getColor(R.color.red));
-                    timeTwo.setBackgroundColor(getResources().getColor(R.color.transparent));
-                    timeThree.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    timeOne.setBackground(getResources().getDrawable(R.drawable.button_filled));
+                    timeTwo.setBackground(getResources().getDrawable(R.drawable.button_border));
+                    timeThree.setBackground(getResources().getDrawable(R.drawable.button_border));
                     break;
 
                 case R.id.time_two:
-                    timeOne.setBackgroundColor(getResources().getColor(R.color.transparent));
-                    timeTwo.setBackgroundColor(getResources().getColor(R.color.red));
-                    timeThree.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    timeOne.setBackground(getResources().getDrawable(R.drawable.button_border));
+                    timeTwo.setBackground(getResources().getDrawable(R.drawable.button_filled));
+                    timeThree.setBackground(getResources().getDrawable(R.drawable.button_border));
                     break;
 
                 case R.id.time_three:
-                    timeOne.setBackgroundColor(getResources().getColor(R.color.transparent));
-                    timeTwo.setBackgroundColor(getResources().getColor(R.color.transparent));
-                    timeThree.setBackgroundColor(getResources().getColor(R.color.red));
+                    timeOne.setBackground(getResources().getDrawable(R.drawable.button_border));
+                    timeTwo.setBackground(getResources().getDrawable(R.drawable.button_border));
+                    timeThree.setBackground(getResources().getDrawable(R.drawable.button_filled));
                     break;
             }
         }

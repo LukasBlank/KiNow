@@ -82,6 +82,7 @@
 
             <Button
                 android:id="@+id/g1"
+                android:onClick="colorSeat"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 />
