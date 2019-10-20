@@ -1,4 +1,4 @@
-package lukas.classes;
+package backend.classes;
 
 
 public class Sitz {

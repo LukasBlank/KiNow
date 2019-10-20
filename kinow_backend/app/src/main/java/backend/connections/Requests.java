@@ -1,4 +1,4 @@
-package lukas.connections;
+package backend.connections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import lukas.classes.Film;
-import lukas.classes.Kino;
-import lukas.classes.Nutzer;
+import backend.classes.Film;
+import backend.classes.Kino;
+import backend.classes.Nutzer;
 import okhttp3.Request;
 
 public class Requests {
@@ -23,7 +23,7 @@ public class Requests {
 
     public ArrayList<Film> getFilme (long kinoID){
         ausgabe = "";
-        ArrayList<lukas.classes.Film> filme = new ArrayList<Film>();
+        ArrayList<backend.classes.Film> filme = new ArrayList<Film>();
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/getFilme";
         String SID = String.valueOf(kinoID);
@@ -153,6 +153,11 @@ public class Requests {
             return null;
         }//catch
     }//getNutzer
+
+    public boolean registerUser (Nutzer n){
+        n.toString();
+        return false;
+    }//n
 
 
 }//class

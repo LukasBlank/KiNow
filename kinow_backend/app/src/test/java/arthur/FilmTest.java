@@ -1,12 +1,5 @@
 package arthur;
 
-import java.util.ArrayList;
-import java.util.List;
-import lukas.classes.Film;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 public class FilmTest {
 
   /**

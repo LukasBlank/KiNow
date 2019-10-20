@@ -2,12 +2,12 @@ package arthur;
 
 
 import java.util.ArrayList;
-import lukas.classes.Sitz;
-import lukas.classes.Werbung;
+import backend.classes.Sitz;
+import backend.classes.Werbung;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import lukas.classes.*;
+import backend.classes.*;
 
 public class VorführungTest {
   ArrayList<Sitz> TestSitze = new ArrayList<Sitz>();

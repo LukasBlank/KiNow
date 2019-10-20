@@ -1,27 +1,21 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
 import android.content.Context;
 import android.net.Uri;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import lukas.classes.Film;
-import lukas.classes.Kino;
-import lukas.classes.Nutzer;
-import lukas.connections.Requests;
+import backend.classes.Film;
+import backend.classes.Kino;
+import backend.classes.Nutzer;
+import backend.connections.Requests;
 
 
 /**
@@ -87,6 +81,9 @@ public class MoviesFragment extends Fragment {
         kino = new Kino();
         kino.setKinoID(0);
         alt = 0;
+        Nutzer n = new Nutzer();
+        n.setEmail("op");n.setVorname("ll");
+        String erg = n.toString();
     }
 
     @Override

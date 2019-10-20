@@ -1,19 +1,20 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
+import android.app.UiAutomation;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 
-import lukas.classes.Kino;
-import lukas.classes.Nutzer;
+import backend.classes.Kino;
+import backend.classes.Nutzer;
 
-public class MainActivity extends AppCompatActivity implements  MoviesFragment.OnKinoSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements AccountFragment.OnLoginListener,MoviesFragment.OnKinoSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
     private ActionBar kinowToolbar;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements  MoviesFragment.O
         kino = new Kino();
         kino.setKinoID(0);
         nutzer = new Nutzer();
+        nutzer.setNutzerID(-1);
 
         //Bottom Navigation
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -70,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements  MoviesFragment.O
                     loadFragment(locationFragment);
                     return true;
                 case R.id.tab_cart:
-                    kinowToolbar.setTitle("ShoppingCart");
+                    if (nutzer.getNutzerID()==-1)kinowToolbar.setTitle("ShoppingCart");
+                    else kinowToolbar.setTitle("Einkäufe von " + nutzer.getVorname() + " " + nutzer.getNachname());
                     if(shoppingCartFragment==null)shoppingCartFragment = new ShoppingCartFragment();
                     loadFragment(shoppingCartFragment);
                     return true;
@@ -108,4 +111,8 @@ public class MainActivity extends AppCompatActivity implements  MoviesFragment.O
         return kino;
     }//getSelectedKino
 
-}
+    @Override
+    public void onLogin(Nutzer nutzer) {
+        this.nutzer = nutzer;
+    }//onLogin
+}//class
