@@ -87,6 +87,18 @@ public class Vorführung {
     return zeitpunkt;
   }
 
+  public String getZeit (){
+    if (this.zeitpunkt.indexOf('/')==-1)return null;
+    else {
+      return zeitpunkt.substring(zeitpunkt.indexOf('/')+1);
+    }//else
+  }//Zeit
+
+  public String getDatum(){
+    if (this.zeitpunkt.indexOf('/')==-1)return null;
+    else return zeitpunkt.substring(0,zeitpunkt.indexOf('/'));
+  }//getDatum
+
   public void setZeitpunkt(String zeitpunkt) {
     this.zeitpunkt = zeitpunkt;
   }

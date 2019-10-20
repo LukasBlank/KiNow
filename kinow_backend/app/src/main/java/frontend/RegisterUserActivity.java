@@ -45,9 +45,6 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     public void registerUser(View view) {
 
-        // Put in some code for saving user data to the DB
-        // Log User in
-
         // Get text of EditTextFields
         firstname_input = reg_firstName_field.getText().toString();
         lastname_input = reg_lastName_field.getText().toString();

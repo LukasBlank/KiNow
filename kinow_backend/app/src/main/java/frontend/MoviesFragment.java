@@ -17,6 +17,7 @@ import java.util.Map;
 import backend.classes.Film;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
+import backend.classes.Vorführung;
 import backend.connections.Requests;
 
 

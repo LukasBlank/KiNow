@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.ArrayList;
 
@@ -31,11 +34,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         View v = LayoutInflater.from(context).inflate(R.layout.movie_view, viewGroup, false);
 
         // OnItemClick -> Open MovieDetailScreen Activity
-        ViewHolder vHolder = new ViewHolder(v);
+        final ViewHolder vHolder = new ViewHolder(v);
         final Intent intent = new Intent(context, MovieDetailScreen.class);
         vHolder.rLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Film film = new Film();
+                for (Film fi : filme){
+                    if (fi.getTitel().equals(vHolder.Title.getText().toString()))film = fi;
+                }//for
+                Toast.makeText(context, "Film " + film.getTitel() + " wurde aufgerufen.", Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             }
         });
