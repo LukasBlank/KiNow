@@ -1,4 +1,4 @@
-package lukas.classes;
+package backend.classes;
 
 import java.util.ArrayList;
 import java.util.List;

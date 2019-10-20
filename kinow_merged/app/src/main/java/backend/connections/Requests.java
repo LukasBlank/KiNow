@@ -1,4 +1,4 @@
-package lukas.connections;
+package backend.connections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import lukas.classes.Film;
-import lukas.classes.Kino;
-import lukas.classes.Nutzer;
+import backend.classes.Film;
+import backend.classes.Kino;
+import backend.classes.Nutzer;
 import okhttp3.Request;
 
 public class Requests {
@@ -23,7 +23,7 @@ public class Requests {
 
     public ArrayList<Film> getFilme (long kinoID){
         ausgabe = "";
-        ArrayList<lukas.classes.Film> filme = new ArrayList<Film>();
+        ArrayList<backend.classes.Film> filme = new ArrayList<Film>();
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/getFilme";
         String SID = String.valueOf(kinoID);
@@ -153,6 +153,39 @@ public class Requests {
             return null;
         }//catch
     }//getNutzer
+
+    public boolean registerUser (Nutzer n){
+        ausgabe = "";
+        String nutzer = n.toMapString();
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/addNutzer";
+        Request request = new Request.Builder()
+                .addHeader("nutzer",nutzer)
+                .url(url).build();
+        tr.setRequest(request);
+        tr.start();
+        try {
+            tr.join();
+            long anfang = System.currentTimeMillis();
+            long ende = anfang;
+            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+            do {
+                ende = System.currentTimeMillis();
+            } while (!tr.isFertig() && ende-anfang<10000);
+            if (!tr.isFertig()){
+                System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                return false;
+            }//then
+            else {
+                ausgabe = tr.getErg();
+                if (ausgabe.equals("Success"))return true;
+                else return false;
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }//catch
+    }//register
 
 
 }//class

@@ -2,22 +2,22 @@ package backend.classes;
 
 public class Werbung {
 
-  private long werbungID,dauer;
-  private String name;
+  private long dauer;
+  private String name,werbungID;
 
   public Werbung() {}
 
-  public Werbung(long werbungID, long dauer, String name){
+  public Werbung(String werbungID, long dauer, String name){
     this.werbungID = werbungID;
     this.dauer = dauer;
     this.name = name;
   }//K
 
-  public long getWerbungID() {
+  public String getWerbungID() {
     return werbungID;
   }
 
-  public void setWerbungID(long werbungID) {
+  public void setWerbungID(String werbungID) {
     this.werbungID = werbungID;
   }
 
@@ -46,7 +46,7 @@ public class Werbung {
     switch (key){
       case "name": this.name = (String) o;
       break;
-      case "werbungID": this.werbungID = Long.parseLong(o.toString());
+      case "werbungID": this.werbungID = (String) o;
       break;
       case "dauer": this.dauer = Long.parseLong(o.toString());
       break;

@@ -1,4 +1,4 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
 import android.content.Intent;
 import android.os.Bundle;

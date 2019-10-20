@@ -1,4 +1,4 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lukas.classes.Film;
+import backend.classes.Film;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 

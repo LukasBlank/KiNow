@@ -1,35 +1,34 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import lukas.classes.Kino;
-import lukas.connections.Requests;
+import backend.classes.Film;
+import backend.classes.Kino;
+import backend.classes.Nutzer;
+import backend.connections.Requests;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LocationFragment.OnFragmentInteractionListener} interface
+ * {@link MoviesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LocationFragment#newInstance} factory method to
+ * Use the {@link MoviesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LocationFragment extends Fragment implements LocationAdapter.onLocationClickedListener{
+public class MoviesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,18 +38,18 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
     private String mParam1;
     private String mParam2;
 
-    // locationList RecyclerView
-    private RecyclerView locationList;
-    private View locView;
-    LocationAdapter locAdapter;
-
-    //Kino Liste und ausgewähltes Kino
-    ArrayList<Kino> kinos = new ArrayList<Kino>();
+    // movieList RecyclerView
+    private RecyclerView movieList;
+    private View movieView;
+    MovieAdapter mAdapter;
+    private Kino kino;
+    private long alt;
+    private ArrayList<Film> filme;
 
     private OnFragmentInteractionListener mListener;
-    private OnKinoIDChangedListener onKinoIDChangedListener;
+    private OnKinoSelectionListener onKinoSelectionListener;
 
-    public LocationFragment() {
+    public MoviesFragment() {
         // Required empty public constructor
     }
 
@@ -60,11 +59,11 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LocationFragment.
+     * @return A new instance of fragment MoviesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LocationFragment newInstance(String param1, String param2) {
-        LocationFragment fragment = new LocationFragment();
+    public static MoviesFragment newInstance(String param1, String param2) {
+        MoviesFragment fragment = new MoviesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,34 +78,44 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //setting params
+        filme = new ArrayList<Film>();
+        kino = new Kino();
+        kino.setKinoID(0);
+        alt = 0;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        locView = inflater.inflate(R.layout.fragment_location, container, false);
+        movieView = inflater.inflate(R.layout.fragment_movies, container, false);
 
-        locationList = locView.findViewById(R.id.locationList);
-        locationList.setHasFixedSize(true);
-
+        movieList = movieView.findViewById(R.id.movieList);
+        movieList.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        locationList.setLayoutManager(layoutManager);
+        movieList.setLayoutManager(layoutManager);
 
-        //alleKinos holen
-        if(kinos.size()==0){
+        //Beim ersten Mal alle Filme holen, danach nur neu holen, wenn sich das gewählte Kino ändert
+        onKinoSelectionListener = (OnKinoSelectionListener) getContext();
+        kino  = onKinoSelectionListener.getSelectedKino();
+
+        if (filme.size()==0 || kino.getKinoID()!=alt){
+            alt = kino.getKinoID();
             Requests request = new Requests();
-            kinos = request.getKinos();
+            filme = request.getFilme(kino.getKinoID());
+            mAdapter = new MovieAdapter(filme, getActivity());
         }//then
 
-        if (locAdapter==null)locAdapter = new LocationAdapter(kinos, getActivity(),this);
+        movieList.setAdapter(mAdapter);
 
-        locationList.setAdapter(locAdapter);
-        locationList.getAdapter().notifyDataSetChanged();
+        movieList.getAdapter().notifyDataSetChanged();
 
 
-        return locView;
-    }//onCreateView
+        return movieView;
+    }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -125,6 +134,9 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
+
+
 
     @Override
     public void onDetach() {
@@ -147,16 +159,7 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
         void onFragmentInteraction(Uri uri);
     }
 
-    @Override
-    public void onKinoSelection(long id) {
-        Kino kino = kinos.get((int) id);
-        String msg = "Gewähltes Kino: " + kino.getName();
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-        onKinoIDChangedListener = (OnKinoIDChangedListener)getContext();
-        onKinoIDChangedListener.onKinoIDChanged(kino);
-    }//onKinoSelection
-
-    public interface OnKinoIDChangedListener{
-        void onKinoIDChanged(Kino kino);
+    public interface OnKinoSelectionListener {
+        Kino getSelectedKino ();
     }//interface
 }

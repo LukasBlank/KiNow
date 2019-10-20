@@ -1,4 +1,4 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import lukas.classes.Nutzer;
-import lukas.connections.Requests;
+import backend.classes.Nutzer;
+import backend.connections.Requests;
 
 
 /**
@@ -48,7 +48,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
     private String email_field_input;
     private String pwd_field_input;
 
+    private Nutzer nutzer;
+
     private OnFragmentInteractionListener mListener;
+    private OnLoginListener onLoginListener;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -133,8 +136,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                     Requests r = new Requests();
                     Nutzer n = r.LogIn(email_field_input,pwd_field_input);
                     if (n==null) Toast.makeText(getContext(), "Anmeldung fehlgeschlagen.", Toast.LENGTH_SHORT).show();
-                    else Toast.makeText(getContext(), "Als " + n.getVorname() + " " + n.getNachname() + " eingeloggt.", Toast.LENGTH_SHORT).show();
-
+                    else {
+                        Toast.makeText(getContext(), "Als " + n.getVorname() + " " + n.getNachname() + " eingeloggt.", Toast.LENGTH_SHORT).show();
+                        onLoginListener = (OnLoginListener) getContext();
+                        onLoginListener.onLogin(n);
+                    }//else
                 }
                 break;
 
@@ -209,4 +215,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-}
+
+    public interface OnLoginListener {
+        void onLogin (Nutzer nutzer);
+    }//interface
+
+}//class
