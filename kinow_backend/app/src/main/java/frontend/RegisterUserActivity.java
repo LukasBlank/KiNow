@@ -101,10 +101,14 @@ public class RegisterUserActivity extends AppCompatActivity {
                 Nutzer neu = new Nutzer();
                 neu.setVorname(firstname_input);neu.setNachname(lastname_input);neu.setEmail(email_input);
                 neu.setPasswort(pwd_input);
-                /**
-                Intent intent = new Intent(RegisterUserActivity.this, MainActivity.class);
-                startActivity(intent);
-                 **/
+                boolean success = request.registerUser(neu);
+                if (success){
+                    Toast.makeText(getBaseContext(), "Registrierung erfolgreich. Sie können sich nun anmelden."
+                            , Toast.LENGTH_SHORT).show();
+                    finish();
+                }//then
+                else Toast.makeText(getBaseContext(), "Registrierung nicht möglich", Toast.LENGTH_SHORT).show();
+
             }//else
         }//then
     }//meth

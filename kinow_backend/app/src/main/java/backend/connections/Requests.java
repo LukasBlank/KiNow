@@ -178,7 +178,7 @@ public class Requests {
             }//then
             else {
                 ausgabe = tr.getErg();
-                if (ausgabe.equals("Success."))return true;
+                if (ausgabe.equals("Success"))return true;
                 else return false;
             }//else
         }catch (Exception e){
