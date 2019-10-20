@@ -127,6 +127,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
 
                 // If data is correct, User will be signed-in
                 if(check_fields) {
+
                     Toast.makeText(getActivity(), "SignIn - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
                 }
                 break;

@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements  MoviesFragment.O
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.tab_movies:
-                    kinowToolbar.setTitle("Movies");
+                    if (kino.getKinoID()==0)kinowToolbar.setTitle("Movies");
+                    else kinowToolbar.setTitle(kino.getName());
                     if (movieFragment==null) movieFragment = new MoviesFragment();
                     loadFragment(movieFragment);
                     return true;

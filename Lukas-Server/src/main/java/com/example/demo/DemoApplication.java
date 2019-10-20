@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.*;
+import java.util.EventListener;
 import java.util.concurrent.ExecutionException;
 
 import lukas.classes.Kino;
@@ -62,12 +63,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-
-    Map<String, Object> map = new HashMap<>();
-    map.put("nutzerID","10");map.put("vorname","Lukas");map.put("nachname","Blank");
-    String test = map.toString();
-
-    boolean success = sc.addNutzer(test);
   }//main
 
   @RestController
@@ -148,15 +143,25 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getKinos
 
-    @RequestMapping(value = "/getNutzer")
-    public ResponseEntity<Object> getNutzer (){
+    @RequestMapping(value = "/addNutzer")
+    public boolean addNutzer(@RequestHeader("nutzer")String nutzer){
+      //String zuverlässig zu einer Map parsen
+      return false;
+    }//addNutzer
+
+    @RequestMapping(value = "/LogIn")
+    public ResponseEntity<Object> LogIn(@RequestHeader("email") String email, @RequestHeader("passwort") String passwort){
       ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
       Map<String,Map<String,Object>> map = new HashMap<>();
       try {
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
         for (DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
+          if (!document.getId().equals("0")){
+            String e = document.get("email").toString();
+            String p = document.get("passwort").toString();
+            if (e.equals(email) && p.equals(passwort))map.put(document.getId(),document.getData());
+          }//then
         }//for
       } catch (InterruptedException e) {
         e.printStackTrace();
@@ -164,13 +169,7 @@ public class DemoApplication {
         e.printStackTrace();
       }//catch
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
-    }//getNutzer
-
-    @RequestMapping(value = "/addNutzer")
-    public boolean addNutzer(@RequestHeader("nutzer")String nutzer){
-      //String zuverlässig zu einer Map parsen
-      return false;
-    }//addNutzer
+    }//LogIn
 
 
   }//Controller

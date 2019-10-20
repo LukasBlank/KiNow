@@ -75,8 +75,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         @Override
         public void onClick(View view) {
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                itemView.setBackgroundColor(Color.rgb(198,198,198));
-                oL.onKinoSelection(getAdapterPosition());
+                if (getAdapterPosition()!=RecyclerView.NO_POSITION){
+                    oL.onKinoSelection(getAdapterPosition());
+                }//then
+
             }//then
         }
     }

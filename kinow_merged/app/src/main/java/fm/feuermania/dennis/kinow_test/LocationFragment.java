@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -149,6 +150,8 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
     @Override
     public void onKinoSelection(long id) {
         Kino kino = kinos.get((int) id);
+        String msg = "Gewähltes Kino: " + kino.getName();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
         onKinoIDChangedListener = (OnKinoIDChangedListener)getContext();
         onKinoIDChangedListener.onKinoIDChanged(kino);
     }//onKinoSelection
