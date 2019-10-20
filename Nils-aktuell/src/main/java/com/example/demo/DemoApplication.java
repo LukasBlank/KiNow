@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutionException;
 
 import lukas.classes.Film;
 import lukas.java_classes.Nutzer;
+import lukas.java_classes.Sitz;
+import org.apache.commons.lang3.concurrent.ConcurrentException;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -60,7 +62,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.updateFilm(7,3);
+    sc.freieSitze(2, 5, 8, 21);
   }//main
 
   @RestController
@@ -72,10 +74,10 @@ public class DemoApplication {
           new Nutzer(1, "Hans", "peter", new Date(), "email@email.com", "1234"), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/Kino")
+    @RequestMapping(value = "/kino")
     public ResponseEntity<Object> getKino(@RequestHeader("kinoID") int kino) {
-      Kino k = new Kino(kino, "HAns", "Pad");
-      Map<Integer, Kino> KinoRepo = new HashMap<>();
+      kino k = new kino(kino, "HAns", "Pad");
+      Map<Integer, kino> KinoRepo = new HashMap<>();
       KinoRepo.put(k.getKinoID(), k);
       return new ResponseEntity<>(KinoRepo.values(), HttpStatus.OK);
     }
@@ -83,9 +85,9 @@ public class DemoApplication {
     @RequestMapping(value = "/KinoBody")
     public ResponseEntity<Object> getKino(@RequestBody() String kino) {
       Gson gson = new Gson();
-      Map<Integer, Kino> KinoRepo = new HashMap<>();
+      Map<Integer, kino> KinoRepo = new HashMap<>();
       try {
-        Kino kino1 = gson.fromJson(kino, Kino.class);
+        kino kino1 = gson.fromJson(kino, kino.class);
         KinoRepo.put(kino1.getKinoID(), kino1);
         return new ResponseEntity<>(KinoRepo.values(), HttpStatus.OK);
       } catch (Exception e) {
@@ -94,6 +96,40 @@ public class DemoApplication {
     }
 
      **/
+
+    //Not working properly
+    public void freieSitze(int kino, int saal, int film, int vorstellungen){
+        ApiFuture <QuerySnapshot> docRef = db.collection("Kino").document(""+kino)
+                .collection("HatSaele").document(kino + "_" + saal)
+                .collection("HatSitze").get();
+        System.out.println(docRef);
+
+        int anzVor = vorstellungen;
+
+        try {
+
+            List<QueryDocumentSnapshot> documents = docRef.get().getDocuments();
+            System.out.println(documents);
+
+            for (int k = 1; k <= anzVor; k++) {
+                System.out.println("CHECKPOINT 2");
+
+                for (QueryDocumentSnapshot document : documents) {
+                    System.out.println("CHECKPOINT 3: -------> " + anzVor);
+                    System.out.println(document.getId() + " => " + document.getData());
+
+                    db.collection("Kino").document("" + kino)
+                            .collection("spieltFilme").document("" + film)
+                            .collection("Vorstellungen").document(kino + "_" + saal + "_" + film + "_" + k)
+                            .collection("FreieSitze").document("" + document.getId()).set(document.getData());
+                }
+            }
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        } catch (ExecutionException e){
+            e.printStackTrace();
+        }
+    }
 
     public void updateFilm(int film, int kino){
         String link;
@@ -176,21 +212,37 @@ public class DemoApplication {
         System.out.println("END");
     }
 
-    public void addWerbung(int kino, int film, int saal, int vorstellung){
+    public void addWerbung(int kino, int saal, int film, int vorstellungen){
         Map <String, Object> docData = new HashMap<>();
 
-        long werbungID, dauer;
-        String name;
+        int anzVorstellungen = vorstellungen;
+        long werbungID;
+        long [] dauer = {
+            2, 3, 4, 4, 3, 4, 3, 5, 3, 5, 3, 4
+        };
+        String [] name = {
+                "Süddeutsche Zeitung", "M&M's", "TK MAX", "Langnese", "Magnum",
+                "Die Addams Family", "Das perfekte Geheimnis", "Star Wars 9: der Aufstieg der Skywalkers",
+                "Die fantastische Reise des Dr. Dolittle", "Zombieland 2: Doppelt hält besser",
+                "Die Eiskönigin 2", "Huslters"
+        };
 
-        werbungID = 0;
+        for (int k = 1; k <= anzVorstellungen; k++) {
+            int vorstellung = k;
+            werbungID = 0;
 
-        for (int i = 0; i <= 20; i++) {
-            docData.put("werbungID", werbungID+1);
-            db.collection("Kino").document(kino+"")
-                    .collection("spieltFilme").document(film+"")
-                    .collection("Vorstellungen").document(kino + "_" + saal + "_" + film + "_" + vorstellung)
-                    .collection("Werbung").document(kino + "_" + saal + "_" + film + "_" + vorstellung + "_" + werbungID).set(docData);
+            for (int i = 0; i < name.length; i++) {
+                docData.put("werbungID", kino + "_" + saal + "_" + film + "_" + vorstellung + "_" + (werbungID + 1));
+                docData.put("name", name[i]);
+                docData.put("dauer", dauer[i]);
+                db.collection("Kino").document(kino + "")
+                        .collection("spieltFilme").document(film + "")
+                        .collection("Vorstellungen").document(kino + "_" + saal + "_" + film + "_" + vorstellung)
+                        .collection("Werbung").document(kino + "_" + saal + "_" + film + "_" + vorstellung + "_" + (werbungID + 1)).set(docData);
+                werbungID++;
+            }
         }
+        System.out.println("END");
     }
 
     @RequestMapping (value = "/juliesPlayground")
