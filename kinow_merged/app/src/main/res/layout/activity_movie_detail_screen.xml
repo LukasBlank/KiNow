@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
@@ -31,6 +30,55 @@
         app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/linLay_times"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4">
+
+        <TextView
+            android:id="@+id/time_one"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/playtime"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/time_two"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/playtime"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/time_three"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/playtime"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/movieDescDetail"
         android:layout_width="300dp"
@@ -44,7 +92,7 @@
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toBottomOf="@+id/linLay_times" />
 
     <TextView
         android:id="@+id/duration"
@@ -142,5 +190,18 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/play_arrow" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/book_movie"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:onClick="bookMovie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieDescDetail" />
 
 </android.support.constraint.ConstraintLayout>
