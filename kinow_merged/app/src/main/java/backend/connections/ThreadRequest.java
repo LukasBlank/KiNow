@@ -1,4 +1,4 @@
-package lukas.connections;
+package backend.connections;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,4 +1,4 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
 public class YouTubeConfig {
 

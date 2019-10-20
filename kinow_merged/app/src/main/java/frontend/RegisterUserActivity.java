@@ -1,4 +1,4 @@
-package fm.feuermania.dennis.kinow_test;
+package frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import backend.classes.Nutzer;
+import backend.connections.Requests;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
@@ -90,10 +94,24 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         // At the end of registration, open MainActivity as logged-in User
         if(check && checkboxes) {
-            Intent intent = new Intent(RegisterUserActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-    }
+            if (!pwd_input.equals(confirm_pwd_input))
+                Toast.makeText(getBaseContext(), "Passwort inkorrekt.", Toast.LENGTH_SHORT).show();
+            else {
+                Requests request = new Requests();
+                Nutzer neu = new Nutzer();
+                neu.setVorname(firstname_input);neu.setNachname(lastname_input);neu.setEmail(email_input);
+                neu.setPasswort(pwd_input);
+                boolean success = request.registerUser(neu);
+                if (success){
+                    Toast.makeText(getBaseContext(), "Registrierung erfolgreich. Sie können sich nun anmelden."
+                            , Toast.LENGTH_SHORT).show();
+                    finish();
+                }//then
+                else Toast.makeText(getBaseContext(), "Registrierung nicht möglich", Toast.LENGTH_SHORT).show();
+
+            }//else
+        }//then
+    }//meth
 
     public void openSignInPage(View view) {
         finish();

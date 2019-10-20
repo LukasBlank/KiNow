@@ -2,8 +2,8 @@ package arthur;
 
 import java.util.ArrayList;
 
-import lukas.classes.Bestellung;
-import lukas.classes.Nutzer;
+import backend.classes.Bestellung;
+import backend.classes.Nutzer;
 import org.junit.Assert;
 import org.junit.Test;
 

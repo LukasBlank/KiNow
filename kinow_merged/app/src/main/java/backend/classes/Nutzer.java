@@ -1,4 +1,4 @@
-package lukas.classes;
+package backend.classes;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -147,5 +147,28 @@ public class Nutzer {
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set
+
+  public String toMapString (){
+    String erg = "{";
+    //"darsteller":["Angelina Jolie","Elle Fanning","Michelle Pfeiffer","Ed Skrein","Chiwetel Ejiofor"]
+    if (email!=null)erg += "\"email\":\""+email+"\",";
+    if (geburtstag!=null)erg += "\"geburtstag\":\""+geburtstag+"\",";
+    if (geschlecht!=null)erg += "\"geschlecht\":\""+geschlecht+"\",";
+    if (nachname!=null)erg+= "\"nachname\":\""+nachname+"\",";
+    if (nutzerID>0)erg+= "\"nutzerID\":"+nutzerID+",";
+    if (passwort!=null)erg += "\"passwort\":\""+passwort+"\",";
+    if (vorname!=null)erg+= "\"vorname\":\""+vorname+"\",";
+    if (zahlungsmethoden!=null){
+      erg += "\"zahlungsmethoden\":[";
+      for (String z : zahlungsmethoden){
+        erg+= "\""+z+"\",";
+      }//for
+      erg = erg.substring(0,erg.lastIndexOf(','));
+      erg += "],";
+    }//then
+    erg = erg.substring(0,erg.lastIndexOf(','));
+    erg += "}";
+    return erg;
+  }//toMapString
 
 }//class

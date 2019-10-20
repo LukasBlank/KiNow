@@ -2,10 +2,10 @@ package arthur;
 
 import java.util.ArrayList;
 import java.util.List;
-import lukas.classes.Film;
-import lukas.classes.Kino;
-import lukas.classes.Kinosaal;
-import lukas.classes.Sitz;
+import backend.classes.Film;
+import backend.classes.Kino;
+import backend.classes.Kinosaal;
+import backend.classes.Sitz;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
