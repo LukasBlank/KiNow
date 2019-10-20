@@ -43,14 +43,12 @@ public class DemoApplication {
     try {
       //Pfad muss angepasst werden ggf. in Java einfügen
 
-      //WENN: Nicht über Server laufend: die beiden unteren Zeilen einkommentieren
-      // und in FileInputStream url.getPath() einfügen
-      //String path = "serviceAccountKey.json";
+      String path = "serviceAccountKey.json";
       //URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream("serviceAccountKey.json");
+          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -144,9 +142,38 @@ public class DemoApplication {
     }//getKinos
 
     @RequestMapping(value = "/addNutzer")
-    public boolean addNutzer(@RequestHeader("nutzer")String nutzer){
+    public ResponseEntity<Object> addNutzer(@RequestHeader("nutzer")String nutzer){
       //String zuverlässig zu einer Map parsen
-      return false;
+      String erg = "Success";
+      try {
+        Map<String,Object> map = new ObjectMapper().readValue(nutzer,Map.class);
+        Nutzer n = new Nutzer();
+        for (Map.Entry<String,Object> e : map.entrySet()){
+          n.set(e.getKey(),e.getValue());
+        }//for
+        String email = n.getEmail();
+        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+            if(!document.getId().equals("0")){
+              String e = document.get("email").toString();
+              if (e.equals(n.getEmail()))erg = "Error";
+            }//then
+        }//for
+        if (erg.equals("Success")){
+          long id = documents.size();
+          map.put("nutzerID",id);
+          db.collection("Nutzer").document("" + id).set(map);
+        }//then
+      } catch (IOException e) {
+        e.printStackTrace();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
     }//addNutzer
 
     @RequestMapping(value = "/LogIn")

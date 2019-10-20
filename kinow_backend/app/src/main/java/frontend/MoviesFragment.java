@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import backend.classes.Film;
 import backend.classes.Kino;
@@ -81,9 +83,6 @@ public class MoviesFragment extends Fragment {
         kino = new Kino();
         kino.setKinoID(0);
         alt = 0;
-        Nutzer n = new Nutzer();
-        n.setEmail("op");n.setVorname("ll");
-        String erg = n.toString();
     }
 
     @Override
