@@ -91,6 +91,14 @@ public class Vorführung {
     this.zeitpunkt = zeitpunkt;
   }
 
+  public String getZeit (){
+    //2019-10-21/13:00
+    if (this.zeitpunkt.indexOf('/')==-1)return null;
+    else {
+      return zeitpunkt.substring(zeitpunkt.indexOf('/')+1);
+    }//else
+  }//Zeit
+
   public boolean isDreiD() {
     return dreiD;
   }
