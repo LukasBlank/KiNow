@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -111,8 +112,14 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     }//watchTrailer
 
     public void bookMovie(View view) {
-        Intent intent = new Intent(MovieDetailScreen.this, SmallCinemaHall.class);
-        startActivity(intent);
+        if (kino.getKinoID()==0) {
+            Toast.makeText(context, "Bitte zuerst Kino auswählen.", Toast.LENGTH_SHORT).show();
+        }//then
+        else if (kino.getKinoID()!=0){
+            Intent intent = new Intent(MovieDetailScreen.this, SmallCinemaHall.class);
+            startActivity(intent);
+        }//else
+
     }//bookMovie
 
 }//class
