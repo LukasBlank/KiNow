@@ -31,6 +31,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     TextView movieTrailer;
     Film film;
     Kino kino;
+    TextView movieRating;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -54,11 +56,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         if (genres.length()>0)genres = genres.substring(0,genres.lastIndexOf(','));
         movieGenre.setText(genres);
 
-        movieLength = findViewById(R.id.duration);
-        movieLength.setText(""+film.getDauer());
-
-        movieLength = findViewById(R.id.rating);
-        movieLength.setText(film.getBewertung()+"/10 Sternen");
+        movieRating = findViewById(R.id.rating);
+        movieRating.setText(filmSelect.getBewertung()+"/10 Sternen");
 
         movieFSK = findViewById(R.id.fsk);
         movieFSK.setText("FSK "+film.getFsk());
