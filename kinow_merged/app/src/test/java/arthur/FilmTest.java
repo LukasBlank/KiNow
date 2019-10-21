@@ -1,19 +1,31 @@
 package arthur;
 
+import backend.classes.Film;
+import backend.classes.Vorführung;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class FilmTest {
 
-  /**
+
   List<Film> TestFilme = new ArrayList<Film>();
   List<String> darsteller1 = new ArrayList<String>();
   ArrayList<String> genres1 = new ArrayList<String>();
   ArrayList<String> regie1 = new ArrayList<String>();
+  ArrayList<Vorführung> Vorfühurung1 = new ArrayList<Vorführung>();
+
   List<String> darsteller2 = new ArrayList<String>();
   ArrayList<String> genres2 = new ArrayList<String>();
   ArrayList<String> regie2 = new ArrayList<String>();
-  Film TestFilm = new Film(1,"Das Erwachen der Macht", "Die Macht", 110, 16, 3, genres1,
-      (ArrayList<String>) darsteller1, regie1);
+  ArrayList<Vorführung> Vorführung2 = new ArrayList<Vorführung>();
+  Film TestFilm = new Film(1L,"Das Erwachen der Macht", "Die Macht", 110L, 16L, 3L, genres1,
+      (ArrayList<String>) darsteller1, regie1,Vorfühurung1);
   Film TestFilm2 = new Film(2,"Zombieland","TestB",150,18,5,genres2,
-      (ArrayList<String>) darsteller2,regie2);
+      (ArrayList<String>) darsteller2,regie2,Vorführung2);
 
   @Before
   public void main(){
@@ -119,7 +131,7 @@ public class FilmTest {
   @Test
   public void equals() {
    Film TestFilm3 = new Film(1,"Das Erwachen der Macht", "Die Macht", 110, 16, 3, genres1,
-        (ArrayList<String>) darsteller1, regie1);
+        (ArrayList<String>) darsteller1, regie1,Vorfühurung1);
     Assert.assertEquals(true,TestFilm.equals(TestFilm));
     Assert.assertEquals(true,TestFilm3.equals(TestFilm));
   }
@@ -145,5 +157,5 @@ public class FilmTest {
     Assert.assertEquals(90,TestFilm.getFsk());
     Assert.assertEquals(10,TestFilm.getBewertung());
   }
-  **/
+
 }
