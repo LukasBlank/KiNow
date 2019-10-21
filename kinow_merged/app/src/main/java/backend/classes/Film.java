@@ -1,10 +1,11 @@
 package backend.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
-public class Film {
+public class Film implements Serializable {
   private long filmID,fsk,dauer,bewertung;
   private String titel,beschreibung;
   private ArrayList<String> genres;
