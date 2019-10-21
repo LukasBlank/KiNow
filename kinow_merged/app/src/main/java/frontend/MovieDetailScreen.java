@@ -57,7 +57,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         movieGenre.setText(genres);
 
         movieRating = findViewById(R.id.rating);
-        movieRating.setText(filmSelect.getBewertung()+"/10 Sternen");
+        movieRating.setText(film.getBewertung()+"/10 Sternen");
 
         movieFSK = findViewById(R.id.fsk);
         movieFSK.setText("FSK "+film.getFsk());
@@ -106,12 +106,13 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
 
     public void watchTrailer(View view) {
         Intent intent = new Intent(MovieDetailScreen.this, MovieTrailer.class);
+        intent.putExtra("link",film.getLink());
         startActivity(intent);
-    }
+    }//watchTrailer
 
     public void bookMovie(View view) {
         Intent intent = new Intent(MovieDetailScreen.this, SmallCinemaHall.class);
         startActivity(intent);
-    }
+    }//bookMovie
 
 }//class

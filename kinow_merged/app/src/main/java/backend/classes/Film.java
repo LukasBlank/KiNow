@@ -3,11 +3,12 @@ package backend.classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import backend.classes.Vorführung;
 
 
 public class Film implements Serializable {
   private long filmID,fsk,dauer,bewertung;
-  private String titel,beschreibung;
+  private String titel,beschreibung,link;
   private ArrayList<String> genres;
   private ArrayList<String> darsteller;
   private ArrayList<String> regie;
@@ -15,7 +16,7 @@ public class Film implements Serializable {
 
   public Film() {}
 
-  public Film(long filmID, String titel, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie, ArrayList<Vorführung> vorführungen){
+  public Film(long filmID, String titel, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie, ArrayList<Vorführung> vorführungen,String link){
     this.filmID = filmID;
     this.titel = titel;
     this.beschreibung = beschreibung;
@@ -26,6 +27,7 @@ public class Film implements Serializable {
     this.darsteller = darsteller;
     this.regie = regie;
     this.vorführungen = vorführungen;
+    this.link = link;
   }//K
 
   public long getFilmID() {
@@ -126,6 +128,14 @@ public class Film implements Serializable {
     if (vorführungen.contains(v))vorführungen.remove(v);
   }//removeVorführung
 
+  public String getLink() {
+    return link;
+  }
+
+  public void setLink(String link) {
+    this.link = link;
+  }
+
   public boolean equals (Film film){
     if (this.filmID==film.getFilmID())return true;
     else return false;
@@ -150,6 +160,8 @@ public class Film implements Serializable {
       case "fsk": this.fsk = Long.parseLong(o.toString());
         break;
       case "bewertung": this.bewertung = Long.parseLong(o.toString());
+        break;
+      case "link": this.link = (String)o;
         break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch

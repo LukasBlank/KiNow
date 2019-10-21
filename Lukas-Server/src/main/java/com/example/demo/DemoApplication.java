@@ -61,7 +61,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.getSitze("1_1_11_1");
   }//main
 
   @RestController
