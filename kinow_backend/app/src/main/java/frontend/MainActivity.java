@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
                     loadFragment(locationFragment);
                     return true;
                 case R.id.tab_cart:
-                    if (nutzer.getNutzerID()==-1)kinowToolbar.setTitle("ShoppingCart");
+                    if (nutzer.getNutzerID()==-1)kinowToolbar.setTitle("Cart");
                     else kinowToolbar.setTitle("Einkäufe von " + nutzer.getVorname() + " " + nutzer.getNachname());
                     if(shoppingCartFragment==null)shoppingCartFragment = new ShoppingCartFragment();
                     loadFragment(shoppingCartFragment);
