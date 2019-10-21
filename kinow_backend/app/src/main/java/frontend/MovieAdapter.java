@@ -2,6 +2,7 @@ package frontend;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,19 +15,24 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import backend.classes.Film;
+import backend.classes.Kino;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> implements Serializable {
 
     ArrayList<Film> filme;
+    Kino thisKino;
     Context context;
+    Kino kino;
 
-    public MovieAdapter(ArrayList<Film> filme, Context context) {
+    public MovieAdapter(ArrayList<Film> filme , Kino kino , Context context) {
         this.filme = filme;
         this.context = context;
-    }
+        this.kino = kino;
+}//K
 
     @NonNull
     @Override
@@ -43,7 +49,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 for (Film fi : filme){
                     if (fi.getTitel().equals(vHolder.Title.getText().toString()))film = fi;
                 }//for
+
                 Toast.makeText(context, "Film " + film.getTitel() + " wurde aufgerufen.", Toast.LENGTH_SHORT).show();
+                intent.putExtra("filmSelect", (Serializable) film);
+                intent.putExtra("kinoSelect", (Serializable) kino);
                 context.startActivity(intent);
             }
         });
