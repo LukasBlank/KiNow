@@ -12,6 +12,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import backend.classes.Film;
+import backend.classes.Kino;
+import backend.classes.Vorführung;
 
 public class MovieDetailScreen extends AppCompatActivity implements Serializable{
 
@@ -26,6 +28,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     TextView movieFSK;
     TextView movieDescription;
     TextView movieTrailer;
+    TextView movieRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -34,6 +37,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
 
 
         Film filmSelect = (Film) getIntent().getSerializableExtra("filmSelect");
+        Kino kinoSelect = (Kino) getIntent().getSerializableExtra("kinoSelect");
+        Vorführung thisVorfuehrung;
 
         movieTitle = findViewById(R.id.movieTitleDetail);
         movieTitle.setText(filmSelect.getTitel());
@@ -48,11 +53,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         }
         movieGenre.setText(genres);
 
-        movieLength = findViewById(R.id.duration);
-        movieLength.setText(""+filmSelect.getDauer());
-
-        movieLength = findViewById(R.id.rating);
-        movieLength.setText(filmSelect.getBewertung()+"/10 Sternen");
+        movieRating = findViewById(R.id.rating);
+        movieRating.setText(filmSelect.getBewertung()+"/10 Sternen");
 
         movieFSK = findViewById(R.id.fsk);
         movieFSK.setText("Ab "+filmSelect.getFsk()+" Jahren");
