@@ -44,11 +44,11 @@ public class DemoApplication {
       //Pfad muss angepasst werden ggf. in Java einfügen
 
       String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
+          new FileInputStream(url.getPath());//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -61,6 +61,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
+    sc.getSitze("1_1_11_1");
   }//main
 
   @RestController
@@ -70,29 +71,6 @@ public class DemoApplication {
     public String server (){
        return "Hallo.";
     }//lol
-
-    @RequestMapping(value = "/lukasTest")
-    public void lukasTest (){
-      Map<String, Object> data = new HashMap<>();
-      data.put("filmID",7);
-      data.put("titel","Ich war noch niemals in New York");
-      data.put("beschreibung","Für Lisa Wartberg (Heike Makatsch), erfolgsverwöhnte Fernsehmoderatorin und Single, steht ihre Show an erster Stelle. Doch dann verliert ihre Mutter Maria (Katharina Thalbach) nach einem Unfall ihr Gedächtnis, kommt ins Krankenhaus und kann sich nur noch an eines erinnern: Sie war noch niemals in New York! Kurzentschlossen flieht Maria und schmuggelt sich als blinder Passagier an Bord eines luxuriösen Kreuzfahrtschiffes. Gemeinsam mit ihrem Maskenbildner Fred (Michael Ostrowski) macht sich Lisa auf die Suche nach ihrer Mutter und spürt sie tatsächlich auf der \"MS Maximiliane\" auf. Doch bevor die beiden Maria wieder von Bord bringen können, legt der Ozeandampfer auch schon ab und die drei finden sich auf einer unfreiwilligen Reise über den Atlantik wieder. Lisa lernt an Bord Axel Staudach (Moritz Bleibtreu) und dessen Sohn Florian (Marlon Schramm) kennen. Axel ist so gar nicht Lisas Typ, doch durch eine Reihe unglücklicher Missgeschicke kommen sich die beiden schließlich näher... Mutter Maria trifft auf Eintänzer Otto (Uwe Ochsenknecht), der behauptet, eine gemeinsame Vergangenheit mit ihr zu haben - was Maria mangels Gedächtnis natürlich nicht überprüfen kann. Und Fred verliebt sich Hals über Kopf in den griechischen Bordzauberer Costa (Pasquale Aleardi). So verläuft die turbulente Schiffsreise - mit mehrmaligem Finden und Verlieren der Liebe und jeder Menge Überraschungen - nach New York.");
-      data.put("dauer",128);
-      data.put("fsk",0);
-      data.put("bewertung",5);
-      ArrayList<String> genres = new ArrayList<>();
-      genres.add("Komödie"); genres.add("Musical");
-      data.put("genres",genres);
-      ArrayList<String> regie = new ArrayList<>();
-      regie.add("Philipp Stölzl");
-      data.put("regie",regie);
-      ArrayList<String> darsteller = new ArrayList<>();
-      darsteller.add("Heike Makatsch"); darsteller.add("Moritz Bleibtreu"); darsteller.add("Katharina Thalbach");
-      darsteller.add("Uwe Ochsenknecht"); darsteller.add( "Michael Ostrowski"); darsteller.add("Pasquale Aleardi");
-      darsteller.add("Marlon Schramm"); darsteller.add("Mat Schuh");
-      data.put("darsteller",darsteller);
-      db.collection("Filme").document("7").set(data);
-    }//lukasTest
 
     @RequestMapping(value = "/getFilme")
     public ResponseEntity<Object> getFilme (@RequestHeader("kinoID") String SkinoID){
@@ -197,6 +175,64 @@ public class DemoApplication {
       }//catch
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//LogIn
+
+    @RequestMapping(value = "/getVor")
+    public ResponseEntity<Object> getVor(@RequestHeader("kinoID") String kinoID , @RequestHeader("filmID") String filmID){
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID).collection("spieltFilme").document(filmID).collection("Vorstellungen").get();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+          map.put(document.getId(),document.getData());
+        }//for
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getVor
+
+    @RequestMapping(value = "/getSitze")
+    public ResponseEntity<Object> getSitze(@RequestHeader("vorführungsID") String vorführungsID){
+      String kinoID = vorführungsID.substring(0,vorführungsID.indexOf('_'));
+      String filmID = vorführungsID.substring(vorführungsID.indexOf('_')+1);
+      filmID = filmID.substring(filmID.indexOf('_')+1);
+      filmID = filmID.substring(0,filmID.indexOf('_'));
+      //Zunächst die freien Sitze in die Map einfügen
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID)
+          .collection("spieltFilme").document(filmID)
+          .collection("Vorstellungen").document(vorführungsID)
+          .collection("FreieSitze").get();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+          String id = "F" + document.getId();
+          map.put(id,document.getData());
+        }//for
+
+        //Nun werden in die selbe Liste die belegten Sitze eingefügt, wenn sie denn vorhanden sind
+        query = db.collection("Kino").document(kinoID)
+            .collection("spieltFilme").document(filmID)
+            .collection("Vorstellungen").document(vorführungsID)
+            .collection("BelegteSitze").get();
+        querySnapshot = query.get();
+        documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+          String id = "B" + document.getId();
+          map.put(id,document.getData());
+        }//for
+
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getSitze
 
 
   }//Controller
