@@ -12,6 +12,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import backend.classes.Film;
+import backend.classes.Kino;
+import backend.classes.Vorführung;
+import backend.connections.Requests;
 
 public class MovieDetailScreen extends AppCompatActivity implements Serializable{
 
@@ -26,42 +29,45 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     TextView movieFSK;
     TextView movieDescription;
     TextView movieTrailer;
+    Film film;
+    Kino kino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail_screen);
 
+        film = (Film) getIntent().getSerializableExtra("filmSelect");
+        kino = (Kino) getIntent().getSerializableExtra("kinoSelect");
 
-        Film filmSelect = (Film) getIntent().getSerializableExtra("filmSelect");
+        Requests r = new Requests();
+        ArrayList<Vorführung> vorführungen = r.getVor(kino.getKinoID(),film.getFilmID());
 
         movieTitle = findViewById(R.id.movieTitleDetail);
-        movieTitle.setText(filmSelect.getTitel());
+        movieTitle.setText(film.getTitel());
 
         movieGenre = findViewById(R.id.genre);
         String genres = "";
-        for(int i=0;i<filmSelect.getGenres().size();i++){
-            genres = genres+filmSelect.getGenres().get(i);
-            if(i<filmSelect.getGenres().size()-1){
-                genres = genres+", ";
-            }
-        }
+        for(String g : film.getGenres()){
+            genres += g + ", ";
+        }//for
+        if (genres.length()>0)genres = genres.substring(0,genres.lastIndexOf(','));
         movieGenre.setText(genres);
 
         movieLength = findViewById(R.id.duration);
-        movieLength.setText(""+filmSelect.getDauer());
+        movieLength.setText(""+film.getDauer());
 
         movieLength = findViewById(R.id.rating);
-        movieLength.setText(filmSelect.getBewertung()+"/10 Sternen");
+        movieLength.setText(film.getBewertung()+"/10 Sternen");
 
         movieFSK = findViewById(R.id.fsk);
-        movieFSK.setText("Ab "+filmSelect.getFsk()+" Jahren");
+        movieFSK.setText("FSK "+film.getFsk());
 
         movieLength = findViewById(R.id.duration);
-        movieLength.setText(filmSelect.getDauer()+" Minuten");
+        movieLength.setText(film.getDauer()+" Min");
 
         movieDescription = findViewById(R.id.movieDescDetail);
-        movieDescription.setText(filmSelect.getBeschreibung());
+        movieDescription.setText(film.getBeschreibung());
 
         timeOne = findViewById(R.id.time_one);
         timeTwo = findViewById(R.id.time_two);

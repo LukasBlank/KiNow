@@ -9,15 +9,14 @@ import java.util.Map;
 import backend.classes.Film;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
+import backend.classes.Vorführung;
 import okhttp3.Request;
 
 public class Requests {
 
     private String ausgabe;
-    Object o;
 
     public Requests (){
-        o = null;
         ausgabe = "";
     }//K
 
@@ -186,6 +185,52 @@ public class Requests {
             return false;
         }//catch
     }//register
+
+    public ArrayList<Vorführung> getVor (long kinoID, long filmID){
+        ausgabe = "";
+        ArrayList<backend.classes.Vorführung> vorführungen  = new ArrayList<Vorführung>();
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/getVor";
+        String kID = String.valueOf(kinoID);
+        String fID = String.valueOf(filmID);
+        Request request = new Request.Builder()
+                .addHeader("kinoID",kID)
+                .addHeader("filmID",fID)
+                .url(url).build();
+        tr.setRequest(request);
+        tr.start();
+        try {
+            tr.join();
+            long anfang = System.currentTimeMillis();
+            long ende = anfang;
+            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+            do {
+                ende = System.currentTimeMillis();
+            } while (!tr.isFertig() && ende-anfang<10000);
+            if (!tr.isFertig()){
+                System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                return null;
+            }//then
+            else {
+                ausgabe = tr.getErg();
+                //gesamte Ausgabe zu einer Map parsen
+                Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                for (Map.Entry<String,Object> entry : map.entrySet()){
+                    Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                    Vorführung v = new Vorführung();
+                    for (Map.Entry<String,Object> e : data.entrySet()){
+                        v.set(e.getKey(),e.getValue());
+                    }//for
+                    vorführungen.add(v);
+                }//for
+                return vorführungen;
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }//catch
+    }//getVor
 
 
 }//class

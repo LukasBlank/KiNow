@@ -105,7 +105,7 @@ public class MoviesFragment extends Fragment {
             alt = kino.getKinoID();
             Requests request = new Requests();
             filme = request.getFilme(kino.getKinoID());
-            mAdapter = new MovieAdapter(filme, getActivity());
+            mAdapter = new MovieAdapter(filme, kino , getActivity());
         }//then
 
         movieList.setAdapter(mAdapter);
