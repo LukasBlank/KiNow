@@ -175,7 +175,7 @@ public class Vorführung implements Serializable {
       break;
       case "zeitpunkt": this.zeitpunkt = (String) o;
       break;
-      case "saalnummer": this.saalnummer = (String) saalnummer;
+      case "saalnummer": this.saalnummer = (String) o;
       break;
       case "grundpreis": this.grundpreis = Double.parseDouble(o.toString());
       break;

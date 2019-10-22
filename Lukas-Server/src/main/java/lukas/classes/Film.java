@@ -1,12 +1,14 @@
 package lukas.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import lukas.classes.Vorführung;
 
 
-public class Film {
+public class Film implements Serializable {
   private long filmID,fsk,dauer,bewertung;
-  private String titel,beschreibung,link;
+  private String titel,beschreibung,link,bildLink;
   private ArrayList<String> genres;
   private ArrayList<String> darsteller;
   private ArrayList<String> regie;
@@ -14,7 +16,7 @@ public class Film {
 
   public Film() {}
 
-  public Film(long filmID, String titel, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie, ArrayList<Vorführung> vorführungen,String link){
+  public Film(long filmID, String titel,String bildLink, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie, ArrayList<Vorführung> vorführungen,String link){
     this.filmID = filmID;
     this.titel = titel;
     this.beschreibung = beschreibung;
@@ -26,6 +28,7 @@ public class Film {
     this.regie = regie;
     this.vorführungen = vorführungen;
     this.link = link;
+    this.bildLink = bildLink;
   }//K
 
   public long getFilmID() {
@@ -74,6 +77,14 @@ public class Film {
 
   public void setBeschreibung(String beschreibung) {
     this.beschreibung = beschreibung;
+  }
+
+  public String getBildLink() {
+    return bildLink;
+  }
+
+  public void setBildLink(String bildLink) {
+    this.bildLink = bildLink;
   }
 
   public ArrayList<String> getGenres() {
@@ -160,7 +171,8 @@ public class Film {
       case "bewertung": this.bewertung = Long.parseLong(o.toString());
         break;
       case "link": this.link = (String)o;
-      break;
+        break;
+      case "bildLink": this.bildLink = (String) bildLink;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set
