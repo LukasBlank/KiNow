@@ -82,7 +82,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         timeThree = findViewById(R.id.time_three);
         btnBuchen = findViewById(R.id.button);
 
-        if (vorführungen.size()==3){
+        if (vorführungen!=null){
             timeOne.setText(vorführungen.get(0).getZeit());
             timeTwo.setText(vorführungen.get(1).getZeit());
             timeThree.setText(vorführungen.get(2).getZeit());
