@@ -12,7 +12,7 @@ public class WerbungTest {
 
     @Test
     public void getWerbungID() {
-        Assert.assertEquals(1,testWerbung.getWerbungID());
+        Assert.assertEquals("1",testWerbung.getWerbungID());
     }
 
     @Test

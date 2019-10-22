@@ -103,7 +103,7 @@ public class BestellungTest {
         //die if.Bedingung wird erfüllt
         Buchung testbuchung3 = new Buchung(1,1,"vorführungsID","_BuchungID_",null,null);
         assertTrue(testbuchung3.getNutzerID().equals(testbuchung3.getNutzerID()));
-        
+
     }
 
     @Test

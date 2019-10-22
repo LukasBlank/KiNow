@@ -25,8 +25,8 @@ public class PreisvariationTest {
 
     @Test
     public void setWert(){
-        testPreisvariation.setWert(000);
-        assertTrue(testPreisvariation.getVariationID() == 000);
+        testPreisvariation.setWert(333);
+        Assert.assertEquals(333,testPreisvariation.getWert());
     }
 
     @Test
