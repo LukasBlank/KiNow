@@ -90,7 +90,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        guest = view.findViewById(R.id.gast_btn);
+        guest = view.findViewById(R.id.guest_btn);
         guest.setOnClickListener(this);
         registerButton = view.findViewById(R.id.register_btn);
         registerButton.setOnClickListener(this);
@@ -161,7 +161,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 Toast.makeText(getActivity(), "Forgot Pwd - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.gast_btn:
+            case R.id.guest_btn:
                 Nutzer n =  new Nutzer();
                 n.setNutzerID(0);
                 Toast.makeText(getContext(), "Als Gast angemeldet.", Toast.LENGTH_SHORT).show();
