@@ -1,9 +1,10 @@
 package backend.classes;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class Nutzer {
+public class Nutzer implements Serializable {
 
   private long nutzerID;
   private String email,vorname,nachname,geschlecht,geburtstag;

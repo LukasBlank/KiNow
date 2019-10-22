@@ -233,7 +233,7 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getSitze
 
-    
+
 
   }//Controller
 }// class

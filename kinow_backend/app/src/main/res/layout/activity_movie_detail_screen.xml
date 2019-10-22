@@ -1,213 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@color/colorPrimaryDark">
 
-    <ImageView
-        android:id="@+id/movieImageDetail"
-        android:layout_width="115dp"
-        android:layout_height="153dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/contentDescription"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/little_movie_image" />
-
-    <TextView
-        android:id="@+id/movieTitleDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/movieTitle"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <GridLayout
-        android:id="@+id/gridLay_times"
-
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"
-        android:columnCount="3"
-        android:rowCount="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/movieImageDetail"
+            android:layout_width="115dp"
+            android:layout_height="153dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/contentDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/little_movie_image" />
 
         <TextView
-            android:id="@+id/time_one"
+            android:id="@+id/movieTitleDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="@drawable/button_border"
-            android:text="@string/playtime"
+            android:layout_marginTop="32dp"
+            android:text="@string/movieTitle"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.052"
+            app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <GridLayout
+            android:id="@+id/gridLay_times"
+
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="15dp"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:rowCount="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieDescDetail">
+
+            <TextView
+                android:id="@+id/time_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:background="@drawable/button_border"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="5dp"
+                android:text="@string/playtime"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/time_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_border"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="5dp"
+                android:text="@string/playtime"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/time_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:background="@drawable/button_border"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="5dp"
+                android:text="@string/playtime"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:visibility="invisible" />
+
+        </GridLayout>
 
         <TextView
-            android:id="@+id/time_two"
-            android:layout_width="wrap_content"
+            android:id="@+id/movieDescDetail"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:background="@drawable/button_border"
-            android:text="@string/playtime"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/movieLongDescription"
+            android:textColor="@color/grey"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline4" />
 
         <TextView
-            android:id="@+id/time_three"
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="132dp"
+            android:text="@string/duration"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+        <TextView
+            android:id="@+id/fsk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginLeft="39dp"
+            android:layout_marginTop="132dp"
+            android:layout_marginEnd="104dp"
+            android:layout_marginRight="104dp"
+            android:text="@string/fsk"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toEndOf="@+id/duration"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginLeft="39dp"
+            android:layout_marginTop="138dp"
+            android:layout_marginEnd="104dp"
+            android:layout_marginRight="104dp"
+            android:text="@string/rating"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toEndOf="@+id/genre"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:text="@string/genre"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toTopOf="@+id/duration"
+            app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
+            app:layout_constraintTop_toBottomOf="@+id/movieTitleDetail"
+            app:layout_constraintVertical_bias="0.915" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="32dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="216dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/watch_trailer_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="108dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/button_border"
-            android:text="@string/playtime"
+            android:onClick="watchTrailer"
+            app:backgroundTint="@color/colorRed"
+            app:fabSize="mini"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:srcCompat="@drawable/play_arrow" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:background="@color/red"
+            android:onClick="bookMovie"
+            android:text="@string/book_movie"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gridLay_times" />
 
-    </GridLayout>
-
-    <TextView
-        android:id="@+id/movieDescDetail"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginStart="24dp"
-        android:text="@string/movieLongDescription"
-        android:textColor="@color/grey"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLay_times" />
-
-    <TextView
-        android:id="@+id/duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="132dp"
-        android:text="@string/duration"
-        android:textColor="@color/grey"
-        app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <TextView
-        android:id="@+id/fsk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="104dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginRight="104dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="132dp"
-        android:text="@string/fsk"
-        android:textColor="@color/grey"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toEndOf="@+id/duration"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <TextView
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="104dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginRight="104dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="138dp"
-        android:text="@string/rating"
-        android:textColor="@color/grey"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toEndOf="@+id/genre"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:text="@string/genre"
-        android:textColor="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/duration"
-        app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
-        app:layout_constraintTop_toBottomOf="@+id/movieTitleDetail"
-        app:layout_constraintVertical_bias="0.915" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="24dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="32dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="216dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="24dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/watch_trailer_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="watchTrailer"
-        app:backgroundTint="@color/colorRed"
-        app:fabSize="mini"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:srcCompat="@drawable/play_arrow" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/book_movie"
-        android:background="@color/red"
-        android:textColor="@color/white"
-        android:onClick="bookMovie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieDescDetail" />
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

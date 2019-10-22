@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import backend.classes.Film;
 import backend.classes.Kino;
+import backend.classes.Nutzer;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> implements Serializable {
 
@@ -27,11 +28,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     Kino thisKino;
     Context context;
     Kino kino;
+    Nutzer nutzer;
 
-    public MovieAdapter(ArrayList<Film> filme , Kino kino , Context context) {
+    public MovieAdapter(ArrayList<Film> filme , Kino kino , Nutzer nutzer , Context context) {
         this.filme = filme;
         this.context = context;
         this.kino = kino;
+        this.nutzer = nutzer;
 }//K
 
     @NonNull
@@ -49,7 +52,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 for (Film fi : filme){
                     if (fi.getTitel().equals(vHolder.Title.getText().toString()))film = fi;
                 }//for
-                Toast.makeText(context, "Film " + film.getTitel() + " wurde aufgerufen.", Toast.LENGTH_SHORT).show();
+                intent.putExtra("nutzer", (Serializable) nutzer);
                 intent.putExtra("filmSelect", (Serializable) film);
                 intent.putExtra("kinoSelect", (Serializable) kino);
                 context.startActivity(intent);
