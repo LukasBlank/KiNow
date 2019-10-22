@@ -138,9 +138,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 if(check_fields) {
                     Requests r = new Requests();
                     Nutzer n = r.LogIn(email_field_input,pwd_field_input);
-                    if (n==null) Toast.makeText(getContext(), "Anmeldung fehlgeschlagen.", Toast.LENGTH_SHORT).show();
+                    if (n==null) Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
                     else {
-                        Toast.makeText(getContext(), "Als " + n.getVorname() + " " + n.getNachname() + " eingeloggt.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Logged in as " + n.getVorname() + " " + n.getNachname() + ".", Toast.LENGTH_SHORT).show();
                         onLoginListener = (OnLoginListener) getContext();
                         onLoginListener.onLogin(n);
                     }//else
@@ -164,7 +164,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
             case R.id.guest_btn:
                 Nutzer n =  new Nutzer();
                 n.setNutzerID(0);
-                Toast.makeText(getContext(), "Als Gast angemeldet.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Logged in as guest.", Toast.LENGTH_SHORT).show();
                 onLoginListener = (OnLoginListener) getContext();
                 onLoginListener.onLogin(n);
                 break;
