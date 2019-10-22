@@ -37,7 +37,6 @@ public class SmallCinemaHall extends AppCompatActivity {
         vorführung = (Vorführung) getIntent().getSerializableExtra("vorführung");
 
         Requests request = new Requests();
-        //vorerst ignorieren
         freieSitze = request.getFreieSitze(vorführung.getVorführungsID());
         //belegteSitze = request.getBelegteSitze(vorführung.getVorführungsID());
     }//onCreate
