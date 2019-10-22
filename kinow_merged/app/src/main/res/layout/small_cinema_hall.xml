@@ -22,44 +22,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/registration_linLay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/violet"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/registration_linLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/violet"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/movie_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="22sp"
+                    app:fontFamily="sans-serif-medium"
+                    android:text="@string/screen"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
+                android:id="@+id/small_hall_square_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/square"
+                android:layout_below="@+id/registration_linLay"
                 android:contentDescription="@string/contentDescription"
-                android:src="@drawable/movie_icon"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:textSize="22sp"
-                app:fontFamily="sans-serif-medium"
-                android:text="@string/screen"
-                android:textColor="@color/white"/>
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/small_hall_square_img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/square"
-            android:layout_below="@+id/registration_linLay"
-            android:contentDescription="@string/contentDescription"
-            android:layout_centerHorizontal="true"
-            android:tint="@color/violet"
-            android:layout_marginTop="-10dp"
-            android:rotation="45"/>
+                android:layout_centerHorizontal="true"
+                android:tint="@color/violet"
+                android:layout_marginTop="-10dp"
+                android:rotation="45"/>
 
             <GridLayout
                 android:id="@+id/small_seat_gridLay"

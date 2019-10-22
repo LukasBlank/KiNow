@@ -35,10 +35,12 @@ public class Bestellung {
 
   public void setBuchungen(ArrayList<Buchung> buchungen) {
     this.buchungen = buchungen;
+    setGesamtpreis();
   }
 
   public void setGesamtpreis (){
     if (buchungen!=null){
+      gesamtpreis = 0;
       for (Buchung b : buchungen){
         gesamtpreis += b.getBuchungspreis();
       }//for
@@ -47,10 +49,12 @@ public class Bestellung {
 
   public void addBuchung (Buchung buchung){
     if (!buchungen.contains(buchung))buchungen.add(buchung);
+    setGesamtpreis();
   }//addBuchung
 
   public void removeBuchung (Buchung buchung){
     if (buchungen.contains(buchung))buchungen.remove(buchung);
+    setGesamtpreis();
   }//buchung
 
   public String getNutzerID (){

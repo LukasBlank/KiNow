@@ -1,8 +1,10 @@
 package backend.classes;
 
+import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
-public class Vorführung {
+public class Vorführung implements Serializable {
 
   private long grunddauer,gesamtdauer;
   private double grundpreis,gesamtpreis;
