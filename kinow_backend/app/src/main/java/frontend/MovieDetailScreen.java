@@ -34,8 +34,9 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     TextView movieTrailer;
     Film film;
     Kino kino;
-    Vorführung vorführung;
     Nutzer nutzer;
+    ArrayList<Vorführung> vorführungen;
+    Vorführung vorführung;
     TextView movieRating;
     Button btnBuchen;
 
@@ -50,8 +51,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         nutzer = (Nutzer) getIntent().getSerializableExtra("nutzer");
 
         Requests r = new Requests();
-        ArrayList<Vorführung> vorführungen = r.getVor(kino.getKinoID(),film.getFilmID());
-        //vorführung = vorführungen.get(1);
+        vorführungen = r.getVor(kino.getKinoID(),film.getFilmID());
+
 
         movieTitle = findViewById(R.id.movieTitleDetail);
         movieTitle.setText(film.getTitel());
@@ -81,6 +82,12 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         timeThree = findViewById(R.id.time_three);
         btnBuchen = findViewById(R.id.button);
 
+        if (vorführungen.size()==3){
+            timeOne.setText(vorführungen.get(0).getZeit());
+            timeTwo.setText(vorführungen.get(1).getZeit());
+            timeThree.setText(vorführungen.get(2).getZeit());
+        }//then
+
         if (kino.getKinoID()!=0){
             timeOne.setVisibility(View.VISIBLE);
             timeTwo.setVisibility(View.VISIBLE);
@@ -106,6 +113,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     timeTwo.setBackground(getResources().getDrawable(R.drawable.button_border));
                     timeThree.setBackground(getResources().getDrawable(R.drawable.button_border));
                     btnBuchen.setVisibility(View.VISIBLE);
+                    vorführung = vorführungen.get(0);
                     break;
 
                 case R.id.time_two:
@@ -113,6 +121,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     timeTwo.setBackground(getResources().getDrawable(R.drawable.button_filled));
                     timeThree.setBackground(getResources().getDrawable(R.drawable.button_border));
                     btnBuchen.setVisibility(View.VISIBLE);
+                    vorführung = vorführungen.get(0);
                     break;
 
                 case R.id.time_three:
@@ -120,12 +129,16 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     timeTwo.setBackground(getResources().getDrawable(R.drawable.button_border));
                     timeThree.setBackground(getResources().getDrawable(R.drawable.button_filled));
                     btnBuchen.setVisibility(View.VISIBLE);
+                    vorführung = vorführungen.get(0);
                     break;
 
                 case R.id.button:
                     if (nutzer.getNutzerID()==-1) {
                         Toast.makeText(getBaseContext(), "Bitte zuerst anmelden.", Toast.LENGTH_SHORT).show();
                     }//then
+                    else if(vorführung==null){
+                        Toast.makeText(getBaseContext(), "Bitte Vorführung auswählen.", Toast.LENGTH_SHORT).show();
+                    }
                     else {
                         Intent intent = new Intent(MovieDetailScreen.this, SmallCinemaHall.class);
                         intent.putExtra("nutzer",nutzer);
@@ -142,9 +155,5 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         intent.putExtra("link",film.getLink());
         startActivity(intent);
     }//watchTrailer
-
-    public void bookMovie(View view) {
-        ;
-    }//bookMovie
 
 }//class

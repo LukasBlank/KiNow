@@ -243,7 +243,10 @@ public class DemoApplication {
         e.printStackTrace();
       }//catch
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
-    }//getFrei
+    }//getBelegt
+
+    //@RequestMapping(value = "/buchen")
+
 
   }//Controller
 }// class
