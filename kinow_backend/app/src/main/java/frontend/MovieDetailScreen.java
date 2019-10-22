@@ -34,6 +34,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     TextView movieTrailer;
     Film film;
     Kino kino;
+    Vorführung vorführung;
     Nutzer nutzer;
     TextView movieRating;
     Button btnBuchen;
@@ -50,6 +51,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
 
         Requests r = new Requests();
         ArrayList<Vorführung> vorführungen = r.getVor(kino.getKinoID(),film.getFilmID());
+        vorführung = vorführungen.get(1);
 
         movieTitle = findViewById(R.id.movieTitleDetail);
         movieTitle.setText(film.getTitel());
@@ -126,6 +128,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     }//then
                     else {
                         Intent intent = new Intent(MovieDetailScreen.this, SmallCinemaHall.class);
+                        intent.putExtra("nutzer",nutzer);
+                        intent.putExtra("vorführung",vorführung);
                         startActivity(intent);
                     }//else
                     break;

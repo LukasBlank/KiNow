@@ -44,7 +44,7 @@ public class DemoApplication {
       //Pfad muss angepasst werden ggf. in Java einfügen
 
       String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
@@ -193,8 +193,8 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getVor
 
-    @RequestMapping(value = "/getSitze")
-    public ResponseEntity<Object> getSitze(@RequestHeader("vorführungsID") String vorführungsID){
+    @RequestMapping(value = "/getFrei")
+    public ResponseEntity<Object> getFrei(@RequestHeader("vorführungsID") String vorführungsID){
       String kinoID = vorführungsID.substring(0,vorführungsID.indexOf('_'));
       String filmID = vorführungsID.substring(vorführungsID.indexOf('_')+1);
       filmID = filmID.substring(filmID.indexOf('_')+1);
@@ -209,31 +209,41 @@ public class DemoApplication {
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
         for (DocumentSnapshot document : documents){
-          String id = "F" + document.getId();
-          map.put(id,document.getData());
+          map.put(document.getId(),document.getData());
         }//for
-
-        //Nun werden in die selbe Liste die belegten Sitze eingefügt, wenn sie denn vorhanden sind
-        query = db.collection("Kino").document(kinoID)
-            .collection("spieltFilme").document(filmID)
-            .collection("Vorstellungen").document(vorführungsID)
-            .collection("BelegteSitze").get();
-        querySnapshot = query.get();
-        documents = querySnapshot.getDocuments();
-        for (DocumentSnapshot document : documents){
-          String id = "B" + document.getId();
-          map.put(id,document.getData());
-        }//for
-
       } catch (InterruptedException e) {
         e.printStackTrace();
       } catch (ExecutionException e) {
         e.printStackTrace();
       }//catch
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
-    }//getSitze
+    }//getFrei
 
-
+    @RequestMapping(value = "/getBelegt")
+    public ResponseEntity<Object> getSitze(@RequestHeader("vorführungsID") String vorführungsID){
+      String kinoID = vorführungsID.substring(0,vorführungsID.indexOf('_'));
+      String filmID = vorführungsID.substring(vorführungsID.indexOf('_')+1);
+      filmID = filmID.substring(filmID.indexOf('_')+1);
+      filmID = filmID.substring(0,filmID.indexOf('_'));
+      //Zunächst die freien Sitze in die Map einfügen
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID)
+          .collection("spieltFilme").document(filmID)
+          .collection("Vorstellungen").document(vorführungsID)
+          .collection("BelegteSitze").get();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+          map.put(document.getId(),document.getData());
+        }//for
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getFrei
 
   }//Controller
 }// class
