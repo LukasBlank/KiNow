@@ -37,8 +37,9 @@ public class SmallCinemaHall extends AppCompatActivity {
         vorführung = (Vorführung) getIntent().getSerializableExtra("vorführung");
 
         Requests request = new Requests();
+        //vorerst ignorieren
         freieSitze = request.getFreieSitze(vorführung.getVorführungsID());
-        belegteSitze = request.getBelegteSitze(vorführung.getVorführungsID());
+        //belegteSitze = request.getBelegteSitze(vorführung.getVorführungsID());
     }//onCreate
 
 
@@ -50,7 +51,7 @@ public class SmallCinemaHall extends AppCompatActivity {
         // ++ Sitze onClick: Farbe ändern, wenn nochmals geklickt wird -> Farbe wieder entfernen
         // ++ Besetzte Sitze anzeigen
 
-    }
+    }//bookSeats
 
     public void onBtnClick(View view) {
 

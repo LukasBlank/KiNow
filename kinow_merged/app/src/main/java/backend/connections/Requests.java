@@ -189,7 +189,7 @@ public class Requests {
 
     public ArrayList<Vorführung> getVor (long kinoID, long filmID){
         ausgabe = "";
-        if (kinoID==0)return null;
+        if (kinoID==0 || filmID==0)return null;
         else {
             ArrayList<backend.classes.Vorführung> vorführungen  = new ArrayList<Vorführung>();
             ThreadRequest tr = new ThreadRequest();

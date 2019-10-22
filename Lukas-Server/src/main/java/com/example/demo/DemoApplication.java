@@ -48,7 +48,7 @@ public class DemoApplication {
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
+          new FileInputStream(url.getPath());//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -247,6 +247,33 @@ public class DemoApplication {
 
     //@RequestMapping(value = "/buchen")
 
+    /**
+    @RequestMapping(value = "/test")
+    public void test (){
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").document("1").collection("HatSaele").document("1_1").collection("HatSitze").get();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        Map<String,Object> data;
+        DocumentReference docRef = db.collection("Kino").document("1").collection("spieltFilme").document("5")
+            .collection("Vorstellungen").document("1_1_5_1");
+        for (DocumentSnapshot document : documents){
+          map.put(document.getId(),document.getData());
+        }//for
+        for (Map.Entry<String,Map<String,Object>> entry : map.entrySet()){
+          data = entry.getValue();
+          docRef.collection("FreieSitze").document(entry.getKey()).set(data);
+        }//for
+
+
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+    }//test
+    **/
 
   }//Controller
 }// class

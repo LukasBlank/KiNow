@@ -82,13 +82,15 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         timeThree = findViewById(R.id.time_three);
         btnBuchen = findViewById(R.id.button);
 
-        if (vorführungen.size()==3){
-            timeOne.setText(vorführungen.get(0).getZeit());
-            timeTwo.setText(vorführungen.get(1).getZeit());
-            timeThree.setText(vorführungen.get(2).getZeit());
+        if (vorführungen!=null){
+            if (vorführungen.size()>2){
+                timeOne.setText(vorführungen.get(0).getZeit());
+                timeTwo.setText(vorführungen.get(1).getZeit());
+                timeThree.setText(vorführungen.get(2).getZeit());
+            }//then
         }//then
 
-        if (kino.getKinoID()!=0){
+        if (kino.getKinoID()!=0 && vorführungen!=null){
             timeOne.setVisibility(View.VISIBLE);
             timeTwo.setVisibility(View.VISIBLE);
             timeThree.setVisibility(View.VISIBLE);
@@ -121,7 +123,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     timeTwo.setBackground(getResources().getDrawable(R.drawable.button_filled));
                     timeThree.setBackground(getResources().getDrawable(R.drawable.button_border));
                     btnBuchen.setVisibility(View.VISIBLE);
-                    vorführung = vorführungen.get(0);
+                    vorführung = vorführungen.get(1);
                     break;
 
                 case R.id.time_three:
@@ -129,7 +131,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     timeTwo.setBackground(getResources().getDrawable(R.drawable.button_border));
                     timeThree.setBackground(getResources().getDrawable(R.drawable.button_filled));
                     btnBuchen.setVisibility(View.VISIBLE);
-                    vorführung = vorführungen.get(0);
+                    vorführung = vorführungen.get(2);
                     break;
 
                 case R.id.button:
