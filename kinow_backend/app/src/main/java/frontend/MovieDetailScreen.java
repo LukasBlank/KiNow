@@ -51,7 +51,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
 
         Requests r = new Requests();
         ArrayList<Vorführung> vorführungen = r.getVor(kino.getKinoID(),film.getFilmID());
-        vorführung = vorführungen.get(1);
+        //vorführung = vorführungen.get(1);
 
         movieTitle = findViewById(R.id.movieTitleDetail);
         movieTitle.setText(film.getTitel());
