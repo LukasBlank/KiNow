@@ -62,7 +62,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.addVorstellungen(11);
 
   }//main
 
@@ -98,43 +97,61 @@ public class DemoApplication {
 
      **/
 
-    public void julie (){
-        Map<String, Object> docData = new HashMap<>();
-        docData.put("test", 1);
-        db.collection("Test").document("test").set(docData);
-    }
-
     //Not working properly
-    public void freieSitze(int kino, int saal, int film, int vorstellungen){
+    public void freieSitze(int kino, int film,  String vorstellung1, String vorstellung2, String vorstellung3){
+        Map <String, Object> docData = new HashMap<>();
+
         ApiFuture <QuerySnapshot> docRef = db.collection("Kino").document(""+kino)
-                .collection("HatSaele").document(kino + "_" + saal)
+                .collection("HatSaele").document(kino + "_1")
                 .collection("HatSitze").get();
         System.out.println(docRef);
 
-        int anzVor = vorstellungen;
+        String [] vorstellungen = {
+                vorstellung1, vorstellung2, vorstellung3
+        };
+        System.out.println(vorstellungen[0] + " ---- " + vorstellungen [1] + " --- " + vorstellungen [2]);
 
         try {
 
             List<QueryDocumentSnapshot> documents = docRef.get().getDocuments();
-            System.out.println(documents);
 
-            for (int k = 1; k <= anzVor; k++) {
+            for (int k = 0; k <= 2; k++) {
                 System.out.println("CHECKPOINT 2");
-
                 for (QueryDocumentSnapshot document : documents) {
-                    System.out.println("CHECKPOINT 3: -------> " + anzVor);
-                    System.out.println(document.getId() + " => " + document.getData());
+                   // System.out.println(document.getId() + " => " + document.getData());
+
+                    String [] sitzname = document.getId().split("_");
+
+                    System.out.println("__________________________________");
+                    System.out.println("SitzID: " + vorstellungen[k] + "_" + sitzname[2]);
 
                     db.collection("Kino").document("" + kino)
                             .collection("spieltFilme").document("" + film)
-                            .collection("Vorstellungen").document("3_3_12_1")
-                            .collection("FreieSitze").document("" + document.getId()).update(document.getData());
-
-                    System.out.println("CHECKPOINT 4: -------> " + anzVor);
-                    System.out.println(document.getId() + " => " + document.getData());
+                            .collection("Vorstellungen").document("" + vorstellungen[k])
+                            .collection("FreieSitze").document(vorstellungen[k] + "_" + sitzname[2]).set(document.getData());
 
                 }
             }
+
+            for (int k = 0; k <= 2; k++) {
+                System.out.println("CHECKPOINT 2");
+                for (QueryDocumentSnapshot document : documents) {
+                    // System.out.println(document.getId() + " => " + document.getData());
+
+                    String [] sitzname = document.getId().split("_");
+
+                    docData.put("sitzID", vorstellungen[k] + "_" + sitzname[2]);
+
+                    System.out.println("__________________________________");
+                    System.out.println("SitzID: " + vorstellungen[k] + "_" + sitzname[2]);
+
+                    db.collection("Kino").document(""+kino)
+                            .collection("spieltFilme").document(""+film)
+                            .collection("Vorstellungen").document(""+vorstellungen[k])
+                            .collection("FreieSitze").document(vorstellungen[k] + "_" + sitzname[2]).update(docData);
+                }
+            }
+
         } catch (InterruptedException e){
             e.printStackTrace();
         } catch (ExecutionException e){
@@ -659,7 +676,7 @@ public class DemoApplication {
 
     //Fügt zu jedem Film Vorstellungen hinzu -> Muss zwar immer individuell angepasst werden
     @RequestMapping (value = "/addVorstellungen")
-    public void addVorstellungen(int film) {
+    public void addVorstellungen(int kino, int film) {
         //Vorstellungen Kino 1
         Map <String, Object> vorstellung1 = new HashMap<>();
         Map <String, Object> vorstellung2 = new HashMap<>();
@@ -674,64 +691,151 @@ public class DemoApplication {
 
         if(film == 1){
 
+            dauer = 170;
+
+            if (kino == 3){
+                saal1 = "3_1"; vorführung1 = "3_1_1_1"; zeit1 = "22:00";
+                saal2 = "3_3"; vorführung2 = "3_3_1_2"; zeit2 = "21:30";
+                saal3 = "3_4"; vorführung3 = "3_4_1_3"; zeit3 = "20:30";
+            }
+
         } else if (film == 2){
 
+            dauer = 122;
+
+             if (kino == 3){
+                saal1 = "3_1"; vorführung1 = "3_1_2_1"; zeit1 = "10:30";
+                saal2 = "3_2"; vorführung2 = "3_2_2_2"; zeit2 = "09:30";
+                saal3 = "3_4"; vorführung3 = "3_4_2_3"; zeit3 = "14:30";
+            }
+
         } else if (film == 3){
+
+            dauer = 122;
+
+            if (kino == 2){
+                saal1 = "2_1"; vorführung1 = "2_1_3_1"; zeit1 = "09:00";
+                saal2 = "2_2"; vorführung2 = "2_2_3_2"; zeit2 = "12:00";
+                saal3 = "2_3"; vorführung3 = "2_3_3_3"; zeit3 = "09:30";
+            } else if (kino == 3){
+                saal1 = "3_2"; vorführung1 = "3_2_3_1"; zeit1 = "12:30";
+                saal2 = "3_3"; vorführung2 = "3_3_3_2"; zeit2 = "09:00";
+                saal3 = "3_4"; vorführung3 = "3_4_3_3"; zeit3 = "08:30";
+            }
 
         } else if (film == 4){
 
             dauer = 119;
 
-            saal1 = "1_1"; vorführung1 = "1_1_4_1"; zeit1 = "13:30";
-            saal2 = "1_2"; vorführung2 = "1_2_4_2"; zeit2 = "16:00";
-            saal3 = "1_4"; vorführung3 = "1_4_4_3"; zeit3 = "18:00";
+            if(kino == 1){
+                saal1 = "1_1"; vorführung1 = "1_1_4_1"; zeit1 = "13:30";
+                saal2 = "1_2"; vorführung2 = "1_2_4_2"; zeit2 = "16:00";
+                saal3 = "1_4"; vorführung3 = "1_4_4_3"; zeit3 = "18:00";
+            }
 
         } else if (film == 5){
 
             dauer = 91;
 
-            saal1 = "1_1"; vorführung1 = "1_1_5_1"; zeit1 = "10:00";
-            saal2 = "1_4"; vorführung2 = "1_4_5_2"; zeit2 = "11:00";
-            saal3 = "1_3"; vorführung3 = "1_3_5_3"; zeit3 = "18:30";
+            if (kino == 1){
+                saal1 = "1_1"; vorführung1 = "1_1_5_1"; zeit1 = "10:00";
+                saal2 = "1_4"; vorführung2 = "1_4_5_2"; zeit2 = "11:00";
+                saal3 = "1_3"; vorführung3 = "1_3_5_3"; zeit3 = "18:30";
+            } else if (kino == 2){
+                saal1 = "2_1"; vorführung1 = "2_1_5_1"; zeit1 = "12:00";
+                saal2 = "2_3"; vorführung2 = "2_3_5_2"; zeit2 = "12:30";
+                saal3 = "2_4"; vorführung3 = "2_4_5_3"; zeit3 = "10:00";
+            }
 
         } else if (film == 6){
+
+            dauer = 97;
+
+            if (kino == 2){
+                saal1 = "2_1"; vorführung1 = "2_1_6_1"; zeit1 = "15:00";
+                saal2 = "2_2"; vorführung2 = "2_2_6_2"; zeit2 = "09:30";
+                saal3 = "2_4"; vorführung3 = "2_4_6_3"; zeit3 = "13:00";
+            } else if (kino == 3){
+                saal1 = "3_1"; vorführung1 = "3_1_6_1"; zeit1 = "17:00";
+                saal2 = "3_3"; vorführung2 = "3_3_6_2"; zeit2 = "15:00";
+                saal3 = "3_4"; vorführung3 = "3_4_6_3"; zeit3 = "12:00";
+            }
 
         } else if (film == 7){
 
             dauer = 128;
 
-            saal1 = "1_3"; vorführung1 = "1_3_7_1"; zeit1 = "08:30";
-            saal2 = "1_2"; vorführung2 = "1_2_7_2"; zeit2 = "13:30";
-            saal3 = "1_1"; vorführung3 = "1_1_7_3"; zeit3 = "20:00";
+            if (kino == 1){
+                saal1 = "1_3"; vorführung1 = "1_3_7_1"; zeit1 = "08:30";
+                saal2 = "1_2"; vorführung2 = "1_2_7_2"; zeit2 = "13:30";
+                saal3 = "1_1"; vorführung3 = "1_1_7_3"; zeit3 = "20:00";
+            } else if (kino == 3){
+                saal1 = "3_1"; vorführung1 = "3_1_7_1"; zeit1 = "14:00";
+                saal2 = "3_2"; vorführung2 = "3_2_7_2"; zeit2 = "19:00";
+                saal3 = "3_4"; vorführung3 = "3_4_7_3"; zeit3 = "17:30";
+            }
 
         } else if (film == 8){
 
             dauer = 117;
 
-            saal1 = "1_2"; vorführung1 = "1_2_8_1"; zeit1 = "9:30";
-            saal2 = "1_3"; vorführung2 = "1_3_8_2"; zeit2 = "12:00";
-            saal3 = "1_4"; vorführung3 = "1_4_8_3"; zeit3 = "08:00";
+            if (kino == 1){
+                saal1 = "1_2"; vorführung1 = "1_2_8_1"; zeit1 = "9:30";
+                saal2 = "1_3"; vorführung2 = "1_3_8_2"; zeit2 = "12:00";
+                saal3 = "1_4"; vorführung3 = "1_4_8_3"; zeit3 = "08:00";
+            } else if (kino == 2){
+                saal1 = "2_1"; vorführung1 = "2_1_8_1"; zeit1 = "17:30";
+                saal2 = "2_3"; vorführung2 = "2_3_8_2"; zeit2 = "15:00";
+                saal3 = "2_4"; vorführung3 = "2_4_8_3"; zeit3 = "20:30";
+            }
 
         } else if (film == 9){
 
             dauer = 113;
 
-            saal1 = "1_1"; vorführung1 = "1_1_9_1"; zeit1 = "16:30";
-            saal2 = "1_3"; vorführung2 = "1_3_9_2"; zeit2 = "15:30";
-            saal3 = "1_4"; vorführung3 = "1_4_9_3"; zeit3 = "19:00";
+            if (kino == 1){
+                saal1 = "1_1"; vorführung1 = "1_1_9_1"; zeit1 = "16:30";
+                saal2 = "1_3"; vorführung2 = "1_3_9_2"; zeit2 = "15:30";
+                saal3 = "1_4"; vorführung3 = "1_4_9_3"; zeit3 = "19:00";
+            } else if (kino == 2){
+                saal1 = "2_1"; vorführung1 = "2_1_9_1"; zeit1 = "21:00";
+                saal2 = "2_2"; vorführung2 = "2_2_9_2"; zeit2 = "15:00";
+                saal3 = "2_3"; vorführung3 = "2_3_9_3"; zeit3 = "18:30";
+            }
 
         } else if (film == 10){
+
+            dauer = 118;
+
+            if (kino == 2){
+                saal1 = "2_2"; vorführung1 = "2_2_10_1"; zeit1 = "17:30";
+                saal2 = "2_3"; vorführung2 = "2_3_10_2"; zeit2 = "21:30";
+                saal3 = "2_4"; vorführung3 = "2_4_10_3"; zeit3 = "16:00";
+            } else if (kino == 3){
+                saal1 = "3_1"; vorführung1 = "3_1_10_1"; zeit1 = "19:00";
+                saal2 = "3_2"; vorführung2 = "3_2_10_2"; zeit2 = "15:30";
+                saal3 = "3_3"; vorführung3 = "3_3_10_3"; zeit3 = "12:00";
+            }
 
         } else if (film == 11){
 
             dauer = 132;
 
-            saal1 = "1_2"; vorführung1 = "1_2_11_1"; zeit1 = "09:30";
-            saal2 = "1_3"; vorführung2 = "1_3_11_2"; zeit2 = "08:30";
-            saal3 = "1_4"; vorführung3 = "1_4_11_3"; zeit3 = "10:00";
+            if (kino == 1){
+                saal1 = "1_2"; vorführung1 = "1_2_11_1"; zeit1 = "09:30";
+                saal2 = "1_3"; vorführung2 = "1_3_11_2"; zeit2 = "08:30";
+                saal3 = "1_4"; vorführung3 = "1_4_11_3"; zeit3 = "10:00";
+            }
 
         } else if (film == 12){
 
+            dauer = 102;
+
+            if (kino == 3){
+                saal1 = "3_1"; vorführung1 = "3_1_12_1"; zeit1 = "08:00";
+                saal2 = "3_2"; vorführung2 = "3_2_12_2"; zeit2 = "22:30";
+                saal3 = "3_3"; vorführung3 = "3_3_12_3"; zeit3 = "18:00";
+            }
         }
 
         vorstellung1.put("dreiD", false);
@@ -761,9 +865,9 @@ public class DemoApplication {
         vorstellung3.put("vorführungsID", vorführung3);
         vorstellung3.put("zeitpunkt", "2019-11-04/" + zeit3);
 
-        db.collection("Kino").document("1").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung1).set(vorstellung1);
-        db.collection("Kino").document("1").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung2).set(vorstellung2);
-        db.collection("Kino").document("1").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung3).set(vorstellung3);
+        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung1).set(vorstellung1);
+        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung2).set(vorstellung2);
+        db.collection("Kino").document(kino + "").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung3).set(vorstellung3);
 
 
     }
