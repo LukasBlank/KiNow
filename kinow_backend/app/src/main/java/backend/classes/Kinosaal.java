@@ -62,8 +62,7 @@ public class Kinosaal {
 
   //pretty useless, cannot get the kino that way
   public boolean equals (Kinosaal saal){
-    if (this.saalnummer.equals(saal.getSaalnummer()))return true;
-    else return false;
+      return this.saalnummer.equals(saal.getSaalnummer());
   }//equals
 
   public Sitz getSitz (String sitzID){

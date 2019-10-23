@@ -129,7 +129,7 @@ public class Vorführung implements Serializable {
   }//addWerbung
 
   public void removeWerbung(Werbung werbung){
-    if(werbungen.contains(werbung))werbungen.remove(werbung);
+      werbungen.remove(werbung);
   }//removeWerbung
 
   public ArrayList<Sitz> getFreieSitze() {
@@ -165,8 +165,7 @@ public class Vorführung implements Serializable {
   }//getAnzahlFreieSitze
 
   public boolean equals (Vorführung vor){
-    if (vorführungsID.equals(vor.getVorführungsID()))return true;
-    else return false;
+      return vorführungsID.equals(vor.getVorführungsID());
   }//equals
 
   public void set (String key, Object o){

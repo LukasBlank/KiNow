@@ -194,7 +194,7 @@ public class DemoApplication {
     }//getVor
 
     @RequestMapping(value = "/getFrei")
-    public ResponseEntity<Object> getFrei(@RequestHeader("vorführungsID") String vorführungsID){
+    public ResponseEntity<Object> getFrei(@RequestHeader("vorfuehrungsID") String vorführungsID){
       String kinoID = vorführungsID.substring(0,vorführungsID.indexOf('_'));
       String filmID = vorführungsID.substring(vorführungsID.indexOf('_')+1);
       filmID = filmID.substring(filmID.indexOf('_')+1);
@@ -220,7 +220,7 @@ public class DemoApplication {
     }//getFrei
 
     @RequestMapping(value = "/getBelegt")
-    public ResponseEntity<Object> getSitze(@RequestHeader("vorführungsID") String vorführungsID){
+    public ResponseEntity<Object> getSitze(@RequestHeader("vorfuehrungsID") String vorführungsID){
       String kinoID = vorführungsID.substring(0,vorführungsID.indexOf('_'));
       String filmID = vorführungsID.substring(vorführungsID.indexOf('_')+1);
       filmID = filmID.substring(filmID.indexOf('_')+1);
@@ -247,6 +247,7 @@ public class DemoApplication {
 
     //@RequestMapping(value = "/buchen")
 
+
     /**
     @RequestMapping(value = "/test")
     public void test (){
@@ -263,7 +264,9 @@ public class DemoApplication {
         }//for
         for (Map.Entry<String,Map<String,Object>> entry : map.entrySet()){
           data = entry.getValue();
-          docRef.collection("FreieSitze").document(entry.getKey()).set(data);
+          String id = "1_1_5_1" + entry.getKey().substring(entry.getKey().lastIndexOf('_'));
+          data.put("sitzID",id);
+          docRef.collection("FreieSitze").document(id).set(data);
         }//for
 
 
@@ -274,6 +277,7 @@ public class DemoApplication {
       }//catch
     }//test
     **/
+
 
   }//Controller
 }// class

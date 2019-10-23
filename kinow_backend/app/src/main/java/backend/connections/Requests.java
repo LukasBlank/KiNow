@@ -178,8 +178,7 @@ public class Requests {
             }//then
             else {
                 ausgabe = tr.getErg();
-                if (ausgabe.equals("Success"))return true;
-                else return false;
+                return ausgabe.equals("Success");
             }//else
         }catch (Exception e){
             e.printStackTrace();
@@ -290,7 +289,7 @@ public class Requests {
             ThreadRequest tr = new ThreadRequest();
             String url = "http://94.16.123.237:8080/getBelegt";
             Request request = new Request.Builder()
-                    .addHeader("vorführungsID",vorführungsID)
+                    .addHeader("vorfuehrungsID",vorführungsID)
                     .url(url).build();
             tr.setRequest(request);
             tr.start();

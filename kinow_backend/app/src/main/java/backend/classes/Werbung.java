@@ -38,8 +38,7 @@ public class Werbung {
   }
 
   public boolean equals (Werbung werbung){
-    if (this.werbungID==werbung.getWerbungID())return true;
-    else return false;
+      return this.werbungID == werbung.getWerbungID();
   }//equals
 
   public void set (String key, Object o){

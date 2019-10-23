@@ -58,8 +58,7 @@ public class Sitz {
   }//getSaalnummer
 
   public boolean equals (Sitz sitz){
-    if (this.sitzID.equals(sitz.getSitzID()))return true;
-    else return false;
+      return this.sitzID.equals(sitz.getSitzID());
   }//equals
 
   public void set (String key, Object o){

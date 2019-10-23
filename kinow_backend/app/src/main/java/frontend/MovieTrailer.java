@@ -22,7 +22,7 @@ public class MovieTrailer extends YouTubeBaseActivity implements YouTubePlayer.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_trailer);
         videoID = (String) getIntent().getSerializableExtra("link");
-        youTubeView = (YouTubePlayerView) findViewById(R.id.trailer_view);
+        youTubeView = findViewById(R.id.trailer_view);
         youTubeView.initialize(YouTubeConfig.YOUTUBE_API_KEY, this);
     }
 

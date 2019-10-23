@@ -38,8 +38,7 @@ public class Preisvariation {
   }
 
   public boolean equals (Preisvariation p){
-    if (this.variationID==p.variationID)return true;
-    else return false;
+      return this.variationID == p.variationID;
   }//equals
 
   public void set (String key, Object o){

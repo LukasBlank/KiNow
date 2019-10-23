@@ -92,8 +92,7 @@ public class Buchung {
   }
 
   public boolean equals (Buchung buchung){
-    if (this.buchungsID.equals(buchung.getBuchungID()))return true;
-    else return false;
+      return this.buchungsID.equals(buchung.getBuchungID());
   }//equals
 
   public void set (String key, Object o){

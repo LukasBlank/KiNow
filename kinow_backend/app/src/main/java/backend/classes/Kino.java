@@ -61,8 +61,7 @@ public class Kino implements Serializable {
   }
 
   public boolean equals (Kino kino){
-    if (this.kinoID == kino.getKinoID()) return true;
-    else return false;
+      return this.kinoID == kino.getKinoID();
   }//equals
 
   public void addFilm (Film film) {

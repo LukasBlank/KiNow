@@ -52,9 +52,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 for (Film fi : filme){
                     if (fi.getTitel().equals(vHolder.Title.getText().toString()))film = fi;
                 }//for
-                intent.putExtra("nutzer", (Serializable) nutzer);
-                intent.putExtra("filmSelect", (Serializable) film);
-                intent.putExtra("kinoSelect", (Serializable) kino);
+                intent.putExtra("nutzer", nutzer);
+                intent.putExtra("filmSelect", film);
+                intent.putExtra("kinoSelect", kino);
                 context.startActivity(intent);
             }
         });

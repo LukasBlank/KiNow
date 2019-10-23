@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
         nutzer.setNutzerID(-1);
 
         //Bottom Navigation
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(botNavItemListener);
         navigation.setSelectedItemId(R.id.tab_account);
 

@@ -27,17 +27,17 @@ public class SmallCinemaHall extends AppCompatActivity {
     Vorführung vorführung;
     Nutzer nutzer;
     ArrayList<Sitz> freieSitze,belegteSitze;
+    Requests r;
 
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.small_cinema_hall);
+        r = new Requests();
         nutzer = (Nutzer) getIntent().getSerializableExtra("nutzer");
         vorführung = (Vorführung) getIntent().getSerializableExtra("vorführung");
-
-        Requests request = new Requests();
-        freieSitze = request.getFreieSitze(vorführung.getVorführungsID());
+        freieSitze = r.getFreieSitze(vorführung.getVorführungsID());
         //belegteSitze = request.getBelegteSitze(vorführung.getVorführungsID());
     }//onCreate
 
