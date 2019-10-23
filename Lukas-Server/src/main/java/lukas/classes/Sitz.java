@@ -48,6 +48,26 @@ public class Sitz {
     }//else
   }//getKinoID
 
+  public String getFilmID (){
+    if (sitzID.length()==0)return null;
+    else if (sitzID.indexOf('_')==-1)return null;
+    else {
+      String erg = sitzID.substring(sitzID.indexOf('_')+1);
+      erg = erg.substring(erg.indexOf('_')+1);
+      erg = erg.substring(0,erg.indexOf('_'));
+      return erg;
+    }//else
+  }///getFilmID
+
+  public String getVorID (){
+    if (sitzID.length()==0)return null;
+    else if (sitzID.indexOf('_')==-1)return null;
+    else {
+      String erg = sitzID.substring(0,sitzID.lastIndexOf('_'));
+      return erg;
+    }//else
+  }//getVor
+
   public String getSaalnummer(){
     if (sitzID.length()==0)return null;
     else if (sitzID.indexOf('_')==-1)return null;

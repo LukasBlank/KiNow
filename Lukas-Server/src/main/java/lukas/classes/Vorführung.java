@@ -39,6 +39,14 @@ public class Vorführung {
     else return vorführungsID.substring(0,vorführungsID.indexOf('_'));
   }//getKinoID
 
+  public String getFilmID (){
+    if (vorführungsID.length()==0 || vorführungsID.indexOf('_')==-1)return null;
+    else {
+      String filmID = vorführungsID.substring(0,vorführungsID.lastIndexOf('_'));
+      return filmID.substring(filmID.lastIndexOf('_')+1);
+    }//else
+  }//getFilmID
+
   public long getGrunddauer() {
     return grunddauer;
   }

@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 
+import java.security.SignedObject;
 import java.util.*;
 import java.util.EventListener;
 import java.util.concurrent.ExecutionException;
@@ -48,7 +49,7 @@ public class DemoApplication {
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
+          new FileInputStream(url.getPath());//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -61,6 +62,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
+    sc.test();
   }//main
 
   @RestController
@@ -147,8 +149,10 @@ public class DemoApplication {
         e.printStackTrace();
       } catch (InterruptedException e) {
         e.printStackTrace();
+        erg = "Error.";
       } catch (ExecutionException e) {
         e.printStackTrace();
+        erg = "Error.";
       }//catch
       return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
     }//addNutzer
@@ -245,38 +249,88 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBelegt
 
-    //@RequestMapping(value = "/buchen")
-
-
-    /**
-    @RequestMapping(value = "/test")
-    public void test (){
-      ApiFuture<QuerySnapshot> query = db.collection("Kino").document("1").collection("HatSaele").document("1_1").collection("HatSitze").get();
-      Map<String,Map<String,Object>> map = new HashMap<>();
+    @RequestMapping(value = "/buchen")
+    public ResponseEntity<Object> buchen(@RequestHeader("sitze") String sitze){
+      //String zuverlässig zu einer Map parsen
+      String erg = "Success";
       try {
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        Map<String,Object> data;
-        DocumentReference docRef = db.collection("Kino").document("1").collection("spieltFilme").document("5")
-            .collection("Vorstellungen").document("1_1_5_1");
-        for (DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
-        }//for
-        for (Map.Entry<String,Map<String,Object>> entry : map.entrySet()){
-          data = entry.getValue();
-          String id = "1_1_5_1" + entry.getKey().substring(entry.getKey().lastIndexOf('_'));
-          data.put("sitzID",id);
-          docRef.collection("FreieSitze").document(id).set(data);
+        //Header zu ArrayListe von Sitzen umwandeln
+        ArrayList<Sitz> sitzListe = new ArrayList<>();
+        Map<String,Map<String,Object>> map = new ObjectMapper().readValue(sitze,Map.class);
+        for (Map.Entry<String,Map<String,Object>> e : map.entrySet()){
+          Map<String,Object> sitz = e.getValue();
+          Sitz tmp = new Sitz();
+          for (Map.Entry<String,Object> entry : sitz.entrySet()){
+            tmp.set(entry.getKey(),entry.getValue());
+          }//for
+          sitzListe.add(tmp);
         }//for
 
+        //Prüfen, ob Sitze immernoch frei
+        if (sitzListe.size()>0){
+          boolean frei = sitzeFrei(sitzListe);
+          //wenn ja, dann aus freien Sitzen entfernen und zu belegten hinzufügen
+          if (frei){
+            String kinoID = sitzListe.get(0).getKinoID();
+            String filmID = sitzListe.get(0).getFilmID();
+            String vorID = sitzListe.get(0).getVorID();
+            for (Map.Entry<String,Map<String,Object>> en : map.entrySet()){
+              db.collection("Kino").document(kinoID).collection("spieltFilme")
+                  .document(filmID).collection("Vorstellungen").document(vorID)
+                  .collection("FreieSitze").document(en.getKey()).delete();
+              db.collection("Kino").document(kinoID).collection("spieltFilme")
+                  .document(filmID).collection("Vorstellungen").document(vorID)
+                  .collection("BelegteSitze").document(en.getKey()).set(en.getValue());
+            }//for
+          }//then
+          else erg = "Error.";
+        }//then
+        else {
+          erg = "Error.";
+        }//else
+      } catch (IOException e) {
+        e.printStackTrace();
+        erg = "Error.";
+      } //catch
+      return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
+    }//buchen
 
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }//catch
-    }//test
-    **/
+    private boolean sitzeFrei (ArrayList<Sitz> sitze){
+      if (sitze!=null){
+        ArrayList<Sitz> test = (ArrayList<Sitz>) sitze.clone();
+        Sitz s = sitze.get(0);
+        String kinoID = s.getKinoID();
+        String filmID = s.getFilmID();
+        String vorID = s.getVorID();
+        ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID)
+            .collection("spieltFilme").document(filmID)
+            .collection("Vorstellungen").document(vorID)
+            .collection("FreieSitze").get();
+        try {
+          QuerySnapshot querySnapshot = query.get();
+          List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+          for (DocumentSnapshot document : documents){
+            for (Sitz iteraor : test){
+              if (document.getId().equals(iteraor.getSitzID())){
+                test.remove(iteraor);
+                if (test.size()==0)return true;
+              }
+            }//for
+          }//for
+          if (test.size()>0)return false;
+          else return true;
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+          return false;
+        } catch (ExecutionException e) {
+          e.printStackTrace();
+          return false;
+        }//catch
+      }//then
+      else return false;
+    }//sitzeFrei
+
+
 
 
   }//Controller

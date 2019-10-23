@@ -2,6 +2,7 @@ package backend.connections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -235,15 +236,15 @@ public class Requests {
         }//else
     }//getVor
 
-    public ArrayList<Sitz> getFreieSitze (String vorführungsID){
+    public ArrayList<Sitz> getFreieSitze (String vorfuehrungsID){
         ausgabe = "";
-        if (vorführungsID.length()==0)return null;
+        if (vorfuehrungsID.length()==0)return null;
         else {
             ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
             ThreadRequest tr = new ThreadRequest();
             String url = "http://94.16.123.237:8080/getFrei";
             Request request = new Request.Builder()
-                    .addHeader("vorführungsID",vorführungsID)
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
                     .url(url).build();
             tr.setRequest(request);
             tr.start();
@@ -281,15 +282,15 @@ public class Requests {
         }//else
     }//getFreieSitze
 
-    public ArrayList<Sitz> getBelegteSitze (String vorführungsID){
+    public ArrayList<Sitz> getBelegteSitze (String vorfuehrungsID){
         ausgabe = "";
-        if (vorführungsID.length()==0)return null;
+        if (vorfuehrungsID.length()==0)return null;
         else {
             ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
             ThreadRequest tr = new ThreadRequest();
             String url = "http://94.16.123.237:8080/getBelegt";
             Request request = new Request.Builder()
-                    .addHeader("vorfuehrungsID",vorführungsID)
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
                     .url(url).build();
             tr.setRequest(request);
             tr.start();
@@ -327,7 +328,46 @@ public class Requests {
         }//else
     }//getBelegteSitze
 
+    public boolean buchen (ArrayList<Sitz> sitze){
+        String head =sitzeToString(sitze);
+        ausgabe = "";
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/buchen";
+        Request request = new Request.Builder()
+                .addHeader("sitze",head)
+                .url(url).build();
+        tr.setRequest(request);
+        tr.start();
+        try {
+            tr.join();
+            long anfang = System.currentTimeMillis();
+            long ende = anfang;
+            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+            do {
+                ende = System.currentTimeMillis();
+            } while (!tr.isFertig() && ende-anfang<10000);
+            if (!tr.isFertig()){
+                System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                return false;
+            }//then
+            else {
+                ausgabe = tr.getErg();
+                return ausgabe.equals("Success");
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }//catch
+    }//buchen
 
-
+    private String sitzeToString (ArrayList<Sitz> sitze){
+       String erg = "{";
+       for (Sitz tmp : sitze){
+           erg += "\""+tmp.getSitzID()+"\":" + tmp.toMapString() + ",";
+       }//for
+       erg = erg.substring(0,erg.lastIndexOf(','));
+       erg += "}";
+       return erg;
+    }//
 
 }//class

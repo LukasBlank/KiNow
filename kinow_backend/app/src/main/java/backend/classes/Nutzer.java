@@ -150,7 +150,6 @@ public class Nutzer implements Serializable {
 
   public String toMapString (){
     String erg = "{";
-    //"darsteller":["Angelina Jolie","Elle Fanning","Michelle Pfeiffer","Ed Skrein","Chiwetel Ejiofor"]
     if (email!=null)erg += "\"email\":\""+email+"\",";
     if (geburtstag!=null)erg += "\"geburtstag\":\""+geburtstag+"\",";
     if (geschlecht!=null)erg += "\"geschlecht\":\""+geschlecht+"\",";
