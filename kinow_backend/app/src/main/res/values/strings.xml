@@ -56,7 +56,7 @@
     <string name="remember_me">Remember Me</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="guest">Contiue as guest.</string>
+    <string name="guest">Continue as guest.</string>
 
     <!-- Strings for Default Cinema Hall Content -->
     <string name="screen">SCREEN</string>
