@@ -62,7 +62,8 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.freieSitze(2, 5, 8, 21);
+    sc.addVorstellungen(11);
+
   }//main
 
   @RestController
@@ -90,12 +91,18 @@ public class DemoApplication {
         kino kino1 = gson.fromJson(kino, kino.class);
         KinoRepo.put(kino1.getKinoID(), kino1);
         return new ResponseEntity<>(KinoRepo.values(), HttpStatus.OK);
-      } catch (Exception e) {
+      } ca-tch (Exception e) {
       }
       return new ResponseEntity<>(KinoRepo.values(), HttpStatus.BAD_REQUEST);
     }
 
      **/
+
+    public void julie (){
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("test", 1);
+        db.collection("Test").document("test").set(docData);
+    }
 
     //Not working properly
     public void freieSitze(int kino, int saal, int film, int vorstellungen){
@@ -120,9 +127,36 @@ public class DemoApplication {
 
                     db.collection("Kino").document("" + kino)
                             .collection("spieltFilme").document("" + film)
-                            .collection("Vorstellungen").document(kino + "_" + saal + "_" + film + "_" + k)
-                            .collection("FreieSitze").document("" + document.getId()).set(document.getData());
+                            .collection("Vorstellungen").document("3_3_12_1")
+                            .collection("FreieSitze").document("" + document.getId()).update(document.getData());
+
+                    System.out.println("CHECKPOINT 4: -------> " + anzVor);
+                    System.out.println(document.getId() + " => " + document.getData());
+
                 }
+            }
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        } catch (ExecutionException e){
+            e.printStackTrace();
+        }
+        System.out.println("--END--");
+    }
+
+    public void updateFilmAcht(){
+        DocumentReference docRef = db.collection("Filme").document("8");
+
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+
+        try {
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                System.out.println("Document data: " + document.getData());
+
+                db.collection("Kino").document("2").collection("spieltFilme").document("8").update(document.getData());
+
+            } else {
+                System.out.println("No such Document");
             }
         } catch (InterruptedException e){
             e.printStackTrace();
@@ -138,74 +172,86 @@ public class DemoApplication {
         switch (film){
             case 1:
                 // ES
-                link = "OYsSefoUdaw";
-                docData.put("link", link);
+                link = "https://m.media-amazon.com/images/M/MV5BYWRiODMyYTgtMjBlZi00NGVmLThmZGYtNjkwOTcyNTEzM2IyXkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 2:
                 //Joker
-                link = "vVGJUj6Hh8s";
-                docData.put("link", link);
+                link = "https://m.media-amazon.com/images/M/MV5BZjc4MTE3OTktZjBiOC00ZGQ1LTkzZjctMjdhYTUxYjE0ZWFhXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_.jpg";
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 3:
                 //downtown abbey
-                link = "sSDOSaipC9Q";
-                docData.put("link", link);
+                link = "MV5BY2U1NmIwYzgtNjFkOS00YWUxLTg0YTMtZmE5NTA3YjRmY2NlXkEyXkFqcGdeQXVyNTA4NzY1MzY";
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 4:
                 //gemini man
-                link = "geIcrgq55uA";
-                docData.put("link", link);
+                link = "https://m.media-amazon.com/images/M/MV5BZjM4NzQ3YzEtMzlkNS00NDg2LTkwOGUtNGM5ZWEyYjUyNGU4XkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,674,1000_AL_.jpg";
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 5:
                 // eine ganz heiße nummer 2.0
-                link = "tg7xjbTpiCc";
-                docData.put("link", link);
+                link = "https://m.media-amazon.com/images/M/MV5BNzgyN2FlZTQtODJlNC00M2Q2LWFmM2ItNjVjYjkwYjJhYmVlXkEyXkFqcGdeQXVyMDU5MDEyMA@@._V1_.jpg";
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 6:
                 //everest - ein yeti will hoch hinaus
                 link = "8Q7OY-NcTZM";
-                docData.put("link", link);
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 7:
                 //ich war noch niemals in NY
                 link = "oPkzUhsRrGc";
-                docData.put("link", link);
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 8:
                 //dem horizont so nah
                 link = "Xkxh6mrA5kI";
-                docData.put("link", link);
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 9:
                 //after teh wedding
                 link = "M9I52xL3DPQ";
-                docData.put("link", link);
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 10:
                 //maleficint
                 link = "xlB_ZwOF3Gk";
-                docData.put("link", link);
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 11:
                 //parasite
                 link = "9qvaE99iMR0";
-                docData.put("link", link);
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
             case 12:
                 //das kapitel im 21. jahrhundert
                 link = "zd7whXnRLbI";
-                docData.put("link", link);
+                docData.put("bildLink", link);
+                db.collection("Filme").document(""+film).update(docData);
                 db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
                 break;
         }
@@ -613,42 +659,113 @@ public class DemoApplication {
 
     //Fügt zu jedem Film Vorstellungen hinzu -> Muss zwar immer individuell angepasst werden
     @RequestMapping (value = "/addVorstellungen")
-    public void addVorstellungen() {
+    public void addVorstellungen(int film) {
+        //Vorstellungen Kino 1
+        Map <String, Object> vorstellung1 = new HashMap<>();
+        Map <String, Object> vorstellung2 = new HashMap<>();
+        Map <String, Object> vorstellung3 = new HashMap<>();
+        String saal1, saal2, saal3, vorführung1, vorführung2, vorführung3, zeit1, zeit2, zeit3;
+        int dauer;
 
-        int film = 9;
+        dauer = 1;
+        saal1 = ""; saal2 = ""; saal3 = "";
+        vorführung3 = ""; vorführung2 = "";  vorführung1 = "";
+        zeit1 = ""; zeit2 = ""; zeit3 = "";
 
-        for (int i = 1; i <= 3; i++) {
-            Map<String, Object> docData = new HashMap<>();
+        if(film == 1){
 
-            docData.put("vorführungsID", "2_" + film + "_" + i); //Kino 1, Film 2, 1 Vorführung
-            docData.put("filmID", film);
-            docData.put("saalnummer", 6);
+        } else if (film == 2){
 
-            if(i == 1){
-                docData.put("zeitpunkt", "12:00");
-            } else if (i == 2) {
-                docData.put("zeitpunkt", "15:00");
-            } else if (i == 3) {
-                docData.put("zeitpunkt", "18:00");
-            } else if (i == 4) {
-                docData.put("zeitpunkt", "20:30");
-            } else if (i == 5){
-                docData.put("zeitpunkt", "8:00");
-            }
+        } else if (film == 3){
 
-            docData.put("gesamtdauer", 137);
-            docData.put("grundpreis", 7.00);
+        } else if (film == 4){
 
-            //if(i == 2) {
-            //  docData.put("gesamtpreis", 11.00);
-            //  docData.put("3D", true);
-            //} else {
-                docData.put("gesamtpreis", 7.00);
-                docData.put("3D", false);
-            //}
+            dauer = 119;
 
-            db.collection("Kino").document("2").collection("spieltFilme").document(film +  "").collection("Vorstellungen").document("2_" + film + "_" + i).set(docData);
+            saal1 = "1_1"; vorführung1 = "1_1_4_1"; zeit1 = "13:30";
+            saal2 = "1_2"; vorführung2 = "1_2_4_2"; zeit2 = "16:00";
+            saal3 = "1_4"; vorführung3 = "1_4_4_3"; zeit3 = "18:00";
+
+        } else if (film == 5){
+
+            dauer = 91;
+
+            saal1 = "1_1"; vorführung1 = "1_1_5_1"; zeit1 = "10:00";
+            saal2 = "1_4"; vorführung2 = "1_4_5_2"; zeit2 = "11:00";
+            saal3 = "1_3"; vorführung3 = "1_3_5_3"; zeit3 = "18:30";
+
+        } else if (film == 6){
+
+        } else if (film == 7){
+
+            dauer = 128;
+
+            saal1 = "1_3"; vorführung1 = "1_3_7_1"; zeit1 = "08:30";
+            saal2 = "1_2"; vorführung2 = "1_2_7_2"; zeit2 = "13:30";
+            saal3 = "1_1"; vorführung3 = "1_1_7_3"; zeit3 = "20:00";
+
+        } else if (film == 8){
+
+            dauer = 117;
+
+            saal1 = "1_2"; vorführung1 = "1_2_8_1"; zeit1 = "9:30";
+            saal2 = "1_3"; vorführung2 = "1_3_8_2"; zeit2 = "12:00";
+            saal3 = "1_4"; vorführung3 = "1_4_8_3"; zeit3 = "08:00";
+
+        } else if (film == 9){
+
+            dauer = 113;
+
+            saal1 = "1_1"; vorführung1 = "1_1_9_1"; zeit1 = "16:30";
+            saal2 = "1_3"; vorführung2 = "1_3_9_2"; zeit2 = "15:30";
+            saal3 = "1_4"; vorführung3 = "1_4_9_3"; zeit3 = "19:00";
+
+        } else if (film == 10){
+
+        } else if (film == 11){
+
+            dauer = 132;
+
+            saal1 = "1_2"; vorführung1 = "1_2_11_1"; zeit1 = "09:30";
+            saal2 = "1_3"; vorführung2 = "1_3_11_2"; zeit2 = "08:30";
+            saal3 = "1_4"; vorführung3 = "1_4_11_3"; zeit3 = "10:00";
+
+        } else if (film == 12){
+
         }
+
+        vorstellung1.put("dreiD", false);
+        vorstellung1.put("gesamtdauer", dauer+30);
+        vorstellung1.put("gesamtpreis", 7.0 );
+        vorstellung1.put("grunddauer", dauer);
+        vorstellung1.put("grundpreis", 7.0);
+        vorstellung1.put("saalnummer", saal1);
+        vorstellung1.put("vorführungsID", vorführung1);
+        vorstellung1.put("zeitpunkt", "2019-11-04/"+zeit1);
+
+        vorstellung2.put("dreiD", false);
+        vorstellung2.put("gesamtdauer", dauer+30);
+        vorstellung2.put("gesamtpreis", 7.0 );
+        vorstellung2.put("grunddauer", dauer);
+        vorstellung2.put("grundpreis", 7.0);
+        vorstellung2.put("saalnummer", saal2);
+        vorstellung2.put("vorführungsID", vorführung2);
+        vorstellung2.put("zeitpunkt", "2019-11-04/" + zeit2);
+
+        vorstellung3.put("dreiD", false);
+        vorstellung3.put("gesamtdauer", dauer+30);
+        vorstellung3.put("gesamtpreis", 7.0 );
+        vorstellung3.put("grunddauer", dauer);
+        vorstellung3.put("grundpreis", 7.0);
+        vorstellung3.put("saalnummer", saal3);
+        vorstellung3.put("vorführungsID", vorführung3);
+        vorstellung3.put("zeitpunkt", "2019-11-04/" + zeit3);
+
+        db.collection("Kino").document("1").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung1).set(vorstellung1);
+        db.collection("Kino").document("1").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung2).set(vorstellung2);
+        db.collection("Kino").document("1").collection("spieltFilme").document(film+"").collection("Vorstellungen").document(vorführung3).set(vorstellung3);
+
+
     }
 
     @RequestMapping (value = "/addTestdata")
