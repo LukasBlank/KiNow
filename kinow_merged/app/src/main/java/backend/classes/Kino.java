@@ -84,9 +84,10 @@ public class Kino implements Serializable {
   }//getFilm
 
   public Kinosaal getSaal (String ID){
-    Kinosaal erg = null;
+    Kinosaal erg = null ;
     for (Kinosaal saal : saele){
-      if (saal.getSaalnummer().equals(ID))erg = saal;
+      if (saal.getSaalnummer().equals(ID)){
+        erg = saal;}
     }//for
     return erg;
   }//getSaal

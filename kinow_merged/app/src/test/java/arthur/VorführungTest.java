@@ -12,6 +12,7 @@ import backend.classes.*;
 public class VorführungTest {
   ArrayList<Sitz> TestSitze = new ArrayList<Sitz>();
   ArrayList<Werbung> TestWerbung = new ArrayList<Werbung>();
+  ArrayList<Werbung> TestWerbung2 = new ArrayList<Werbung>();
   Vorführung TestVorfuehrung = new Vorführung("1","7",90, 5L, 110L, "15:00", true, TestWerbung, TestSitze);
   Kinosaal TestSaal1 = new Kinosaal("1", 50, true, TestSitze);
   Kinosaal TestSaal2 = new Kinosaal("2", 50, true, TestSitze);
@@ -26,13 +27,13 @@ public class VorführungTest {
 
   @Test
   public void getSaalnummer() {
-    Assert.assertEquals("1",TestVorfuehrung.getSaalnummer());
+    Assert.assertEquals("7",TestVorfuehrung.getSaalnummer());
   }
 
   @Test
   public void setSaalnummer() {
     TestVorfuehrung.setSaalnummer("2");
-    Assert.assertNotEquals("2",TestVorfuehrung.getSaalnummer());
+    Assert.assertEquals("2",TestVorfuehrung.getSaalnummer());
   }
 
   @Test
@@ -71,34 +72,47 @@ public class VorführungTest {
 
   @Test
   public void getVorführungsID() {
+    Assert.assertEquals( "1", TestVorfuehrung.getVorführungsID() );
   }
 
   @Test
   public void setVorführungsID() {
+    TestVorfuehrung.setVorführungsID( "22" );
+    Assert.assertEquals( "22",TestVorfuehrung.getVorführungsID() );
   }
 
   @Test
   public void getZeitpunkt() {
+    Assert.assertEquals( "15:00", TestVorfuehrung.getZeitpunkt() );
   }
 
   @Test
   public void setZeitpunkt() {
+    TestVorfuehrung.setZeitpunkt( "55:22" );
+    Assert.assertEquals( "55:22",TestVorfuehrung.getZeitpunkt() );
   }
 
   @Test
   public void isDreiD() {
+    Assert.assertEquals( true, TestVorfuehrung.isDreiD() );
   }
 
   @Test
   public void setDreiD() {
+    TestVorfuehrung.setDreiD( false );
+    Assert.assertEquals( false, TestVorfuehrung.isDreiD() );
   }
 
   @Test
   public void getWerbungen() {
+    Assert.assertEquals( TestWerbung,TestVorfuehrung.getWerbungen() );
   }
 
   @Test
   public void setWerbungen() {
+    TestVorfuehrung.setWerbungen( TestWerbung2 );
+    Assert.assertEquals( TestWerbung,TestVorfuehrung.getWerbungen() );
+
   }
 
   @Test
