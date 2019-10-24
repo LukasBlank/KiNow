@@ -2,6 +2,7 @@ package backend.connections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,15 +10,15 @@ import java.util.Map;
 import backend.classes.Film;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
+import backend.classes.Sitz;
+import backend.classes.Vorführung;
 import okhttp3.Request;
 
 public class Requests {
 
     private String ausgabe;
-    Object o;
 
     public Requests (){
-        o = null;
         ausgabe = "";
     }//K
 
@@ -178,8 +179,7 @@ public class Requests {
             }//then
             else {
                 ausgabe = tr.getErg();
-                if (ausgabe.equals("Success"))return true;
-                else return false;
+                return ausgabe.equals("Success");
             }//else
         }catch (Exception e){
             e.printStackTrace();
@@ -187,5 +187,234 @@ public class Requests {
         }//catch
     }//register
 
+    public ArrayList<Vorführung> getVor (long kinoID, long filmID){
+        ausgabe = "";
+        if (kinoID==0)return null;
+        else {
+            ArrayList<backend.classes.Vorführung> vorführungen  = new ArrayList<Vorführung>();
+            ThreadRequest tr = new ThreadRequest();
+            String url = "http://94.16.123.237:8080/getVor";
+            String kID = String.valueOf(kinoID);
+            String fID = String.valueOf(filmID);
+            Request request = new Request.Builder()
+                    .addHeader("kinoID",kID)
+                    .addHeader("filmID",fID)
+                    .url(url).build();
+            tr.setRequest(request);
+            tr.start();
+            try {
+                tr.join();
+                long anfang = System.currentTimeMillis();
+                long ende = anfang;
+                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                do {
+                    ende = System.currentTimeMillis();
+                } while (!tr.isFertig() && ende-anfang<10000);
+                if (!tr.isFertig()){
+                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                    return null;
+                }//then
+                else {
+                    ausgabe = tr.getErg();
+                    //gesamte Ausgabe zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Vorführung v = new Vorführung();
+                        for (Map.Entry<String,Object> e : data.entrySet()){
+                            v.set(e.getKey(),e.getValue());
+                        }//for
+                        vorführungen.add(v);
+                    }//for
+                    return vorführungen;
+                }//else
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }//catch
+        }//else
+    }//getVor
+
+    public ArrayList<Sitz> getFreieSitze (String vorfuehrungsID){
+        ausgabe = "";
+        if (vorfuehrungsID.length()==0)return null;
+        else {
+            ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
+            ThreadRequest tr = new ThreadRequest();
+            String url = "http://94.16.123.237:8080/getFrei";
+            Request request = new Request.Builder()
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
+                    .url(url).build();
+            tr.setRequest(request);
+            tr.start();
+            try {
+                tr.join();
+                long anfang = System.currentTimeMillis();
+                long ende = anfang;
+                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                do {
+                    ende = System.currentTimeMillis();
+                } while (!tr.isFertig() && ende-anfang<10000);
+                if (!tr.isFertig()){
+                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                    return null;
+                }//then
+                else {
+                    ausgabe = tr.getErg();
+                    //gesamte Ausgabe zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Sitz s = new Sitz();
+                        for (Map.Entry<String,Object> e : data.entrySet()){
+                            s.set(e.getKey(),e.getValue());
+                        }//for
+                        sitze.add(s);
+                    }//for
+                    return sitze;
+                }//else
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }//catch
+        }//else
+    }//getFreieSitze
+
+    public ArrayList<Sitz> getBelegteSitze (String vorfuehrungsID){
+        ausgabe = "";
+        if (vorfuehrungsID.length()==0)return null;
+        else {
+            ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
+            ThreadRequest tr = new ThreadRequest();
+            String url = "http://94.16.123.237:8080/getBelegt";
+            Request request = new Request.Builder()
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
+                    .url(url).build();
+            tr.setRequest(request);
+            tr.start();
+            try {
+                tr.join();
+                long anfang = System.currentTimeMillis();
+                long ende = anfang;
+                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                do {
+                    ende = System.currentTimeMillis();
+                } while (!tr.isFertig() && ende-anfang<10000);
+                if (!tr.isFertig()){
+                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                    return null;
+                }//then
+                else {
+                    ausgabe = tr.getErg();
+                    //gesamte Ausgabe zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Sitz s = new Sitz();
+                        for (Map.Entry<String,Object> e : data.entrySet()){
+                            s.set(e.getKey(),e.getValue());
+                        }//for
+                        sitze.add(s);
+                    }//for
+                    return sitze;
+                }//else
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }//catch
+        }//else
+    }//getBelegteSitze
+
+    public ArrayList<Sitz> getReservierte (String vorfuehrungsID){
+        ausgabe = "";
+        if (vorfuehrungsID.length()==0)return null;
+        else {
+            ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
+            ThreadRequest tr = new ThreadRequest();
+            String url = "http://94.16.123.237:8080/getReservierte";
+            Request request = new Request.Builder()
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
+                    .url(url).build();
+            tr.setRequest(request);
+            tr.start();
+            try {
+                tr.join();
+                long anfang = System.currentTimeMillis();
+                long ende = anfang;
+                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                do {
+                    ende = System.currentTimeMillis();
+                } while (!tr.isFertig() && ende-anfang<10000);
+                if (!tr.isFertig()){
+                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                    return null;
+                }//then
+                else {
+                    ausgabe = tr.getErg();
+                    //gesamte Ausgabe zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Sitz s = new Sitz();
+                        for (Map.Entry<String,Object> e : data.entrySet()){
+                            s.set(e.getKey(),e.getValue());
+                        }//for
+                        sitze.add(s);
+                    }//for
+                    return sitze;
+                }//else
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }//catch
+        }//else
+    }//getReservierte
+
+    public boolean reservieren (ArrayList<Sitz> sitze, String nutzerID){
+        String head =sitzeToString(sitze);
+        ausgabe = "";
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/reservieren";
+        Request request = new Request.Builder()
+                .addHeader("sitze",head)
+                .addHeader("nutzer",nutzerID)
+                .url(url).build();
+        tr.setRequest(request);
+        tr.start();
+        try {
+            tr.join();
+            long anfang = System.currentTimeMillis();
+            long ende = anfang;
+            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+            do {
+                ende = System.currentTimeMillis();
+            } while (!tr.isFertig() && ende-anfang<10000);
+            if (!tr.isFertig()){
+                System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                return false;
+            }//then
+            else {
+                ausgabe = tr.getErg();
+                return ausgabe.equals("Success");
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }//catch
+    }//reservieren
+
+    private String sitzeToString (ArrayList<Sitz> sitze){
+       String erg = "{";
+       for (Sitz tmp : sitze){
+           erg += "\""+tmp.getSitzID()+"\":" + tmp.toMapString() + ",";
+       }//for
+       erg = erg.substring(0,erg.lastIndexOf(','));
+       erg += "}";
+       return erg;
+    }//sitzeToString
 
 }//class

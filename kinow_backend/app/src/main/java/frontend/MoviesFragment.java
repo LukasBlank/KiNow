@@ -44,11 +44,12 @@ public class MoviesFragment extends Fragment {
     private View movieView;
     MovieAdapter mAdapter;
     private Kino kino;
-    private long alt;
+    private long kinoAlt,nutzerAlt;
     private ArrayList<Film> filme;
+    private Nutzer nutzer;
 
     private OnFragmentInteractionListener mListener;
-    private OnKinoSelectionListener onKinoSelectionListener;
+    private OnSelectionListener onSelectionListener;
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -83,8 +84,11 @@ public class MoviesFragment extends Fragment {
         filme = new ArrayList<Film>();
         kino = new Kino();
         kino.setKinoID(0);
-        alt = 0;
-    }
+        kinoAlt = 0;
+        nutzer = new Nutzer();
+        nutzer.setNutzerID(-1);
+        nutzerAlt = -1;
+    }//onCreate
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,14 +102,15 @@ public class MoviesFragment extends Fragment {
         movieList.setLayoutManager(layoutManager);
 
         //Beim ersten Mal alle Filme holen, danach nur neu holen, wenn sich das gewählte Kino ändert
-        onKinoSelectionListener = (OnKinoSelectionListener) getContext();
-        kino  = onKinoSelectionListener.getSelectedKino();
+        onSelectionListener = (OnSelectionListener) getContext();
+        kino  = onSelectionListener.getSelectedKino();
+        nutzer = onSelectionListener.getSelectedNutzer();
 
-        if (filme.size()==0 || kino.getKinoID()!=alt){
-            alt = kino.getKinoID();
+        if (filme.size()==0 || kino.getKinoID()!=kinoAlt || nutzer.getNutzerID()!=nutzerAlt){
+            kinoAlt = kino.getKinoID();
             Requests request = new Requests();
             filme = request.getFilme(kino.getKinoID());
-            mAdapter = new MovieAdapter(filme, getActivity());
+            mAdapter = new MovieAdapter(filme, kino ,nutzer, getActivity());
         }//then
 
         movieList.setAdapter(mAdapter);
@@ -129,7 +134,7 @@ public class MoviesFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+           mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -160,7 +165,9 @@ public class MoviesFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public interface OnKinoSelectionListener {
+    public interface OnSelectionListener {
         Kino getSelectedKino ();
+        Nutzer getSelectedNutzer();
     }//interface
+
 }

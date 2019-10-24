@@ -15,14 +15,14 @@ public class MovieTrailer extends YouTubeBaseActivity implements YouTubePlayer.O
     private YouTubePlayerView youTubeView;
 
     // Paste in the videoID after "watch?v=": https://www.youtube.com/watch?v=ViQwVbg1jNg
-    private String videoID = "ViQwVbg1jNg";
+    private String videoID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_trailer);
-
-        youTubeView = (YouTubePlayerView) findViewById(R.id.trailer_view);
+        videoID = (String) getIntent().getSerializableExtra("link");
+        youTubeView = findViewById(R.id.trailer_view);
         youTubeView.initialize(YouTubeConfig.YOUTUBE_API_KEY, this);
     }
 

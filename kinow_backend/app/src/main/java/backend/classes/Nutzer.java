@@ -1,9 +1,10 @@
 package backend.classes;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class Nutzer {
+public class Nutzer implements Serializable {
 
   private long nutzerID;
   private String email,vorname,nachname,geschlecht,geburtstag;
@@ -110,8 +111,7 @@ public class Nutzer {
   }//addBestellung
 
   public boolean equals (Nutzer nutzer){
-    if (this.nutzerID==nutzer.getNutzerID())return true;
-    else return false;
+      return this.nutzerID == nutzer.getNutzerID();
   }//nutzer
 
   public BigInteger hashPasswordWithRSA(String pass){
@@ -150,7 +150,6 @@ public class Nutzer {
 
   public String toMapString (){
     String erg = "{";
-    //"darsteller":["Angelina Jolie","Elle Fanning","Michelle Pfeiffer","Ed Skrein","Chiwetel Ejiofor"]
     if (email!=null)erg += "\"email\":\""+email+"\",";
     if (geburtstag!=null)erg += "\"geburtstag\":\""+geburtstag+"\",";
     if (geschlecht!=null)erg += "\"geschlecht\":\""+geschlecht+"\",";

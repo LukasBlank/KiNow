@@ -1,10 +1,13 @@
 package backend.classes;
 
+import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
-public class Vorführung {
+public class Vorführung implements Serializable {
 
-  private long grunddauer,gesamtdauer,grundpreis,gesamtpreis;
+  private long grunddauer,gesamtdauer;
+  private double grundpreis,gesamtpreis;
   private String vorführungsID, zeitpunkt, saalnummer;
   private boolean dreiD;
   private ArrayList<Werbung> werbungen;
@@ -13,7 +16,7 @@ public class Vorführung {
 
   public Vorführung() {}
 
-  public Vorführung(String vorführungsID,String saalnummer,long grunddauer, long grundpreis, long gesamtdauer, String zeitpunkt, boolean dreiD, ArrayList<Werbung> werbungen, ArrayList<Sitz> freieSitze){
+  public Vorführung(String vorführungsID,String saalnummer,long grunddauer, double grundpreis, long gesamtdauer, String zeitpunkt, boolean dreiD, ArrayList<Werbung> werbungen, ArrayList<Sitz> freieSitze){
     this.vorführungsID = vorführungsID;
     this.saalnummer = saalnummer;
     this.zeitpunkt = zeitpunkt;
@@ -61,7 +64,7 @@ public class Vorführung {
     else return gesamtdauer;
   }//getGesamtdauer
 
-  public void setGrundpreis(long grundpreis) {
+  public void setGrundpreis(double grundpreis) {
     this.grundpreis = grundpreis;
     setGesamtpreis();
   }//setGrundpreis
@@ -73,7 +76,7 @@ public class Vorführung {
     }//then
   }//setGesamtpreis
 
-  public long getGesamtpreis () { return gesamtpreis; }
+  public double getGesamtpreis () { return gesamtpreis; }
 
   public String getVorführungsID() {
     return vorführungsID;
@@ -172,15 +175,15 @@ public class Vorführung {
       break;
       case "zeitpunkt": this.zeitpunkt = (String) o;
       break;
-      case "saalnummer": this.saalnummer = (String) saalnummer;
+      case "saalnummer": this.saalnummer = (String) o;
       break;
-      case "grundpreis": this.grundpreis = Long.parseLong(o.toString());
+      case "grundpreis": this.grundpreis = Double.parseDouble(o.toString());
       break;
       case "grunddauer": this.grunddauer = Long.parseLong(o.toString());
       break;
       case "dreiD": this.dreiD = Boolean.parseBoolean(o.toString());
       break;
-      case "gesamtpreis": this.gesamtpreis = Long.parseLong(o.toString());
+      case "gesamtpreis": this.gesamtpreis = Double.parseDouble(o.toString());
       break;
       case "gesamtdauer": this.gesamtdauer = Long.parseLong(o.toString());
       break;

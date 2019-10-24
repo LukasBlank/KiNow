@@ -39,6 +39,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
     Button registerButton;
     Button signInButton;
     Button forgotPwdButton;
+    Button guest;
 
     EditText email_field;
     EditText pwd_field;
@@ -89,6 +90,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
+        guest = view.findViewById(R.id.guest_btn);
+        guest.setOnClickListener(this);
         registerButton = view.findViewById(R.id.register_btn);
         registerButton.setOnClickListener(this);
         signInButton = view.findViewById(R.id.sign_in_btn);
@@ -135,9 +138,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 if(check_fields) {
                     Requests r = new Requests();
                     Nutzer n = r.LogIn(email_field_input,pwd_field_input);
-                    if (n==null) Toast.makeText(getContext(), "Anmeldung fehlgeschlagen.", Toast.LENGTH_SHORT).show();
+                    if (n==null) Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
                     else {
-                        Toast.makeText(getContext(), "Als " + n.getVorname() + " " + n.getNachname() + " eingeloggt.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Logged in as " + n.getVorname() + " " + n.getNachname() + ".", Toast.LENGTH_SHORT).show();
                         onLoginListener = (OnLoginListener) getContext();
                         onLoginListener.onLogin(n);
                     }//else
@@ -156,6 +159,14 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 // Send E-Mail to User, with Link to SetNewPassword Screen
                 // DB: Replace old pwd with new chosen pwd
                 Toast.makeText(getActivity(), "Forgot Pwd - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.guest_btn:
+                Nutzer n =  new Nutzer();
+                n.setNutzerID(0);
+                Toast.makeText(getContext(), "Logged in as guest.", Toast.LENGTH_SHORT).show();
+                onLoginListener = (OnLoginListener) getContext();
+                onLoginListener.onLogin(n);
                 break;
         }
 

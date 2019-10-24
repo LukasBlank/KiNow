@@ -56,5 +56,18 @@
     <string name="remember_me">Remember Me</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="guest">Continue as guest.</string>
+
+    <!-- Strings for Default Cinema Hall Content -->
+    <string name="screen">SCREEN</string>
+    <string name="book_movie">Book</string>
+    <string name="bookNow">Book now</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="d">D</string>
+    <string name="e">E</string>
+    <string name="f">F</string>
+    <string name="g">G</string>
 
 </resources>

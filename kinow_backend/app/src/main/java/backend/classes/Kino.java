@@ -1,8 +1,9 @@
 package backend.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Kino {
+public class Kino implements Serializable {
 
   private long kinoID;
   private String name,ort;
@@ -60,8 +61,7 @@ public class Kino {
   }
 
   public boolean equals (Kino kino){
-    if (this.kinoID == kino.getKinoID()) return true;
-    else return false;
+      return this.kinoID == kino.getKinoID();
   }//equals
 
   public void addFilm (Film film) {

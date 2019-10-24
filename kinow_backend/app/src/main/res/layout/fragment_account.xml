@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
@@ -36,17 +36,17 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
                     android:contentDescription="@string/contentDescription"
-                    android:src="@drawable/face_icon"/>
+                    android:src="@drawable/face_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="22sp"
-                    app:fontFamily="sans-serif-medium"
                     android:text="@string/big_login"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
 
@@ -54,30 +54,30 @@
                 android:id="@+id/square_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/square"
                 android:layout_below="@+id/login_linLay"
-                android:contentDescription="@string/contentDescription"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="-10dp"
-                android:rotation="45"/>
+                android:contentDescription="@string/contentDescription"
+                android:rotation="45"
+                android:src="@drawable/square" />
 
             <RelativeLayout
                 android:id="@+id/relLay_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_below="@+id/square_img"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_below="@+id/square_img">
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp">
 
                 <ImageView
                     android:id="@+id/email_img"
-                    android:padding="5dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:background="@color/mint"
                     android:contentDescription="@string/contentDescription"
-                    android:src="@drawable/email_icon"
-                    android:background="@color/mint"/>
+                    android:padding="5dp"
+                    android:src="@drawable/email_icon" />
 
                 <EditText
                     android:id="@+id/email_input"
@@ -85,18 +85,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/email_img"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/email_img"
                     android:layout_toEndOf="@+id/email_img"
-                    android:paddingLeft="20dp"
-                    android:paddingStart="20dp"
-                    android:maxLines="1"
-                    android:lines="1"
-                    android:singleLine="true"
-                    android:maxEms="30"
-                    android:maxLength="30"
+                    android:layout_toRightOf="@+id/email_img"
                     android:background="@color/editTextField"
                     android:hint="@string/email"
-                    android:textSize="15sp"/>
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
 
             </RelativeLayout>
 
@@ -104,39 +104,39 @@
                 android:id="@+id/relLay_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_below="@+id/relLay_email"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_below="@+id/relLay_email">
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp">
 
                 <ImageView
                     android:id="@+id/lock_img"
-                    android:padding="5dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:background="@color/mint"
                     android:contentDescription="@string/contentDescription"
-                    android:src="@drawable/lock_icon"
-                    android:background="@color/mint"/>
+                    android:padding="5dp"
+                    android:src="@drawable/lock_icon" />
 
                 <EditText
                     android:id="@+id/pwd_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
                     android:layout_alignBottom="@+id/lock_img"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/lock_img"
                     android:layout_toEndOf="@+id/lock_img"
-                    android:maxLines="1"
-                    android:lines="1"
-                    android:singleLine="true"
-                    android:maxEms="30"
-                    android:maxLength="30"
-                    android:paddingLeft="20dp"
-                    android:paddingStart="20dp"
+                    android:layout_toRightOf="@+id/lock_img"
                     android:background="@color/editTextField"
                     android:hint="@string/pwd"
-                    android:textSize="15sp"/>
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
 
             </RelativeLayout>
 
@@ -144,30 +144,30 @@
                 android:id="@+id/relLay_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
+                android:layout_below="@+id/relLay_pwd"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/relLay_pwd">
+                android:layout_marginRight="30dp">
 
                 <CheckBox
                     android:id="@+id/checkbox_remember_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="@string/remember_me"
-                    android:textColor="@color/textColor"
-                    android:layout_centerVertical="true"/>
+                    android:textColor="@color/textColor" />
 
                 <Button
                     android:id="@+id/forgot_pwd_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/forgot_pwd"
-                    android:background="@color/transparent"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:textColor="@color/textColor"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparent"
+                    android:text="@string/forgot_pwd"
                     android:textAllCaps="false"
-                    android:textSize="13sp"/>
+                    android:textColor="@color/textColor"
+                    android:textSize="13sp" />
 
             </RelativeLayout>
 
@@ -176,42 +176,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relLay_checkbox"
-                android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
                 android:background="@color/mint"
-                app:fontFamily="sans-serif-medium"
                 android:text="@string/big_sign_in"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                app:fontFamily="sans-serif-medium" />
 
             <ImageView
                 android:id="@+id/line_img"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_below="@+id/sign_in_btn"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
                 android:contentDescription="@string/contentDescription"
                 android:layerType="software"
+                android:src="@drawable/line" />
+
+            <Button
+                android:id="@+id/guest_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line_img"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginEnd="30dp"
-                android:src="@drawable/line"/>
+                android:background="@color/transparent"
+                android:text="@string/guest"
+                android:textAllCaps="false"
+                android:textColor="@color/textColor" />
 
             <Button
                 android:id="@+id/register_btn"
-                android:onClick="openRegistrationPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/guest_btn"
+                android:layout_marginTop="0dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
                 android:background="@color/transparent"
                 android:text="@string/no_account_yet"
-                android:textColor="@color/textColor"
                 android:textAllCaps="false"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/line_img"/>
+                android:textColor="@color/textColor" />
 
         </RelativeLayout>
 

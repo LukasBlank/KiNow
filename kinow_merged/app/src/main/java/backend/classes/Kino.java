@@ -1,8 +1,9 @@
 package backend.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Kino {
+public class Kino implements Serializable {
 
   private long kinoID;
   private String name,ort;

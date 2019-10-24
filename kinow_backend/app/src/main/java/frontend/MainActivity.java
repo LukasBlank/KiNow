@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import android.view.MenuItem;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
 
-public class MainActivity extends AppCompatActivity implements AccountFragment.OnLoginListener,MoviesFragment.OnKinoSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
     private ActionBar kinowToolbar;
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
     Fragment locationFragment = null;
     Fragment shoppingCartFragment = null;
     Fragment accountFragment = null;
+
+    BottomNavigationView navigation;
 
     //saving selected kino
     Kino kino;
@@ -47,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
         nutzer.setNutzerID(-1);
 
         //Bottom Navigation
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(botNavItemListener);
-        navigation.setSelectedItemId(R.id.tab_movies);
+        navigation.setSelectedItemId(R.id.tab_account);
 
     }
 
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
                     loadFragment(locationFragment);
                     return true;
                 case R.id.tab_cart:
-                    if (nutzer.getNutzerID()==-1)kinowToolbar.setTitle("ShoppingCart");
+                    if (nutzer.getNutzerID()<1)kinowToolbar.setTitle("Cart");
                     else kinowToolbar.setTitle("Einkäufe von " + nutzer.getVorname() + " " + nutzer.getNachname());
                     if(shoppingCartFragment==null)shoppingCartFragment = new ShoppingCartFragment();
                     loadFragment(shoppingCartFragment);
@@ -104,6 +107,12 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
     @Override
     public void onKinoIDChanged(Kino kino) {
         this.kino = kino;
+        navigation.setSelectedItemId(R.id.tab_movies);
+        kinowToolbar.setTitle(kino.getName());
+        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.replace(R.id.fragmentContainer,movieFragment);
+        t.addToBackStack(null);
+        t.commit();
     }//onKinoIDChanged
 
     @Override
@@ -112,7 +121,17 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
     }//getSelectedKino
 
     @Override
+    public Nutzer getSelectedNutzer() {
+        return nutzer;
+    }
+
+    @Override
     public void onLogin(Nutzer nutzer) {
         this.nutzer = nutzer;
+        navigation.setSelectedItemId(R.id.tab_movies);
+        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.replace(R.id.fragmentContainer,movieFragment);
+        t.addToBackStack(null);
+        t.commit();
     }//onLogin
 }//class

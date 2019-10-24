@@ -50,7 +50,7 @@ public class Bestellung {
   }//addBuchung
 
   public void removeBuchung (Buchung buchung){
-    if (buchungen.contains(buchung))buchungen.remove(buchung);
+      buchungen.remove(buchung);
   }//buchung
 
   public String getNutzerID (){
@@ -61,8 +61,7 @@ public class Bestellung {
   }//getNutzer
 
   public boolean equals (Bestellung bestellung){
-    if (this.besetellungsnummer.equals(bestellung.getBesetellungsnummer()))return true;
-    else return false;
+      return this.besetellungsnummer.equals(bestellung.getBesetellungsnummer());
   }//equals
 
   public void set (String key, Object o){

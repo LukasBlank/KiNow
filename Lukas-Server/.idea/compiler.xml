@@ -15,7 +15,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Nils-aktuell" options="" />
-      <module name="demo-REST" options="-parameters" />
+      <module name="demo-REST" options="" />
       <module name="demoRest" options="-parameters" />
     </option>
   </component>

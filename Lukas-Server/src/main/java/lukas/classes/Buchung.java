@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Buchung {
 
-  private long buchungspreis,vorführungspreis;
+  private double buchungspreis,vorführungspreis;
   private String vorführungsID,buchungsID;
   private ArrayList<Sitz> sitze;
   private ArrayList<Preisvariation> preisvariationen;
 
   public Buchung() {}
 
-  public Buchung(long buchungspreis,long vorführungspreis,String vorführungsID,String buchungID,ArrayList<Sitz>sitze,ArrayList<Preisvariation>preisvariationen){
+  public Buchung(double buchungspreis,double vorführungspreis,String vorführungsID,String buchungID,ArrayList<Sitz>sitze,ArrayList<Preisvariation>preisvariationen){
     this.buchungsID = buchungID;
     this.vorführungsID =vorführungsID;
     this.vorführungspreis = vorführungspreis;
@@ -21,12 +21,13 @@ public class Buchung {
     //setBuchungspreis
   }//K
 
-  public long getVorführungspreis() {
+  public double getVorführungspreis() {
     return vorführungspreis;
   }
 
-  public void setVorführungspreis(long vorführungspreis) {
+  public void setVorführungspreis(Double vorführungspreis) {
     this.vorführungspreis = vorführungspreis;
+    if (sitze!=null)setBuchungspreis();
   }
 
   public String getVorführungsID() {
@@ -51,6 +52,7 @@ public class Buchung {
 
   public void setSitze(ArrayList<Sitz> sitze) {
     this.sitze = sitze;
+    if (this.vorführungspreis>0)setBuchungspreis();
   }
 
   public ArrayList<Preisvariation> getPreisvariationen() {
@@ -61,7 +63,7 @@ public class Buchung {
     this.preisvariationen = preisvariationen;
   }
 
-  public long getBuchungspreis () { return this.buchungspreis; }
+  public double getBuchungspreis () { return this.buchungspreis; }
 
   public void setBuchungspreis (){
     if (vorführungspreis!=0 && sitze!=null){
@@ -79,7 +81,7 @@ public class Buchung {
 
   public String getBestellungsnummer (){
     if (this.buchungsID.length()>0 && this.buchungsID.indexOf('_')!=-1){
-      return this.buchungsID.substring(this.buchungsID.indexOf('_')+1,this.buchungsID.lastIndexOf('_'));
+      return this.buchungsID.substring(0,this.buchungsID.lastIndexOf('_'));
     }//then
     else return null;
   }//getBestellugsnummer
@@ -100,11 +102,11 @@ public class Buchung {
     switch (key){
       case "buchungsID": this.buchungsID = (String) o;
       break;
-      case "vorführungspreis": this.vorführungspreis = Long.parseLong(o.toString());
+      case "vorführungspreis": this.vorführungspreis = Double.parseDouble(o.toString());
       break;
       case "vorführungsID": this.vorführungsID = (String) o;
       break;
-      case "buchungspreis": this.buchungspreis = Long.parseLong(o.toString());
+      case "buchungspreis": this.buchungspreis = Double.parseDouble(o.toString());
       break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch

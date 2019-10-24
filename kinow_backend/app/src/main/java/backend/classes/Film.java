@@ -1,12 +1,14 @@
 package backend.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import backend.classes.Vorführung;
 
 
-public class Film {
+public class Film implements Serializable {
   private long filmID,fsk,dauer,bewertung;
-  private String titel,beschreibung;
+  private String titel,beschreibung,link,bildLink;
   private ArrayList<String> genres;
   private ArrayList<String> darsteller;
   private ArrayList<String> regie;
@@ -14,7 +16,7 @@ public class Film {
 
   public Film() {}
 
-  public Film(long filmID, String titel, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie, ArrayList<Vorführung> vorführungen){
+  public Film(long filmID, String titel,String bildLink, String beschreibung, long dauer, long fsk, long bewertung, ArrayList<String> genres, ArrayList<String> darsteller, ArrayList<String> regie, ArrayList<Vorführung> vorführungen,String link){
     this.filmID = filmID;
     this.titel = titel;
     this.beschreibung = beschreibung;
@@ -25,6 +27,8 @@ public class Film {
     this.darsteller = darsteller;
     this.regie = regie;
     this.vorführungen = vorführungen;
+    this.link = link;
+    this.bildLink = bildLink;
   }//K
 
   public long getFilmID() {
@@ -75,6 +79,14 @@ public class Film {
     this.beschreibung = beschreibung;
   }
 
+  public String getBildLink() {
+    return bildLink;
+  }
+
+  public void setBildLink(String bildLink) {
+    this.bildLink = bildLink;
+  }
+
   public ArrayList<String> getGenres() {
     return genres;
   }
@@ -122,12 +134,19 @@ public class Film {
   }//addVorführung
 
   public void removeVorführung (Vorführung v){
-    if (vorführungen.contains(v))vorführungen.remove(v);
+      vorführungen.remove(v);
   }//removeVorführung
 
+  public String getLink() {
+    return link;
+  }
+
+  public void setLink(String link) {
+    this.link = link;
+  }
+
   public boolean equals (Film film){
-    if (this.filmID==film.getFilmID())return true;
-    else return false;
+      return this.filmID == film.getFilmID();
   }//equals
 
   public void set (String key, Object o){
@@ -150,6 +169,9 @@ public class Film {
         break;
       case "bewertung": this.bewertung = Long.parseLong(o.toString());
         break;
+      case "link": this.link = (String)o;
+        break;
+      case "bildLink": this.bildLink = bildLink;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set
