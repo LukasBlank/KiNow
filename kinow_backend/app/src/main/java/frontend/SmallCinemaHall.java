@@ -1160,8 +1160,22 @@ public class SmallCinemaHall extends AppCompatActivity {
         Button btn_g5 = findViewById(R.id.g5);Button btn_g6 = findViewById(R.id.g6);Button btn_g7 = findViewById(R.id.g7);
 
 
-        if (belegteSitze.size()!=0){
+        if (belegteSitze.size()!=0 || reserviert.size()!=0){
             for (Sitz s : belegteSitze){
+                String sitzID = s.getSitzID();
+                sitzID = sitzID.substring(sitzID.lastIndexOf('_')+1);
+                switch (sitzID){
+                    case "A1": btn_a1.setBackgroundResource(R.drawable.seat_black);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_black);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_black);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_black);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_black);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_black);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_black);break;
+                    case "B1": btn_b1.setBackgroundResource(R.drawable.seat_black);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_black);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_black);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_black);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_black);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_black);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_black);break;
+                    case "C1": btn_c1.setBackgroundResource(R.drawable.seat_black);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_black);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_black);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_black);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_black);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_black);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_black);break;
+                    case "D1": btn_d1.setBackgroundResource(R.drawable.seat_black);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_black);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_black);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_black);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_black);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_black);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_black);break;
+                    case "E1": btn_e1.setBackgroundResource(R.drawable.seat_black);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_black);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_black);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_black);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_black);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_black);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_black);break;
+                    case "F1": btn_f1.setBackgroundResource(R.drawable.seat_black);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_black);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_black);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_black);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_black);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_black);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_black);break;
+                    case "G1": btn_g1.setBackgroundResource(R.drawable.seat_black);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_black);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_black);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_black);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_black);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_black);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_black);break;
+                    default: ;
+                }//switch
+            }//for
+            for (Sitz s : reserviert){
                 String sitzID = s.getSitzID();
                 sitzID = sitzID.substring(sitzID.lastIndexOf('_')+1);
                 switch (sitzID){
