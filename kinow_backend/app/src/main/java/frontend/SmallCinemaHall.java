@@ -26,7 +26,7 @@ public class SmallCinemaHall extends AppCompatActivity {
 
     Vorführung vorführung;
     Nutzer nutzer;
-    ArrayList<Sitz> freieSitze,belegteSitze,selected;
+    ArrayList<Sitz> freieSitze,belegteSitze,selected,reserviert;
     Requests r;
 
     
@@ -39,6 +39,7 @@ public class SmallCinemaHall extends AppCompatActivity {
         vorführung = (Vorführung) getIntent().getSerializableExtra("vorführung");
         freieSitze = r.getFreieSitze(vorführung.getVorführungsID());
         belegteSitze = r.getBelegteSitze(vorführung.getVorführungsID());
+        reserviert = r.getReservierte(vorführung.getVorführungsID());
         selected = new ArrayList<>();
         setup();
     }//onCreate

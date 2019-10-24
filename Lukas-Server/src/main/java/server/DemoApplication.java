@@ -243,6 +243,32 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBelegt
 
+    @RequestMapping(value = "/getReservierte")
+    public ResponseEntity<Object> getReservierte(@RequestHeader("vorfuehrungsID") String vorführungsID){
+      String kinoID = vorführungsID.substring(0,vorführungsID.indexOf('_'));
+      String filmID = vorführungsID.substring(vorführungsID.indexOf('_')+1);
+      filmID = filmID.substring(filmID.indexOf('_')+1);
+      filmID = filmID.substring(0,filmID.indexOf('_'));
+      //Zunächst die freien Sitze in die Map einfügen
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID)
+          .collection("spieltFilme").document(filmID)
+          .collection("Vorstellungen").document(vorführungsID)
+          .collection("ReservierteSitze").get();
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        for (DocumentSnapshot document : documents){
+          map.put(document.getId(),document.getData());
+        }//for
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getBelegt
+
     /**
     @RequestMapping(value = "/buchen")
     public ResponseEntity<Object> buchen(@RequestHeader("sitze") String sitze, @RequestHeader("nutzer") String nutzerID){
@@ -467,8 +493,6 @@ public class DemoApplication {
       }//catch
 
     }//neueReservierung
-
-
 
 
   }//Controller
