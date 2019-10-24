@@ -1,5 +1,6 @@
 package frontend;
 
+import android.accounts.AbstractAccountAuthenticator;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+
+import backend.classes.Buchung;
+import backend.classes.Nutzer;
+import backend.connections.Requests;
 
 
 /**
@@ -28,6 +35,12 @@ public class ShoppingCartFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private OnLoadCartListener onLoadCartListener;
+
+    private Nutzer nutzer;
+
+    private ArrayList<Buchung>reservierungen;
+    private ArrayList<Buchung>buchungen;
 
     public ShoppingCartFragment() {
         // Required empty public constructor
@@ -63,8 +76,22 @@ public class ShoppingCartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        //Lade den ausgewählten Nutzer
+        onLoadCartListener = (OnLoadCartListener) getContext();
+        nutzer = onLoadCartListener.onLoadGetNutzer();
+        reservierungen = new ArrayList<>();
+        buchungen = new ArrayList<>();
+
+        Requests request = new Requests();
+        if (nutzer.getNutzerID()>0){
+            reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
+            //bestellungen holen
+        }//then
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,4 +132,8 @@ public class ShoppingCartFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public interface OnLoadCartListener {
+        Nutzer onLoadGetNutzer();
+    }//interface
 }

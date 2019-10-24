@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
 
-public class MainActivity extends AppCompatActivity implements AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements ShoppingCartFragment.OnLoadCartListener, AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
     private ActionBar kinowToolbar;
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
         nutzer.setNutzerID(-1);
 
         //Bottom Navigation
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(botNavItemListener);
         navigation.setSelectedItemId(R.id.tab_account);
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
                     loadFragment(locationFragment);
                     return true;
                 case R.id.tab_cart:
-                    if (nutzer.getNutzerID()==-1)kinowToolbar.setTitle("Cart");
+                    if (nutzer.getNutzerID()<1)kinowToolbar.setTitle("Cart");
                     else kinowToolbar.setTitle("Einkäufe von " + nutzer.getVorname() + " " + nutzer.getNachname());
                     if(shoppingCartFragment==null)shoppingCartFragment = new ShoppingCartFragment();
                     loadFragment(shoppingCartFragment);
@@ -134,4 +134,10 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
         t.addToBackStack(null);
         t.commit();
     }//onLogin
+
+    @Override
+    public Nutzer onLoadGetNutzer() {
+        return nutzer;
+    }//onLoadGetNutzer
+
 }//class

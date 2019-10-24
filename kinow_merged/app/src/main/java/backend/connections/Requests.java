@@ -2,10 +2,12 @@ package backend.connections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import backend.classes.Buchung;
 import backend.classes.Film;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
@@ -178,8 +180,7 @@ public class Requests {
             }//then
             else {
                 ausgabe = tr.getErg();
-                if (ausgabe.equals("Success"))return true;
-                else return false;
+                return ausgabe.equals("Success");
             }//else
         }catch (Exception e){
             e.printStackTrace();
@@ -189,7 +190,7 @@ public class Requests {
 
     public ArrayList<Vorführung> getVor (long kinoID, long filmID){
         ausgabe = "";
-        if (kinoID==0 || filmID==0)return null;
+        if (kinoID==0)return null;
         else {
             ArrayList<backend.classes.Vorführung> vorführungen  = new ArrayList<Vorführung>();
             ThreadRequest tr = new ThreadRequest();
@@ -236,15 +237,15 @@ public class Requests {
         }//else
     }//getVor
 
-    public ArrayList<Sitz> getFreieSitze (String vorführungsID){
+    public ArrayList<Sitz> getFreieSitze (String vorfuehrungsID){
         ausgabe = "";
-        if (vorführungsID.length()==0)return null;
+        if (vorfuehrungsID.length()==0)return null;
         else {
             ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
             ThreadRequest tr = new ThreadRequest();
             String url = "http://94.16.123.237:8080/getFrei";
             Request request = new Request.Builder()
-                    .addHeader("vorführungsID",vorführungsID)
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
                     .url(url).build();
             tr.setRequest(request);
             tr.start();
@@ -282,15 +283,15 @@ public class Requests {
         }//else
     }//getFreieSitze
 
-    public ArrayList<Sitz> getBelegteSitze (String vorführungsID){
+    public ArrayList<Sitz> getBelegteSitze (String vorfuehrungsID){
         ausgabe = "";
-        if (vorführungsID.length()==0)return null;
+        if (vorfuehrungsID.length()==0)return null;
         else {
             ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
             ThreadRequest tr = new ThreadRequest();
             String url = "http://94.16.123.237:8080/getBelegt";
             Request request = new Request.Builder()
-                    .addHeader("vorführungsID",vorführungsID)
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
                     .url(url).build();
             tr.setRequest(request);
             tr.start();
@@ -328,7 +329,174 @@ public class Requests {
         }//else
     }//getBelegteSitze
 
+    public ArrayList<Sitz> getReservierte (String vorfuehrungsID){
+        ausgabe = "";
+        if (vorfuehrungsID.length()==0)return null;
+        else {
+            ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
+            ThreadRequest tr = new ThreadRequest();
+            String url = "http://94.16.123.237:8080/getReservierte";
+            Request request = new Request.Builder()
+                    .addHeader("vorfuehrungsID",vorfuehrungsID)
+                    .url(url).build();
+            tr.setRequest(request);
+            tr.start();
+            try {
+                tr.join();
+                long anfang = System.currentTimeMillis();
+                long ende = anfang;
+                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                do {
+                    ende = System.currentTimeMillis();
+                } while (!tr.isFertig() && ende-anfang<10000);
+                if (!tr.isFertig()){
+                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                    return null;
+                }//then
+                else {
+                    ausgabe = tr.getErg();
+                    //gesamte Ausgabe zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Sitz s = new Sitz();
+                        for (Map.Entry<String,Object> e : data.entrySet()){
+                            s.set(e.getKey(),e.getValue());
+                        }//for
+                        sitze.add(s);
+                    }//for
+                    return sitze;
+                }//else
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }//catch
+        }//else
+    }//getReservierte
 
+    public boolean reservieren (ArrayList<Sitz> sitze, String nutzerID){
+        String head =sitzeToString(sitze);
+        ausgabe = "";
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/reservieren";
+        Request request = new Request.Builder()
+                .addHeader("sitze",head)
+                .addHeader("nutzer",nutzerID)
+                .url(url).build();
+        tr.setRequest(request);
+        tr.start();
+        try {
+            tr.join();
+            long anfang = System.currentTimeMillis();
+            long ende = anfang;
+            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+            do {
+                ende = System.currentTimeMillis();
+            } while (!tr.isFertig() && ende-anfang<10000);
+            if (!tr.isFertig()){
+                System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                return false;
+            }//then
+            else {
+                ausgabe = tr.getErg();
+                return ausgabe.equals("Success");
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }//catch
+    }//reservieren
 
+    private String sitzeToString (ArrayList<Sitz> sitze){
+       String erg = "{";
+       for (Sitz tmp : sitze){
+           erg += "\""+tmp.getSitzID()+"\":" + tmp.toMapString() + ",";
+       }//for
+       erg = erg.substring(0,erg.lastIndexOf(','));
+       erg += "}";
+       return erg;
+    }//sitzeToString
+
+    public ArrayList<Buchung> getReservierungen(String nutzerID){
+        ausgabe = "";
+        if (nutzerID.equals(0)||nutzerID==null)return null;
+        else {
+            ArrayList<backend.classes.Buchung> buchungen  = new ArrayList<>();
+            ThreadRequest tr = new ThreadRequest();
+            String url = "http://94.16.123.237:8080/getReservierungen";
+            Request request = new Request.Builder()
+                    .addHeader("nutzerID",nutzerID)
+                    .url(url).build();
+            tr.setRequest(request);
+            tr.start();
+            try {
+                tr.join();
+                long anfang = System.currentTimeMillis();
+                long ende = anfang;
+                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                do {
+                    ende = System.currentTimeMillis();
+                } while (!tr.isFertig() && ende-anfang<10000);
+                if (!tr.isFertig()){
+                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                    return null;
+                }//then
+                else {
+                    ausgabe = tr.getErg();
+                    //gesamte Ausgabe zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Buchung b = new Buchung();
+                        for (Map.Entry<String,Object> e : data.entrySet()){
+                            b.set(e.getKey(),e.getValue());
+                        }//for
+                        ausgabe = "";
+                        ArrayList<Sitz>sitze = new ArrayList<>();
+                        tr = new ThreadRequest();
+                        url = "http://94.16.123.237:8080/getResSitze";
+                        request = new Request.Builder()
+                                .addHeader("reservierungsID",b.getBuchungID())
+                                .url(url).build();
+                        tr.setRequest(request);
+                        tr.start();
+                        tr.join();
+                        anfang = System.currentTimeMillis();
+                        ende = anfang;
+                        //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                        do {
+                            ende = System.currentTimeMillis();
+                        } while (!tr.isFertig() && ende-anfang<10000);
+                        if (!tr.isFertig()){
+                            System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                            return null;
+                        }//then
+                        else {
+                            ausgabe = tr.getErg();
+                            //gesamte Ausgabe zu einer Map parsen
+                            map = new ObjectMapper().readValue(ausgabe, Map.class);
+                            //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                            for (Map.Entry<String,Object> et : map.entrySet()){
+                                data = (Map<String, Object>) et.getValue();
+                                Sitz s = new Sitz();
+                                for (Map.Entry<String,Object> ea : data.entrySet()){
+                                    s.set(ea.getKey(),ea.getValue());
+                                }//for
+                                sitze.add(s);
+                            }//for
+                        }//else
+                        b.setSitze(sitze);
+                        buchungen.add(b);
+                    }//for
+                    return buchungen;
+                }//else
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }//catch
+        }//else
+    }//getReservierungen
 
 }//class

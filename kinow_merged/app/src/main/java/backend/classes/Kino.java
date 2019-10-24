@@ -61,8 +61,7 @@ public class Kino implements Serializable {
   }
 
   public boolean equals (Kino kino){
-    if (this.kinoID == kino.getKinoID()) return true;
-    else return false;
+      return this.kinoID == kino.getKinoID();
   }//equals
 
   public void addFilm (Film film) {
@@ -84,10 +83,9 @@ public class Kino implements Serializable {
   }//getFilm
 
   public Kinosaal getSaal (String ID){
-    Kinosaal erg = null ;
+    Kinosaal erg = null;
     for (Kinosaal saal : saele){
-      if (saal.getSaalnummer().equals(ID)){
-        erg = saal;}
+      if (saal.getSaalnummer().equals(ID))erg = saal;
     }//for
     return erg;
   }//getSaal

@@ -36,7 +36,7 @@ public class KinosaalTest {
     TestKino.setSaele(TestSaelle);
     TestSaelle.add(TestSaal1);
     for (int i = 0; i < 49; i++) {
-      TestSitze.add(new Sitz("1" + (i + 1), false, false));
+      TestSitze.add(new Sitz("" + (i + 1), false, false));
     }
   }
 
@@ -88,7 +88,7 @@ public class KinosaalTest {
   @Test
   public void getKinoID() {
     main();
-    Assert.assertEquals("1",TestSaal1.getKinoID());
+    Assert.assertEquals(1,TestSaal1.getKinoID());
   }
 
   @Test

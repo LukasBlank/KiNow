@@ -83,29 +83,22 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         btnBuchen = findViewById(R.id.button);
 
         if (vorführungen!=null){
-            if(vorführungen.size()>2){
+            if (vorführungen.size()>2){
                 timeOne.setText(vorführungen.get(0).getZeit());
                 timeTwo.setText(vorführungen.get(1).getZeit());
                 timeThree.setText(vorführungen.get(2).getZeit());
             }//then
         }//then
 
-        if (kino.getKinoID()!=0&&vorführungen!=null){
-            if (vorführungen.size()>2){
-                timeOne.setText(vorführungen.get(0).getZeit());
-                timeTwo.setText(vorführungen.get(1).getZeit());
-                timeThree.setText(vorführungen.get(2).getZeit());
+        if (kino.getKinoID()!=0 && vorführungen!=null){
+            timeOne.setVisibility(View.VISIBLE);
+            timeTwo.setVisibility(View.VISIBLE);
+            timeThree.setVisibility(View.VISIBLE);
 
-                timeOne.setVisibility(View.VISIBLE);
-                timeTwo.setVisibility(View.VISIBLE);
-                timeThree.setVisibility(View.VISIBLE);
-
-                timeOne.setOnClickListener(onClickListener);
-                timeTwo.setOnClickListener(onClickListener);
-                timeThree.setOnClickListener(onClickListener);
-                btnBuchen.setOnClickListener(onClickListener);
-            }//then
-
+            timeOne.setOnClickListener(onClickListener);
+            timeTwo.setOnClickListener(onClickListener);
+            timeThree.setOnClickListener(onClickListener);
+            btnBuchen.setOnClickListener(onClickListener);
         }//then
 
 
@@ -160,7 +153,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     };
 
     public void watchTrailer(View view) {
-        Intent intent = new Intent(MovieDetailScreen.this, MovieTrailer.class);
+        Intent intent = new Intent(this, MovieTrailer.class);
         intent.putExtra("link",film.getLink());
         startActivity(intent);
     }//watchTrailer

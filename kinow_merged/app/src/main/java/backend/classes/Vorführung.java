@@ -41,6 +41,14 @@ public class Vorführung implements Serializable {
     else return vorführungsID.substring(0,vorführungsID.indexOf('_'));
   }//getKinoID
 
+  public String getFilmID (){
+    if (vorführungsID.length()==0 || vorführungsID.indexOf('_')==-1)return null;
+    else {
+      String filmID = vorführungsID.substring(0,vorführungsID.lastIndexOf('_'));
+      return filmID.substring(filmID.lastIndexOf('_')+1);
+    }//else
+  }//getFilmID
+
   public long getGrunddauer() {
     return grunddauer;
   }
@@ -129,7 +137,7 @@ public class Vorführung implements Serializable {
   }//addWerbung
 
   public void removeWerbung(Werbung werbung){
-    if(werbungen.contains(werbung))werbungen.remove(werbung);
+      werbungen.remove(werbung);
   }//removeWerbung
 
   public ArrayList<Sitz> getFreieSitze() {
@@ -165,8 +173,7 @@ public class Vorführung implements Serializable {
   }//getAnzahlFreieSitze
 
   public boolean equals (Vorführung vor){
-    if (vorführungsID.equals(vor.getVorführungsID()))return true;
-    else return false;
+      return vorführungsID.equals(vor.getVorführungsID());
   }//equals
 
   public void set (String key, Object o){
