@@ -269,6 +269,48 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBelegt
 
+    @RequestMapping(value = "/getBestellungen")
+    public ResponseEntity<Object> getBestellungen(@RequestHeader("nutzerID") String nutzerID){
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      if (Long.parseLong(nutzerID)>=1){
+        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
+            .collection("Bestellungen").get();
+        try {
+          QuerySnapshot querySnapshot = query.get();
+          List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+          for (DocumentSnapshot document : documents){
+            map.put(document.getId(),document.getData());
+          }//for
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } catch (ExecutionException e) {
+          e.printStackTrace();
+        }//catch
+      }//then
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getBestellungen
+
+    @RequestMapping(value = "/getReservierungen")
+    public ResponseEntity<Object> getReservierungen(@RequestHeader("nutzerID") String nutzerID){
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      if (Long.parseLong(nutzerID)>=1){
+        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
+            .collection("Reservierungen").get();
+        try {
+          QuerySnapshot querySnapshot = query.get();
+          List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+          for (DocumentSnapshot document : documents){
+            map.put(document.getId(),document.getData());
+          }//for
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } catch (ExecutionException e) {
+          e.printStackTrace();
+        }//catch
+      }//then
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getBestellungen
+
     /**
     @RequestMapping(value = "/buchen")
     public ResponseEntity<Object> buchen(@RequestHeader("sitze") String sitze, @RequestHeader("nutzer") String nutzerID){
