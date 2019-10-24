@@ -139,4 +139,5 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartFragm
     public Nutzer onLoadGetNutzer() {
         return nutzer;
     }//onLoadGetNutzer
+
 }//class

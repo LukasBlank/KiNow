@@ -1,7 +1,10 @@
 package frontend;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +31,7 @@ public class SmallCinemaHall extends AppCompatActivity {
     Nutzer nutzer;
     ArrayList<Sitz> freieSitze,belegteSitze,selected,reserviert;
     Requests r;
+
 
     
     @Override
@@ -81,7 +85,9 @@ public class SmallCinemaHall extends AppCompatActivity {
         if (selected.size()==0) Toast.makeText(this, "No seats selected.", Toast.LENGTH_SHORT).show();
         else {
             boolean möglich = r.reservieren(selected,String.valueOf(nutzer.getNutzerID()));
-            if (möglich) Toast.makeText(this, "Reservierung zum Warenkorb hinzugefügt.", Toast.LENGTH_SHORT).show();
+            if (möglich){
+                Toast.makeText(this, "Reservierung zum Warenkorb hinzugefügt.", Toast.LENGTH_SHORT).show();
+            }//then
             else Toast.makeText(this, "Reservierung leider nicht möglich. Versuchen Sie es erneut.", Toast.LENGTH_SHORT).show();
         }//else
     }//bookSeats
@@ -1191,4 +1197,5 @@ public class SmallCinemaHall extends AppCompatActivity {
             }//for
         }//then
     }//setup
+
 }//class

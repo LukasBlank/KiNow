@@ -453,18 +453,49 @@ public class Requests {
                         for (Map.Entry<String,Object> e : data.entrySet()){
                             b.set(e.getKey(),e.getValue());
                         }//for
+                        ausgabe = "";
+                        ArrayList<Sitz>sitze = new ArrayList<>();
+                        tr = new ThreadRequest();
+                        url = "http://94.16.123.237:8080/getResSitze";
+                        request = new Request.Builder()
+                                .addHeader("reservierungsID",b.getBuchungID())
+                                .url(url).build();
+                        tr.setRequest(request);
+                        tr.start();
+                        tr.join();
+                        anfang = System.currentTimeMillis();
+                        ende = anfang;
+                        //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                        do {
+                            ende = System.currentTimeMillis();
+                        } while (!tr.isFertig() && ende-anfang<10000);
+                        if (!tr.isFertig()){
+                            System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                            return null;
+                        }//then
+                        else {
+                            ausgabe = tr.getErg();
+                            //gesamte Ausgabe zu einer Map parsen
+                            map = new ObjectMapper().readValue(ausgabe, Map.class);
+                            //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                            for (Map.Entry<String,Object> et : map.entrySet()){
+                                data = (Map<String, Object>) et.getValue();
+                                Sitz s = new Sitz();
+                                for (Map.Entry<String,Object> ea : data.entrySet()){
+                                    s.set(ea.getKey(),ea.getValue());
+                                }//for
+                                sitze.add(s);
+                            }//for
+                        }//else
+                        b.setSitze(sitze);
                         buchungen.add(b);
                     }//for
-                    ArrayList<Sitz>sitze = new ArrayList<>();
-                    tr = new ThreadRequest();
-                    url = "http://94.16.123.237:8080/getReservierungen";
-
+                    return buchungen;
                 }//else
             }catch (Exception e){
                 e.printStackTrace();
                 return null;
             }//catch
-
         }//else
     }//getReservierungen
 

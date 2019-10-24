@@ -153,7 +153,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     };
 
     public void watchTrailer(View view) {
-        Intent intent = new Intent(MovieDetailScreen.this, MovieTrailer.class);
+        Intent intent = new Intent(this, MovieTrailer.class);
         intent.putExtra("link",film.getLink());
         startActivity(intent);
     }//watchTrailer

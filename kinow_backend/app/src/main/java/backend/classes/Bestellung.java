@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Bestellung {
 
-  private long gesamtpreis;
+  private double gesamtpreis;
   private String besetellungsnummer;
   private ArrayList<Buchung> buchungen;
 
   public Bestellung (){}
 
-  public Bestellung(String besetellungsnummer, long gesamtpreis, ArrayList<Buchung> buchungen){
+  public Bestellung(String besetellungsnummer, double gesamtpreis, ArrayList<Buchung> buchungen){
     this.besetellungsnummer = besetellungsnummer;
     this.buchungen = buchungen;
     setGesamtpreis();
@@ -21,7 +21,7 @@ public class Bestellung {
     return besetellungsnummer;
   }
 
-  public long getGesamtpreis() {
+  public double getGesamtpreis() {
     return gesamtpreis;
   }
 
@@ -35,10 +35,12 @@ public class Bestellung {
 
   public void setBuchungen(ArrayList<Buchung> buchungen) {
     this.buchungen = buchungen;
+    setGesamtpreis();
   }
 
   public void setGesamtpreis (){
     if (buchungen!=null){
+      gesamtpreis = 0;
       for (Buchung b : buchungen){
         gesamtpreis += b.getBuchungspreis();
       }//for
@@ -47,10 +49,12 @@ public class Bestellung {
 
   public void addBuchung (Buchung buchung){
     if (!buchungen.contains(buchung))buchungen.add(buchung);
+    setGesamtpreis();
   }//addBuchung
 
   public void removeBuchung (Buchung buchung){
-      buchungen.remove(buchung);
+    if (buchungen.contains(buchung))buchungen.remove(buchung);
+    setGesamtpreis();
   }//buchung
 
   public String getNutzerID (){
@@ -61,15 +65,16 @@ public class Bestellung {
   }//getNutzer
 
   public boolean equals (Bestellung bestellung){
-      return this.besetellungsnummer.equals(bestellung.getBesetellungsnummer());
+    if (this.besetellungsnummer.equals(bestellung.getBesetellungsnummer()))return true;
+    else return false;
   }//equals
 
   public void set (String key, Object o){
     switch (key){
       case "bestellungsnummer": this.besetellungsnummer = (String) o;
-      break;
+        break;
       case "gesamtpreis": this.gesamtpreis = Long.parseLong(o.toString());
-      break;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

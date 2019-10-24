@@ -102,7 +102,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 if (success){
                     Toast.makeText(getBaseContext(), "Registrierung erfolgreich. Sie können sich nun anmelden."
                             , Toast.LENGTH_SHORT).show();
-                    finish();
+                    openSignInPage(view);
                 }//then
                 else Toast.makeText(getBaseContext(), "Registrierung nicht möglich", Toast.LENGTH_SHORT).show();
 

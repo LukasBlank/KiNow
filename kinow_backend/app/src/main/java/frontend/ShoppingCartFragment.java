@@ -1,5 +1,6 @@
 package frontend;
 
+import android.accounts.AbstractAccountAuthenticator;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -80,10 +81,14 @@ public class ShoppingCartFragment extends Fragment {
         //Lade den ausgewählten Nutzer
         onLoadCartListener = (OnLoadCartListener) getContext();
         nutzer = onLoadCartListener.onLoadGetNutzer();
+        reservierungen = new ArrayList<>();
+        buchungen = new ArrayList<>();
 
         Requests request = new Requests();
-        reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
-
+        if (nutzer.getNutzerID()>0){
+            reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
+            //bestellungen holen
+        }//then
 
         // Inflate the layout for this fragment
         return view;
