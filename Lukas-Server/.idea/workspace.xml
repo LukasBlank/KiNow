@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5da69a20-e8f8-4740-b7cc-570ba20f8c3f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/connections/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/connections/Requests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -48,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="313" column="41" selection-start-line="313" selection-start-column="30" selection-end-line="313" selection-end-column="41" />
+            <state relative-caret-position="439">
+              <caret line="336" column="4" selection-start-line="336" selection-start-column="4" selection-end-line="336" selection-end-column="4" />
               <folding>
                 <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getKinos#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -214,7 +213,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571920829287" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571926682385" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -262,12 +261,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571871429465</updated>
-      <workItem from="1571871446876" duration="15963000" />
+      <workItem from="1571871446876" duration="15974000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15981000" />
+    <option name="totallyTimeSpent" value="15992000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -321,7 +320,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java</url>
-          <line>545</line>
+          <line>543</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
@@ -370,8 +369,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="313" column="41" selection-start-line="313" selection-start-column="30" selection-end-line="313" selection-end-column="41" />
+        <state relative-caret-position="439">
+          <caret line="336" column="4" selection-start-line="336" selection-start-column="4" selection-end-line="336" selection-end-column="4" />
           <folding>
             <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getKinos#0;class#SimpleController#0;class#DemoApplication#0" />

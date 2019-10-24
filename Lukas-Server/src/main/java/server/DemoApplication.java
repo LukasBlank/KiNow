@@ -334,8 +334,6 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getResSitze
 
-
-
     /**
     @RequestMapping(value = "/buchen")
     public ResponseEntity<Object> buchen(@RequestHeader("sitze") String sitze, @RequestHeader("nutzer") String nutzerID){
