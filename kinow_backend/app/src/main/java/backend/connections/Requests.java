@@ -328,11 +328,11 @@ public class Requests {
         }//else
     }//getBelegteSitze
 
-    public boolean buchen (ArrayList<Sitz> sitze){
+    public boolean reservieren (ArrayList<Sitz> sitze, String nutzerID){
         String head =sitzeToString(sitze);
         ausgabe = "";
         ThreadRequest tr = new ThreadRequest();
-        String url = "http://94.16.123.237:8080/buchen";
+        String url = "http://94.16.123.237:8080/reservieren";
         Request request = new Request.Builder()
                 .addHeader("sitze",head)
                 .url(url).build();
@@ -358,7 +358,7 @@ public class Requests {
             e.printStackTrace();
             return false;
         }//catch
-    }//buchen
+    }//reservieren
 
     private String sitzeToString (ArrayList<Sitz> sitze){
        String erg = "{";
@@ -368,6 +368,6 @@ public class Requests {
        erg = erg.substring(0,erg.lastIndexOf(','));
        erg += "}";
        return erg;
-    }//
+    }//sitzeToString
 
 }//class

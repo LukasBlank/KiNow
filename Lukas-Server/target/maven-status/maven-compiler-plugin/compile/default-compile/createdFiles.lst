@@ -1,7 +1,5 @@
-com\example\demo\DemoApplication.class
 lukas\classes\Bestellung.class
 lukas\classes\Film.class
 lukas\classes\Buchung.class
 lukas\classes\Werbung.class
-com\example\demo\DemoApplication$SimpleController.class
 lukas\classes\Preisvariation.class

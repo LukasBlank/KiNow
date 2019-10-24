@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Bestellung {
 
-  private long gesamtpreis;
+  private double gesamtpreis;
   private String besetellungsnummer;
   private ArrayList<Buchung> buchungen;
 
   public Bestellung (){}
 
-  public Bestellung(String besetellungsnummer, long gesamtpreis, ArrayList<Buchung> buchungen){
+  public Bestellung(String besetellungsnummer, double gesamtpreis, ArrayList<Buchung> buchungen){
     this.besetellungsnummer = besetellungsnummer;
     this.buchungen = buchungen;
     setGesamtpreis();
@@ -21,7 +21,7 @@ public class Bestellung {
     return besetellungsnummer;
   }
 
-  public long getGesamtpreis() {
+  public double getGesamtpreis() {
     return gesamtpreis;
   }
 
