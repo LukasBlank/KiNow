@@ -311,6 +311,31 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBestellungen
 
+    @RequestMapping(value = "/getResSitze")
+    public ResponseEntity<Object> getResSitze(@RequestHeader("reservierungsID") String reservierungsID){
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      if (reservierungsID.length()!=0){
+        String nutzerID = reservierungsID.substring(0,reservierungsID.indexOf('_'));
+        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
+            .collection("Reservierungen").document(reservierungsID)
+            .collection("Sitze").get();
+        try {
+          QuerySnapshot querySnapshot = query.get();
+          List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+          for (DocumentSnapshot document : documents){
+            map.put(document.getId(),document.getData());
+          }//for
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } catch (ExecutionException e) {
+          e.printStackTrace();
+        }//catch
+      }//then
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getResSitze
+
+
+
     /**
     @RequestMapping(value = "/buchen")
     public ResponseEntity<Object> buchen(@RequestHeader("sitze") String sitze, @RequestHeader("nutzer") String nutzerID){

@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
 
-public class MainActivity extends AppCompatActivity implements AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements ShoppingCartFragment.OnLoadCartListener, AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
     private ActionBar kinowToolbar;
 
@@ -134,4 +134,9 @@ public class MainActivity extends AppCompatActivity implements AccountFragment.O
         t.addToBackStack(null);
         t.commit();
     }//onLogin
+
+    @Override
+    public Nutzer onLoadGetNutzer() {
+        return nutzer;
+    }//onLoadGetNutzer
 }//class

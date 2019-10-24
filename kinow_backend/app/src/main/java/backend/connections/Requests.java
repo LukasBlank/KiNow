@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import backend.classes.Buchung;
 import backend.classes.Film;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
@@ -416,5 +417,55 @@ public class Requests {
        erg += "}";
        return erg;
     }//sitzeToString
+
+    public ArrayList<Buchung> getReservierungen(String nutzerID){
+        ausgabe = "";
+        if (nutzerID.equals(0)||nutzerID==null)return null;
+        else {
+            ArrayList<backend.classes.Buchung> buchungen  = new ArrayList<>();
+            ThreadRequest tr = new ThreadRequest();
+            String url = "http://94.16.123.237:8080/getReservierungen";
+            Request request = new Request.Builder()
+                    .addHeader("nutzerID",nutzerID)
+                    .url(url).build();
+            tr.setRequest(request);
+            tr.start();
+            try {
+                tr.join();
+                long anfang = System.currentTimeMillis();
+                long ende = anfang;
+                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+                do {
+                    ende = System.currentTimeMillis();
+                } while (!tr.isFertig() && ende-anfang<10000);
+                if (!tr.isFertig()){
+                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
+                    return null;
+                }//then
+                else {
+                    ausgabe = tr.getErg();
+                    //gesamte Ausgabe zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
+                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Buchung b = new Buchung();
+                        for (Map.Entry<String,Object> e : data.entrySet()){
+                            b.set(e.getKey(),e.getValue());
+                        }//for
+                        buchungen.add(b);
+                    }//for
+                    ArrayList<Sitz>sitze = new ArrayList<>();
+                    tr = new ThreadRequest();
+                    url = "http://94.16.123.237:8080/getReservierungen";
+
+                }//else
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }//catch
+
+        }//else
+    }//getReservierungen
 
 }//class
