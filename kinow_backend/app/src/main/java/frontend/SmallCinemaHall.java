@@ -2,6 +2,7 @@ package frontend;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -31,7 +32,6 @@ public class SmallCinemaHall extends AppCompatActivity {
     Nutzer nutzer;
     ArrayList<Sitz> freieSitze,belegteSitze,selected,reserviert;
     Requests r;
-
 
     
     @Override

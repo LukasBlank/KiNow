@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+import javax.print.Doc;
+import lukas.classes.Bestellung;
 import lukas.classes.Buchung;
 import lukas.classes.Nutzer;
 import lukas.classes.Sitz;
@@ -40,11 +42,11 @@ public class DemoApplication {
       //Pfad muss angepasst werden ggf. in Java einfügen
 
       String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
+          new FileInputStream(url.getPath());//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -460,6 +462,35 @@ public class DemoApplication {
       return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
     }//reservieren
 
+    @RequestMapping(value = "/buchen")
+    public ResponseEntity<Object> buchen(@RequestHeader("nutzerID") String nutzerID){
+      long id = Long.parseLong(nutzerID);
+      String erg = "Success";
+      //Abbruch wenn falsche id
+      if (id<1)erg = "Error.";
+      else {
+        ApiFuture<DocumentSnapshot> queryDoc = db.collection("Nutzer").document(nutzerID).get();
+        DocumentSnapshot doc = null;
+        try {
+          //abbruch wenn es nutzer nicht gibt
+          doc = queryDoc.get();
+          if (!doc.exists())erg = "Error.";
+          else {
+            DocumentReference nutzer = db.collection("Nutzer").document(nutzerID);
+           ArrayList<Buchung> reservierungen = getRes(nutzerID);
+           if (reservierungen.size()>0){
+             if (!verbucheReservierungen(nutzer,reservierungen))erg = "Error.";
+           }//then
+          }//else
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } catch (ExecutionException e) {
+          e.printStackTrace();
+        }
+      }//else
+      return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
+    }//buchen
+
     private boolean sitzeFrei (ArrayList<Sitz> sitze){
       if (sitze!=null){
         ArrayList<Sitz> test = (ArrayList<Sitz>) sitze.clone();
@@ -559,6 +590,140 @@ public class DemoApplication {
 
     }//neueReservierung
 
+    private ArrayList<Buchung> getRes (String nutzerID){
+      ArrayList<Buchung> buchungen = new ArrayList<>();
+      DocumentReference nutzerRef = db.collection("Nutzer").document(nutzerID);
+      CollectionReference resRef = nutzerRef.collection("Reservierungen");
+      try {
+        ApiFuture<QuerySnapshot> queryQ = resRef.get();
+        QuerySnapshot q = queryQ.get();
+        List<QueryDocumentSnapshot> documents = q.getDocuments();
+        if (documents.size()==0)return buchungen;
+        else {
+          //buchungen aus reservierungen holen
+          Map<String,Object> map = new HashMap<>();
+          for (DocumentSnapshot document : documents){
+            map = document.getData();
+            Buchung b = new Buchung();
+            for (Map.Entry<String,Object> e : map.entrySet()){
+              b.set(e.getKey(),e.getValue());
+            }//for
+            buchungen.add(b);
+            //sitze für buchungen holen
+            for (Buchung buchung : buchungen){
+              ArrayList<Sitz> sitze = new ArrayList<>();
+              queryQ = resRef.document(buchung.getBuchungID()).collection("Sitze").get();
+              q = queryQ.get();
+              documents = q.getDocuments();
+              if (documents.size()!=0){
+                for (DocumentSnapshot d : documents){
+                  map = d.getData();
+                  Sitz s = new Sitz();
+                  for (Map.Entry<String,Object> entry : map.entrySet()){
+                    s.set(entry.getKey(),entry.getValue());
+                  }//for
+                  sitze.add(s);
+                }//for
+                b.setSitze(sitze);
+              }//then
+            }//for
+          }//for
+        }//else
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return buchungen;
+    }//getRes
+
+    private boolean verbucheReservierungen (DocumentReference nutzer, ArrayList<Buchung> reservierungen){
+      //sitze in vorführung umbuchen
+      for (Buchung buchung : reservierungen){
+        ArrayList<Sitz> sitze = buchung.getSitze();
+        DocumentReference vorRef;
+        if (sitze.size()>0){
+          Sitz s = sitze.get(0);
+          vorRef = db.collection("Kino").document(s.getKinoID()).collection("spieltFilme").document(s.getFilmID())
+              .collection("Vorstellungen").document(s.getVorID());
+          for (Sitz sitz : sitze){
+            Map<String,Object> sitzMap = sitzToMap(sitz);
+            vorRef.collection("ReservierteSitze").document(sitz.getSitzID()).delete();
+            vorRef.collection("BelegteSitze").document(sitz.getSitzID()).set(sitzMap);
+          }///for
+        }//then
+        else return false;
+      }//for
+
+      //reservierungen löschen
+      for (Buchung buch : reservierungen){
+        for (Sitz sit : buch.getSitze()){
+          nutzer.collection("Reservierungen").document(buch.getBuchungID()).collection("Sitze").document(sit.getSitzID()).delete();
+        }//for
+        nutzer.collection("Reservierungen").document(buch.getBuchungID()).delete();
+      }//for
+      //reservierungen zu bestellungen machen
+      Bestellung bestellung = new Bestellung();
+      bestellung.setBesetellungsnummer(getBestellungsnummer(nutzer));
+      bestellung.setBuchungen(reservierungen);
+      //bestellung hinzufügen
+      Map<String,Object> bestellungMap = new HashMap<>(); bestellungMap.put("bestellungsnummer",bestellung.getBesetellungsnummer()); bestellungMap.put("gesamtpreis",bestellung.getGesamtpreis());
+      nutzer.collection("Bestellungen").document(bestellung.getBesetellungsnummer()).set(bestellungMap);
+      //buchungen hinzufügen
+      for (Buchung b : bestellung.getBuchungen()){
+        //buchungsID updaten und buchungen hinzufügen
+        String buchungsID = bestellung.getBesetellungsnummer() + "_" + b.getBuchungID().substring(b.getBuchungID().lastIndexOf('_')+1);
+        b.setBuchungID(buchungsID);
+        Map<String,Object> buchungMap = buchungToMap(b);
+        nutzer.collection("Bestellungen").document(b.getBestellungsnummer()).collection("Buchungen").document(b.getBuchungID()).set(buchungMap);
+      //sitze der buchungen namen ändern und hinzufügen
+        for (Sitz s : b.getSitze()){
+          String sitzID = buchungsID + "_" + s.getSitzID().substring(s.getSitzID().lastIndexOf('_')+1);
+          s.setSitzID(sitzID);
+          Map<String,Object> sitzeMap = sitzToMap(s);
+          nutzer.collection("Bestellungen").document(b.getBestellungsnummer()).collection("Buchungen")
+              .document(b.getBuchungID()).collection("Sitze").document(s.getSitzID()).set(sitzeMap);
+        }//for
+      }//for
+      return true;
+    }//verbucheReservierungen
+
+    private Map<String,Object> sitzToMap (Sitz sitz){
+      if (sitz!=null){
+        Map<String,Object> map = new HashMap<>();
+        map.put("sitzID",sitz.getSitzID());
+        map.put("barrierefrei",sitz.isBarrierefrei());
+        map.put("loge",sitz.isLoge());
+        return map;
+      }//then
+      else return null;
+    }//sitzToMap
+
+    private Map<String,Object> buchungToMap (Buchung buchung){
+      if (buchung!=null){
+        Map<String,Object> buchungMap = new HashMap<>();
+        buchungMap.put("buchungsID",buchung.getBuchungID());
+        buchungMap.put("buchungspreis",buchung.getBuchungspreis());
+        buchungMap.put("vorführungsID",buchung.getVorführungsID());
+        return buchungMap;
+      }///then
+      else return null;
+    }//buchungToMap
+
+    private String getBestellungsnummer (DocumentReference nutzer){
+      String id = "";
+      ApiFuture<QuerySnapshot> q = nutzer.collection("Bestellungen").get();
+      try {
+        QuerySnapshot querySnapshot = q.get();
+        List<QueryDocumentSnapshot> documents =  querySnapshot.getDocuments();
+        id = nutzer.getId() + "_" + (documents.size()+1);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }
+      return id;
+    }//getBestellungsnummer
 
   }//Controller
 }// class
