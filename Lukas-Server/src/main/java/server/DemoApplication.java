@@ -42,11 +42,11 @@ public class DemoApplication {
       //Pfad muss angepasst werden ggf. in Java einfügen
 
       String path = "serviceAccountKey.json";
-      URL url = DemoApplication.class.getClassLoader().getResource(path);
+      //URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(url.getPath());//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
+          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
