@@ -282,9 +282,7 @@ public class DemoApplication {
                 //sitze aus der passendne vorführung entfernen und zu reservierten sitzen packen
                 for (Map.Entry<String,Map<String,Object>> en : map.entrySet()){
                   vorführungRef.collection("FreieSitze").document(en.getKey()).delete();
-                  Map<String,Object> reserv = en.getValue();
-                  reserv.put("zeit",System.currentTimeMillis());
-                  vorführungRef.collection("ReservierteSitze").document(en.getKey()).set(reserv);
+                  vorführungRef.collection("ReservierteSitze").document(en.getKey()).set(en.getValue());
                 }//for
                 //neue Reservierung unter dem passenden Nutzer vornhemen
                 erg = neueReservierung(nutzerID,map,sitzListe);
@@ -416,6 +414,8 @@ public class DemoApplication {
 
         //Erstelle eine Map in welche alle Informationen gepackt werden
         Map<String,Object> buchungsMap = buchungToMap(buchung);
+        //gebe zeitpunkt der reservierung mit um diese wieder umzukehren
+        buchungsMap.put("zeit",System.currentTimeMillis());
         //Dem Nutzer die Reservierungsbuchung hinzufügen
         resRef.document(buchungsID).set(buchungsMap);
         //Der Buchung die Sitze hinzufügen
@@ -535,10 +535,8 @@ public class DemoApplication {
         b.setBuchungID(buchungsID);
         Map<String,Object> buchungMap = buchungToMap(b);
         nutzer.collection("Bestellungen").document(b.getBestellungsnummer()).collection("Buchungen").document(b.getBuchungID()).set(buchungMap);
-      //sitze der buchungen namen ändern und hinzufügen
+      //sitze hinzufügen
         for (Sitz s : b.getSitze()){
-          String sitzID = buchungsID + "_" + s.getSitzID().substring(s.getSitzID().lastIndexOf('_')+1);
-          s.setSitzID(sitzID);
           Map<String,Object> sitzeMap = sitzToMap(s);
           nutzer.collection("Bestellungen").document(b.getBestellungsnummer()).collection("Buchungen")
               .document(b.getBuchungID()).collection("Sitze").document(s.getSitzID()).set(sitzeMap);
