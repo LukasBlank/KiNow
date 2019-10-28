@@ -172,7 +172,8 @@ public class Film implements Serializable {
         break;
       case "link": this.link = (String)o;
         break;
-      case "bildLink": this.bildLink = (String) bildLink;
+      case "bildLink": this.bildLink = (String) o;
+      break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

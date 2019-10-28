@@ -280,7 +280,9 @@ public class DemoApplication {
                 //sitze aus der passendne vorführung entfernen und zu reservierten sitzen packen
                 for (Map.Entry<String,Map<String,Object>> en : map.entrySet()){
                   vorführungRef.collection("FreieSitze").document(en.getKey()).delete();
-                  vorführungRef.collection("ReservierteSitze").document(en.getKey()).set(en.getValue());
+                  Map<String,Object> reserv = en.getValue();
+                  reserv.put("zeit",System.currentTimeMillis());
+                  vorführungRef.collection("ReservierteSitze").document(en.getKey()).set(reserv);
                 }//for
                 //neue Reservierung unter dem passenden Nutzer vornhemen
                 erg = neueReservierung(nutzerID,map,sitzListe);
