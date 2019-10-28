@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5da69a20-e8f8-4740-b7cc-570ba20f8c3f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Timer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Timer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Timer/src/main/java/server/Putzfrau.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Timer/src/main/java/server/Putzfrau.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Timer/target/classes/server/Putzfrau.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Timer/target/classes/server/Putzfrau.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/classes/Sitz.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/classes/Sitz.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -46,7 +46,7 @@
         <counts>
           <entry key="gradle" value="1" />
           <entry key="iml" value="2" />
-          <entry key="java" value="6" />
+          <entry key="java" value="7" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
@@ -54,7 +54,7 @@
         <counts>
           <entry key="Groovy" value="1" />
           <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="6" />
+          <entry key="JAVA" value="7" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
@@ -75,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-36">
-              <caret line="498" column="104" selection-start-line="498" selection-start-column="104" selection-end-line="498" selection-end-column="104" />
+            <state relative-caret-position="320">
+              <caret line="517" column="40" selection-start-line="517" selection-start-column="26" selection-end-line="517" selection-end-column="40" />
               <folding>
                 <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -97,10 +97,23 @@
                 <element signature="method#neueReservierung#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getBuchungsnummer#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getRes#0;class#SimpleController#0;class#DemoApplication#0" />
-                <element signature="method#verbucheReservierungen#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#sitzToMap#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#buchungToMap#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getBestellungsnummer#0;class#SimpleController#0;class#DemoApplication#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lukas/classes/Sitz.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+              <folding>
+                <element signature="method#getKinoID#0;class#Sitz#0" />
+                <element signature="method#getVorID#0;class#Sitz#0" />
+                <element signature="method#getSaalnummer#0;class#Sitz#0" />
               </folding>
             </state>
           </provider>
@@ -213,7 +226,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572272545529" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572277348895" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -269,19 +282,18 @@
       <workItem from="1572019843290" duration="2439000" />
       <workItem from="1572022330099" duration="880000" />
       <workItem from="1572025601267" duration="2619000" />
-      <workItem from="1572263536753" duration="6933000" />
+      <workItem from="1572263536753" duration="9018000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43456000" />
+    <option name="totallyTimeSpent" value="45541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18259935" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18259935" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -293,7 +305,7 @@
       <window_info anchor="bottom" id="Spring" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.49946293" visible="true" weight="0.57894737" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.49946293" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.2362822" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -302,7 +314,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="13" weight="0.3281075" />
-      <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50053704" side_tool="true" visible="true" weight="0.57894737" />
+      <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50053704" side_tool="true" visible="true" weight="0.0" />
       <window_info anchor="right" id="Google Cloud Storage" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Bean Validation" order="1" />
       <window_info anchor="right" id="Maven Projects" order="2" visible="true" weight="0.09989259" />
@@ -431,10 +443,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lukas/classes/Sitz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="method#getKinoID#0;class#Sitz#0" />
+            <element signature="method#getVorID#0;class#Sitz#0" />
+            <element signature="method#getSaalnummer#0;class#Sitz#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
-          <caret line="498" column="104" selection-start-line="498" selection-start-column="104" selection-end-line="498" selection-end-column="104" />
+        <state relative-caret-position="320">
+          <caret line="517" column="40" selection-start-line="517" selection-start-column="26" selection-end-line="517" selection-end-column="40" />
           <folding>
             <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -455,7 +479,6 @@
             <element signature="method#neueReservierung#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getBuchungsnummer#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getRes#0;class#SimpleController#0;class#DemoApplication#0" />
-            <element signature="method#verbucheReservierungen#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#sitzToMap#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#buchungToMap#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getBestellungsnummer#0;class#SimpleController#0;class#DemoApplication#0" />

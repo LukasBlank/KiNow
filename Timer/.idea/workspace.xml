@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="672a02d5-2093-4501-86a3-a476b413cb3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Lukas-Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lukas-Server/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/src/main/java/server/DemoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication$SimpleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication$SimpleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Putzfrau.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Putzfrau.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/classes/Sitz.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/classes/Sitz.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -85,12 +82,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="30" />
-          <entry key="java" value="1773" />
+          <entry key="java" value="2142" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1773" />
+          <entry key="JAVA" value="2142" />
           <entry key="PLAIN_TEXT" value="30" />
         </counts>
       </usages-collector>
@@ -101,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/Putzfrau.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="259">
+              <caret line="76" column="41" lean-forward="true" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -149,7 +146,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="940" />
     <option name="width" value="987" />
     <option name="height" value="1042" />
@@ -231,7 +228,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572272545583" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572277348975" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -293,11 +290,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45014000" />
+    <option name="totallyTimeSpent" value="49194000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1060" extended-state="7" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24973147" />
@@ -312,8 +308,8 @@
       <window_info anchor="bottom" id="Spring" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.051511757" />
-      <window_info active="true" anchor="bottom" id="Debug" order="6" visible="true" weight="0.462486" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.48264277" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.47816348" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="9" />
@@ -379,24 +375,6 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/Putzfrau.java</url>
-          <line>51</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/Putzfrau.java</url>
-          <line>83</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/lukas/classes/Buchung.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -436,8 +414,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/Putzfrau.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="259">
+          <caret line="76" column="41" lean-forward="true" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
         </state>
       </provider>
     </entry>

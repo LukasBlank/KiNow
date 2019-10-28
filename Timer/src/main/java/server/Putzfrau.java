@@ -29,11 +29,11 @@ public class Putzfrau {
       //Pfad muss angepasst werden ggf. in Java einfügen
 
       String path = "serviceAccountKey.json";
-      URL url = Putzfrau.class.getClassLoader().getResource(path);
+      //URL url = Putzfrau.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(url.getPath());//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
+          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -45,7 +45,17 @@ public class Putzfrau {
       e.printStackTrace();
     }//catch
     db = FirestoreClient.getFirestore();
-    cleanup();
+    while (true){
+      try {
+        Thread.sleep(120000);
+        System.out.println("Cleanup!");
+        cleanup();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+        System.out.println(e.getMessage());
+      }
+    }//while
+
   }//main
 
   private static void cleanup (){
@@ -64,10 +74,10 @@ public class Putzfrau {
             //alle reservierungen des nutzers
             for (DocumentSnapshot reservierung : reservierungen){
               long resZeit = reservierung.getLong("zeit");
-              if (grenze-resZeit>60000){
+              if (grenze-resZeit>600000){
                 DocumentReference documentReference = db.collection("Nutzer").document(document.getId()).collection("Reservierungen").document(reservierung.getId());
                 stonieren(documentReference);
-                //documentReference.delete();
+                documentReference.delete();
               }//then
             }//for
           }//then
@@ -85,24 +95,24 @@ public class Putzfrau {
     ApiFuture<QuerySnapshot> query = resRef.collection("Sitze").get();
     try {
       DocumentSnapshot doc = res.get();
-      String vorID = doc.getString("vorführungsID");
       QuerySnapshot querySnapshot = query.get();
       List<QueryDocumentSnapshot> sitze = querySnapshot.getDocuments();
       for (DocumentSnapshot sitz : sitze){
-        //sitz to map und sitzID aktualisieren
+        //sitz to map und danach löschen
         Map<String,Object> sitzMap = new HashMap<>();
         sitzMap.put("barrierefrei",sitz.getBoolean("barrierefrei"));
         sitzMap.put("loge",sitz.getBoolean("loge"));
-        String ID = sitz.getString("sitzID"); ID = ID.substring(ID.lastIndexOf('_')+1);
-        String sitzID = vorID + ID;
-        sitzMap.put("sitzID",sitzID);
+        sitzMap.put("sitzID",sitz.getString("sitzID"));
         //map in der vorführung von reserviert zu frei
+        String sitzID = sitzMap.get("sitzID").toString();
         String kinoID = sitzID.substring(0,sitzID.indexOf('_'));
-        String filmID = sitzID.substring(0,sitzID.indexOf('_')); filmID = filmID.substring(0,filmID.indexOf('_'));
+        String filmID = sitzID.substring(sitzID.indexOf('_')+1); filmID = filmID.substring(filmID.indexOf('_')+1);filmID = filmID.substring(0,filmID.indexOf('_'));
+        String vorID = sitzID.substring(0,sitzID.lastIndexOf('_'));
         DocumentReference vorRef = db.collection("Kino").document(kinoID).collection("spieltFilme").document(filmID)
             .collection("Vorstellungen").document(vorID);
-        //vorRef.collection("ReservierteSitze").document(sitzID).delete();
-        //vorRef.collection("FreieSitze").document(sitzID).set(sitzMap);
+        vorRef.collection("ReservierteSitze").document(sitzID).delete();
+        vorRef.collection("FreieSitze").document(sitzID).set(sitzMap);
+        resRef.collection("Sitze").document(sitzID).delete();
       }//for
     } catch (InterruptedException e) {
       e.printStackTrace();

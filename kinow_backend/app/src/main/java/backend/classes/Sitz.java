@@ -97,8 +97,8 @@ public class Sitz {
     String erg = "{";
     //"darsteller":["Angelina Jolie","Elle Fanning","Michelle Pfeiffer","Ed Skrein","Chiwetel Ejiofor"]
     if (sitzID!=null)erg += "\"sitzID\":\""+sitzID+"\",";
-    erg += "\"loge\":\"" +loge+ "\",";
-    erg += "\"barrierefrei\":\"" +barrierefrei+ "\",";
+    erg += "\"loge\":" +loge+ ",";
+    erg += "\"barrierefrei\":" +barrierefrei+ ",";
     erg = erg.substring(0,erg.lastIndexOf(','));
     erg += "}";
     return erg;
