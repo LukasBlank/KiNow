@@ -87,8 +87,12 @@ public class SmallCinemaHall extends AppCompatActivity {
             boolean möglich = r.reservieren(selected,String.valueOf(nutzer.getNutzerID()));
             if (möglich){
                 Toast.makeText(this, "Reservierung zum Warenkorb hinzugefügt.", Toast.LENGTH_SHORT).show();
+                finish();
             }//then
-            else Toast.makeText(this, "Reservierung leider nicht möglich. Versuchen Sie es erneut.", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(this, "Reservierung leider nicht möglich. Versuchen Sie es erneut.", Toast.LENGTH_SHORT).show();
+                finish();
+            }//else
         }//else
     }//bookSeats
 

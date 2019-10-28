@@ -23,6 +23,8 @@ import lukas.classes.Bestellung;
 import lukas.classes.Buchung;
 import lukas.classes.Nutzer;
 import lukas.classes.Sitz;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -393,9 +395,15 @@ public class DemoApplication {
       try {
         //aktuelle BuchungsID holen
         CollectionReference resRef = db.collection("Nutzer").document(nutzerID).collection("Reservierungen");
-        String buchungsID = getBuchungsnummer(nutzerID,resRef);
-        if (buchungsID==null)return "Error.";
-        else buchung.setBuchungID(buchungsID);
+        String buchungsID = RandomStringUtils.random(20,true,true);
+        ApiFuture<DocumentSnapshot> test = db.collection("Nutzer").document(nutzerID).collection("Reservierungen")
+            .document(buchungsID).get();
+        DocumentSnapshot testDoc = test.get();
+        while (testDoc.exists()){
+          buchungsID = RandomStringUtils.random(20,true,true);
+          testDoc = test.get();
+        }//while
+        buchung.setBuchungID(buchungsID);
 
         //vorführungspreis und sitze der buchung zuweisen
         Sitz sitz = new Sitz();
@@ -529,12 +537,15 @@ public class DemoApplication {
       Map<String,Object> bestellungMap = new HashMap<>(); bestellungMap.put("bestellungsnummer",bestellung.getBesetellungsnummer()); bestellungMap.put("gesamtpreis",bestellung.getGesamtpreis());
       nutzer.collection("Bestellungen").document(bestellung.getBesetellungsnummer()).set(bestellungMap);
       //buchungen hinzufügen
+      int i = 1;
       for (Buchung b : bestellung.getBuchungen()){
         //buchungsID updaten und buchungen hinzufügen
-        String buchungsID = bestellung.getBesetellungsnummer() + "_" + b.getBuchungID().substring(b.getBuchungID().lastIndexOf('_')+1);
+        String buchungsID = bestellung.getBesetellungsnummer() + "_" + i;
         b.setBuchungID(buchungsID);
         Map<String,Object> buchungMap = buchungToMap(b);
-        nutzer.collection("Bestellungen").document(b.getBestellungsnummer()).collection("Buchungen").document(b.getBuchungID()).set(buchungMap);
+        nutzer.collection("Bestellungen").document(b.getBestellungsnummer())
+            .collection("Buchungen").document(b.getBuchungID()).set(buchungMap);
+        i++;
       //sitze hinzufügen
         for (Sitz s : b.getSitze()){
           Map<String,Object> sitzeMap = sitzToMap(s);
@@ -557,7 +568,7 @@ public class DemoApplication {
     }//sitzToMap
 
     private Map<String,Object> buchungToMap (Buchung buchung){
-      if (buchung!=null){
+      if (buchung!=null && buchung.getBuchungID()!=null){
         Map<String,Object> buchungMap = new HashMap<>();
         buchungMap.put("buchungsID",buchung.getBuchungID());
         buchungMap.put("buchungspreis",buchung.getBuchungspreis());

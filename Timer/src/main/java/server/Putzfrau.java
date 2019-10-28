@@ -48,7 +48,6 @@ public class Putzfrau {
     while (true){
       try {
         Thread.sleep(120000);
-        System.out.println("Cleanup!");
         cleanup();
       } catch (InterruptedException e) {
         e.printStackTrace();
@@ -74,7 +73,7 @@ public class Putzfrau {
             //alle reservierungen des nutzers
             for (DocumentSnapshot reservierung : reservierungen){
               long resZeit = reservierung.getLong("zeit");
-              if (grenze-resZeit>600000){
+              if (grenze-resZeit>1800000){
                 DocumentReference documentReference = db.collection("Nutzer").document(document.getId()).collection("Reservierungen").document(reservierung.getId());
                 stonieren(documentReference);
                 documentReference.delete();
