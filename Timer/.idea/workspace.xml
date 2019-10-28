@@ -3,8 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="672a02d5-2093-4501-86a3-a476b413cb3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Lukas-Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lukas-Server/src/main/java/lukas/classes/Buchung.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/src/main/java/lukas/classes/Buchung.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Lukas-Server/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/src/main/java/server/DemoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Putzfrau.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Putzfrau.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/classes/lukas/classes/Buchung.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/classes/lukas/classes/Buchung.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication$SimpleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication$SimpleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/demo-REST-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/classes/Buchung.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_backend/app/src/main/java/backend/classes/Buchung.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -227,7 +234,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572280666117" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572282593501" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -289,7 +296,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50492000" />
+    <option name="totallyTimeSpent" value="51089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -308,7 +315,7 @@
       <window_info anchor="bottom" id="Spring" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" visible="true" weight="0.124300115" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.36842105" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.47816348" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -320,7 +327,7 @@
       <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
       <window_info anchor="right" id="Google Cloud Storage" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Bean Validation" order="1" />
-      <window_info active="true" anchor="right" id="Maven Projects" order="2" visible="true" weight="0.09989259" />
+      <window_info anchor="right" id="Maven Projects" order="2" visible="true" weight="0.09989259" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="3" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />

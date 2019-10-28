@@ -44,11 +44,11 @@ public class DemoApplication {
       //Pfad muss angepasst werden ggf. in Java einfügen
 
       String path = "serviceAccountKey.json";
-      //URL url = DemoApplication.class.getClassLoader().getResource(path);
+      URL url = DemoApplication.class.getClassLoader().getResource(path);
 
       //Datenbankverbindung erstellen
       FileInputStream serviceAccount =
-          new FileInputStream(path);//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
+          new FileInputStream(url.getPath());//Wenn über Server: path // Wenn lokal : url.getPath() und oben einkommentieren
 
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -61,8 +61,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    ResponseEntity<Object> re = sc.getFilme("0");
-    System.out.println(re.toString());
+    ResponseEntity<Object> re = sc.buchen("1");
   }//main
 
   @RestController
@@ -174,7 +173,8 @@ public class DemoApplication {
 
     @RequestMapping(value = "/getVor")
     public ResponseEntity<Object> getVor(@RequestHeader("kinoID") String kinoID , @RequestHeader("filmID") String filmID){
-      ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID).collection("spieltFilme").document(filmID).collection("Vorstellungen").get();
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID)
+          .collection("spieltFilme").document(filmID).collection("Vorstellungen").get();
       Map<String,Map<String,Object>> map = getMapQuerySnapshot(query);
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getVor
@@ -411,14 +411,13 @@ public class DemoApplication {
         ApiFuture<DocumentSnapshot>qD = db.collection("Kino").document(sitz.getKinoID()).collection("spieltFilme").document(sitz.getFilmID())
             .collection("Vorstellungen").document(sitz.getVorID()).get();
         DocumentSnapshot vor = qD.get();
-        Double vPreis = 0.0;
         if (vor.exists()){
-          vPreis = Double.parseDouble(vor.get("gesamtpreis").toString());
+          Double vPreis = Double.parseDouble(vor.get("gesamtpreis").toString());
           buchung.setVorführungspreis(vPreis);
           buchung.setVorführungsID(vor.get("vorführungsID").toString());
+          buchung.setFilmtitel(getFilmTitel(buchung.getVorführungsID()));
         }//then
         buchung.setSitze(sitze);
-        Double preis = buchung.getBuchungspreis();
 
         //Erstelle eine Map in welche alle Informationen gepackt werden
         Map<String,Object> buchungsMap = buchungToMap(buchung);
@@ -573,6 +572,7 @@ public class DemoApplication {
         buchungMap.put("buchungsID",buchung.getBuchungID());
         buchungMap.put("buchungspreis",buchung.getBuchungspreis());
         buchungMap.put("vorführungsID",buchung.getVorführungsID());
+        if (buchung.getFilmtitel()!=null)buchungMap.put("filmtitel",buchung.getFilmtitel());
         return buchungMap;
       }///then
       else return null;
@@ -592,6 +592,22 @@ public class DemoApplication {
       }
       return id;
     }//getBestellungsnummer
+
+    private String getFilmTitel (String vorführungsID){
+      String erg = null;
+      String filmID = vorführungsID.substring(vorführungsID.indexOf('_')+1);
+      filmID = filmID.substring(filmID.indexOf('_')+1); filmID = filmID.substring(0,filmID.indexOf('_'));
+      ApiFuture<DocumentSnapshot> docQ = db.collection("Filme").document(filmID).get();
+      try {
+        DocumentSnapshot document = docQ.get();
+        erg = document.getString("titel");
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }
+      return erg;
+    }//getFilmTitel
 
   }//Controller
 }// class
