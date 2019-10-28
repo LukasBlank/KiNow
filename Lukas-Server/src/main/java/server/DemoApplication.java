@@ -59,6 +59,8 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
+    ResponseEntity<Object> re = sc.getFilme("0");
+    System.out.println(re.toString());
   }//main
 
   @RestController
@@ -73,7 +75,7 @@ public class DemoApplication {
     public ResponseEntity<Object> getFilme (@RequestHeader("kinoID") String kinoID){
       //alle filme für Kino mit bestimmter ID holen, ggf. alle Filme holen
       ApiFuture<QuerySnapshot> query;
-      if (kinoID.equals(0)) query = db.collection("Filme").get();
+      if (kinoID.equals("0")) query = db.collection("Filme").get();
       else {
         query = db.collection("Kino").document(kinoID).collection("spieltFilme").get();
       }//else
