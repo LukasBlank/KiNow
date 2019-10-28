@@ -68,7 +68,7 @@ public class Putzfrau {
           List<QueryDocumentSnapshot> reservierungen = querySnapshot.getDocuments();
           if (reservierungen.size()>0){
             for (DocumentSnapshot reservierung : reservierungen){
-              String 
+              String
             }//for
           }//then
         }//then
