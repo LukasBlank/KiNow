@@ -70,49 +70,39 @@ public class DemoApplication {
     }//lol
 
     @RequestMapping(value = "/getFilme")
-    public ResponseEntity<Object> getFilme (@RequestHeader("kinoID") String SkinoID){
+    public ResponseEntity<Object> getFilme (@RequestHeader("kinoID") String kinoID){
       //alle filme für Kino mit bestimmter ID holen, ggf. alle Filme holen
       ApiFuture<QuerySnapshot> query;
-      long kinoID = Long.parseLong(SkinoID);
-      if (kinoID==0) query = db.collection("Filme").get();
+      if (kinoID.equals(0)) query = db.collection("Filme").get();
       else {
-        query = db.collection("Kino").document((String.valueOf(kinoID))).collection("spieltFilme").get();
+        query = db.collection("Kino").document(kinoID).collection("spieltFilme").get();
       }//else
-
-      QuerySnapshot querySnapshot = null;
-      List<QueryDocumentSnapshot> documents = null;
-      Map<String,Map<String,Object>> map = new HashMap<>();
-      try {
-        querySnapshot = query.get();
-        documents = querySnapshot.getDocuments();
-        for ( DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
-          //maps für subcollections erstellen
-        }//for
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }//catch
-
+      //Filme holen
+      Map<String,Map<String,Object>> map = getMapQuerySnapshot(query);
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getFilme
 
-    @RequestMapping(value = "/getKinos")
-    public ResponseEntity<Object> getKinos (){
-      ApiFuture<QuerySnapshot> query = db.collection("Kino").get();
+    private Map<String,Map<String,Object>> getMapQuerySnapshot (ApiFuture<QuerySnapshot> query){
       Map<String,Map<String,Object>> map = new HashMap<>();
       try {
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
+        for (DocumentSnapshot documnt : documents){
+          map.put(documnt.getId(),documnt.getData());
         }//for
-      } catch (InterruptedException e) {
+      }//try
+      catch (InterruptedException e) {
         e.printStackTrace();
       } catch (ExecutionException e) {
         e.printStackTrace();
       }//catch
+      return map;
+    }//getMapQuerySnapshot
+
+    @RequestMapping(value = "/getKinos")
+    public ResponseEntity<Object> getKinos (){
+      ApiFuture<QuerySnapshot> query = db.collection("Kino").get();
+      Map<String,Map<String,Object>> map = getMapQuerySnapshot(query);
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getKinos
 
@@ -122,18 +112,15 @@ public class DemoApplication {
       String erg = "Success";
       try {
         Map<String,Object> map = new ObjectMapper().readValue(nutzer,Map.class);
-        Nutzer n = new Nutzer();
-        for (Map.Entry<String,Object> e : map.entrySet()){
-          n.set(e.getKey(),e.getValue());
-        }//for
-        String email = n.getEmail();
+        //prüfen, ob Email bereits für einen Nutzer verwendet wurde
+        String email = map.get("email").toString();
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
         QuerySnapshot querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
         for (DocumentSnapshot document : documents){
             if(!document.getId().equals("0")){
               String e = document.get("email").toString();
-              if (e.equals(n.getEmail()))erg = "Error";
+              if (e.equals(email))erg = "Error";
             }//then
         }//for
         if (erg.equals("Success")){
@@ -143,6 +130,7 @@ public class DemoApplication {
         }//then
       } catch (IOException e) {
         e.printStackTrace();
+        erg = "Error.";
       } catch (InterruptedException e) {
         e.printStackTrace();
         erg = "Error.";
@@ -155,41 +143,35 @@ public class DemoApplication {
 
     @RequestMapping(value = "/LogIn")
     public ResponseEntity<Object> LogIn(@RequestHeader("email") String email, @RequestHeader("passwort") String passwort){
-      ApiFuture<QuerySnapshot> query = db.collection("Nutzer").get();
+      Query query = db.collection("Nutzer").whereEqualTo("email",email);
       Map<String,Map<String,Object>> map = new HashMap<>();
       try {
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (DocumentSnapshot document : documents){
-          if (!document.getId().equals("0")){
-            String e = document.get("email").toString();
-            String p = document.get("passwort").toString();
-            if (e.equals(email) && p.equals(passwort))map.put(document.getId(),document.getData());
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        QuerySnapshot q = querySnapshot.get();
+        List<QueryDocumentSnapshot> documents = q.getDocuments();
+        if (documents.size()==1){
+          DocumentSnapshot document = documents.get(0);
+          if (document.get("passwort").equals(passwort)){
+            map.put(document.getId(),document.getData());
           }//then
-        }//for
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }//catch
+          else map = new HashMap<>();
+        }//then
+        else map = new HashMap<>();
+        }//try
+        catch (InterruptedException e) {
+          e.printStackTrace();
+          map = new HashMap<>();
+        } catch (ExecutionException e) {
+          e.printStackTrace();
+          map = new HashMap<>();
+        }//catch
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//LogIn
 
     @RequestMapping(value = "/getVor")
     public ResponseEntity<Object> getVor(@RequestHeader("kinoID") String kinoID , @RequestHeader("filmID") String filmID){
       ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID).collection("spieltFilme").document(filmID).collection("Vorstellungen").get();
-      Map<String,Map<String,Object>> map = new HashMap<>();
-      try {
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
-        }//for
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }//catch
+      Map<String,Map<String,Object>> map = getMapQuerySnapshot(query);
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getVor
 
@@ -204,18 +186,7 @@ public class DemoApplication {
           .collection("spieltFilme").document(filmID)
           .collection("Vorstellungen").document(vorführungsID)
           .collection("FreieSitze").get();
-      Map<String,Map<String,Object>> map = new HashMap<>();
-      try {
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
-        }//for
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }//catch
+      Map<String,Map<String,Object>> map = getMapQuerySnapshot(query);
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getFrei
 
@@ -230,18 +201,7 @@ public class DemoApplication {
           .collection("spieltFilme").document(filmID)
           .collection("Vorstellungen").document(vorführungsID)
           .collection("BelegteSitze").get();
-      Map<String,Map<String,Object>> map = new HashMap<>();
-      try {
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
-        }//for
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }//catch
+      Map<String,Map<String,Object>> map = getMapQuerySnapshot(query);
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBelegt
 
@@ -256,18 +216,7 @@ public class DemoApplication {
           .collection("spieltFilme").document(filmID)
           .collection("Vorstellungen").document(vorführungsID)
           .collection("ReservierteSitze").get();
-      Map<String,Map<String,Object>> map = new HashMap<>();
-      try {
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-        for (DocumentSnapshot document : documents){
-          map.put(document.getId(),document.getData());
-        }//for
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }//catch
+      Map<String,Map<String,Object>> map = getMapQuerySnapshot(query);
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBelegt
 
@@ -277,17 +226,7 @@ public class DemoApplication {
       if (Long.parseLong(nutzerID)>=1){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Bestellungen").get();
-        try {
-          QuerySnapshot querySnapshot = query.get();
-          List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-          for (DocumentSnapshot document : documents){
-            map.put(document.getId(),document.getData());
-          }//for
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        } catch (ExecutionException e) {
-          e.printStackTrace();
-        }//catch
+        map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBestellungen
@@ -298,17 +237,7 @@ public class DemoApplication {
       if (Long.parseLong(nutzerID)>=1){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Reservierungen").get();
-        try {
-          QuerySnapshot querySnapshot = query.get();
-          List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-          for (DocumentSnapshot document : documents){
-            map.put(document.getId(),document.getData());
-          }//for
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        } catch (ExecutionException e) {
-          e.printStackTrace();
-        }//catch
+        map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBestellungen
@@ -321,88 +250,11 @@ public class DemoApplication {
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Reservierungen").document(reservierungsID)
             .collection("Sitze").get();
-        try {
-          QuerySnapshot querySnapshot = query.get();
-          List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-          for (DocumentSnapshot document : documents){
-            map.put(document.getId(),document.getData());
-          }//for
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        } catch (ExecutionException e) {
-          e.printStackTrace();
-        }//catch
+        map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getResSitze
 
-    /**
-    @RequestMapping(value = "/buchen")
-    public ResponseEntity<Object> buchen(@RequestHeader("sitze") String sitze, @RequestHeader("nutzer") String nutzerID){
-      String erg = "Success";
-      try {
-        //Überprüfen, ob Nutzer existiert
-        ApiFuture<DocumentSnapshot> query = db.collection("Nutzer").document(nutzerID).get();
-        DocumentSnapshot doc = query.get();
-        if (doc.exists()){
-          //Header zu ArrayListe von Sitzen umwandeln
-          ArrayList<Sitz> sitzListe = new ArrayList<>();
-          Map<String,Map<String,Object>> map = new ObjectMapper().readValue(sitze,Map.class);
-          for (Map.Entry<String,Map<String,Object>> e : map.entrySet()){
-            Map<String,Object> sitz = e.getValue();
-            Sitz tmp = new Sitz();
-            for (Map.Entry<String,Object> entry : sitz.entrySet()){
-              tmp.set(entry.getKey(),entry.getValue());
-            }//for
-            sitzListe.add(tmp);
-          }//for
-
-          //Prüfen, ob Sitze immernoch frei
-          if (sitzListe.size()>0){
-            boolean frei = sitzeFrei(sitzListe);
-            //wenn ja, dann aus freien Sitzen entfernen und zu belegten hinzufügen
-            if (frei){
-              String kinoID = sitzListe.get(0).getKinoID();
-              String filmID = sitzListe.get(0).getFilmID();
-              String vorID = sitzListe.get(0).getVorID();
-
-              for (Map.Entry<String,Map<String,Object>> en : map.entrySet()){
-                db.collection("Kino").document(kinoID).collection("spieltFilme")
-                    .document(filmID).collection("Vorstellungen").document(vorID)
-                    .collection("FreieSitze").document(en.getKey()).delete();
-                db.collection("Kino").document(kinoID).collection("spieltFilme")
-                    .document(filmID).collection("Vorstellungen").document(vorID)
-                    .collection("BelegteSitze").document(en.getKey()).set(en.getValue());
-              }//for
-              //die verbuchten plätze zum passenden nutzer hinzufügen
-              if (!nutzerID.equals("0")){
-                //aktuelle Bestellungsnummer holen
-                ApiFuture<QuerySnapshot> q = db.collection("Nutzer").document(nutzerID).collection("Bestellungen").get();
-                QuerySnapshot qSnapshot =  q.get();
-                List<QueryDocumentSnapshot> documents = qSnapshot.getDocuments();
-                String bestellungsnummer = nutzerID + "_" + (documents.size()+1);
-              }//then
-
-            }//then
-        }//then
-        else erg = "Error.";
-        }//then
-        else {
-          erg = "Error.";
-        }//else
-      } catch (IOException e) {
-        e.printStackTrace();
-        erg = "Error.";
-      } //catch
-      catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }
-
-      return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
-    }//buchen
-    **/
     @RequestMapping(value = "/reservieren")
     public ResponseEntity<Object> reservieren(@RequestHeader("sitze") String sitze, @RequestHeader("nutzer") String nutzerID){
       String erg = "Success";
@@ -417,24 +269,20 @@ public class DemoApplication {
             //Header zu ArrayListe von Sitzen umwandeln
             Map<String,Map<String,Object>> map = new ObjectMapper().readValue(sitze,Map.class);
             ArrayList<Sitz> sitzListe = mapToSitze(map);
+            //prüfen ob auch sitze mitgegeben wurden
             if (sitzListe.size()>0){
-              //prüfen ob sitze frei sind
+              Sitz tmp = sitzListe.get(0);
+              DocumentReference vorführungRef = db.collection("Kino").document(tmp.getKinoID()).collection("spieltFilme")
+                  .document(tmp.getFilmID()).collection("Vorstellungen").document(tmp.getVorID());
+              //sitze auf freiheit überprüfen
               boolean frei = sitzeFrei(sitzListe);
               if (frei){
-                String kinoID = sitzListe.get(0).getKinoID();
-                String filmID = sitzListe.get(0).getFilmID();
-                String vorID = sitzListe.get(0).getVorID();
-                //wenn die sitze frei sind unter reserviert speichern und unter Nutzer Reservierung hinzufügen
-                //TODO: Timer, welcher nach 30 Minuten Reservierungen löscht
+                //sitze aus der passendne vorführung entfernen und zu reservierten sitzen packen
                 for (Map.Entry<String,Map<String,Object>> en : map.entrySet()){
-                  db.collection("Kino").document(kinoID).collection("spieltFilme")
-                      .document(filmID).collection("Vorstellungen").document(vorID)
-                      .collection("FreieSitze").document(en.getKey()).delete();
-                  db.collection("Kino").document(kinoID).collection("spieltFilme")
-                      .document(filmID).collection("Vorstellungen").document(vorID)
-                      .collection("ReservierteSitze").document(en.getKey()).set(en.getValue());
-                  //Unter dem passenden Nutzer eine Reservierung hinzufügen
+                  vorführungRef.collection("FreieSitze").document(en.getKey()).delete();
+                  vorführungRef.collection("ReservierteSitze").document(en.getKey()).set(en.getValue());
                 }//for
+                //neue Reservierung unter dem passenden Nutzer vornhemen
                 erg = neueReservierung(nutzerID,map,sitzListe);
               }//then
               else erg = "Error.";
@@ -465,18 +313,18 @@ public class DemoApplication {
     @RequestMapping(value = "/buchen")
     public ResponseEntity<Object> buchen(@RequestHeader("nutzerID") String nutzerID){
       long id = Long.parseLong(nutzerID);
+      DocumentReference nutzer = db.collection("Nutzer").document(nutzerID);
       String erg = "Success";
-      //Abbruch wenn falsche id
+      //Abbruch wenn Gast oder ID falsch
       if (id<1)erg = "Error.";
       else {
-        ApiFuture<DocumentSnapshot> queryDoc = db.collection("Nutzer").document(nutzerID).get();
-        DocumentSnapshot doc = null;
+        ApiFuture<DocumentSnapshot> queryDoc = nutzer.get();
         try {
           //abbruch wenn es nutzer nicht gibt
-          doc = queryDoc.get();
+          DocumentSnapshot doc = queryDoc.get();
           if (!doc.exists())erg = "Error.";
           else {
-            DocumentReference nutzer = db.collection("Nutzer").document(nutzerID);
+            //wenn nutzer existiert, dann
            ArrayList<Buchung> reservierungen = getRes(nutzerID);
            if (reservierungen.size()>0){
              if (!verbucheReservierungen(nutzer,reservierungen))erg = "Error.";
@@ -484,9 +332,11 @@ public class DemoApplication {
           }//else
         } catch (InterruptedException e) {
           e.printStackTrace();
+          erg = "Error.";
         } catch (ExecutionException e) {
           e.printStackTrace();
-        }
+          erg = "Error.";
+        }//catch
       }//else
       return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
     }//buchen
@@ -495,22 +345,19 @@ public class DemoApplication {
       if (sitze!=null){
         ArrayList<Sitz> test = (ArrayList<Sitz>) sitze.clone();
         Sitz s = sitze.get(0);
-        String kinoID = s.getKinoID();
-        String filmID = s.getFilmID();
-        String vorID = s.getVorID();
-        ApiFuture<QuerySnapshot> query = db.collection("Kino").document(kinoID)
-            .collection("spieltFilme").document(filmID)
-            .collection("Vorstellungen").document(vorID)
+        ApiFuture<QuerySnapshot> query = db.collection("Kino").document(s.getKinoID())
+            .collection("spieltFilme").document(s.getFilmID())
+            .collection("Vorstellungen").document(s.getVorID())
             .collection("FreieSitze").get();
         try {
           QuerySnapshot querySnapshot = query.get();
           List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
           for (DocumentSnapshot document : documents){
-            for (Sitz iteraor : test){
-              if (document.getId().equals(iteraor.getSitzID())){
-                test.remove(iteraor);
+            for (Sitz sitz : sitze){
+              if (document.getId().equals(sitz.getSitzID())){
+                test.remove(sitz);
                 if (test.size()==0)return true;
-              }
+              }//then
             }//for
           }//for
           if (test.size()>0)return false;
@@ -543,13 +390,12 @@ public class DemoApplication {
       Buchung buchung = new Buchung();
       try {
         //aktuelle BuchungsID holen
-        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID).collection("Reservierungen").get();
-        QuerySnapshot qSnapshot =  query.get();
-        List<QueryDocumentSnapshot> documents = qSnapshot.getDocuments();
-        String buchungsID = nutzerID + "_0_" + (documents.size()+1);
-        buchung.setBuchungID(buchungsID);
+        CollectionReference resRef = db.collection("Nutzer").document(nutzerID).collection("Reservierungen");
+        String buchungsID = getBuchungsnummer(nutzerID,resRef);
+        if (buchungsID==null)return "Error.";
+        else buchung.setBuchungID(buchungsID);
 
-        //vorführungspreis holen
+        //vorführungspreis und sitze der buchung zuweisen
         Sitz sitz = new Sitz();
         if (sitze.size()>0)sitz = sitze.get(0);
         ApiFuture<DocumentSnapshot>qD = db.collection("Kino").document(sitz.getKinoID()).collection("spieltFilme").document(sitz.getFilmID())
@@ -561,25 +407,19 @@ public class DemoApplication {
           buchung.setVorführungspreis(vPreis);
           buchung.setVorführungsID(vor.get("vorführungsID").toString());
         }//then
-
-        //der Buchung die sitze zuweisen
         buchung.setSitze(sitze);
-        //hole den automatisch berechneten Buchungspreis
         Double preis = buchung.getBuchungspreis();
+
         //Erstelle eine Map in welche alle Informationen gepackt werden
-        Map<String,Object> buchungsMap = new HashMap<>();
-        buchungsMap.put("buchungsID",buchungsID);
-        buchungsMap.put("vorführungsID",sitz.getVorID());
-        buchungsMap.put("buchungspreis",preis);
+        Map<String,Object> buchungsMap = buchungToMap(buchung);
         //Dem Nutzer die Reservierungsbuchung hinzufügen
-        db.collection("Nutzer").document(nutzerID).collection("Reservierungen").document(buchungsID).set(buchungsMap);
+        resRef.document(buchungsID).set(buchungsMap);
         //Der Buchung die Sitze hinzufügen
         for (Map.Entry<String,Map<String,Object>> e : map.entrySet()){
-          db.collection("Nutzer").document(nutzerID).collection("Reservierungen").document(buchungsID).collection("Sitze")
+          resRef.document(buchungsID).collection("Sitze")
               .document(e.getKey()).set(e.getValue());
         }//for
         return "Success";
-
       } catch (InterruptedException e) {
         e.printStackTrace();
         return "Error.";
@@ -587,8 +427,23 @@ public class DemoApplication {
         e.printStackTrace();
         return "Error.";
       }//catch
-
     }//neueReservierung
+
+    private String getBuchungsnummer (String nutzerID, CollectionReference collectionReference){
+      ApiFuture<QuerySnapshot> query = collectionReference.get();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        String buchungsID = nutzerID + "_0_" + (documents.size()+1);
+        return buchungsID;
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+        return null;
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+        return null;
+      }
+    }//getBuchungsnummer
 
     private ArrayList<Buchung> getRes (String nutzerID){
       ArrayList<Buchung> buchungen = new ArrayList<>();
