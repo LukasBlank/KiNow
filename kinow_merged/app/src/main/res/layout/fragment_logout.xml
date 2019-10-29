@@ -73,7 +73,7 @@
                     android:src="@drawable/lock_icon" />
 
                 <EditText
-                    android:id="@+id/new_pwd_input"
+                    android:id="@+id/set_new_pwd_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/new_lock_img"
@@ -83,7 +83,7 @@
                     android:background="@color/editTextField"
                     android:paddingLeft="20dp"
                     android:paddingStart="20dp"
-                    android:hint="@string/pwd"
+                    android:hint="@string/hint_newPwd"
                     android:inputType="textPassword"
                     android:lines="1"
                     android:maxEms="30"
@@ -115,7 +115,7 @@
                     android:src="@drawable/lock_icon" />
 
                 <EditText
-                    android:id="@+id/confirm_new_pwd_input"
+                    android:id="@+id/confirm_set_new_pwd_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/confirm_new_lock_img"

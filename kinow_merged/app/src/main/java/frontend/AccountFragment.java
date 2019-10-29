@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import backend.classes.Nutzer;
@@ -40,6 +41,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
     Button signInButton;
     Button forgotPwdButton;
     Button guest;
+
+    LinearLayout enterNewPwdField;
+    boolean newPwdField_visible = true;
 
     EditText email_field;
     EditText pwd_field;
@@ -100,6 +104,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
         rememberMe.setOnCheckedChangeListener(this);
         forgotPwdButton = view.findViewById(R.id.forgot_pwd_btn);
         forgotPwdButton.setOnClickListener(this);
+
+        enterNewPwdField = view.findViewById(R.id.enter_new_pwd_field);
 
         email_field = view.findViewById(R.id.email_input);
         pwd_field = view.findViewById(R.id.pwd_input);
@@ -162,6 +168,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 // Do some DB activity here
                 // Send E-Mail to User, with Link to SetNewPassword Screen
                 // DB: Replace old pwd with new chosen pwd
+                if(newPwdField_visible){
+                    enterNewPwdField.setVisibility(View.VISIBLE);
+                    newPwdField_visible = false;
+                } else if(!newPwdField_visible) {
+                    enterNewPwdField.setVisibility(View.GONE);
+                    newPwdField_visible = true;
+                }
                 Toast.makeText(getActivity(), "Forgot Pwd - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
                 break;
 
