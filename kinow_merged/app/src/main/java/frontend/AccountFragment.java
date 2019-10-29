@@ -138,8 +138,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 if(check_fields) {
                     Requests r = new Requests();
                     Nutzer n = r.LogIn(email_field_input,pwd_field_input);
-                    if (n==null) Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
+                    if (n==null) {
+                        MainActivity.logout();
+                        Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
+                    }
                     else {
+                        MainActivity.login();
                         Toast.makeText(getContext(), "Logged in as " + n.getVorname() + " " + n.getNachname() + ".", Toast.LENGTH_SHORT).show();
                         onLoginListener = (OnLoginListener) getContext();
                         onLoginListener.onLogin(n);

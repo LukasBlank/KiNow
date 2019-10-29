@@ -1,0 +1,169 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="frontend.LogoutFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:textSize="30sp"
+            app:fontFamily="sans-serif-medium"
+            android:text="@string/hey" />
+
+        <Button
+            android:id="@+id/set_new_pwd_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:background="@color/mint"
+            android:text="@string/set_new_pwd"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/new_pwd_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/newPwd_relLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:id="@+id/new_lock_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/mint"
+                    android:contentDescription="@string/contentDescription"
+                    android:padding="5dp"
+                    android:src="@drawable/lock_icon" />
+
+                <EditText
+                    android:id="@+id/new_pwd_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/new_lock_img"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/new_lock_img"
+                    android:layout_toRightOf="@+id/new_lock_img"
+                    android:background="@color/editTextField"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:hint="@string/pwd"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/confirm_newPwd_relLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="00dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:id="@+id/confirm_new_lock_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/mint"
+                    android:contentDescription="@string/contentDescription"
+                    android:padding="5dp"
+                    android:src="@drawable/lock_icon" />
+
+                <EditText
+                    android:id="@+id/confirm_new_pwd_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/confirm_new_lock_img"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/confirm_new_lock_img"
+                    android:layout_toRightOf="@+id/confirm_new_lock_img"
+                    android:background="@color/editTextField"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:hint="@string/confirm_pwd"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="00dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:background="@color/mint"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/red"
+            android:textSize="15sp"
+            android:text="@string/logout_btn"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

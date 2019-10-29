@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
 
-public class MainActivity extends AppCompatActivity implements ShoppingCartFragment.OnLoadCartListener, AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements LogoutFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnLoadCartListener, AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
     private ActionBar kinowToolbar;
 
@@ -24,8 +24,11 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartFragm
     Fragment locationFragment = null;
     Fragment shoppingCartFragment = null;
     Fragment accountFragment = null;
+    Fragment logoutFragment = null;
 
     BottomNavigationView navigation;
+
+    private static boolean loggedIn = false;
 
     //saving selected kino
     Kino kino;
@@ -56,6 +59,14 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartFragm
 
     }
 
+    public static void login(){
+        loggedIn = true;
+    }
+
+    public static void logout(){
+        loggedIn = false;
+    }
+
     //Change Fragment depending on which Button is pressed
     private BottomNavigationView.OnNavigationItemSelectedListener botNavItemListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,9 +92,15 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartFragm
                     loadFragment(shoppingCartFragment);
                     return true;
                 case R.id.tab_account:
-                    kinowToolbar.setTitle("Account");
-                    if(accountFragment==null)accountFragment = new AccountFragment();
-                    loadFragment(accountFragment);
+                    if(loggedIn){
+                        kinowToolbar.setTitle("Account");
+                        if(logoutFragment==null)logoutFragment = new LogoutFragment();
+                        loadFragment(logoutFragment);
+                    } else if (!loggedIn){
+                        kinowToolbar.setTitle("Account");
+                        if(accountFragment==null)accountFragment = new AccountFragment();
+                        loadFragment(accountFragment);
+                    }
                     return true;
             }
             return false;
