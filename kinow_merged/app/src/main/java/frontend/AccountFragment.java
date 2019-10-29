@@ -41,17 +41,23 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
     Button signInButton;
     Button forgotPwdButton;
     Button guest;
+    Button save_newPwd_btn;
 
     LinearLayout enterNewPwdField;
     boolean newPwdField_visible = true;
+    boolean emptyString = false;
 
     EditText email_field;
     EditText pwd_field;
+    EditText newPwdInput;
+    EditText confirmNewPwdInput;
 
     CheckBox rememberMe;
 
     private String email_field_input;
     private String pwd_field_input;
+    private String newPwd;
+    private String confirmNewPwd;
 
     private Nutzer nutzer;
 
@@ -104,8 +110,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
         rememberMe.setOnCheckedChangeListener(this);
         forgotPwdButton = view.findViewById(R.id.forgot_pwd_btn);
         forgotPwdButton.setOnClickListener(this);
+        save_newPwd_btn = view.findViewById(R.id.save_new_pwd_btn);
+        save_newPwd_btn.setOnClickListener(this);
 
         enterNewPwdField = view.findViewById(R.id.enter_new_pwd_field);
+        newPwdInput = view.findViewById(R.id.login_new_pwd_input);
+        confirmNewPwdInput = view.findViewById(R.id.confirm_new_pwd_input);
 
         email_field = view.findViewById(R.id.email_input);
         pwd_field = view.findViewById(R.id.pwd_input);
@@ -126,6 +136,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 // Get text of EditTextFields
                 email_field_input = email_field.getText().toString();
                 pwd_field_input = pwd_field.getText().toString();
+                newPwd = newPwdInput.getText().toString();
+                confirmNewPwd = confirmNewPwdInput.getText().toString();
 
                 // Check if E-Mail or Password field is empty
                 boolean check_fields = true;
@@ -175,7 +187,36 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                     enterNewPwdField.setVisibility(View.GONE);
                     newPwdField_visible = true;
                 }
-                Toast.makeText(getActivity(), "Forgot Pwd - Bitte lösche diesen Toast am Ende, danke!", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.save_new_pwd_btn:
+
+                // Get text of EditTextFields
+                email_field_input = email_field.getText().toString();
+                newPwd = newPwdInput.getText().toString();
+                confirmNewPwd = confirmNewPwdInput.getText().toString();
+
+                // Compare if both new pwd EditTextFields match
+                // If they match, save new password
+                if(email_field_input.matches("") || email_field_input.contains(" ")){
+                    email_field.setHint("E-Mail *");
+                    email_field.setHintTextColor(getResources().getColor(R.color.red));
+                    emptyString = true;
+                } else emptyString = false;
+                if(newPwd.matches("") || newPwd.contains(" ")){
+                    newPwdInput.setHint("New Password *");
+                    newPwdInput.setHintTextColor(getResources().getColor(R.color.red));
+                    emptyString = true;
+                } else emptyString = false;
+                if(confirmNewPwd.matches("") || confirmNewPwd.contains(" ")){
+                    confirmNewPwdInput.setHint("Confirm Password *");
+                    confirmNewPwdInput.setHintTextColor(getResources().getColor(R.color.red));
+                    emptyString = true;
+                } else emptyString = false;
+                if(!emptyString) {
+                    enterNewPwdField.setVisibility(View.GONE);
+                    newPwdField_visible = true;
+                }
                 break;
 
             case R.id.guest_btn:

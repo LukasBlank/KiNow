@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -33,7 +34,13 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
     Button save_btn;
     Button logout_btn;
     LinearLayout newPwdField;
+    EditText setNewPwd;
+    EditText confirmSetNewPwd;
     boolean visible = true;
+    boolean emptyPassword = false;
+
+    private String setNewPwdText;
+    private String confirmSetNewPwdText;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,8 +76,7 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_logout, container, false);
         setNewPwd_btn = view.findViewById(R.id.set_new_pwd_btn);
@@ -80,6 +86,9 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
         logout_btn = view.findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(this);
         newPwdField = view.findViewById(R.id.new_pwd_field);
+
+        setNewPwd = view.findViewById(R.id.set_new_pwd_input);
+        confirmSetNewPwd = view.findViewById(R.id.confirm_set_new_pwd_input);
 
         return view;
     }
@@ -100,9 +109,28 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.save_btn:
+
+                // Get text of EditTextFields
+                setNewPwdText = setNewPwd.getText().toString();
+                confirmSetNewPwdText = confirmSetNewPwd.getText().toString();
+
                 // Compare if both new pwd EditTextFields match
                 // If they match, save new password
-                Toast.makeText(getContext(), "Saved new password.", Toast.LENGTH_SHORT).show();
+                if(setNewPwdText.matches("") || setNewPwdText.contains(" ")){
+                    setNewPwd.setHint("New Password *");
+                    setNewPwd.setHintTextColor(getResources().getColor(R.color.red));
+                    emptyPassword = true;
+                } else emptyPassword = false;
+                if(confirmSetNewPwdText.matches("") || confirmSetNewPwdText.contains(" ")){
+                    confirmSetNewPwd.setHint("Confirm Password *");
+                    confirmSetNewPwd.setHintTextColor(getResources().getColor(R.color.red));
+                    emptyPassword = true;
+                } else emptyPassword = false;
+                if(!emptyPassword) {
+                    newPwdField.setVisibility(View.GONE);
+                    visible = true;
+                    Toast.makeText(getContext(), "Saved new password.", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.logout_btn:
