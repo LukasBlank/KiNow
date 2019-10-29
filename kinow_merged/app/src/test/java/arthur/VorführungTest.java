@@ -111,10 +111,12 @@ public class VorführungTest {
 
   @Test
   public void getFreieSitze() {
+      Assert.assertEquals( TestSitze,TestVorfuehrung.getFreieSitze() );
   }
 
   @Test
   public void getBelegteSitze() {
+      Assert.assertEquals( null,TestVorfuehrung.getBelegteSitze() );
   }
 
   @Test

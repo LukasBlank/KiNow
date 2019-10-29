@@ -10,17 +10,17 @@ import org.junit.Test;
 public class NutzerTest {
   ArrayList<String> payments = new ArrayList<String>();
   ArrayList<Bestellung> bestellungen = new ArrayList<Bestellung>();
-  Nutzer Ben = new Nutzer("1", "Mail", "Ben", "Benutzer","Bday", "Diverse","123456", payments, bestellungen);
+  Nutzer Ben = new Nutzer(1, "Mail", "Ben", "Benutzer","Bday", "Diverse","123456", payments, bestellungen);
 
   @Test
   public void getNutzerID() {
-    Assert.assertEquals("1",Ben.getNutzerID());
+    Assert.assertEquals(1,Ben.getNutzerID());
   }
 
   @Test
   public void setNutzerID() {
-    Ben.setNutzerID("3");
-    Assert.assertEquals("3",Ben.getNutzerID());
+    Ben.setNutzerID(3);
+    Assert.assertEquals(3,Ben.getNutzerID());
   }
 
   @Test
@@ -134,7 +134,7 @@ public class NutzerTest {
   @Test
   public void equals() {
     Assert.assertEquals(true,Ben.equals(Ben));
-    Assert.assertEquals(false,Ben.equals(new Nutzer("3", "Mail", "Ben", "Benutzer","Bday", "Diverse","123456", payments, bestellungen)));
+    Assert.assertEquals(false,Ben.equals(new Nutzer(3, "Mail", "Ben", "Benutzer","Bday", "Diverse","123456", payments, bestellungen)));
   }
 
   @Test
