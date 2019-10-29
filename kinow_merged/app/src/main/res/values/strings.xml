@@ -70,4 +70,11 @@
     <string name="f">F</string>
     <string name="g">G</string>
 
+    <!-- Strings for Default Logout Screen Content -->
+    <string name="hey">Hey, you!</string>
+    <string name="logout_btn">Logout</string>
+    <string name="set_new_pwd">Set new password</string>
+    <string name="hint_newPwd">New Password</string>
+    <string name="save">Save</string>
+
 </resources>

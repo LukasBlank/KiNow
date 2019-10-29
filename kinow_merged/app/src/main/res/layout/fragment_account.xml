@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AccountFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -171,11 +175,106 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/enter_new_pwd_field"
+                android:layout_below="@id/relLay_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/aNewPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp">
+
+                <ImageView
+                    android:id="@+id/pwd_lock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/mint"
+                    android:contentDescription="@string/contentDescription"
+                    android:padding="5dp"
+                    android:src="@drawable/lock_icon" />
+
+                <EditText
+                    android:id="@+id/login_new_pwd_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/pwd_lock"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/pwd_lock"
+                    android:layout_toRightOf="@+id/pwd_lock"
+                    android:background="@color/editTextField"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:hint="@string/hint_newPwd"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/confirm_aNewPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="00dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp">
+
+                <ImageView
+                    android:id="@+id/confirm_pwd_lock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/mint"
+                    android:contentDescription="@string/contentDescription"
+                    android:padding="5dp"
+                    android:src="@drawable/lock_icon" />
+
+                <EditText
+                    android:id="@+id/confirm_new_pwd_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/confirm_pwd_lock"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/confirm_pwd_lock"
+                    android:layout_toRightOf="@+id/confirm_pwd_lock"
+                    android:background="@color/editTextField"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:hint="@string/confirm_pwd"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/sign_in_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/relLay_checkbox"
+                android:layout_below="@+id/enter_new_pwd_field"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginEnd="30dp"
@@ -228,4 +327,6 @@
 
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>
