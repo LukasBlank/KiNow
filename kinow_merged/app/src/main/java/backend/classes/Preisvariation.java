@@ -38,17 +38,17 @@ public class Preisvariation {
   }
 
   public boolean equals (Preisvariation p){
-      return this.variationID == p.variationID;
+    return this.variationID == p.variationID;
   }//equals
 
   public void set (String key, Object o){
     switch (key){
       case "name": this.name = (String) o;
-      break;
+        break;
       case "variationID": this.variationID = Long.parseLong(o.toString());
-      break;
+        break;
       case "wert": this.wert = Long.parseLong(o.toString());
-      break;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

@@ -62,7 +62,7 @@ public class Kinosaal {
 
   //pretty useless, cannot get the kino that way
   public boolean equals (Kinosaal saal){
-      return this.saalnummer.equals(saal.getSaalnummer());
+    return this.saalnummer.equals(saal.getSaalnummer());
   }//equals
 
   public Sitz getSitz (String sitzID){
@@ -76,11 +76,11 @@ public class Kinosaal {
   public void set (String key, Object o){
     switch (key){
       case "saalnummer": this.saalnummer = (String)o;
-      break;
+        break;
       case "platzzahl": this.platzzahl = Long.parseLong(o.toString());
-      break;
+        break;
       case "barrierefrei": this.barrierefrei = Boolean.parseBoolean(o.toString());
-      break;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

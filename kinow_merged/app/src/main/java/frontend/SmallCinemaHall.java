@@ -87,8 +87,12 @@ public class SmallCinemaHall extends AppCompatActivity {
             boolean möglich = r.reservieren(selected,String.valueOf(nutzer.getNutzerID()));
             if (möglich){
                 Toast.makeText(this, "Reservierung zum Warenkorb hinzugefügt.", Toast.LENGTH_SHORT).show();
+                finish();
             }//then
-            else Toast.makeText(this, "Reservierung leider nicht möglich. Versuchen Sie es erneut.", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(this, "Reservierung leider nicht möglich. Versuchen Sie es erneut.", Toast.LENGTH_SHORT).show();
+                finish();
+            }//else
         }//else
     }//bookSeats
 
@@ -1178,7 +1182,7 @@ public class SmallCinemaHall extends AppCompatActivity {
                     case "E1": btn_e1.setBackgroundResource(R.drawable.seat_black);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_black);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_black);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_black);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_black);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_black);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_black);break;
                     case "F1": btn_f1.setBackgroundResource(R.drawable.seat_black);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_black);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_black);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_black);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_black);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_black);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_black);break;
                     case "G1": btn_g1.setBackgroundResource(R.drawable.seat_black);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_black);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_black);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_black);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_black);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_black);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_black);break;
-                    default: ;
+                    default:
                 }//switch
             }//for
             for (Sitz s : reserviert){
@@ -1192,7 +1196,7 @@ public class SmallCinemaHall extends AppCompatActivity {
                     case "E1": btn_e1.setBackgroundResource(R.drawable.seat_black);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_black);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_black);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_black);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_black);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_black);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_black);break;
                     case "F1": btn_f1.setBackgroundResource(R.drawable.seat_black);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_black);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_black);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_black);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_black);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_black);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_black);break;
                     case "G1": btn_g1.setBackgroundResource(R.drawable.seat_black);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_black);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_black);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_black);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_black);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_black);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_black);break;
-                    default: ;
+                    default:
                 }//switch
             }//for
         }//then

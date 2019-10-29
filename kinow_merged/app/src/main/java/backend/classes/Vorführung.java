@@ -137,7 +137,7 @@ public class Vorführung implements Serializable {
   }//addWerbung
 
   public void removeWerbung(Werbung werbung){
-      werbungen.remove(werbung);
+    werbungen.remove(werbung);
   }//removeWerbung
 
   public ArrayList<Sitz> getFreieSitze() {
@@ -173,27 +173,27 @@ public class Vorführung implements Serializable {
   }//getAnzahlFreieSitze
 
   public boolean equals (Vorführung vor){
-      return vorführungsID.equals(vor.getVorführungsID());
+    return vorführungsID.equals(vor.getVorführungsID());
   }//equals
 
   public void set (String key, Object o){
     switch (key){
       case "vorführungsID": this.vorführungsID = (String)o;
-      break;
+        break;
       case "zeitpunkt": this.zeitpunkt = (String) o;
-      break;
+        break;
       case "saalnummer": this.saalnummer = (String) o;
-      break;
+        break;
       case "grundpreis": this.grundpreis = Double.parseDouble(o.toString());
-      break;
+        break;
       case "grunddauer": this.grunddauer = Long.parseLong(o.toString());
-      break;
+        break;
       case "dreiD": this.dreiD = Boolean.parseBoolean(o.toString());
-      break;
+        break;
       case "gesamtpreis": this.gesamtpreis = Double.parseDouble(o.toString());
-      break;
+        break;
       case "gesamtdauer": this.gesamtdauer = Long.parseLong(o.toString());
-      break;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

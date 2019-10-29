@@ -78,17 +78,17 @@ public class Sitz {
   }//getSaalnummer
 
   public boolean equals (Sitz sitz){
-      return this.sitzID.equals(sitz.getSitzID());
+    return this.sitzID.equals(sitz.getSitzID());
   }//equals
 
   public void set (String key, Object o){
     switch (key){
       case "sitzID": this.sitzID = (String) o;
-      break;
+        break;
       case "loge": this.loge = Boolean.parseBoolean(o.toString());
-      break;
+        break;
       case "barrierefrei": this.barrierefrei = Boolean.parseBoolean(o.toString());
-      break;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set
@@ -97,8 +97,8 @@ public class Sitz {
     String erg = "{";
     //"darsteller":["Angelina Jolie","Elle Fanning","Michelle Pfeiffer","Ed Skrein","Chiwetel Ejiofor"]
     if (sitzID!=null)erg += "\"sitzID\":\""+sitzID+"\",";
-    erg += "\"loge\":\"" +loge+ "\",";
-    erg += "\"barrierefrei\":\"" +barrierefrei+ "\",";
+    erg += "\"loge\":" +loge+ ",";
+    erg += "\"barrierefrei\":" +barrierefrei+ ",";
     erg = erg.substring(0,erg.lastIndexOf(','));
     erg += "}";
     return erg;

@@ -12,7 +12,7 @@ public class SeatHelper {
             }
         }
 
-        System.out.println("");
+        System.out.println();
 
         // Generate Output for Button findViewById
         for(int i = 97;i<=103;i++){
@@ -21,7 +21,7 @@ public class SeatHelper {
             }
         }
 
-        System.out.println("");
+        System.out.println();
 
         // Generate Output for Switch Cases
         for(int i = 97;i<=103;i++){
@@ -35,7 +35,7 @@ public class SeatHelper {
                 System.out.println("clicked_"+((char)i)+o+" = false;");
                 System.out.println("}");
                 System.out.println("break;");
-                System.out.println("");
+                System.out.println();
             }
         }
 

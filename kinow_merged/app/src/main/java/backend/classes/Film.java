@@ -134,7 +134,7 @@ public class Film implements Serializable {
   }//addVorführung
 
   public void removeVorführung (Vorführung v){
-      vorführungen.remove(v);
+    vorführungen.remove(v);
   }//removeVorführung
 
   public String getLink() {
@@ -146,7 +146,7 @@ public class Film implements Serializable {
   }
 
   public boolean equals (Film film){
-      return this.filmID == film.getFilmID();
+    return this.filmID == film.getFilmID();
   }//equals
 
   public void set (String key, Object o){
@@ -171,7 +171,8 @@ public class Film implements Serializable {
         break;
       case "link": this.link = (String)o;
         break;
-      case "bildLink": this.bildLink = bildLink;
+      case "bildLink": this.bildLink = (String) o;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set

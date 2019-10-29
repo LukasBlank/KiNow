@@ -111,7 +111,7 @@ public class Nutzer implements Serializable {
   }//addBestellung
 
   public boolean equals (Nutzer nutzer){
-      return this.nutzerID == nutzer.getNutzerID();
+    return this.nutzerID == nutzer.getNutzerID();
   }//nutzer
 
   public BigInteger hashPasswordWithRSA(String pass){

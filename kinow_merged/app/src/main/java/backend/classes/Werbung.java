@@ -38,17 +38,17 @@ public class Werbung {
   }
 
   public boolean equals (Werbung werbung){
-      return this.werbungID == werbung.getWerbungID();
+    return this.werbungID == werbung.getWerbungID();
   }//equals
 
   public void set (String key, Object o){
     switch (key){
       case "name": this.name = (String) o;
-      break;
+        break;
       case "werbungID": this.werbungID = (String) o;
-      break;
+        break;
       case "dauer": this.dauer = Long.parseLong(o.toString());
-      break;
+        break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch
   }//set
