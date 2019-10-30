@@ -62,8 +62,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    sc.addWerbung(3, 1, 2, 4, 7);
-
   }//main
 
   @RestController
@@ -98,7 +96,6 @@ public class DemoApplication {
 
      **/
 
-    //Not working properly
     public void freieSitze(int kino, int film,  String vorstellung1, String vorstellung2, String vorstellung3){
         Map <String, Object> docData = new HashMap<>();
 
@@ -161,6 +158,98 @@ public class DemoApplication {
         System.out.println("--END--");
     }
 
+
+    public void updateFilmInKino(){
+
+    }
+
+
+    public void test (){
+        Map <String, Object> docData = new HashMap<>();
+        docData.put("test", "test");
+        db.collection("TEST").document("test").set(docData);
+    }
+
+      public void updateFilm2 (int film){
+          String link;
+          Map<String, Object> docData = new HashMap<>();
+
+
+          if (film == 1) {
+              // ES
+              link = "https://m.media-amazon.com/images/M/MV5BYWRiODMyYTgtMjBlZi00NGVmLThmZGYtNjkwOTcyNTEzM2IyXkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //Joker
+          else if (film == 2) {
+              link = "https://m.media-amazon.com/images/M/MV5BZjc4MTE3OTktZjBiOC00ZGQ1LTkzZjctMjdhYTUxYjE0ZWFhXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //downtown abbey
+          else if (film == 3) {
+              link = "https://m.media-amazon.com/images/M/MV5BMmQxNGRkMjYtZTAyMy00MDUyLThiNmYtODI1NTkyNmI0ZTNlXkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_SY1000_CR0,0,675,1000_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //gemini man
+          else if (film == 4) {
+              link = "https://m.media-amazon.com/images/M/MV5BZjM4NzQ3YzEtMzlkNS00NDg2LTkwOGUtNGM5ZWEyYjUyNGU4XkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,674,1000_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          else if (film == 5) {
+              // eine ganz heiße nummer 2.0
+              link = "https://m.media-amazon.com/images/M/MV5BNzgyN2FlZTQtODJlNC00M2Q2LWFmM2ItNjVjYjkwYjJhYmVlXkEyXkFqcGdeQXVyMDU5MDEyMA@@._V1_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //everest - ein yeti will hoch hinaus
+          else if (film == 6) {
+              link = "https://m.media-amazon.com/images/M/MV5BMTYzY2U0NjctNDJkNS00MmE3LWFiZGQtZjllZTIzYTQ4ODJkXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SY1000_CR0,0,631,1000_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //ich war noch niemals in NY
+          else if (film == 7) {
+              link = "https://m.media-amazon.com/images/M/MV5BZDExNzU3MWMtODQ0My00YzM4LTliOWEtYWM4NGZiMTkyNmI5XkEyXkFqcGdeQXVyMDU5MDEyMA@@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //dem horizont so nah
+          else if (film == 8) {
+              link = "https://m.media-amazon.com/images/M/MV5BMzI3NDg1N2MtM2U5NS00MGVmLTliZjMtNDZiNTBjOWIyOWI3XkEyXkFqcGdeQXVyMDU4OTQ3NQ@@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          else if (film == 9) {
+              //after teh wedding
+              link = "https://m.media-amazon.com/images/M/MV5BNTI2NGVlMzAtMGQyYS00N2Q3LWE0ZDUtNzBmNGE1ZWE3NzQzXkEyXkFqcGdeQXVyOTgxNDIzMTY@._V1_SY1000_SX675_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          else if (film == 10) {
+              //maleficint
+              link = "https://m.media-amazon.com/images/M/MV5BZjJiYTExOTAtNWU0Yi00NzJjLTkwOTgtOTU2NWM1ZjJmYWVhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_SX675_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //parasite
+          else if (film == 11) {
+              link = "https://m.media-amazon.com/images/M/MV5BOWVmODY4MjYtZGViYS00MzJjLWI3NmItMGFmMDRkMzI1OTU3XkEyXkFqcGdeQXVyNTQ0NTUxOTA@._V1_SY1000_CR0,0,750,1000_AL_.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          //das kapitel im 21. jahrhundert
+          else if (film == 12) {
+              link = "http://de.web.img3.acsta.net/pictures/19/08/06/11/25/4453583.jpg";
+              docData.put("bildLink", link);
+              db.collection("Filme").document("" + film).update(docData);
+          }
+          System.out.println("END");
+      }
+
     public void updateFilmAcht(){
         DocumentReference docRef = db.collection("Filme").document("8");
 
@@ -187,91 +276,90 @@ public class DemoApplication {
         String link;
         Map<String, Object> docData = new HashMap<>();
 
-        switch (film){
-            case 1:
-                // ES
-                link = "https://m.media-amazon.com/images/M/MV5BYWRiODMyYTgtMjBlZi00NGVmLThmZGYtNjkwOTcyNTEzM2IyXkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 2:
-                //Joker
-                link = "https://m.media-amazon.com/images/M/MV5BZjc4MTE3OTktZjBiOC00ZGQ1LTkzZjctMjdhYTUxYjE0ZWFhXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_.jpg";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 3:
-                //downtown abbey
-                link = "MV5BY2U1NmIwYzgtNjFkOS00YWUxLTg0YTMtZmE5NTA3YjRmY2NlXkEyXkFqcGdeQXVyNTA4NzY1MzY";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 4:
-                //gemini man
-                link = "https://m.media-amazon.com/images/M/MV5BZjM4NzQ3YzEtMzlkNS00NDg2LTkwOGUtNGM5ZWEyYjUyNGU4XkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,674,1000_AL_.jpg";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 5:
-                // eine ganz heiße nummer 2.0
-                link = "https://m.media-amazon.com/images/M/MV5BNzgyN2FlZTQtODJlNC00M2Q2LWFmM2ItNjVjYjkwYjJhYmVlXkEyXkFqcGdeQXVyMDU5MDEyMA@@._V1_.jpg";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 6:
-                //everest - ein yeti will hoch hinaus
-                link = "8Q7OY-NcTZM";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 7:
-                //ich war noch niemals in NY
-                link = "oPkzUhsRrGc";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 8:
-                //dem horizont so nah
-                link = "Xkxh6mrA5kI";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 9:
-                //after teh wedding
-                link = "M9I52xL3DPQ";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 10:
-                //maleficint
-                link = "xlB_ZwOF3Gk";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 11:
-                //parasite
-                link = "9qvaE99iMR0";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
-            case 12:
-                //das kapitel im 21. jahrhundert
-                link = "zd7whXnRLbI";
-                docData.put("bildLink", link);
-                db.collection("Filme").document(""+film).update(docData);
-                db.collection("Kino").document(kino+"").collection("spieltFilme").document(film+"").update(docData);
-                break;
+
+        if (film == 1) {
+            // ES
+            link = "https://m.media-amazon.com/images/M/MV5BYWRiODMyYTgtMjBlZi00NGVmLThmZGYtNjkwOTcyNTEzM2IyXkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //Joker
+        else if (film == 2) {
+            link = "https://m.media-amazon.com/images/M/MV5BZjc4MTE3OTktZjBiOC00ZGQ1LTkzZjctMjdhYTUxYjE0ZWFhXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //downtown abbey
+        else if (film == 3) {
+            link = "https://m.media-amazon.com/images/M/MV5BMmQxNGRkMjYtZTAyMy00MDUyLThiNmYtODI1NTkyNmI0ZTNlXkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_SY1000_CR0,0,675,1000_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //gemini man
+        else if (film == 4) {
+            link = "https://m.media-amazon.com/images/M/MV5BZjM4NzQ3YzEtMzlkNS00NDg2LTkwOGUtNGM5ZWEyYjUyNGU4XkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_SY1000_CR0,0,674,1000_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        else if (film == 5) {
+            // eine ganz heiße nummer 2.0
+            link = "https://m.media-amazon.com/images/M/MV5BNzgyN2FlZTQtODJlNC00M2Q2LWFmM2ItNjVjYjkwYjJhYmVlXkEyXkFqcGdeQXVyMDU5MDEyMA@@._V1_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //everest - ein yeti will hoch hinaus
+        else if (film == 6) {
+            link = "https://m.media-amazon.com/images/M/MV5BMTYzY2U0NjctNDJkNS00MmE3LWFiZGQtZjllZTIzYTQ4ODJkXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SY1000_CR0,0,631,1000_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //ich war noch niemals in NY
+        else if (film == 7) {
+            link = "https://m.media-amazon.com/images/M/MV5BZDExNzU3MWMtODQ0My00YzM4LTliOWEtYWM4NGZiMTkyNmI5XkEyXkFqcGdeQXVyMDU5MDEyMA@@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //dem horizont so nah
+        else if (film == 8) {
+            link = "https://m.media-amazon.com/images/M/MV5BMzI3NDg1N2MtM2U5NS00MGVmLTliZjMtNDZiNTBjOWIyOWI3XkEyXkFqcGdeQXVyMDU4OTQ3NQ@@._V1_SY1000_CR0,0,706,1000_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        else if (film == 9) {
+            //after teh wedding
+            link = "https://m.media-amazon.com/images/M/MV5BNTI2NGVlMzAtMGQyYS00N2Q3LWE0ZDUtNzBmNGE1ZWE3NzQzXkEyXkFqcGdeQXVyOTgxNDIzMTY@._V1_SY1000_SX675_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        else if (film == 10) {
+            //maleficint
+            link = "https://m.media-amazon.com/images/M/MV5BZjJiYTExOTAtNWU0Yi00NzJjLTkwOTgtOTU2NWM1ZjJmYWVhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_SX675_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //parasite
+        else if (film == 11) {
+            link = "https://m.media-amazon.com/images/M/MV5BOWVmODY4MjYtZGViYS00MzJjLWI3NmItMGFmMDRkMzI1OTU3XkEyXkFqcGdeQXVyNTQ0NTUxOTA@._V1_SY1000_CR0,0,750,1000_AL_.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
+        }
+        //das kapitel im 21. jahrhundert
+        else if (film == 12) {
+            link = "http://de.web.img3.acsta.net/pictures/19/08/06/11/25/4453583.jpg";
+            docData.put("bildLink", link);
+            db.collection("Filme").document("" + film).update(docData);
+            db.collection("Kino").document(kino + "").collection("spieltFilme").document(film + "").update(docData);
         }
         System.out.println("END");
     }
@@ -538,6 +626,7 @@ public class DemoApplication {
     public String server (){
        return "Hallo.";
     }//lol
+
 
     @RequestMapping(value = "/lukasTest")
     public void lukasTest (){
