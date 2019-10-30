@@ -5,7 +5,7 @@
     <!-- Strings used for NavigationBar -->
     <string name="location">Location</string>
     <string name="movies">Movies</string>
-    <string name="cart">ShoppingCart</string>
+    <string name="cart">Cart</string>
     <string name="account">Account</string>
 
     <!-- Strings for Default Content -->
@@ -13,16 +13,20 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Strings for Default Movie Content -->
-    <string name="movieTitle">Title</string>
+    <string name="movieTitle">Spiderman and Avangers fight against the world and there are Aliens</string>
     <string name="movieDescription">Description</string>
     <string name="movieLongDescription">Description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</string>
     <string name="duration">xxx Min</string>
     <string name="fsk">FSK: xy</string>
     <string name="rating">x/y Stars</string>
     <string name="genre">Genre</string>
+    <string name="header_actor">Actors:</string>
     <string name="actor">Stephen Hawking</string>
+    <string name="header_regisseur">Regisseur:</string>
     <string name="regisseur">Steven Spielberg</string>
     <string name="playtime">12:34</string>
+    <string name="hall">Hall</string>
+    <string name="date">01.01.2019</string>
     <string name="year">2019</string>
     <string name="place">Hollywood, LosAngeles</string>
     <string name="published">2017</string>
