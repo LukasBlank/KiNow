@@ -61,6 +61,7 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
+    System.out.println(sc.logout("1"));
   }//main
 
   @RestController
@@ -367,6 +368,60 @@ public class DemoApplication {
       }//else
       return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
     }//buchen
+
+    @RequestMapping(value = "/logout")
+    public ResponseEntity<Object> logout(@RequestHeader("nutzerID") String nutzerID){
+      boolean erfolg = false;
+      CollectionReference resRef = db.collection("Nutzer").document(nutzerID).collection("Reservierungen");
+      ApiFuture<QuerySnapshot> query = resRef.get();
+      try {
+        QuerySnapshot querySnapshot = query.get();
+        if (querySnapshot.getDocuments().size()==0)erfolg=true;
+        else {
+          for (DocumentSnapshot doc : querySnapshot.getDocuments()){
+            stonieren(doc.getReference());
+            doc.getReference().delete();
+          }//for
+          erfolg = true;
+        }//else
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(erfolg,HttpStatus.ACCEPTED);
+    }//logout
+
+    private void stonieren (DocumentReference documentReference){
+      ApiFuture<DocumentSnapshot> res = documentReference.get();
+      ApiFuture<QuerySnapshot> query = documentReference.collection("Sitze").get();
+      try {
+        DocumentSnapshot doc = res.get();
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> sitze = querySnapshot.getDocuments();
+        for (DocumentSnapshot sitz : sitze){
+          //sitz to map und danach löschen
+          Map<String,Object> sitzMap = new HashMap<>();
+          sitzMap.put("barrierefrei",sitz.getBoolean("barrierefrei"));
+          sitzMap.put("loge",sitz.getBoolean("loge"));
+          sitzMap.put("sitzID",sitz.getString("sitzID"));
+          //map in der vorführung von reserviert zu frei
+          String sitzID = sitzMap.get("sitzID").toString();
+          String kinoID = sitzID.substring(0,sitzID.indexOf('_'));
+          String filmID = sitzID.substring(sitzID.indexOf('_')+1); filmID = filmID.substring(filmID.indexOf('_')+1);filmID = filmID.substring(0,filmID.indexOf('_'));
+          String vorID = sitzID.substring(0,sitzID.lastIndexOf('_'));
+          DocumentReference vorRef = db.collection("Kino").document(kinoID).collection("spieltFilme").document(filmID)
+              .collection("Vorstellungen").document(vorID);
+          vorRef.collection("ReservierteSitze").document(sitzID).delete();
+          vorRef.collection("FreieSitze").document(sitzID).set(sitzMap);
+          documentReference.collection("Sitze").document(sitzID).delete();
+        }//for
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+    }//stonieren
 
     private boolean sitzeFrei (ArrayList<Sitz> sitze){
       if (sitze!=null){
