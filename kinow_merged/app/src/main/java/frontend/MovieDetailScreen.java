@@ -87,7 +87,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         movieFSK.setText("FSK "+film.getFsk());
 
         movieLength = findViewById(R.id.duration);
-        movieLength.setText(film.getDauer()+" Min");
+        movieLength.setText(film.getDauer()+" Minuten");
 
         movieDescription = findViewById(R.id.movieDescDetail);
         movieDescription.setText(film.getBeschreibung());
