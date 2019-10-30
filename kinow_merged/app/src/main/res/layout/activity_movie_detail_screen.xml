@@ -136,14 +136,8 @@
                         android:focusable="true"
                         android:padding="5dp"
                         android:text="@string/playtime"
-
-
-                        
-
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        />
-
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/time_two"
@@ -155,14 +149,8 @@
                         android:focusable="true"
                         android:padding="5dp"
                         android:text="@string/playtime"
-
-
-
-
                         android:textColor="@color/black"
-                        android:textSize="20sp"
- />
-
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/time_three"
@@ -173,14 +161,8 @@
                         android:focusable="true"
                         android:padding="5dp"
                         android:text="@string/playtime"
-
-
-
-
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                         />
-
+                        android:textSize="20sp" />
 
                 </GridLayout>
 
