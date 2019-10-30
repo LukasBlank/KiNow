@@ -2,16 +2,29 @@ package frontend;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import backend.classes.Film;
 import backend.classes.Kino;
@@ -21,6 +34,7 @@ import backend.connections.Requests;
 
 public class MovieDetailScreen extends AppCompatActivity implements Serializable{
 
+    private Bitmap bitmap;
     Context context;
     TextView timeOne;
     TextView timeTwo;
@@ -32,6 +46,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     TextView movieFSK;
     TextView movieDescription;
     TextView movieTrailer;
+    ImageView movieImage;
     Film film;
     Kino kino;
     Nutzer nutzer;
@@ -77,6 +92,12 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         movieDescription = findViewById(R.id.movieDescDetail);
         movieDescription.setText(film.getBeschreibung());
 
+        movieImage = findViewById(R.id.movieImageDetail);
+        String imgURL = film.getBildLink();
+        Picasso.get().load(imgURL).into(movieImage);
+
+        //movieImage.setImageBitmap(bitmap);
+
         timeOne = findViewById(R.id.time_one);
         timeTwo = findViewById(R.id.time_two);
         timeThree = findViewById(R.id.time_three);
@@ -103,6 +124,34 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         }//then
 
     }//onCreate
+
+    public Bitmap getBitMapFromURL(String src){
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Bitmap getBitMapFromURLHttps(String src){
+        try {
+            URL url = new URL(src);
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     // Dennis Notiz: Evtl. durch if Anweisung ersetzen, + Book Button sool nur gehen wenn eine der Zeiten ausgewählt ist
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -155,4 +204,39 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         startActivity(intent);
     }//watchTrailer
 
+    private class DownLoadImageTask extends AsyncTask<String,Void, Bitmap> {
+        ImageView imageView;
+
+        public DownLoadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
+
+        /*
+            doInBackground(Params... params)
+                Override this method to perform a computation on a background thread.
+         */
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try{
+                InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
+                logo = BitmapFactory.decodeStream(is);
+            }catch(Exception e){ // Catch the download exception
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
+        protected void onPostExecute(Bitmap result){
+            imageView.setImageBitmap(result);
+        }
+    }
 }//class

@@ -1,5 +1,7 @@
 package backend.connections;
 
+import android.graphics.Bitmap;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
