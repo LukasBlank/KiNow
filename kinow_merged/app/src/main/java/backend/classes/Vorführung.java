@@ -29,8 +29,9 @@ public class Vorführung implements Serializable {
   }//Vorführung
 
   public String getSaalnummer() {
-    return saalnummer;
-  }
+    String s = this.saalnummer.substring(this.saalnummer.lastIndexOf('_')+1);
+    return s;
+  }//getSaalnummer
 
   public void setSaalnummer(String saalnummer) {
     this.saalnummer = saalnummer;

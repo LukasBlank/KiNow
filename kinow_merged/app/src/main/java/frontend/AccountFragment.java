@@ -127,17 +127,15 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
     @Override
     public void onClick(View v) {
 
+        // Get text of EditTextFields
+        email_field_input = email_field.getText().toString();
+        pwd_field_input = pwd_field.getText().toString();
+        newPwd = newPwdInput.getText().toString();
+        confirmNewPwd = confirmNewPwdInput.getText().toString();
+
         switch(v.getId()){
 
-            // Check in DB if User exists and if he/she used the correct e-mail and password
             case R.id.sign_in_btn:
-                // Do some DB activity here
-
-                // Get text of EditTextFields
-                email_field_input = email_field.getText().toString();
-                pwd_field_input = pwd_field.getText().toString();
-                newPwd = newPwdInput.getText().toString();
-                confirmNewPwd = confirmNewPwdInput.getText().toString();
 
                 // Check if E-Mail or Password field is empty
                 boolean check_fields = true;
@@ -156,17 +154,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                 if(check_fields) {
                     Requests r = new Requests();
                     Nutzer n = r.LogIn(email_field_input,pwd_field_input);
-                    if (n==null) {
-                        MainActivity.logout();
-                        Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
-                    }
+                    if (n==null) Toast.makeText(getContext(), "Login failed.", Toast.LENGTH_SHORT).show();
                     else {
-                        MainActivity.login();
                         Toast.makeText(getContext(), "Logged in as " + n.getVorname() + " " + n.getNachname() + ".", Toast.LENGTH_SHORT).show();
                         onLoginListener = (OnLoginListener) getContext();
                         onLoginListener.onLogin(n);
                     }//else
-                }
+                }//then
                 break;
 
             // Open RegisterUserActivity when register_btn is clicked
@@ -236,11 +230,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
 
         if(isChecked) {
             // Remember User and login
-            Toast.makeText(getActivity(), "Checked - Lösch diesen Toast bitte am Ende!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Checked", Toast.LENGTH_SHORT).show();
         }
         else {
             // Do not remember User and login, if app gets closed User should be logged out automatically
-            Toast.makeText(getActivity(), "Un-Checked - Lösch diesen Toast bitte am Ende!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Un-Checked", Toast.LENGTH_SHORT).show();
         }
 
     }

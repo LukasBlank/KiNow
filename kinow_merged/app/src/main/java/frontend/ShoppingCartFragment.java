@@ -37,9 +37,8 @@ public class ShoppingCartFragment extends Fragment {
     private OnLoadCartListener onLoadCartListener;
 
     private Nutzer nutzer;
-
     private ArrayList<Buchung>reservierungen;
-    private ArrayList<Buchung>buchungen;
+    private ArrayList<Buchung>bestellungen;
 
     public ShoppingCartFragment() {
         // Required empty public constructor
@@ -70,6 +69,7 @@ public class ShoppingCartFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        onLoadCartListener = (OnLoadCartListener) getContext();
     }
 
     @Override
@@ -78,15 +78,13 @@ public class ShoppingCartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
 
         //Lade den ausgewählten Nutzer
-        onLoadCartListener = (OnLoadCartListener) getContext();
         nutzer = onLoadCartListener.onLoadGetNutzer();
         reservierungen = new ArrayList<>();
-        buchungen = new ArrayList<>();
-
+        bestellungen = new ArrayList<>();
         Requests request = new Requests();
-        if (nutzer.getNutzerID()>0){
+        if (nutzer.getNutzerID()!=0){
             reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
-            //bestellungen holen
+            bestellungen = null;
         }//then
 
         // Inflate the layout for this fragment

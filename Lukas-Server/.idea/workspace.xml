@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5da69a20-e8f8-4740-b7cc-570ba20f8c3f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lukas/classes/Buchung.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lukas/classes/Buchung.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/server/DemoApplication$SimpleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/server/DemoApplication$SimpleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/server/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/server/DemoApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Timer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Timer/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -38,8 +36,9 @@
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.19" value="3" />
           <entry key="project.open.time.22" value="1" />
+          <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.64" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -60,12 +59,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="12935" />
+          <entry key="java" value="13769" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="12935" />
+          <entry key="JAVA" value="13769" />
         </counts>
       </usages-collector>
     </session>
@@ -75,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+            <state relative-caret-position="441">
+              <caret line="384" column="24" selection-start-line="384" selection-start-column="24" selection-end-line="384" selection-end-column="24" />
               <folding>
                 <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -89,9 +88,12 @@
                 <element signature="method#getReservierte#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getBestellungen#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getReservierungen#0;class#SimpleController#0;class#DemoApplication#0" />
+                <element signature="method#getBesBuchungen#0;class#SimpleController#0;class#DemoApplication#0" />
+                <element signature="method#getBesSitze#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getResSitze#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#reservieren#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#buchen#0;class#SimpleController#0;class#DemoApplication#0" />
+                <element signature="method#stonieren#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#sitzeFrei#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#mapToSitze#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#neueReservierung#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -163,8 +165,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -211,6 +211,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,7 +223,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572369155572" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Timer" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -277,17 +279,19 @@
       <workItem from="1572022330099" duration="880000" />
       <workItem from="1572025601267" duration="2619000" />
       <workItem from="1572263536753" duration="13822000" />
+      <workItem from="1572444449110" duration="5493000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50345000" />
+    <option name="totallyTimeSpent" value="55838000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18259935" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18528464" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -299,7 +303,7 @@
       <window_info anchor="bottom" id="Spring" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.49946293" weight="0.33594626" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.49946293" visible="true" weight="0.21724524" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.2362822" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -367,6 +371,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java</url>
+          <line>373</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="bestellung.buchungen" />
@@ -381,9 +395,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle" />
     <entry file="file://$PROJECT_DIR$/demoRest.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -409,11 +421,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding>
-            <element signature="method#getKinoID#0;class#Sitz#0" />
-            <element signature="method#getVorID#0;class#Sitz#0" />
-            <element signature="method#getSaalnummer#0;class#Sitz#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -421,16 +428,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-          <folding>
-            <element signature="method#setBesetellungsnummer#0;class#Bestellung#0" />
-            <element signature="method#setBuchungen#0;class#Bestellung#0" />
-            <element signature="method#setGesamtpreis#0;class#Bestellung#0" />
-            <element signature="method#addBuchung#0;class#Bestellung#0" />
-            <element signature="method#removeBuchung#0;class#Bestellung#0" />
-            <element signature="method#getNutzerID#0;class#Bestellung#0" />
-            <element signature="method#equals#0;class#Bestellung#0" />
-            <element signature="method#set#0;class#Bestellung#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -438,21 +435,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1277">
           <caret line="111" column="50" selection-start-line="111" selection-start-column="50" selection-end-line="111" selection-end-column="50" />
-          <folding>
-            <element signature="method#setVorführungspreis#0;class#Buchung#0" />
-            <element signature="method#setSitze#0;class#Buchung#0" />
-            <element signature="method#setBuchungspreis#0;class#Buchung#0" />
-            <element signature="method#getBestellungsnummer#0;class#Buchung#0" />
-            <element signature="method#getNutzerID#0;class#Buchung#0" />
-            <element signature="method#equals#0;class#Buchung#0" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        <state relative-caret-position="441">
+          <caret line="384" column="24" selection-start-line="384" selection-start-column="24" selection-end-line="384" selection-end-column="24" />
           <folding>
             <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -465,9 +454,12 @@
             <element signature="method#getReservierte#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getBestellungen#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getReservierungen#0;class#SimpleController#0;class#DemoApplication#0" />
+            <element signature="method#getBesBuchungen#0;class#SimpleController#0;class#DemoApplication#0" />
+            <element signature="method#getBesSitze#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getResSitze#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#reservieren#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#buchen#0;class#SimpleController#0;class#DemoApplication#0" />
+            <element signature="method#stonieren#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#sitzeFrei#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#mapToSitze#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#neueReservierung#0;class#SimpleController#0;class#DemoApplication#0" />

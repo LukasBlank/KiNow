@@ -146,7 +146,7 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
     @Override
     public void onKinoSelection(long id) {
         Kino kino = kinos.get((int) id);
-        String msg = "Gewähltes Kino: " + kino.getName();
+        String msg = kino.getName() + " selected.";
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
         onKinoIDChangedListener = (OnKinoIDChangedListener)getContext();
         onKinoIDChangedListener.onKinoIDChanged(kino);
