@@ -129,7 +129,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     btnBuchen.setVisibility(View.VISIBLE);
                     vorführung = vorführungen.get(0);
                     movieDate.setText(vorführung.getDatum());
-                    movieHall.setText(vorführung.getSaalnummer());
+                    movieHall.setText("Hall " + vorführung.getSaalnummer());
                     break;
 
                 case R.id.time_two:
@@ -139,7 +139,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     btnBuchen.setVisibility(View.VISIBLE);
                     vorführung = vorführungen.get(1);
                     movieDate.setText(vorführung.getDatum());
-                    movieHall.setText(vorführung.getSaalnummer());
+                    movieHall.setText("Hall " + vorführung.getSaalnummer());
                     break;
 
                 case R.id.time_three:
@@ -149,7 +149,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     btnBuchen.setVisibility(View.VISIBLE);
                     vorführung = vorführungen.get(2);
                     movieDate.setText(vorführung.getDatum());
-                    movieHall.setText(vorführung.getSaalnummer());
+                    movieHall.setText("Hall " +  vorführung.getSaalnummer());
                     break;
 
                 case R.id.button:

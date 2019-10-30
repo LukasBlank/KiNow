@@ -20,14 +20,9 @@ import okhttp3.Request;
 
 public class Requests {
 
-    private String ausgabe;
-
-    public Requests (){
-        ausgabe = "";
-    }//K
+    public Requests (){  }//K
 
     public ArrayList<Film> getFilme (long kinoID){
-        ausgabe = "";
         ArrayList<backend.classes.Film> filme = new ArrayList<Film>();
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/getFilme";
@@ -35,24 +30,12 @@ public class Requests {
         Request request = new Request.Builder()
                 .addHeader("kinoID",SID)
                 .url(url).build();
-        tr.setRequest(request);
-        tr.start();
+        String erg = getRequestErg(request);
         try {
-            tr.join();
-            long anfang = System.currentTimeMillis();
-            long ende = anfang;
-            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-            do {
-                ende = System.currentTimeMillis();
-            } while (!tr.isFertig() && ende-anfang<10000);
-            if (!tr.isFertig()){
-                System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                return null;
-            }//then
+            if(erg==null)return null;
             else {
-                ausgabe = tr.getErg();
                 //gesamte Ausgabe zu einer Map parsen
-                Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
                 //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                 for (Map.Entry<String,Object> entry : map.entrySet()){
                     Map<String,Object> filmMap = (Map<String, Object>) entry.getValue();
@@ -72,30 +55,17 @@ public class Requests {
     }//getFilme
 
     public ArrayList<Kino> getKinos (){
-        ausgabe = "";
         ArrayList<Kino> kinos = new ArrayList<Kino>();
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/getKinos";
         Request request = new Request.Builder()
                 .url(url).build();
-        tr.setRequest(request);
-        tr.start();
+        String erg = getRequestErg(request);
         try {
-            tr.join();
-            long anfang = System.currentTimeMillis();
-            long ende = anfang;
-            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-            do {
-                ende = System.currentTimeMillis();
-            } while (!tr.isFertig() && ende-anfang<10000);
-            if (!tr.isFertig()){
-                System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                return null;
-            }//then
+            if(erg==null)return null;
             else {
-                ausgabe = tr.getErg();
                 //gesamte Ausgabe zu einer Map parsen
-                Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
                 //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                 for (Map.Entry<String,Object> entry : map.entrySet()){
                     Map<String,Object> data = (Map<String, Object>) entry.getValue();
@@ -116,34 +86,20 @@ public class Requests {
 
     public Nutzer LogIn (String email, String pw){
         //reset & request builden
-        ausgabe = "";
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/LogIn";
         Request request = new Request.Builder()
                 .addHeader("email",email)
                 .addHeader("passwort",pw)
                 .url(url).build();
-        //Thread starten, welcher nutzer zurück gibt, wenn dieser existiert
-        tr.setRequest(request);
-        tr.start();
+        String erg = getRequestErg(request);
         try {
-            tr.join();
-            long anfang = System.currentTimeMillis();
-            long ende = anfang;
-            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten "ok"
-            do {
-                ende = System.currentTimeMillis();
-            } while (!tr.isFertig() && ende-anfang<10000);
-            if (!tr.isFertig()){
-                System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                return null;
-            }//then
+            if(erg==null)return null;
             else {
-                ausgabe = tr.getErg();
-                if (ausgabe.indexOf(':')==-1)return null;
+                if (erg.indexOf(':')==-1)return null;
                 else {
                     //Ergebnis zu einer Map parsen
-                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
                     //diese Map hat nur ein paar, welches den nutzer darstellt // diesen zu eigener map parsen
                     Map<String,Object> nutzerMap = new HashMap<>();
                     for (Map.Entry<String,Object> e : map.entrySet()){
@@ -163,30 +119,17 @@ public class Requests {
     }//getNutzer
 
     public boolean registerUser (Nutzer n){
-        ausgabe = "";
         String nutzer = n.toMapString();
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/addNutzer";
         Request request = new Request.Builder()
                 .addHeader("nutzer",nutzer)
                 .url(url).build();
-        tr.setRequest(request);
-        tr.start();
+        String erg = getRequestErg(request);
         try {
-            tr.join();
-            long anfang = System.currentTimeMillis();
-            long ende = anfang;
-            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-            do {
-                ende = System.currentTimeMillis();
-            } while (!tr.isFertig() && ende-anfang<10000);
-            if (!tr.isFertig()){
-                System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                return false;
-            }//then
+            if(erg==null)return false;
             else {
-                ausgabe = tr.getErg();
-                return ausgabe.equals("Success");
+                return erg.equals("Success");
             }//else
         }catch (Exception e){
             e.printStackTrace();
@@ -195,7 +138,6 @@ public class Requests {
     }//register
 
     public ArrayList<Vorführung> getVor (long kinoID, long filmID){
-        ausgabe = "";
         if (kinoID==0)return null;
         else {
             ArrayList<backend.classes.Vorführung> vorführungen  = new ArrayList<Vorführung>();
@@ -207,24 +149,12 @@ public class Requests {
                     .addHeader("kinoID",kID)
                     .addHeader("filmID",fID)
                     .url(url).build();
-            tr.setRequest(request);
-            tr.start();
+            String erg = getRequestErg(request);
             try {
-                tr.join();
-                long anfang = System.currentTimeMillis();
-                long ende = anfang;
-                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-                do {
-                    ende = System.currentTimeMillis();
-                } while (!tr.isFertig() && ende-anfang<10000);
-                if (!tr.isFertig()){
-                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                    return null;
-                }//then
+                if(erg==null)return null;
                 else {
-                    ausgabe = tr.getErg();
                     //gesamte Ausgabe zu einer Map parsen
-                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
                     //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                     for (Map.Entry<String,Object> entry : map.entrySet()){
                         Map<String,Object> vorMap = (Map<String, Object>) entry.getValue();
@@ -244,7 +174,6 @@ public class Requests {
     }//getVor
 
     public ArrayList<Sitz> getFreieSitze (String vorfuehrungsID){
-        ausgabe = "";
         if (vorfuehrungsID.length()==0)return null;
         else {
             ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
@@ -253,24 +182,12 @@ public class Requests {
             Request request = new Request.Builder()
                     .addHeader("vorfuehrungsID",vorfuehrungsID)
                     .url(url).build();
-            tr.setRequest(request);
-            tr.start();
+            String erg = getRequestErg(request);
             try {
-                tr.join();
-                long anfang = System.currentTimeMillis();
-                long ende = anfang;
-                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-                do {
-                    ende = System.currentTimeMillis();
-                } while (!tr.isFertig() && ende-anfang<10000);
-                if (!tr.isFertig()){
-                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                    return null;
-                }//then
+                if (erg==null) return null;
                 else {
-                    ausgabe = tr.getErg();
                     //gesamte Ausgabe zu einer Map parsen
-                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
                     //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                     for (Map.Entry<String,Object> entry : map.entrySet()){
                         Map<String,Object> data = (Map<String, Object>) entry.getValue();
@@ -290,7 +207,6 @@ public class Requests {
     }//getFreieSitze
 
     public ArrayList<Sitz> getBelegteSitze (String vorfuehrungsID){
-        ausgabe = "";
         if (vorfuehrungsID.length()==0)return null;
         else {
             ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
@@ -299,24 +215,12 @@ public class Requests {
             Request request = new Request.Builder()
                     .addHeader("vorfuehrungsID",vorfuehrungsID)
                     .url(url).build();
-            tr.setRequest(request);
-            tr.start();
+            String erg = getRequestErg(request);
             try {
-                tr.join();
-                long anfang = System.currentTimeMillis();
-                long ende = anfang;
-                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-                do {
-                    ende = System.currentTimeMillis();
-                } while (!tr.isFertig() && ende-anfang<10000);
-                if (!tr.isFertig()){
-                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                    return null;
-                }//then
+                if(erg==null)return null;
                 else {
-                    ausgabe = tr.getErg();
                     //gesamte Ausgabe zu einer Map parsen
-                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
                     //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                     for (Map.Entry<String,Object> entry : map.entrySet()){
                         Map<String,Object> data = (Map<String, Object>) entry.getValue();
@@ -336,7 +240,6 @@ public class Requests {
     }//getBelegteSitze
 
     public ArrayList<Sitz> getReservierte (String vorfuehrungsID){
-        ausgabe = "";
         if (vorfuehrungsID.length()==0)return null;
         else {
             ArrayList<backend.classes.Sitz> sitze  = new ArrayList<Sitz>();
@@ -345,24 +248,12 @@ public class Requests {
             Request request = new Request.Builder()
                     .addHeader("vorfuehrungsID",vorfuehrungsID)
                     .url(url).build();
-            tr.setRequest(request);
-            tr.start();
+            String erg = getRequestErg(request);
             try {
-                tr.join();
-                long anfang = System.currentTimeMillis();
-                long ende = anfang;
-                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-                do {
-                    ende = System.currentTimeMillis();
-                } while (!tr.isFertig() && ende-anfang<10000);
-                if (!tr.isFertig()){
-                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                    return null;
-                }//then
+                if(erg==null)return null;
                 else {
-                    ausgabe = tr.getErg();
                     //gesamte Ausgabe zu einer Map parsen
-                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
                     //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                     for (Map.Entry<String,Object> entry : map.entrySet()){
                         Map<String,Object> data = (Map<String, Object>) entry.getValue();
@@ -383,30 +274,17 @@ public class Requests {
 
     public boolean reservieren (ArrayList<Sitz> sitze, String nutzerID){
         String head =sitzeToString(sitze);
-        ausgabe = "";
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/reservieren";
         Request request = new Request.Builder()
                 .addHeader("sitze",head)
                 .addHeader("nutzer",nutzerID)
                 .url(url).build();
-        tr.setRequest(request);
-        tr.start();
+        String erg = getRequestErg(request);
         try {
-            tr.join();
-            long anfang = System.currentTimeMillis();
-            long ende = anfang;
-            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-            do {
-                ende = System.currentTimeMillis();
-            } while (!tr.isFertig() && ende-anfang<10000);
-            if (!tr.isFertig()){
-                System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                return false;
-            }//then
+            if (erg==null)return false;
             else {
-                ausgabe = tr.getErg();
-                return ausgabe.equals("Success");
+                return erg.equals("Success");
             }//else
         }catch (Exception e){
             e.printStackTrace();
@@ -425,7 +303,6 @@ public class Requests {
     }//sitzeToString
 
     public ArrayList<Buchung> getReservierungen(String nutzerID){
-        ausgabe = "";
         if (nutzerID.equals(0)||nutzerID==null)return null;
         else {
             ArrayList<backend.classes.Buchung> buchungen  = new ArrayList<>();
@@ -434,24 +311,12 @@ public class Requests {
             Request request = new Request.Builder()
                     .addHeader("nutzerID",nutzerID)
                     .url(url).build();
-            tr.setRequest(request);
-            tr.start();
+            String ergBuchungen = getRequestErg(request);
             try {
-                tr.join();
-                long anfang = System.currentTimeMillis();
-                long ende = anfang;
-                //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-                do {
-                    ende = System.currentTimeMillis();
-                } while (!tr.isFertig() && ende-anfang<10000);
-                if (!tr.isFertig()){
-                    System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                    return null;
-                }//then
+                if(ergBuchungen==null) return null;
                 else {
-                    ausgabe = tr.getErg();
                     //gesamte Ausgabe zu einer Map parsen
-                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    Map<String,Object> map = new ObjectMapper().readValue(ergBuchungen, Map.class);
                     //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                     for (Map.Entry<String,Object> entry : map.entrySet()){
                         Map<String,Object> data = (Map<String, Object>) entry.getValue();
@@ -459,7 +324,6 @@ public class Requests {
                         for (Map.Entry<String,Object> e : data.entrySet()){
                             b.set(e.getKey(),e.getValue());
                         }//for
-                        ausgabe = "";
                         ArrayList<Sitz>sitze = new ArrayList<>();
                         tr = new ThreadRequest();
                         url = "http://94.16.123.237:8080/getResSitze";
@@ -467,23 +331,11 @@ public class Requests {
                                 .addHeader("reservierungsID",b.getBuchungID())
                                 .addHeader("nutzerID", nutzerID)
                                 .url(url).build();
-                        tr.setRequest(request);
-                        tr.start();
-                        tr.join();
-                        anfang = System.currentTimeMillis();
-                        ende = anfang;
-                        //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
-                        do {
-                            ende = System.currentTimeMillis();
-                        } while (!tr.isFertig() && ende-anfang<10000);
-                        if (!tr.isFertig()){
-                            System.out.println("Zeitlimit bei HttpRequest überschritten.");
-                            return null;
-                        }//then
-                        else {
-                            ausgabe = tr.getErg();
+                        String ergSitze = getRequestErg(request);
+                       if(ergSitze==null) return null;
+                       else{
                             //gesamte Ausgabe zu einer Map parsen
-                            map = new ObjectMapper().readValue(ausgabe, Map.class);
+                            map = new ObjectMapper().readValue(ergSitze, Map.class);
                             //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                             for (Map.Entry<String,Object> et : map.entrySet()){
                                 data = (Map<String, Object>) et.getValue();
@@ -493,7 +345,7 @@ public class Requests {
                                 }//for
                                 sitze.add(s);
                             }//for
-                        }//else
+                       }//else
                         b.setSitze(sitze);
                         buchungen.add(b);
                     }//for
