@@ -1,6 +1,5 @@
 package frontend;
 
-import android.accounts.AbstractAccountAuthenticator;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,10 +73,10 @@ public class ShoppingCartFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+
         //Lade den ausgewählten Nutzer
         onLoadCartListener = (OnLoadCartListener) getContext();
         nutzer = onLoadCartListener.onLoadGetNutzer();

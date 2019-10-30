@@ -124,7 +124,8 @@
                     android:layout_height="40dp"
                     android:orientation="horizontal"
                     android:columnCount="3"
-                    android:rowCount="1">
+                    android:rowCount="1"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/time_one"
@@ -136,8 +137,7 @@
                         android:padding="5dp"
                         android:text="@string/playtime"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:visibility="invisible" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/time_two"
@@ -150,8 +150,7 @@
                         android:padding="5dp"
                         android:text="@string/playtime"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:visibility="invisible" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/time_three"
@@ -163,8 +162,7 @@
                         android:padding="5dp"
                         android:text="@string/playtime"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:visibility="invisible" />
+                        android:textSize="20sp" />
 
                 </GridLayout>
 
@@ -226,7 +224,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal"
-                    android:weightSum="10">
+                    android:weightSum="10"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/hall"

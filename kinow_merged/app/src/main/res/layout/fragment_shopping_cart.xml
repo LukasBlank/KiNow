@@ -5,11 +5,9 @@
     android:layout_height="match_parent"
     tools:context="frontend.ShoppingCartFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cart_item_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/cart"
-        android:layout_gravity="center"
-        android:textColor="@color/white"/>
+        android:layout_height="match_parent" />
 
 </FrameLayout>
