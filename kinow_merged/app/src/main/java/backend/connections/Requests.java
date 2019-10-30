@@ -1,12 +1,9 @@
 package backend.connections;
 
-<<<<<<< HEAD
 import android.graphics.Bitmap;
 
-=======
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
->>>>>>> f15f84625f1d9f3dab798163aa1ca210612a1204
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;

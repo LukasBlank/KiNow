@@ -34,9 +34,7 @@ import backend.connections.Requests;
 
 public class MovieDetailScreen extends AppCompatActivity implements Serializable{
 
-    private Bitmap bitmap;
     Context context;
-<<<<<<< HEAD
     TextView timeOne;
     TextView timeTwo;
     TextView timeThree;
@@ -51,14 +49,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     Film film;
     Kino kino;
     Nutzer nutzer;
-=======
-    TextView timeOne;TextView timeTwo;TextView timeThree;
-    TextView movieTitle;TextView movieGenre;TextView movieLength;
-    TextView movieActors;TextView movieFSK;TextView movieDescription;
-    TextView movieTrailer;TextView movieHall;TextView movieDate;
+    TextView movieHall;TextView movieDate;
     TextView movieRegie;
-    Film film;Kino kino;Nutzer nutzer;
->>>>>>> f15f84625f1d9f3dab798163aa1ca210612a1204
     ArrayList<Vorführung> vorführungen;
     Vorführung vorführung;
     TextView movieRating;
@@ -117,16 +109,14 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         movieDescription = findViewById(R.id.movieDescDetail);
         movieDescription.setText(film.getBeschreibung());
 
-<<<<<<< HEAD
         movieImage = findViewById(R.id.movieImageDetail);
         String imgURL = film.getBildLink();
         Picasso.get().load(imgURL).into(movieImage);
 
         //movieImage.setImageBitmap(bitmap);
-=======
+
         movieHall = findViewById(R.id.hall);
         movieDate = findViewById(R.id.date);
->>>>>>> f15f84625f1d9f3dab798163aa1ca210612a1204
 
         timeOne = findViewById(R.id.time_one);
         timeTwo = findViewById(R.id.time_two);
