@@ -196,21 +196,31 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                     email_field.setHint("E-Mail *");
                     email_field.setHintTextColor(getResources().getColor(R.color.red));
                     emptyString = true;
-                } else emptyString = false;
+                }
                 if(newPwd.matches("") || newPwd.contains(" ")){
                     newPwdInput.setHint("New Password *");
                     newPwdInput.setHintTextColor(getResources().getColor(R.color.red));
                     emptyString = true;
-                } else emptyString = false;
+                }
                 if(confirmNewPwd.matches("") || confirmNewPwd.contains(" ")){
                     confirmNewPwdInput.setHint("Confirm Password *");
                     confirmNewPwdInput.setHintTextColor(getResources().getColor(R.color.red));
                     emptyString = true;
-                } else emptyString = false;
-                if(!emptyString) {
-                    enterNewPwdField.setVisibility(View.GONE);
-                    newPwdField_visible = true;
                 }
+                if(!emptyString) {
+                    if (!newPwd.equals(confirmNewPwd))Toast.makeText(getContext(), "Passwords do not match.", Toast.LENGTH_SHORT).show();
+                    else {
+                        Requests request = new Requests();
+                        Nutzer nutzer = request.getNutzer(email_field_input);
+                        if (nutzer==null) Toast.makeText(getContext(), "User does not exist.", Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(getContext(), "Email was sent to " + email_field_input + ". Please verify your Account " +
+                                    "to reset the Password.", Toast.LENGTH_LONG).show();
+                            enterNewPwdField.setVisibility(View.GONE);
+                            newPwdField_visible = true;
+                        }//else
+                    }//else
+                }//then
                 break;
 
             case R.id.guest_btn:

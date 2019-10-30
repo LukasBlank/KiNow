@@ -10,6 +10,7 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.protobuf.Api;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -391,6 +392,30 @@ public class DemoApplication {
       }//catch
       return new ResponseEntity<>(erfolg,HttpStatus.ACCEPTED);
     }//logout
+
+    @RequestMapping(value = "/getNutzer")
+    public ResponseEntity<Object> getNutzer(@RequestHeader("email") String email){
+      Query query = db.collection("Nutzer").whereEqualTo("email",email);
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      try {
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        QuerySnapshot q = querySnapshot.get();
+        List<QueryDocumentSnapshot> documents = q.getDocuments();
+        if (documents.size()==1){
+          DocumentSnapshot document = documents.get(0);
+          map.put(document.getId(),document.getData());
+        }//then
+        else map = new HashMap<>();
+      }//try
+      catch (InterruptedException e) {
+        e.printStackTrace();
+        map = new HashMap<>();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+        map = new HashMap<>();
+      }//catch
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getNutzer
 
     private void stonieren (DocumentReference documentReference){
       ApiFuture<DocumentSnapshot> res = documentReference.get();

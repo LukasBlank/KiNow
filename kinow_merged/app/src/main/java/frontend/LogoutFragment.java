@@ -116,16 +116,17 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
 
                 // Compare if both new pwd EditTextFields match
                 // If they match, save new password
+                emptyPassword = false;
                 if(setNewPwdText.matches("") || setNewPwdText.contains(" ")){
                     setNewPwd.setHint("New Password *");
                     setNewPwd.setHintTextColor(getResources().getColor(R.color.red));
                     emptyPassword = true;
-                } else emptyPassword = false;
+                }
                 if(confirmSetNewPwdText.matches("") || confirmSetNewPwdText.contains(" ")){
                     confirmSetNewPwd.setHint("Confirm Password *");
                     confirmSetNewPwd.setHintTextColor(getResources().getColor(R.color.red));
                     emptyPassword = true;
-                } else emptyPassword = false;
+                }
                 if(!emptyPassword) {
                     newPwdField.setVisibility(View.GONE);
                     visible = true;

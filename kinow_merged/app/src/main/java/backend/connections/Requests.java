@@ -460,4 +460,37 @@ public class Requests {
         else return null;
     }//getRequestErg
 
+    public Nutzer getNutzer(String email){
+        //reset & request builden
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/getNutzer";
+        Request request = new Request.Builder()
+                .addHeader("email",email)
+                .url(url).build();
+        String erg = getRequestErg(request);
+        try {
+            if(erg==null)return null;
+            else {
+                if (erg.indexOf(':')==-1)return null;
+                else {
+                    //Ergebnis zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(erg, Map.class);
+                    //diese Map hat nur ein paar, welches den nutzer darstellt // diesen zu eigener map parsen
+                    Map<String,Object> nutzerMap = new HashMap<>();
+                    for (Map.Entry<String,Object> e : map.entrySet()){
+                        nutzerMap = (Map<String, Object>) e.getValue();
+                    }//for
+                    Nutzer nutzer = new Nutzer();
+                    for (Map.Entry<String,Object> entry : nutzerMap.entrySet()){
+                        nutzer.set(entry.getKey(),entry.getValue());
+                    }//for
+                    return nutzer;
+                }//else
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }//catch
+    }//getNutzer
+
 }//class
