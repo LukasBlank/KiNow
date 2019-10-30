@@ -52,10 +52,10 @@ public class Requests {
                 Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
                 //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                 for (Map.Entry<String,Object> entry : map.entrySet()){
-                    Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                    Map<String,Object> filmMap = (Map<String, Object>) entry.getValue();
                     Film film = new Film();
                     //Diese "SubMaps" wieder durchiterieren und zu Filmen parsen
-                    for (Map.Entry<String,Object> e : data.entrySet()){
+                    for (Map.Entry<String,Object> e : filmMap.entrySet()){
                         film.set(e.getKey(),e.getValue());
                     }//for
                     filme.add(film);
@@ -112,6 +112,7 @@ public class Requests {
     }//getKinos
 
     public Nutzer LogIn (String email, String pw){
+        //reset & request builden
         ausgabe = "";
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/LogIn";
@@ -119,13 +120,14 @@ public class Requests {
                 .addHeader("email",email)
                 .addHeader("passwort",pw)
                 .url(url).build();
+        //Thread starten, welcher nutzer zurück gibt, wenn dieser existiert
         tr.setRequest(request);
         tr.start();
         try {
             tr.join();
             long anfang = System.currentTimeMillis();
             long ende = anfang;
-            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten ok
+            //warten bis Thread fertig ist // höchstens 10 Sekunden //da Thread parallel arbeitet ist aktives Warten "ok"
             do {
                 ende = System.currentTimeMillis();
             } while (!tr.isFertig() && ende-anfang<10000);
@@ -137,14 +139,15 @@ public class Requests {
                 ausgabe = tr.getErg();
                 if (ausgabe.indexOf(':')==-1)return null;
                 else {
-                    //Ergebnis zu einer Map parsen, diese zu Nutzer parsen
-                    Map<String,Object> gesamt = new ObjectMapper().readValue(ausgabe, Map.class);
-                    Map<String,Object> map = new HashMap<>();
-                    for (Map.Entry<String,Object> e : gesamt.entrySet()){
-                        map = (Map<String, Object>) e.getValue();
+                    //Ergebnis zu einer Map parsen
+                    Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
+                    //diese Map hat nur ein paar, welches den nutzer darstellt // diesen zu eigener map parsen
+                    Map<String,Object> nutzerMap = new HashMap<>();
+                    for (Map.Entry<String,Object> e : map.entrySet()){
+                        nutzerMap = (Map<String, Object>) e.getValue();
                     }//for
                     Nutzer nutzer = new Nutzer();
-                    for (Map.Entry<String,Object> entry : map.entrySet()){
+                    for (Map.Entry<String,Object> entry : nutzerMap.entrySet()){
                         nutzer.set(entry.getKey(),entry.getValue());
                     }//for
                     return nutzer;
@@ -221,9 +224,9 @@ public class Requests {
                     Map<String,Object> map = new ObjectMapper().readValue(ausgabe, Map.class);
                     //durch diese Map iterieren und jeden Value-Eintrag zu einer Map machen
                     for (Map.Entry<String,Object> entry : map.entrySet()){
-                        Map<String,Object> data = (Map<String, Object>) entry.getValue();
+                        Map<String,Object> vorMap = (Map<String, Object>) entry.getValue();
                         Vorführung v = new Vorführung();
-                        for (Map.Entry<String,Object> e : data.entrySet()){
+                        for (Map.Entry<String,Object> e : vorMap.entrySet()){
                             v.set(e.getKey(),e.getValue());
                         }//for
                         vorführungen.add(v);

@@ -53,7 +53,7 @@ public class MoviesFragment extends Fragment {
 
     public MoviesFragment() {
         // Required empty public constructor
-    }
+    }//K
 
     /**
      * Use this factory method to create a new instance of
@@ -71,7 +71,7 @@ public class MoviesFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
+    }//newInstance
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,15 +79,15 @@ public class MoviesFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }//then
         //setting params
         filme = new ArrayList<Film>();
         kino = new Kino();
         kino.setKinoID(0);
         kinoAlt = 0;
         nutzer = new Nutzer();
-        nutzer.setNutzerID(-1);
-        nutzerAlt = -1;
+        nutzer.setNutzerID(0);
+        nutzerAlt = 0;
     }//onCreate
 
     @Override
@@ -108,18 +108,17 @@ public class MoviesFragment extends Fragment {
 
         if (filme.size()==0 || kino.getKinoID()!=kinoAlt || nutzer.getNutzerID()!=nutzerAlt){
             kinoAlt = kino.getKinoID();
+            nutzerAlt = nutzer.getNutzerID();
             Requests request = new Requests();
             filme = request.getFilme(kino.getKinoID());
             mAdapter = new MovieAdapter(filme, kino ,nutzer, getActivity());
         }//then
 
         movieList.setAdapter(mAdapter);
-
         movieList.getAdapter().notifyDataSetChanged();
 
-
         return movieView;
-    }
+    }//onCreateView
 
 
 
@@ -127,8 +126,8 @@ public class MoviesFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
+        }//then
+    }//onButtonPressed
 
     @Override
     public void onAttach(Context context) {
@@ -138,17 +137,14 @@ public class MoviesFragment extends Fragment {
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-
-
+        }//else
+    }//onAttach
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }//onDetach
 
     /**
      * This interface must be implemented by activities that contain this
@@ -170,4 +166,4 @@ public class MoviesFragment extends Fragment {
         Nutzer getSelectedNutzer();
     }//interface
 
-}
+}//class

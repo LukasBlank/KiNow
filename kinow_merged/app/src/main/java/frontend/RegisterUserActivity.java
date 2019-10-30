@@ -92,7 +92,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         // At the end of registration, open MainActivity as logged-in User
         if(check && checkboxes) {
             if (!pwd_input.equals(confirm_pwd_input))
-                Toast.makeText(getBaseContext(), "Passwort inkorrekt.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Password is not correct.", Toast.LENGTH_SHORT).show();
             else {
                 Requests request = new Requests();
                 Nutzer neu = new Nutzer();
@@ -102,16 +102,10 @@ public class RegisterUserActivity extends AppCompatActivity {
                 if (success){
                     Toast.makeText(getBaseContext(), "Registrierung erfolgreich. Sie können sich nun anmelden."
                             , Toast.LENGTH_SHORT).show();
-                    openSignInPage(view);
+                    finish();
                 }//then
                 else Toast.makeText(getBaseContext(), "Registrierung nicht möglich", Toast.LENGTH_SHORT).show();
-
             }//else
         }//then
     }//meth
-
-    public void openSignInPage(View view) {
-        finish();
-    }
-
-}
+}//class

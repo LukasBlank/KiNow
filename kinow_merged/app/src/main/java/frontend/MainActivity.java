@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
 
     BottomNavigationView navigation;
 
-    private static boolean loggedIn = false;
-
     //saving selected kino
     Kino kino;
     Nutzer nutzer;
@@ -41,30 +39,20 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
 
         //Set default ActionBar Title to "kiNOW"
         kinowToolbar = getSupportActionBar();
-        kinowToolbar.setTitle("Movies");
-
-        //Set default Fragment
-        loadFragment(new MoviesFragment());
+        kinowToolbar.setTitle("Account");
+        loadFragment(new AccountFragment());
 
         //set selected kino = null
         kino = new Kino();
         kino.setKinoID(0);
         nutzer = new Nutzer();
-        nutzer.setNutzerID(-1);
+        nutzer.setNutzerID(0);
 
         //Bottom Navigation
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(botNavItemListener);
         navigation.setSelectedItemId(R.id.tab_account);
 
-    }
-
-    public static void login(){
-        loggedIn = true;
-    }
-
-    public static void logout(){
-        loggedIn = false;
     }
 
     //Change Fragment depending on which Button is pressed
@@ -86,17 +74,17 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
                     loadFragment(locationFragment);
                     return true;
                 case R.id.tab_cart:
-                    if (nutzer.getNutzerID()<1)kinowToolbar.setTitle("Cart");
+                    if (nutzer.getNutzerID()==0)kinowToolbar.setTitle("Shopping Cart");
                     else kinowToolbar.setTitle("Einkäufe von " + nutzer.getVorname() + " " + nutzer.getNachname());
                     if(shoppingCartFragment==null)shoppingCartFragment = new ShoppingCartFragment();
                     loadFragment(shoppingCartFragment);
                     return true;
                 case R.id.tab_account:
-                    if(loggedIn){
-                        kinowToolbar.setTitle("Account");
+                    if(nutzer.getNutzerID()!=0){
+                        kinowToolbar.setTitle(nutzer.getVorname() + " " + nutzer.getNachname());
                         if(logoutFragment==null)logoutFragment = new LogoutFragment();
                         loadFragment(logoutFragment);
-                    } else if (!loggedIn){
+                    } else if (nutzer.getNutzerID()==0){
                         kinowToolbar.setTitle("Account");
                         if(accountFragment==null)accountFragment = new AccountFragment();
                         loadFragment(accountFragment);
@@ -140,16 +128,26 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
     @Override
     public Nutzer getSelectedNutzer() {
         return nutzer;
-    }
+    }//getLoggedInUser
 
     @Override
     public void onLogin(Nutzer nutzer) {
         this.nutzer = nutzer;
-        navigation.setSelectedItemId(R.id.tab_movies);
-        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-        t.replace(R.id.fragmentContainer,movieFragment);
-        t.addToBackStack(null);
-        t.commit();
+        if (nutzer.getNutzerID()!=0){
+            navigation.setSelectedItemId(R.id.tab_cart);
+            FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+            t.replace(R.id.fragmentContainer,shoppingCartFragment);
+            t.addToBackStack(null);
+            t.commit();
+        }//then
+        else {
+            navigation.setSelectedItemId(R.id.tab_movies);
+            FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+            t.replace(R.id.fragmentContainer,movieFragment);
+            t.addToBackStack(null);
+            t.commit();
+        }//else
+
     }//onLogin
 
     @Override

@@ -25,7 +25,6 @@ import backend.classes.Nutzer;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> implements Serializable {
 
     ArrayList<Film> filme;
-    Kino thisKino;
     Context context;
     Kino kino;
     Nutzer nutzer;
@@ -57,22 +56,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 intent.putExtra("kinoSelect", kino);
                 context.startActivity(intent);
             }
-        });
+        });//onClickListener
 
-        return new ViewHolder(v);
-    }
+        return vHolder;
+    }//onCreateViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.Title.setText(filme.get(i).getTitel());
         viewHolder.Desc.setText(filme.get(i).getBeschreibung());
-    }
+    }//onBindViewHolder
 
     @Override
     public int getItemCount() {
          if (filme!= null) return filme.size();
          else return -1;
-    }
+    }//getItemCount
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView movieImage;
@@ -86,7 +85,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             Title = itemView.findViewById(R.id.title);
             Desc = itemView.findViewById(R.id.desc);
             rLayout = itemView.findViewById(R.id.rLayout);
-        }
-    }
+        }//K
+    }//classViewHolder
 
 }//class

@@ -90,17 +90,17 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
             }//then
         }//then
 
+        //wenn ein Kino gewählt wurde und es passende vorführungen gibt, dass zeige die zeiten dazu an
         if (kino.getKinoID()!=0 && vorführungen!=null){
             timeOne.setVisibility(View.VISIBLE);
             timeTwo.setVisibility(View.VISIBLE);
             timeThree.setVisibility(View.VISIBLE);
-
+            //weise den angezeigten componenten und dem buchen button den onClickListener zu
             timeOne.setOnClickListener(onClickListener);
             timeTwo.setOnClickListener(onClickListener);
             timeThree.setOnClickListener(onClickListener);
             btnBuchen.setOnClickListener(onClickListener);
         }//then
-
 
     }//onCreate
 
@@ -135,12 +135,9 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                     break;
 
                 case R.id.button:
-                    if (nutzer.getNutzerID()==-1) {
-                        Toast.makeText(getBaseContext(), "Bitte zuerst anmelden.", Toast.LENGTH_SHORT).show();
-                    }//then
-                    else if(vorführung==null){
+                    if(vorführung==null){
                         Toast.makeText(getBaseContext(), "Bitte Vorführung auswählen.", Toast.LENGTH_SHORT).show();
-                    }
+                    }//then
                     else {
                         Intent intent = new Intent(MovieDetailScreen.this, SmallCinemaHall.class);
                         intent.putExtra("nutzer",nutzer);
@@ -148,7 +145,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
                         startActivity(intent);
                     }//else
                     break;
-            }
+            }//switch
         }
     };
 
