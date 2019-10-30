@@ -81,4 +81,15 @@
     <string name="hint_newPwd">New Password</string>
     <string name="save">Save</string>
 
+    <!-- Strings for Default ShoppingCart Screen Content -->
+    <string name="header_date">Date:</string>
+    <string name="header_time">Time:</string>
+    <string name="header_seat">Seats:</string>
+    <string name="seats">C2, C3, C4</string>
+    <string name="header_price">Price:</string>
+    <string name="price">18€</string>
+    <string name="buy_btn">Buy</string>
+    <string name="reserve_btn">Reserve</string>
+    <string name="delete_btn">Delete</string>
+
 </resources>

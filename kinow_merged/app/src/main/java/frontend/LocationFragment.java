@@ -25,7 +25,7 @@ import backend.connections.Requests;
  * Use the {@link LocationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LocationFragment extends Fragment implements LocationAdapter.onLocationClickedListener{
+public class LocationFragment extends Fragment implements LocationAdapter.onLocationClickedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,7 +89,7 @@ public class LocationFragment extends Fragment implements LocationAdapter.onLoca
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         locationList.setLayoutManager(layoutManager);
 
-        //alleKinos holen
+        //alle Kinos holen
         if(kinos.size()==0){
             Requests request = new Requests();
             kinos = request.getKinos();
