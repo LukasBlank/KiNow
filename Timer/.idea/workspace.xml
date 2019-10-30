@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="672a02d5-2093-4501-86a3-a476b413cb3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Lukas-Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/classes/lukas/classes/Buchung.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/classes/lukas/classes/Buchung.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lukas-Server/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/src/main/java/server/DemoApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication$SimpleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication$SimpleController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lukas-Server/target/classes/server/DemoApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -82,29 +83,31 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="30" />
-          <entry key="java" value="2144" />
+          <entry key="java" value="2149" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2144" />
+          <entry key="JAVA" value="2149" />
           <entry key="PLAIN_TEXT" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/Putzfrau.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+            <state relative-caret-position="301">
+              <caret line="78" column="43" lean-forward="true" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -201,6 +204,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -223,7 +227,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -234,7 +237,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572283486571" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -280,7 +283,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5da69a20-e8f8-4740-b7cc-570ba20f8c3f" name="Default Changelist" comment="" />
+      <changelist id="672a02d5-2093-4501-86a3-a476b413cb3e" name="Default Changelist" comment="" />
       <created>1571871429465</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -291,18 +294,19 @@
       <workItem from="1572022330099" duration="880000" />
       <workItem from="1572025601267" duration="2619000" />
       <workItem from="1572263536753" duration="3293000" />
+      <workItem from="1572453978106" duration="730000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51089000" />
+    <option name="totallyTimeSpent" value="51819000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24973147" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.25349087" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -420,8 +424,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/Putzfrau.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+        <state relative-caret-position="301">
+          <caret line="78" column="43" lean-forward="true" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
         </state>
       </provider>
     </entry>
