@@ -66,7 +66,7 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
         movieGenre.setText(genres);
 
         movieRating = findViewById(R.id.rating);
-        movieRating.setText(film.getBewertung()+"/10 Sternen");
+        movieRating.setText(film.getBewertung()+"/10★");
 
         movieFSK = findViewById(R.id.fsk);
         movieFSK.setText("FSK "+film.getFsk());

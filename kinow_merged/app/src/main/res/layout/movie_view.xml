@@ -8,47 +8,29 @@
     <!-- CardView for MovieImage -->
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardCornerRadius="0dp"
         app:cardElevation="3dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="153dp">
 
             <ImageView
                 android:contentDescription="@string/contentDescription"
                 android:id="@+id/movieImage"
+                android:layout_width="115dp"
+                android:layout_height="153dp"
+                app:srcCompat="@drawable/little_movie_image"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/movie_sample_image"/>
-
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-
-    <!-- CardView for Title and Description -->
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cardView"
-        android:layout_alignTop="@+id/cardView"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="-20dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="-20dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/cardView"
-        android:layout_toRightOf="@+id/cardView"
-        android:elevation="5dp"
-        app:cardCornerRadius="5dp">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                android:layout_toRightOf="@+id/movieImage"
+                android:layout_toEndOf="@+id/movieImage"
+                android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
@@ -56,7 +38,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:text="@string/movieTitle"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -65,13 +51,18 @@
                 android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
                 android:maxLength="200"
-                android:text="@string/movieDescription"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:text="@string/movieLongDescription"
                 android:textSize="14sp" />
+
+        </LinearLayout>
 
         </RelativeLayout>
 
