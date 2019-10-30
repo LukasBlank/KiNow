@@ -261,7 +261,7 @@ public class DemoApplication {
     public ResponseEntity<Object> getBesSitze(@RequestHeader("buchungsID") String buchungsID, @RequestHeader("nutzerID") String nutzerID){
       Map<String,Map<String,Object>> map = new HashMap<>();
       if (buchungsID.length()!=0){
-        String bestellungsnummer = buchungsID.substring(buchungsID.lastIndexOf('_')+1);
+        String bestellungsnummer = buchungsID.substring(0,buchungsID.lastIndexOf('_'));
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Bestellungen").document(bestellungsnummer)
             .collection("Buchungen").document(buchungsID).collection("Sitze").get();
