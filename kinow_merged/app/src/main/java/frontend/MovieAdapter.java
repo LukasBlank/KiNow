@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.Title.setText(filme.get(i).getTitel());
         viewHolder.Desc.setText(filme.get(i).getBeschreibung());
+        Picasso.get().load(filme.get(i).getBildLink()).into(viewHolder.movieImage);
     }//onBindViewHolder
 
     @Override
