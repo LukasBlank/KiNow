@@ -245,11 +245,35 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getBestellungen
 
+    @RequestMapping(value = "/getBesBuchungen")
+    public ResponseEntity<Object> getBesBuchungen(@RequestHeader("bestellungsnummer") String bestellungsnummer, @RequestHeader("nutzerID") String nutzerID){
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      if (bestellungsnummer.length()!=0){
+        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
+            .collection("Bestellungen").document(bestellungsnummer)
+            .collection("Buchungen").get();
+        map = getMapQuerySnapshot(query);
+      }//then
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getBesBuchungen
+
+    @RequestMapping(value = "/getBesSitze")
+    public ResponseEntity<Object> getBesSitze(@RequestHeader("buchungsID") String buchungsID, @RequestHeader("nutzerID") String nutzerID){
+      Map<String,Map<String,Object>> map = new HashMap<>();
+      if (buchungsID.length()!=0){
+        String bestellungsnummer = buchungsID.substring(buchungsID.lastIndexOf('_')+1);
+        ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
+            .collection("Bestellungen").document(bestellungsnummer)
+            .collection("Buchungen").document(buchungsID).collection("Sitze").get();
+        map = getMapQuerySnapshot(query);
+      }//then
+      return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }//getBesBuchungen
+
     @RequestMapping(value = "/getResSitze")
-    public ResponseEntity<Object> getResSitze(@RequestHeader("reservierungsID") String reservierungsID){
+    public ResponseEntity<Object> getResSitze(@RequestHeader("reservierungsID") String reservierungsID, @RequestHeader("nutzerID") String nutzerID){
       Map<String,Map<String,Object>> map = new HashMap<>();
       if (reservierungsID.length()!=0){
-        String nutzerID = reservierungsID.substring(0,reservierungsID.indexOf('_'));
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Reservierungen").document(reservierungsID)
             .collection("Sitze").get();
