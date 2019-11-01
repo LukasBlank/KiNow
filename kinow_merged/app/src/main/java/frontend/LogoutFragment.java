@@ -136,6 +136,11 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
 
             case R.id.logout_btn:
                 // Log user out
+
+                // Show Alert Dialog
+                AlertDialog alert = new AlertDialog(getActivity());
+                alert.show();
+
                 Toast.makeText(getContext(), "You logged out.", Toast.LENGTH_SHORT).show();
                 break;
         }

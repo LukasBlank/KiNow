@@ -94,6 +94,13 @@
     <string name="reserve_btn">Reserve</string>
     <string name="delete_btn">Delete</string>
 
+    <!-- Strings for Alert Dialog Content -->
+    <string name="warning">WARNING</string>
+    <string name="alert_text">Some of your reservations are not completed yet. These are lost at the logout. \nAre you sure that you want to continue?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Terms Of Service -->
     <string name="terms_of_service">Datenschutzerklärung
 \n
 \nDatenschutz
