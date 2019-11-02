@@ -41,7 +41,6 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Requests r = new Requests();
-
         Buchung b = reservierungen.get(i);
         viewHolder.movieTitel.setText(b.getFilmtitel());
         viewHolder.price.setText(String.valueOf(b.getBuchungspreis()));

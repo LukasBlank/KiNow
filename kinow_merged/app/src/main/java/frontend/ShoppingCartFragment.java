@@ -14,7 +14,9 @@ import java.util.ArrayList;
 
 import backend.classes.Bestellung;
 import backend.classes.Buchung;
+import backend.classes.Film;
 import backend.classes.Nutzer;
+import backend.classes.Vorführung;
 import backend.connections.Requests;
 
 
@@ -40,6 +42,8 @@ public class ShoppingCartFragment extends Fragment {
     private OnLoadCartListener onLoadCartListener;
 
     private Nutzer nutzer;
+    private Vorführung vor;
+    private ArrayList<Film> filme;
     private ArrayList<Buchung>reservierungen;
     private ArrayList<Bestellung>bestellungen;
 

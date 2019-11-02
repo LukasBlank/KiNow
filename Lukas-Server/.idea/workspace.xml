@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f492c7c9-575b-416b-91e3-87667082f436" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/server/DemoApplication$SimpleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/server/DemoApplication$SimpleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/server/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/server/DemoApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/demo-REST-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/demo-REST-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/demo-REST-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/demo-REST-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/frontend/ReservierungAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/frontend/ReservierungAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/frontend/ShoppingCartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/frontend/ShoppingCartFragment.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,11 +29,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="iml" value="6" />
+          <entry key="java" value="734" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="IDEA_MODULE" value="6" />
+          <entry key="JAVA" value="734" />
         </counts>
       </usages-collector>
     </session>
@@ -51,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+            <state relative-caret-position="398">
+              <caret line="465" column="26" selection-start-line="465" selection-start-column="26" selection-end-line="465" selection-end-column="26" />
               <folding>
                 <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -73,6 +67,7 @@
                 <element signature="method#logout#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getNutzer#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#setNewPassword#0;class#SimpleController#0;class#DemoApplication#0" />
+                <element signature="method#getFilmBild#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#stonieren#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#sitzeFrei#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#mapToSitze#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -98,6 +93,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/demoRest.iml" />
+        <option value="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" />
       </list>
     </option>
   </component>
@@ -259,30 +255,31 @@
       <workItem from="1572025601267" duration="2619000" />
       <workItem from="1572263536753" duration="13822000" />
       <workItem from="1572444449110" duration="5493000" />
-      <workItem from="1572686926966" duration="5433000" />
+      <workItem from="1572686926966" duration="7695000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="606000" />
+    <option name="totallyTimeSpent" value="2868000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18796992" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18796992" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.6696529" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.16461366" />
       <window_info anchor="bottom" id="Java Enterprise" order="1" />
       <window_info anchor="bottom" id="Spring" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.49946293" weight="0.2474804" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.49946293" visible="true" weight="0.3012318" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.2362822" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -369,8 +366,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+        <state relative-caret-position="398">
+          <caret line="465" column="26" selection-start-line="465" selection-start-column="26" selection-end-line="465" selection-end-column="26" />
           <folding>
             <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -391,6 +388,7 @@
             <element signature="method#logout#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getNutzer#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#setNewPassword#0;class#SimpleController#0;class#DemoApplication#0" />
+            <element signature="method#getFilmBild#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#stonieren#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#sitzeFrei#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#mapToSitze#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -463,7 +461,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
