@@ -105,7 +105,7 @@ public class ShoppingCartFragment extends Fragment {
             bestellungen = request.getBestellungen(String.valueOf(nutzer.getNutzerID()));
         }//then
 
-        if (resAdapter==null)resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity());
+        resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity());
 
         reservierugsList.setAdapter(resAdapter);
         reservierugsList.getAdapter().notifyDataSetChanged();

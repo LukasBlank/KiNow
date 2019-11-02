@@ -435,16 +435,12 @@ public class DemoApplication {
     }//setNetPassword
 
     @RequestMapping(value = "/getFilmBild")
-    public ResponseEntity<Object> getFilmBild (@RequestHeader("titel") String titel){
+    public ResponseEntity<Object> getFilmBild (@RequestHeader("filmID") String filmID){
       String bildlink = null;
-      Query filmQ = db.collection("Filme").whereEqualTo("titel",titel);
-      ApiFuture<QuerySnapshot> docQ = filmQ.get();
+      ApiFuture<DocumentSnapshot> filmQ = db.collection("Filme").document(filmID).get();
       try {
-        QuerySnapshot querySnapshot = docQ.get();
-        if (querySnapshot.getDocuments().size()==1){
-          DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-          bildlink = documentSnapshot.get("bildLink").toString();
-        }//then
+        DocumentSnapshot doc = filmQ.get();
+        if (doc.exists())bildlink=doc.get("bildLink").toString();
       } catch (InterruptedException e) {
         e.printStackTrace();
       } catch (ExecutionException e) {

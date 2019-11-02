@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import backend.classes.Buchung;
 import backend.classes.Nutzer;
+import backend.classes.Sitz;
 import backend.connections.Requests;
 
 public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapter.ViewHolder> {
@@ -42,9 +45,26 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Requests r = new Requests();
         Buchung b = reservierungen.get(i);
+        String zeit = r.getVorZeit(b.getVorführungsID());
+        String filmID = b.getVorführungsID().substring(0,b.getVorführungsID().lastIndexOf('_'));
+        filmID = filmID.substring(filmID.lastIndexOf('_')+1);
+        String bild = r.getFilmBild(filmID);
+        Picasso.get().load(bild).resize(700,935).centerCrop().into(viewHolder.movieImage);
+        String datum = zeit.substring(0,zeit.indexOf('/'));
+        zeit = zeit.substring(zeit.indexOf('/'+1));
+        viewHolder.date.setText(datum);
+        viewHolder.time.setText(zeit);
         viewHolder.movieTitel.setText(b.getFilmtitel());
         viewHolder.price.setText(String.valueOf(b.getBuchungspreis()));
-        //Picasso.get().load(filme.get(i).getBildLink()).into(viewHolder.movieImage);
+        String sitze = "";
+        for (Sitz s : b.getSitze()){
+            String sitzID = s.getSitzID();
+            sitze += sitzID.substring(sitzID.lastIndexOf('_')+1) + ", ";
+        }//for
+        if (sitze.length()>1){
+            sitze = sitze.substring(0,sitze.lastIndexOf(','));
+        }//then
+        viewHolder.seats.setText(sitze);
     }//onBindViewHolder
 
     @Override
