@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,11 +24,13 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
     private Nutzer nutzer;
     private ArrayList<Buchung> reservierungen;
     private Context context;
+    private OnDeleteListener onDeleteListener;
 
-    public ReservierungAdapter (Nutzer nutzer, ArrayList<Buchung> reservierungen, Context context){
+    public ReservierungAdapter (Nutzer nutzer, ArrayList<Buchung> reservierungen, Context context, OnDeleteListener onDeleteListener){
         this.nutzer = nutzer;
         this.reservierungen = reservierungen;
         this.context = context;
+        this.onDeleteListener = onDeleteListener;
     }//ReservierungsAdapter
 
     public ReservierungAdapter(View v) {
@@ -35,9 +38,16 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
         View v = LayoutInflater.from(context).inflate(R.layout.cart_view, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
+        viewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDeleteListener.onDelete(reservierungen.get(i));
+                reservierungen.remove(i);
+            }//onClick
+        });
         return viewHolder;
     }//onCreateViewHolder
 
@@ -76,6 +86,7 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView movieImage;
         public TextView movieTitel,date,time,seats,price;
+        public Button deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,7 +96,11 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
             time = itemView.findViewById(R.id.cart_item_time);
             seats = itemView.findViewById(R.id.cart_item_seats);
             price = itemView.findViewById(R.id.cart_item_price);
-
+            deleteBtn = itemView.findViewById(R.id.delete_ticket_btn);
         }//K
     }//classViewHolder
+
+    public interface OnDeleteListener {
+        void onDelete(Buchung buchung);
+    }
 }//class

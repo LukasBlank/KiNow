@@ -542,5 +542,16 @@ public class Requests {
         return erg;
     }//getVorZeit
 
+    public boolean stonieren (String buchungsID){
+        if (buchungsID==null)return false;
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/vorStonieren";
+        Request request = new Request.Builder()
+                .addHeader("buchungsID",buchungsID)
+                .url(url).build();
+        String erg = getRequestErg(request);
+        return Boolean.parseBoolean(erg);
+    }//stonieren
+
 
 }//class

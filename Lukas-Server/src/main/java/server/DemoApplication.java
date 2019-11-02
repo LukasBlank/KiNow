@@ -469,6 +469,26 @@ public class DemoApplication {
       return new ResponseEntity<>(zeit,HttpStatus.ACCEPTED);
     }//getVorZeit
 
+    @RequestMapping(value = "/vorStonieren")
+    public ResponseEntity<Object> vorStonieren (@RequestHeader("buchungsID") String buchungsID, @RequestHeader("nutzerID")String nutzerID){
+      boolean erfolg = false;
+      ApiFuture<DocumentSnapshot> query = db.collection("Nutzer").document(nutzerID)
+          .collection("Reservierungen").document(buchungsID).get();
+      try {
+        DocumentSnapshot doc = query.get();
+        if (doc.exists()){
+          stonieren(doc.getReference());
+          doc.getReference().delete();
+          erfolg = true;
+        }//then
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }//catch
+      return new ResponseEntity<>(erfolg,HttpStatus.ACCEPTED);
+    }//vorStonieren
+
     private void stonieren (DocumentReference documentReference){
       ApiFuture<DocumentSnapshot> res = documentReference.get();
       ApiFuture<QuerySnapshot> query = documentReference.collection("Sitze").get();

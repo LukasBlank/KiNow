@@ -33,6 +33,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     String pwd_input;
     String confirm_pwd_input;
     String dot = ".";
+    String gender_input;
+    String birthday_input;
 
     CheckBox accept_terms;
     CheckBox minimum_age;
@@ -115,6 +117,9 @@ public class RegisterUserActivity extends AppCompatActivity {
         email_input = reg_eMail_field.getText().toString();
         pwd_input = reg_pwd_field.getText().toString();
         confirm_pwd_input = reg_confirmPwd_field.getText().toString();
+        gender_input = gender_field.getText().toString();
+        birthday_input = birthday_field.getText().toString();
+
 
         // Check if any field is empty or if any checkbox is unchecked
         boolean check = true;
@@ -162,6 +167,8 @@ public class RegisterUserActivity extends AppCompatActivity {
                 Nutzer neu = new Nutzer();
                 neu.setVorname(firstname_input);neu.setNachname(lastname_input);neu.setEmail(email_input);
                 neu.setPasswort(pwd_input);
+                if (gender_input.length()>1)neu.setGeschlecht(gender_input);
+                if (birthday_input.length()>1)neu.setGeburtstag(birthday_input);
                 boolean success = request.registerUser(neu);
                 if (success){
                     Toast.makeText(getBaseContext(), "Registrierung erfolgreich. Sie können sich nun anmelden."

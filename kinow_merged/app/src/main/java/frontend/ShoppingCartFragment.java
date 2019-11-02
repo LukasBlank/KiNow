@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,7 @@ import backend.connections.Requests;
  * Use the {@link ShoppingCartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingCartFragment extends Fragment {
+public class ShoppingCartFragment extends Fragment implements ReservierungAdapter.OnDeleteListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -105,10 +107,15 @@ public class ShoppingCartFragment extends Fragment {
             bestellungen = request.getBestellungen(String.valueOf(nutzer.getNutzerID()));
         }//then
 
-        resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity());
+        resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity(),this);
 
         reservierugsList.setAdapter(resAdapter);
         reservierugsList.getAdapter().notifyDataSetChanged();
+
+        if (reservierungen.size()>0){
+            Button buyallBtn = view.findViewById(R.id.buy_all_btn);
+            buyallBtn.setVisibility(View.VISIBLE);
+        }//then
 
         // Inflate the layout for this fragment
         return view;
@@ -137,6 +144,20 @@ public class ShoppingCartFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void onDelete(Buchung buchung) {
+        Requests r = new Requests();
+        boolean erfolg = r.stonieren(buchung.getBuchungID());
+        if (erfolg){
+            reservierungen.remove(buchung);
+            Toast.makeText(getContext(), "Deleted successfully.", Toast.LENGTH_SHORT).show();
+        }//then
+        else {
+            Toast.makeText(getContext(), "Deletion failed.", Toast.LENGTH_SHORT).show();
+        }//else
+
+    }//onDelete
 
     /**
      * This interface must be implemented by activities that contain this
