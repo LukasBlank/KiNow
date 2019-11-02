@@ -51,7 +51,7 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
         String bild = r.getFilmBild(filmID);
         Picasso.get().load(bild).resize(700,935).centerCrop().into(viewHolder.movieImage);
         String datum = zeit.substring(0,zeit.indexOf('/'));
-        zeit = zeit.substring(zeit.indexOf('/'+1));
+        zeit = zeit.substring(zeit.indexOf('/')+1);
         viewHolder.date.setText(datum);
         viewHolder.time.setText(zeit);
         viewHolder.movieTitel.setText(b.getFilmtitel());
