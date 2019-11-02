@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import backend.classes.Buchung;
+import backend.connections.Requests;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -20,7 +25,7 @@ import android.widget.Toast;
  * Use the {@link LogoutFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LogoutFragment extends Fragment implements View.OnClickListener {
+public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButtonListener,View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,6 +48,7 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
     private String confirmSetNewPwdText;
 
     private OnFragmentInteractionListener mListener;
+    private OnLogoutListener onLogoutListener;
 
     public LogoutFragment() {
         // Required empty public constructor
@@ -90,6 +96,8 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
         setNewPwd = view.findViewById(R.id.set_new_pwd_input);
         confirmSetNewPwd = view.findViewById(R.id.confirm_set_new_pwd_input);
 
+        onLogoutListener = (OnLogoutListener) getContext();
+
         return view;
     }
 
@@ -136,14 +144,18 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
 
             case R.id.logout_btn:
                 // Log user out
+                ArrayList<Buchung> reservierungen = onLogoutListener.onLogoutGetRes();
+                if (reservierungen!= null && reservierungen.size()>0){
+                    AlertDialog alert = new AlertDialog(getActivity());
+                    alert.show();
+                }//then
+                else {
+                    onLogoutListener.onLogout();
+                    Toast.makeText(getContext(), "You logged out.", Toast.LENGTH_SHORT).show();
+                }//else
 
-                // Show Alert Dialog
-                AlertDialog alert = new AlertDialog(getActivity());
-                alert.show();
-
-                Toast.makeText(getContext(), "You logged out.", Toast.LENGTH_SHORT).show();
                 break;
-        }
+        }//switch
 
     }
 
@@ -171,6 +183,13 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
+    @Override
+    public void onYes() {
+        Requests requests = new Requests();
+        //stonieren
+    }//onYes
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -185,4 +204,9 @@ public class LogoutFragment extends Fragment implements View.OnClickListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public interface OnLogoutListener {
+        ArrayList<Buchung> onLogoutGetRes();
+        void onLogout();
+    }//interface
 }

@@ -1,21 +1,23 @@
 package frontend;
 
-import android.app.UiAutomation;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
+import backend.classes.Buchung;
 import backend.classes.Kino;
 import backend.classes.Nutzer;
+import backend.connections.Requests;
 
-public class MainActivity extends AppCompatActivity implements LogoutFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnLoadCartListener, AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements LogoutFragment.OnLogoutListener,LogoutFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnLoadCartListener, AccountFragment.OnLoginListener,MoviesFragment.OnSelectionListener ,LocationFragment.OnKinoIDChangedListener,MoviesFragment.OnFragmentInteractionListener, ShoppingCartFragment.OnFragmentInteractionListener, LocationFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
 
     private ActionBar kinowToolbar;
 
@@ -154,5 +156,26 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
     public Nutzer onLoadGetNutzer() {
         return nutzer;
     }//onLoadGetNutzer
+
+    @Override
+    public ArrayList<Buchung> onLogoutGetRes() {
+        Requests r = new Requests();
+        ArrayList<Buchung> reservierungen = r.getReservierungen(String.valueOf(nutzer.getNutzerID()));
+        return reservierungen;
+    }//onLogout
+
+    @Override
+    public void onLogout() {
+        nutzer = new Nutzer();
+        nutzer.setNutzerID(0);
+        accountFragment = new AccountFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, accountFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        kinowToolbar.setTitle("Account");
+        navigation.setSelectedItemId(R.id.tab_account);
+    }//onLogout
+
 
 }//class

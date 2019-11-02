@@ -62,7 +62,6 @@ public class DemoApplication {
     }//catch
     db = FirestoreClient.getFirestore();
     SimpleController sc = new SimpleController();
-    System.out.println(sc.logout("1"));
   }//main
 
   @RestController

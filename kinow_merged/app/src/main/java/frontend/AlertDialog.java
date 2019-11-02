@@ -12,6 +12,7 @@ public class AlertDialog extends Dialog implements android.view.View.OnClickList
     public Activity activity;
     public Dialog dialog;
     public Button yes, no;
+    private OnAlertButtonListener onAlertButtonListener;
 
     public AlertDialog(Activity a) {
         super(a);
@@ -28,6 +29,7 @@ public class AlertDialog extends Dialog implements android.view.View.OnClickList
         no = findViewById(R.id.no_btn);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
+        onAlertButtonListener = (OnAlertButtonListener) getContext();
 
     }
 
@@ -35,14 +37,19 @@ public class AlertDialog extends Dialog implements android.view.View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.yes_btn:
+                onAlertButtonListener.onYes();
                 activity.finish();
                 break;
             case R.id.no_btn:
-                dismiss();
+                activity.finish();
                 break;
             default:
                 break;
         }
         dismiss();
     }
-}
+
+    public interface OnAlertButtonListener {
+       void onYes ();
+    }//interface
+}//class

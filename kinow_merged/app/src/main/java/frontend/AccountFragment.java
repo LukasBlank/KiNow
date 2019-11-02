@@ -214,7 +214,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
                         Nutzer nutzer = request.getNutzer(email_field_input);
                         if (nutzer==null) Toast.makeText(getContext(), "User does not exist.", Toast.LENGTH_SHORT).show();
                         else {
-                            Toast.makeText(getContext(), "Email was sent to " + email_field_input + ". Please verify your Account " +
+                            Toast.makeText(getContext(), "Email was sent to " + email_field_input + ". Please verify your Email " +
                                     "to reset the Password.", Toast.LENGTH_LONG).show();
                             enterNewPwdField.setVisibility(View.GONE);
                             newPwdField_visible = true;
