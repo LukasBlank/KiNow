@@ -68,6 +68,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         viewHolder.Desc.setText(filme.get(i).getBeschreibung());
         String link = filme.get(i).getBildLink();
         Picasso.get().load(filme.get(i).getBildLink()).resize(700,935).centerCrop().into(viewHolder.movieImage);
+                //resize(700,935).centerCrop().
     }//onBindViewHolder
 
     @Override
