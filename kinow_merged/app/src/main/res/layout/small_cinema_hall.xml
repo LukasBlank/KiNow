@@ -84,11 +84,11 @@
 
                 <Button
                     android:id="@+id/g1"
-                    android:onClick="onBtnClick"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="3dp"
-                    android:background="@drawable/seat_blue_wheelchair" />
+                    android:background="@drawable/seat_grey"
+                    android:onClick="onBtnClick" />
 
                 <Button
                     android:id="@+id/g2"
@@ -132,11 +132,11 @@
 
                 <Button
                     android:id="@+id/g7"
-                    android:onClick="onBtnClick"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="3dp"
-                    android:background="@drawable/seat_blue_wheelchair" />
+                    android:background="@drawable/seat_grey"
+                    android:onClick="onBtnClick" />
 
                 <TextView
                     android:layout_width="30dp"

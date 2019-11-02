@@ -76,15 +76,14 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
                     loadFragment(locationFragment);
                     return true;
                 case R.id.tab_cart:
-                    if (nutzer.getNutzerID()==0)kinowToolbar.setTitle("Shopping Cart");
-                    else kinowToolbar.setTitle("Einkäufe von " + nutzer.getVorname() + " " + nutzer.getNachname());
+                    kinowToolbar.setTitle("Shopping Cart");
                     if(shoppingCartFragment==null)shoppingCartFragment = new ShoppingCartFragment();
                     loadFragment(shoppingCartFragment);
                     return true;
                 case R.id.tab_account:
                     if(nutzer.getNutzerID()!=0){
                         kinowToolbar.setTitle(nutzer.getVorname() + " " + nutzer.getNachname());
-                        if(logoutFragment==null)logoutFragment = new LogoutFragment();
+                        logoutFragment = new LogoutFragment();
                         loadFragment(logoutFragment);
                     } else if (nutzer.getNutzerID()==0){
                         kinowToolbar.setTitle("Account");
@@ -182,5 +181,12 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
         return nutzer;
     }//onLogoutGetNutzer
 
+    // Show FinishDialog if BackButton is pressed
+    @Override
+    public void onBackPressed(){
+        FinishDialog finisher = new FinishDialog(MainActivity.this);
+        finisher.show();
+        super.onBackPressed();
+    }
 
 }//class

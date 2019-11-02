@@ -4,12 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import backend.classes.Bestellung;
 import backend.classes.Buchung;
 import backend.classes.Nutzer;
 import backend.connections.Requests;
@@ -38,7 +41,10 @@ public class ShoppingCartFragment extends Fragment {
 
     private Nutzer nutzer;
     private ArrayList<Buchung>reservierungen;
-    private ArrayList<Buchung>bestellungen;
+    private ArrayList<Bestellung>bestellungen;
+
+    private RecyclerView reservierugsList;
+    private ReservierungAdapter resAdapter;
 
     public ShoppingCartFragment() {
         // Required empty public constructor
@@ -74,8 +80,16 @@ public class ShoppingCartFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+
+        reservierugsList = view.findViewById(R.id.cart_item_list);
+        reservierugsList.setHasFixedSize(true);
+
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        reservierugsList.setLayoutManager(layoutManager);
+
+
 
         //Lade den ausgewählten Nutzer
         nutzer = onLoadCartListener.onLoadGetNutzer();
@@ -84,8 +98,13 @@ public class ShoppingCartFragment extends Fragment {
         Requests request = new Requests();
         if (nutzer.getNutzerID()!=0){
             reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
-            bestellungen = null;
+            bestellungen = request.getBestellungen(String.valueOf(nutzer.getNutzerID()));
         }//then
+
+        if (resAdapter==null)resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity());
+
+        reservierugsList.setAdapter(resAdapter);
+        reservierugsList.getAdapter().notifyDataSetChanged();
 
         // Inflate the layout for this fragment
         return view;
