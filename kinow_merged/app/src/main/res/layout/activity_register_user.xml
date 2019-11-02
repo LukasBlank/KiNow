@@ -240,14 +240,37 @@
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/relLay_reg_confirm_pwd">
 
-                <CheckBox
-                    android:id="@+id/checkbox_terms"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/terms"
-                    android:textColor="@color/textColor"
-                    app:buttonTint="@color/red"
-                    android:layout_centerVertical="true"/>
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_terms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/agree"
+                        android:textColor="@color/textColor"
+                        app:buttonTint="@color/red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:onClick="openTerms"
+                        android:text="@string/terms"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dot"
+                        android:textColor="@color/textColor" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 

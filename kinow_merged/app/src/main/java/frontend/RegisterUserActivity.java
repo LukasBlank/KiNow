@@ -43,6 +43,11 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     }
 
+    public void openTerms(View view) {
+        Intent i = new Intent(RegisterUserActivity.this, TermsOfServiceActivity.class);
+        startActivity(i);
+    }
+
     public void registerUser(View view) {
 
         // Get text of EditTextFields
