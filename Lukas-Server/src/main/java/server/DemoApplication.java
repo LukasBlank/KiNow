@@ -416,7 +416,7 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getNutzer
 
-    @RequestMapping(value = "/setNetPassword")
+    @RequestMapping(value = "/setNewPassword")
     public ResponseEntity<Object> setNewPassword(@RequestHeader("nutzerID") String nutzerID, @RequestHeader("password") String password){
       boolean erfolg = false;
       ApiFuture<DocumentSnapshot> nutzerDoc = db.collection("Nutzer").document(nutzerID).get();
