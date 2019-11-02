@@ -434,6 +434,41 @@ public class DemoApplication {
       return new ResponseEntity<>(erfolg,HttpStatus.ACCEPTED);
     }//setNetPassword
 
+    @RequestMapping(value = "/getFilmBild")
+    public ResponseEntity<Object> getFilmBild (@RequestHeader("filmID") String filmID){
+      String bildlink = null;
+      ApiFuture<DocumentSnapshot> filmQ = db.collection("Filme").document(filmID).get();
+      try {
+        DocumentSnapshot doc = filmQ.get();
+        if (doc.exists())bildlink=doc.get("bildLink").toString();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }
+      return new ResponseEntity<>(bildlink,HttpStatus.ACCEPTED);
+    }//getFilmBild
+
+    @RequestMapping(value = "/getVorZeit")
+    public ResponseEntity<Object> getVorZeit (@RequestHeader("vorID") String vorID){
+      String zeit = null;
+      String kinoID = vorID.substring(0,vorID.indexOf('_'));
+      String filmID = vorID.substring(0,vorID.lastIndexOf('_')); filmID = filmID.substring(filmID.lastIndexOf('_')+1);
+      ApiFuture<DocumentSnapshot> docSnap = db.collection("Kino").document(kinoID).collection("spieltFilme").document(filmID)
+          .collection("Vorstellungen").document(vorID).get();
+      try {
+        DocumentSnapshot doc = docSnap.get();
+        if (doc.exists()){
+          zeit = doc.get("zeitpunkt").toString();
+        }//then
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }
+      return new ResponseEntity<>(zeit,HttpStatus.ACCEPTED);
+    }//getVorZeit
+
     private void stonieren (DocumentReference documentReference){
       ApiFuture<DocumentSnapshot> res = documentReference.get();
       ApiFuture<QuerySnapshot> query = documentReference.collection("Sitze").get();

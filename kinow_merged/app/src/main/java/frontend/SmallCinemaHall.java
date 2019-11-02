@@ -125,13 +125,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_a1.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_a1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_a1.setBackgroundResource(R.drawable.seat_violet);
                         clicked_a1 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_a1.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_a1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_a1.setBackgroundResource(R.drawable.seat_grey);
                         clicked_a1 = false;
                     }//else
                 }//then
@@ -146,13 +148,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_a2.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_a2.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_a2.setBackgroundResource(R.drawable.seat_violet);
                         clicked_a2 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_a2.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_a2.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_a2.setBackgroundResource(R.drawable.seat_grey);
                         clicked_a2 = false;
                     }//else
                 }//then
@@ -167,13 +171,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_a3.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_a3.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_a3.setBackgroundResource(R.drawable.seat_violet);
                         clicked_a3 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_a3.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_a3.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_a3.setBackgroundResource(R.drawable.seat_grey);
                         clicked_a3 = false;
                     }//else
                 }//then
@@ -188,13 +194,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_a4.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_a4.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_a4.setBackgroundResource(R.drawable.seat_violet);
                         clicked_a4 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_a4.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_a4.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_a4.setBackgroundResource(R.drawable.seat_grey);
                         clicked_a4 = false;
                     }//else
                 }//then
@@ -209,13 +217,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_a5.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_a5.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_a5.setBackgroundResource(R.drawable.seat_violet);
                         clicked_a5 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_a5.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_a5.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_a5.setBackgroundResource(R.drawable.seat_grey);
                         clicked_a5 = false;
                     }//else
                 }//then
@@ -230,13 +240,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_a6.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_a6.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_a6.setBackgroundResource(R.drawable.seat_violet);
                         clicked_a6 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_a6.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_a6.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_a6.setBackgroundResource(R.drawable.seat_grey);
                         clicked_a6 = false;
                     }//else
                 }//then
@@ -251,13 +263,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_a7.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_a7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_a7.setBackgroundResource(R.drawable.seat_violet);
                         clicked_a7 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_a7.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_a7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_a7.setBackgroundResource(R.drawable.seat_grey);
                         clicked_a7 = false;
                     }//else
                 }//then
@@ -272,13 +286,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_b1.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_b1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_b1.setBackgroundResource(R.drawable.seat_violet);
                         clicked_b1 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_b1.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_b1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_b1.setBackgroundResource(R.drawable.seat_grey);
                         clicked_b1 = false;
                     }//else
                 }//then
@@ -293,13 +309,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_b2.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_b2.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_b2.setBackgroundResource(R.drawable.seat_violet);
                         clicked_b2 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_b2.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_b2.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_b2.setBackgroundResource(R.drawable.seat_grey);
                         clicked_b2 = false;
                     }//else
                 }//then
@@ -314,13 +332,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_b3.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_b3.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_b3.setBackgroundResource(R.drawable.seat_violet);
                         clicked_b3 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_b3.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_b3.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_b3.setBackgroundResource(R.drawable.seat_grey);
                         clicked_b3 = false;
                     }//else
                 }//then
@@ -335,13 +355,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_b4.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_b4.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_b4.setBackgroundResource(R.drawable.seat_violet);
                         clicked_b4 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_b4.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_b4.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_b4.setBackgroundResource(R.drawable.seat_grey);
                         clicked_b4 = false;
                     }//else
                 }//then
@@ -356,13 +378,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_b5.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_b5.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_b5.setBackgroundResource(R.drawable.seat_violet);
                         clicked_b5 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_b5.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_b5.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_b5.setBackgroundResource(R.drawable.seat_grey);
                         clicked_b5 = false;
                     }//else
                 }//then
@@ -377,13 +401,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_b6.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_b6.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_b6.setBackgroundResource(R.drawable.seat_violet);
                         clicked_b6 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_b6.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_b6.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_b6.setBackgroundResource(R.drawable.seat_grey);
                         clicked_b6 = false;
                     }//else
                 }//then
@@ -398,13 +424,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_b7.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_b7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_b7.setBackgroundResource(R.drawable.seat_violet);
                         clicked_b7 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_b7.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_b7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_b7.setBackgroundResource(R.drawable.seat_grey);
                         clicked_b7 = false;
                     }//else
                 }//then
@@ -419,13 +447,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_c1.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_c1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_c1.setBackgroundResource(R.drawable.seat_violet);
                         clicked_c1 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_c1.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_c1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_c1.setBackgroundResource(R.drawable.seat_grey);
                         clicked_c1 = false;
                     }//else
                 }//then
@@ -440,13 +470,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_c2.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_c2.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_c2.setBackgroundResource(R.drawable.seat_violet);
                         clicked_c2 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_c2.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_c2.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_c2.setBackgroundResource(R.drawable.seat_grey);
                         clicked_c2 = false;
                     }//else
                 }//then
@@ -461,13 +493,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_c3.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_c3.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_c3.setBackgroundResource(R.drawable.seat_violet);
                         clicked_c3 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_c3.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_c3.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_c3.setBackgroundResource(R.drawable.seat_grey);
                         clicked_c3 = false;
                     }//else
                 }//then
@@ -482,13 +516,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_c4.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_c4.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_c4.setBackgroundResource(R.drawable.seat_violet);
                         clicked_c4 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_c4.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_c4.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_c4.setBackgroundResource(R.drawable.seat_grey);
                         clicked_c4 = false;
                     }//else
                 }//then
@@ -503,13 +539,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_c5.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_c5.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_c5.setBackgroundResource(R.drawable.seat_violet);
                         clicked_c5 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_c5.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_c5.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_c5.setBackgroundResource(R.drawable.seat_grey);
                         clicked_c5 = false;
                     }//else
                 }//then
@@ -524,13 +562,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_c6.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_c6.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_c6.setBackgroundResource(R.drawable.seat_violet);
                         clicked_c6 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_c6.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_c6.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_c6.setBackgroundResource(R.drawable.seat_grey);
                         clicked_c6 = false;
                     }//else
                 }//then
@@ -545,13 +585,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_c7.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_c7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_c7.setBackgroundResource(R.drawable.seat_violet);
                         clicked_c7 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_c7.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_c7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_c7.setBackgroundResource(R.drawable.seat_grey);
                         clicked_c7 = false;
                     }//else
                 }//then
@@ -566,13 +608,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_d1.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_d1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_d1.setBackgroundResource(R.drawable.seat_violet);
                         clicked_d1 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_d1.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_d1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_d1.setBackgroundResource(R.drawable.seat_grey);
                         clicked_d1 = false;
                     }//else
                 }//then
@@ -587,13 +631,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_d2.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_d2.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_d2.setBackgroundResource(R.drawable.seat_violet);
                         clicked_d2 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_d2.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_d2.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_d2.setBackgroundResource(R.drawable.seat_grey);
                         clicked_d2 = false;
                     }//else
                 }//then
@@ -608,13 +654,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_d3.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_d3.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_d3.setBackgroundResource(R.drawable.seat_violet);
                         clicked_d3 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_d3.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_d3.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_d3.setBackgroundResource(R.drawable.seat_grey);
                         clicked_d3 = false;
                     }//else
                 }//then
@@ -629,13 +677,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_d4.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_d4.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_d4.setBackgroundResource(R.drawable.seat_violet);
                         clicked_d4 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_d4.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_d4.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_d4.setBackgroundResource(R.drawable.seat_grey);
                         clicked_d4 = false;
                     }//else
                 }//then
@@ -650,13 +700,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_d5.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_d5.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_d5.setBackgroundResource(R.drawable.seat_violet);
                         clicked_d5 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_d5.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_d5.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_d5.setBackgroundResource(R.drawable.seat_grey);
                         clicked_d5 = false;
                     }//else
                 }//then
@@ -671,13 +723,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_d6.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_d6.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_d6.setBackgroundResource(R.drawable.seat_violet);
                         clicked_d6 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_d6.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_d6.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_d6.setBackgroundResource(R.drawable.seat_grey);
                         clicked_d6 = false;
                     }//else
                 }//then
@@ -692,13 +746,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_d7.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_d7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_d7.setBackgroundResource(R.drawable.seat_violet);
                         clicked_d7 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_d7.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_d7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_d7.setBackgroundResource(R.drawable.seat_grey);
                         clicked_d7 = false;
                     }//else
                 }//then
@@ -713,13 +769,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_e1.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_e1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_e1.setBackgroundResource(R.drawable.seat_violet);
                         clicked_e1 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_e1.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_e1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_e1.setBackgroundResource(R.drawable.seat_grey);
                         clicked_e1 = false;
                     }//else
                 }//then
@@ -734,13 +792,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_e2.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_e2.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_e2.setBackgroundResource(R.drawable.seat_violet);
                         clicked_e2 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_e2.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_e2.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_e2.setBackgroundResource(R.drawable.seat_grey);
                         clicked_e2 = false;
                     }//else
                 }//then
@@ -755,13 +815,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_e3.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_e3.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_e3.setBackgroundResource(R.drawable.seat_violet);
                         clicked_e3 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_e3.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_e3.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_e3.setBackgroundResource(R.drawable.seat_grey);
                         clicked_e3 = false;
                     }//else
                 }//then
@@ -776,13 +838,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_e4.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_e4.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_e4.setBackgroundResource(R.drawable.seat_violet);
                         clicked_e4 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_e4.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_e4.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_e4.setBackgroundResource(R.drawable.seat_grey);
                         clicked_e4 = false;
                     }//else
                 }//then
@@ -797,13 +861,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_e5.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_e5.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_e5.setBackgroundResource(R.drawable.seat_violet);
                         clicked_e5 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_e5.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_e5.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_e5.setBackgroundResource(R.drawable.seat_grey);
                         clicked_e5 = false;
                     }//else
                 }//then
@@ -818,13 +884,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_e6.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_e6.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_e6.setBackgroundResource(R.drawable.seat_violet);
                         clicked_e6 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_e6.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_e6.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_e6.setBackgroundResource(R.drawable.seat_grey);
                         clicked_e6 = false;
                     }//else
                 }//then
@@ -839,13 +907,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_e7.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_e7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_e7.setBackgroundResource(R.drawable.seat_violet);
                         clicked_e7 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_e7.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_e7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_e7.setBackgroundResource(R.drawable.seat_grey);
                         clicked_e7 = false;
                     }//else
                 }//then
@@ -860,13 +930,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_f1.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_f1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_f1.setBackgroundResource(R.drawable.seat_violet);
                         clicked_f1 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_f1.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_f1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_f1.setBackgroundResource(R.drawable.seat_grey);
                         clicked_f1 = false;
                     }//else
                 }//then
@@ -881,13 +953,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_f2.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_f2.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_f2.setBackgroundResource(R.drawable.seat_violet);
                         clicked_f2 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_f2.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_f2.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_f2.setBackgroundResource(R.drawable.seat_grey);
                         clicked_f2 = false;
                     }//else
                 }//then
@@ -902,13 +976,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_f3.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_f3.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_f3.setBackgroundResource(R.drawable.seat_violet);
                         clicked_f3 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_f3.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_f3.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_f3.setBackgroundResource(R.drawable.seat_grey);
                         clicked_f3 = false;
                     }//else
                 }//then
@@ -923,13 +999,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_f4.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_f4.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_f4.setBackgroundResource(R.drawable.seat_violet);
                         clicked_f4 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_f4.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_f4.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_f4.setBackgroundResource(R.drawable.seat_grey);
                         clicked_f4 = false;
                     }//else
                 }//then
@@ -944,13 +1022,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_f5.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_f5.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_f5.setBackgroundResource(R.drawable.seat_violet);
                         clicked_f5 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_f5.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_f5.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_f5.setBackgroundResource(R.drawable.seat_grey);
                         clicked_f5 = false;
                     }//else
                 }//then
@@ -965,13 +1045,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_f6.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_f6.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_f6.setBackgroundResource(R.drawable.seat_violet);
                         clicked_f6 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_f6.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_f6.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_f6.setBackgroundResource(R.drawable.seat_grey);
                         clicked_f6 = false;
                     }//else
                 }//then
@@ -986,13 +1068,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_f7.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_f7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_f7.setBackgroundResource(R.drawable.seat_violet);
                         clicked_f7 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_f7.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_f7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_f7.setBackgroundResource(R.drawable.seat_grey);
                         clicked_f7 = false;
                     }//else
                 }//then
@@ -1007,13 +1091,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_g1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        if (sitz.isBarrierefrei())btn_g1.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_g1.setBackgroundResource(R.drawable.seat_violet);
                         clicked_g1 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_g1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        if (sitz.isBarrierefrei())btn_g1.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_g1.setBackgroundResource(R.drawable.seat_grey);
                         clicked_g1 = false;
                     }//else
                 }//then
@@ -1028,13 +1114,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_g2.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_g2.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_g2.setBackgroundResource(R.drawable.seat_violet);
                         clicked_g2 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_g2.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_g2.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_g2.setBackgroundResource(R.drawable.seat_grey);
                         clicked_g2 = false;
                     }//else
                 }//then
@@ -1049,13 +1137,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_g3.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_g3.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_g3.setBackgroundResource(R.drawable.seat_violet);
                         clicked_g3 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_g3.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_g3.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_g3.setBackgroundResource(R.drawable.seat_grey);
                         clicked_g3 = false;
                     }//else
                 }//then
@@ -1070,13 +1160,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_g4.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_g4.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_g4.setBackgroundResource(R.drawable.seat_violet);
                         clicked_g4 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_g4.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_g4.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_g4.setBackgroundResource(R.drawable.seat_grey);
                         clicked_g4 = false;
                     }//else
                 }//then
@@ -1091,13 +1183,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_g5.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_g5.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_g5.setBackgroundResource(R.drawable.seat_violet);
                         clicked_g5 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_g5.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_g5.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_g5.setBackgroundResource(R.drawable.seat_grey);
                         clicked_g5 = false;
                     }//else
                 }//then
@@ -1112,13 +1206,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_g6.setBackgroundResource(R.drawable.seat_violet);
+                        if (sitz.isBarrierefrei())btn_g6.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_g6.setBackgroundResource(R.drawable.seat_violet);
                         clicked_g6 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_g6.setBackgroundResource(R.drawable.seat_grey);
+                        if (sitz.isBarrierefrei())btn_g6.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_g6.setBackgroundResource(R.drawable.seat_grey);
                         clicked_g6 = false;
                     }//else
                 }//then
@@ -1133,13 +1229,15 @@ public class SmallCinemaHall extends AppCompatActivity {
                         sitz = getSitzFrei(id);
                         selected.add(sitz);
                         freieSitze.remove(sitz);
-                        btn_g7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        if (sitz.isBarrierefrei())btn_g7.setBackgroundResource(R.drawable.seat_violet_wheelchair);
+                        else btn_g7.setBackgroundResource(R.drawable.seat_violet);
                         clicked_g7 = true;
                     } else {
                         sitz = getSitzSelected(id);
                         selected.remove(sitz);
                         freieSitze.add(sitz);
-                        btn_g7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        if (sitz.isBarrierefrei())btn_g7.setBackgroundResource(R.drawable.seat_blue_wheelchair);
+                        else btn_g7.setBackgroundResource(R.drawable.seat_grey);
                         clicked_g7 = false;
                     }//else
                 }//then
@@ -1165,35 +1263,79 @@ public class SmallCinemaHall extends AppCompatActivity {
         Button btn_g2 = findViewById(R.id.g2);Button btn_g3 = findViewById(R.id.g3);Button btn_g4 = findViewById(R.id.g4);
         Button btn_g5 = findViewById(R.id.g5);Button btn_g6 = findViewById(R.id.g6);Button btn_g7 = findViewById(R.id.g7);
 
+        for (Sitz s : freieSitze){
+            String sitzID = s.getSitzID();
+            sitzID = sitzID.substring(sitzID.lastIndexOf('_')+1);
+            if (s.isBarrierefrei()){
+                switch (sitzID){
+                    case "A1": btn_a1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
+                    case "B1": btn_b1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
+                    case "C1": btn_c1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
+                    case "D1": btn_d1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
+                    case "E1": btn_e1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
+                    case "F1": btn_f1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
+                    case "G1": btn_g1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
+                    default:
+                }//switch
+            }//then
+        }//for
 
         if (belegteSitze.size()!=0 || reserviert.size()!=0){
             for (Sitz s : belegteSitze){
                 String sitzID = s.getSitzID();
                 sitzID = sitzID.substring(sitzID.lastIndexOf('_')+1);
-                switch (sitzID){
-                    case "A1": btn_a1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "B1": btn_b1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "C1": btn_c1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "D1": btn_d1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "E1": btn_e1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "F1": btn_f1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "G1": btn_g1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    default:
-                }//switch
+                if (!s.isBarrierefrei()){
+                    switch (sitzID){
+                        case "A1": btn_a1.setBackgroundResource(R.drawable.seat_black);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_black);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_black);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_black);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_black);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_black);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "B1": btn_b1.setBackgroundResource(R.drawable.seat_black);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_black);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_black);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_black);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_black);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_black);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "C1": btn_c1.setBackgroundResource(R.drawable.seat_black);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_black);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_black);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_black);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_black);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_black);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "D1": btn_d1.setBackgroundResource(R.drawable.seat_black);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_black);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_black);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_black);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_black);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_black);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "E1": btn_e1.setBackgroundResource(R.drawable.seat_black);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_black);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_black);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_black);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_black);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_black);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "F1": btn_f1.setBackgroundResource(R.drawable.seat_black);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_black);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_black);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_black);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_black);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_black);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "G1": btn_g1.setBackgroundResource(R.drawable.seat_black);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_black);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_black);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_black);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_black);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_black);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_black);break;
+                        default:
+                    }//switch
+                }//then
+                else {
+                    switch (sitzID){
+                        case "A1": btn_a1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "B1": btn_b1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "C1": btn_c1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "D1": btn_d1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "E1": btn_e1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "F1": btn_f1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "G1": btn_g1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        default:
+                    }//switch
+                }//else
             }//for
             for (Sitz s : reserviert){
                 String sitzID = s.getSitzID();
                 sitzID = sitzID.substring(sitzID.lastIndexOf('_')+1);
-                switch (sitzID){
-                    case "A1": btn_a1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "B1": btn_b1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "C1": btn_c1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "D1": btn_d1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "E1": btn_e1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "F1": btn_f1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    case "G1": btn_g1.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_blue_wheelchair);break;
-                    default:
-                }//switch
+                if (!s.isBarrierefrei()){
+                    switch (sitzID){
+                        case "A1": btn_a1.setBackgroundResource(R.drawable.seat_black);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_black);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_black);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_black);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_black);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_black);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "B1": btn_b1.setBackgroundResource(R.drawable.seat_black);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_black);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_black);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_black);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_black);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_black);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "C1": btn_c1.setBackgroundResource(R.drawable.seat_black);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_black);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_black);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_black);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_black);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_black);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "D1": btn_d1.setBackgroundResource(R.drawable.seat_black);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_black);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_black);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_black);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_black);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_black);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "E1": btn_e1.setBackgroundResource(R.drawable.seat_black);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_black);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_black);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_black);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_black);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_black);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "F1": btn_f1.setBackgroundResource(R.drawable.seat_black);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_black);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_black);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_black);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_black);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_black);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_black);break;
+                        case "G1": btn_g1.setBackgroundResource(R.drawable.seat_black);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_black);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_black);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_black);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_black);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_black);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_black);break;
+                        default:
+                    }//switch
+                }//then
+                else {
+                    switch (sitzID){
+                        case "A1": btn_a1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A2": btn_a2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A3": btn_a3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A4": btn_a4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A5": btn_a5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A6": btn_a6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "A7": btn_a7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "B1": btn_b1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B2": btn_b2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B3": btn_b3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B4": btn_b4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B5": btn_b5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B6": btn_b6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "B7": btn_b7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "C1": btn_c1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C2": btn_c2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C3": btn_c3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C4": btn_c4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C5": btn_c5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C6": btn_c6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "C7": btn_c7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "D1": btn_d1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D2": btn_d2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D3": btn_d3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D4": btn_d4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D5": btn_d5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D6": btn_d6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "D7": btn_d7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "E1": btn_e1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E2": btn_e2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E3": btn_e3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E4": btn_e4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E5": btn_e5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E6": btn_e6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "E7": btn_e7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "F1": btn_f1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F2": btn_f2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F3": btn_f3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F4": btn_f4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F5": btn_f5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F6": btn_f6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "F7": btn_f7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        case "G1": btn_g1.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G2": btn_g2.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G3": btn_g3.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G4": btn_g4.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G5": btn_g5.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G6": btn_g6.setBackgroundResource(R.drawable.seat_black_wheelchair);break;case "G7": btn_g7.setBackgroundResource(R.drawable.seat_black_wheelchair);break;
+                        default:
+                    }//switch
+                }//else
             }//for
         }//then
     }//setup

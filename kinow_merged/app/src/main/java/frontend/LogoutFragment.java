@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class LogoutFragment extends Fragment implements WarnDialog.OnAlertButton
     LinearLayout newPwdField;
     EditText setNewPwd;
     EditText confirmSetNewPwd;
+    TextView helloText;
     boolean visible = true;
     boolean emptyPassword = false;
 
@@ -94,12 +96,14 @@ public class LogoutFragment extends Fragment implements WarnDialog.OnAlertButton
         logout_btn = view.findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(this);
         newPwdField = view.findViewById(R.id.new_pwd_field);
+        helloText = view.findViewById(R.id.helloText);
 
         setNewPwd = view.findViewById(R.id.set_new_pwd_input);
         confirmSetNewPwd = view.findViewById(R.id.confirm_set_new_pwd_input);
 
         onLogoutListener = (OnLogoutListener) getContext();
         nutzer = onLogoutListener.onLogoutGetNutzer();
+        helloText.setText("Hello " + nutzer.getVorname());
 
         return view;
     }
@@ -146,7 +150,7 @@ public class LogoutFragment extends Fragment implements WarnDialog.OnAlertButton
 
                 if (setNewPwdText.equals(confirmSetNewPwdText)){
                     Requests r = new Requests();
-                    boolean erfolg = r.setNetPassword(String.valueOf(nutzer.getNutzerID()),nutzer.getPasswort());
+                    boolean erfolg = r.setNetPassword(String.valueOf(nutzer.getNutzerID()),setNewPwdText);
                     if (erfolg){
                         Toast.makeText(getContext(), "Password changed.", Toast.LENGTH_SHORT).show();
                     }//then
