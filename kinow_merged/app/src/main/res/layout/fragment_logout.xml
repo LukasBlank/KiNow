@@ -23,16 +23,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:textSize="30sp"
-            app:fontFamily="sans-serif-medium"
-            android:text="@string/hey" />
+            <TextView
+                android:id="@+id/helloText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/hey"
+                android:textSize="30sp"
+                app:fontFamily="sans-serif-medium" />
 
         <Button
             android:id="@+id/set_new_pwd_btn"

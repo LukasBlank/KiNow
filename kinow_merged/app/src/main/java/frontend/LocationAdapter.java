@@ -34,7 +34,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public LocationAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(context).inflate(R.layout.location_view, viewGroup, false);
         return new ViewHolder(v, kListener);
-    }
+    }//onCreateViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull LocationAdapter.ViewHolder viewHolder, int i) {
