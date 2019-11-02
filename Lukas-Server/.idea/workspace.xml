@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5da69a20-e8f8-4740-b7cc-570ba20f8c3f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Timer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Timer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/backend/connections/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/backend/connections/Requests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/frontend/MovieAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/frontend/MovieAdapter.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,7 +32,7 @@
     <session id="-35880041">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.19" value="3" />
           <entry key="project.open.time.22" value="1" />
@@ -74,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="384" column="24" selection-start-line="384" selection-start-column="24" selection-end-line="384" selection-end-column="24" />
+            <state relative-caret-position="-357">
+              <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
               <folding>
                 <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -93,6 +93,8 @@
                 <element signature="method#getResSitze#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#reservieren#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#buchen#0;class#SimpleController#0;class#DemoApplication#0" />
+                <element signature="method#logout#0;class#SimpleController#0;class#DemoApplication#0" />
+                <element signature="method#getNutzer#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#stonieren#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#sitzeFrei#0;class#SimpleController#0;class#DemoApplication#0" />
                 <element signature="method#mapToSitze#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -188,24 +190,7 @@
               <item name="demo-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="demo-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="lukas" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="demo-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="lukas" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="classes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -284,11 +269,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55838000" />
+    <option name="totallyTimeSpent" value="56415000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18528464" />
@@ -303,7 +287,7 @@
       <window_info anchor="bottom" id="Spring" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.49946293" visible="true" weight="0.21724524" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.49946293" weight="0.21724524" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.2362822" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -440,8 +424,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/DemoApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="384" column="24" selection-start-line="384" selection-start-column="24" selection-end-line="384" selection-end-column="24" />
+        <state relative-caret-position="-357">
+          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
           <folding>
             <element signature="method#getFilme#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#getMapQuerySnapshot#0;class#SimpleController#0;class#DemoApplication#0" />
@@ -459,6 +443,8 @@
             <element signature="method#getResSitze#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#reservieren#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#buchen#0;class#SimpleController#0;class#DemoApplication#0" />
+            <element signature="method#logout#0;class#SimpleController#0;class#DemoApplication#0" />
+            <element signature="method#getNutzer#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#stonieren#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#sitzeFrei#0;class#SimpleController#0;class#DemoApplication#0" />
             <element signature="method#mapToSitze#0;class#SimpleController#0;class#DemoApplication#0" />

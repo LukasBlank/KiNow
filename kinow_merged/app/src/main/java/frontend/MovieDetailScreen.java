@@ -9,18 +9,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -55,6 +54,8 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
     Vorführung vorführung;
     TextView movieRating;
     Button btnBuchen;
+    GridLayout gridLayout;
+    LinearLayout linearLayout;
 
 
     @Override
@@ -133,9 +134,10 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
 
         //wenn ein Kino gewählt wurde und es passende vorführungen gibt, dass zeige die zeiten dazu an
         if (kino.getKinoID()!=0 && vorführungen!=null){
-            timeOne.setVisibility(View.VISIBLE);
-            timeTwo.setVisibility(View.VISIBLE);
-            timeThree.setVisibility(View.VISIBLE);
+            gridLayout = findViewById(R.id.gridLay_times);
+            gridLayout.setVisibility(View.VISIBLE);
+            linearLayout = findViewById(R.id.linLay_infos3);
+            linearLayout.setVisibility(View.VISIBLE);
             //weise den angezeigten componenten und dem buchen button den onClickListener zu
             timeOne.setOnClickListener(onClickListener);
             timeTwo.setOnClickListener(onClickListener);
