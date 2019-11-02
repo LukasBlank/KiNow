@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5da69a20-e8f8-4740-b7cc-570ba20f8c3f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/DemoApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/backend/classes/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/backend/classes/Nutzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/backend/classes/Nutzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/backend/connections/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kinow_merged/app/src/main/java/backend/connections/Requests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,48 +29,6 @@
     </option>
     <expand />
     <select />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-35880041">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.15" value="1" />
-          <entry key="project.open.time.19" value="3" />
-          <entry key="project.open.time.22" value="1" />
-          <entry key="project.open.time.28" value="1" />
-          <entry key="project.open.time.45" value="1" />
-          <entry key="project.open.time.64" value="1" />
-          <entry key="project.opened" value="8" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="gradle" value="1" />
-          <entry key="iml" value="2" />
-          <entry key="java" value="10" />
-          <entry key="xml" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Groovy" value="1" />
-          <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="10" />
-          <entry key="XML" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="java" value="14260" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JAVA" value="14260" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
@@ -167,37 +129,68 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="demo-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
               <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="demo-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="demo-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="demo-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="lukas" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="lukas" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="classes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Lukas-Server" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\A703967\Desktop\DHBW\Semester 3\Fallstudie\KiNow\Lukas-Server" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="server" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -205,13 +198,14 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572369155572" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Timer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -242,11 +236,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Spring Boot.DemoApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -275,8 +264,9 @@
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
     <layout>
+      <window_info id="Resources Explorer" weight="0.32998413" />
       <window_info id="Web" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18796992" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18773136" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -351,9 +341,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/lukas/classes/Vorführung.java">
@@ -485,7 +472,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>Android API 29 Platform</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
