@@ -85,6 +85,8 @@ public class Requests {
 
     public Nutzer LogIn (String email, String pw){
         //reset & request builden
+        Nutzer n = new Nutzer();
+        pw = n.hashPasswordWithRSA(pw);
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/LogIn";
         Request request = new Request.Builder()
@@ -118,6 +120,7 @@ public class Requests {
     }//getNutzer
 
     public boolean registerUser (Nutzer n){
+        n.setPasswort(n.hashPasswordWithRSA(n.getPasswort()));
         String nutzer = n.toMapString();
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/addNutzer";
@@ -504,6 +507,8 @@ public class Requests {
     }//logout
 
     public boolean setNetPassword (String nutzerID, String password){
+        Nutzer n = new Nutzer();
+        password = n.hashPasswordWithRSA(password);
         if (nutzerID==null || password==null)return false;
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/setNewPassword";
@@ -514,5 +519,18 @@ public class Requests {
         String erg = getRequestErg(request);
         return Boolean.parseBoolean(erg);
     }//setNewPassword
+
+    public void hashAll(){
+        String a = "julie.pines@atos.net";
+        String b ="nils.falkenrich@atos.net";
+        String c = "lukas.blank@atos.net";
+        ArrayList<Nutzer> list = new ArrayList<Nutzer>();
+        list.add(getNutzer(a));
+        list.add(getNutzer(b));
+        list.add(getNutzer(c));
+        for (int i = 0;i<list.size();i++){
+            setNetPassword(list.get(i).getNutzerID()+"",list.get(i).getPasswort());
+        }
+    }
 
 }//class
