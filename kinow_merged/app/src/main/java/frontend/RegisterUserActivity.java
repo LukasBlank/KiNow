@@ -1,12 +1,18 @@
 package frontend;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import backend.classes.Nutzer;
 import backend.connections.Requests;
@@ -18,15 +24,20 @@ public class RegisterUserActivity extends AppCompatActivity {
     EditText reg_eMail_field;
     EditText reg_pwd_field;
     EditText reg_confirmPwd_field;
+    EditText birthday_field;
+    EditText gender_field;
 
     String firstname_input;
     String lastname_input;
     String email_input;
     String pwd_input;
     String confirm_pwd_input;
+    String dot = ".";
 
     CheckBox accept_terms;
     CheckBox minimum_age;
+
+    DatePickerDialog datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,54 @@ public class RegisterUserActivity extends AppCompatActivity {
         accept_terms = findViewById(R.id.checkbox_terms);
         minimum_age = findViewById(R.id.checkbox_sixteen);
 
+        birthday_field = findViewById(R.id.reg_birthday_input);
+        birthday_field.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCalendar();
+            }
+        });
+
+        gender_field = findViewById(R.id.reg_gender_input);
+        gender_field.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseGender();
+            }
+        });
+
+    }
+
+    // Single Choice Gender
+    public void chooseGender() {
+        final String[] singleChoiceItems = getResources().getStringArray(R.array.gender);
+        int itemSelected = -1;
+        new AlertDialog.Builder(this)
+                .setTitle("Select Your Gender:")
+                .setSingleChoiceItems(singleChoiceItems, itemSelected, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int selectedIndex) {
+                        gender_field.setText(singleChoiceItems[selectedIndex]);
+                    }
+                })
+                .setPositiveButton("Ok", null)
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    // Date Picker Dialog
+    public void openCalendar() {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        datePicker = new DatePickerDialog(RegisterUserActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                birthday_field.setText(dayOfMonth + dot + (monthOfYear + 1) + dot + year);
+            }
+        }, year, month, day);
+        datePicker.show();
     }
 
     public void openTerms(View view) {

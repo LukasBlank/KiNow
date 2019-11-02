@@ -26,7 +26,7 @@ import backend.connections.Requests;
  * Use the {@link LogoutFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButtonListener,View.OnClickListener {
+public class LogoutFragment extends Fragment implements WarnDialog.OnAlertButtonListener,View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -159,7 +159,7 @@ public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButto
                 // Log user out
                 ArrayList<Buchung> reservierungen = onLogoutListener.onLogoutGetRes();
                 if (reservierungen!= null && reservierungen.size()>0){
-                    AlertDialog alert = new AlertDialog(getActivity(),this);
+                    WarnDialog alert = new WarnDialog(getActivity(),this);
                     alert.show();
                 }//then
                 else {

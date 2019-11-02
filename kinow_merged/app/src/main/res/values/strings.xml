@@ -63,6 +63,8 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="guest">Continue as guest.</string>
+    <string name="birthday">Birthday</string>
+    <string name="gender">Gender</string>
 
     <!-- Strings for Default Cinema Hall Content -->
     <string name="screen">SCREEN</string>

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -112,6 +116,53 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/relLay_more_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:weightSum="10"
+                android:layout_below="@+id/relLay_reg_names">
+
+                <EditText
+                    android:id="@+id/reg_birthday_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:layout_weight="5"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:maxLength="10"
+                    android:background="@color/editTextField"
+                    android:hint="@string/birthday"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/reg_gender_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:ems="6"
+                    android:maxLength="6"
+                    android:layout_weight="5"
+                    android:background="@color/editTextField"
+                    android:hint="@string/gender"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/relLay_reg_email"
                 android:layout_width="match_parent"
@@ -119,7 +170,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_below="@+id/relLay_reg_names">
+                android:layout_below="@+id/relLay_more_info">
 
                 <ImageView
                     android:id="@+id/reg_email_img"
@@ -341,4 +392,6 @@
 
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

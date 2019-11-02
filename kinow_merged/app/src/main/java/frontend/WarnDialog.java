@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-public class AlertDialog extends Dialog implements android.view.View.OnClickListener {
+public class WarnDialog extends Dialog implements android.view.View.OnClickListener {
 
     public Activity activity;
     public Context context;
@@ -16,7 +16,7 @@ public class AlertDialog extends Dialog implements android.view.View.OnClickList
     public Button yes, no;
     private OnAlertButtonListener onAlertButtonListener;
 
-    public AlertDialog(Activity a, OnAlertButtonListener onAlertButtonListener) {
+    public WarnDialog(Activity a, OnAlertButtonListener onAlertButtonListener) {
         super(a);
         // TODO Auto-generated constructor stub
         this.activity = a;
