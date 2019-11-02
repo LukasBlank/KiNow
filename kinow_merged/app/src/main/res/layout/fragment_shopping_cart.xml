@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="frontend.ShoppingCartFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/header_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/header_cart"
+        android:textSize="22sp"
+        app:fontFamily="sans-serif-medium"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cart_item_list"
+        android:layout_below="@+id/header_cart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/buy_all_btn"
+        android:visibility="gone"
+        android:layout_below="@+id/cart_item_list"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@color/mint"
+        android:text="@string/buy_all"/>
+
+    <TextView
+        android:id="@+id/header_pruchases"
+        android:layout_below="@+id/buy_all_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/header_purchases"
+        android:textSize="22sp"
+        app:fontFamily="sans-serif-medium"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/purchases_item_list"
+        android:layout_below="@+id/header_pruchases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</ScrollView>

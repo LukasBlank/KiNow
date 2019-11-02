@@ -95,6 +95,9 @@
     <string name="buy_btn">Buy</string>
     <string name="reserve_btn">Reserve</string>
     <string name="delete_btn">Delete</string>
+    <string name="header_purchases">Purchases:</string>
+    <string name="header_cart">Shopping Cart:</string>
+    <string name="buy_all">Buy All</string>
 
     <!-- Strings for Alert Dialog Content -->
     <string name="warning">WARNING</string>
