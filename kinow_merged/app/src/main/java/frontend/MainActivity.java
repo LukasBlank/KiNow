@@ -177,5 +177,10 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
         navigation.setSelectedItemId(R.id.tab_account);
     }//onLogout
 
+    @Override
+    public Nutzer onLogoutGetNutzer(){
+        return nutzer;
+    }//onLogoutGetNutzer
+
 
 }//class

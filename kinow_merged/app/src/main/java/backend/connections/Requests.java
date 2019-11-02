@@ -500,7 +500,19 @@ public class Requests {
                 .addHeader("nutzerID",nutzerID)
                 .url(url).build();
         String erg = getRequestErg(request);
-        
+        return Boolean.parseBoolean(erg);
     }//logout
+
+    public boolean setNetPassword (String nutzerID, String password){
+        if (nutzerID==null || password==null)return false;
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/setNewPassword";
+        Request request = new Request.Builder()
+                .addHeader("nutzerID",nutzerID)
+                .addHeader("password",password)
+                .url(url).build();
+        String erg = getRequestErg(request);
+        return Boolean.parseBoolean(erg);
+    }//setNewPassword
 
 }//class

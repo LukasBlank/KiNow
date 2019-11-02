@@ -416,6 +416,24 @@ public class DemoApplication {
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
     }//getNutzer
 
+    @RequestMapping(value = "/setNetPassword")
+    public ResponseEntity<Object> setNewPassword(@RequestHeader("nutzerID") String nutzerID, @RequestHeader("password") String password){
+      boolean erfolg = false;
+      ApiFuture<DocumentSnapshot> nutzerDoc = db.collection("Nutzer").document(nutzerID).get();
+      try {
+        DocumentSnapshot doc = nutzerDoc.get();
+        if (doc.exists()){
+          db.collection("Nutzer").document(nutzerID).update("passwort",password);
+          erfolg = true;
+        }//then
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+      }
+      return new ResponseEntity<>(erfolg,HttpStatus.ACCEPTED);
+    }//setNetPassword
+
     private void stonieren (DocumentReference documentReference){
       ApiFuture<DocumentSnapshot> res = documentReference.get();
       ApiFuture<QuerySnapshot> query = documentReference.collection("Sitze").get();

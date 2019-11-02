@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import backend.classes.Buchung;
+import backend.classes.Nutzer;
 import backend.connections.Requests;
 
 /**
@@ -46,6 +47,7 @@ public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButto
 
     private String setNewPwdText;
     private String confirmSetNewPwdText;
+    private Nutzer nutzer;
 
     private OnFragmentInteractionListener mListener;
     private OnLogoutListener onLogoutListener;
@@ -97,6 +99,7 @@ public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButto
         confirmSetNewPwd = view.findViewById(R.id.confirm_set_new_pwd_input);
 
         onLogoutListener = (OnLogoutListener) getContext();
+        nutzer = onLogoutListener.onLogoutGetNutzer();
 
         return view;
     }
@@ -140,13 +143,23 @@ public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButto
                     visible = true;
                     Toast.makeText(getContext(), "Saved new password.", Toast.LENGTH_SHORT).show();
                 }
+
+                if (setNewPwdText.equals(confirmSetNewPwdText)){
+                    Requests r = new Requests();
+                    boolean erfolg = r.setNetPassword(String.valueOf(nutzer.getNutzerID()),nutzer.getPasswort());
+                    if (erfolg){
+                        Toast.makeText(getContext(), "Password changed.", Toast.LENGTH_SHORT).show();
+                    }//then
+                    else Toast.makeText(getContext(), "Unexpected error. Please try again.", Toast.LENGTH_SHORT).show();
+                }//then
+                else Toast.makeText(getContext(), "Password incorrect.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.logout_btn:
                 // Log user out
                 ArrayList<Buchung> reservierungen = onLogoutListener.onLogoutGetRes();
                 if (reservierungen!= null && reservierungen.size()>0){
-                    AlertDialog alert = new AlertDialog(getActivity());
+                    AlertDialog alert = new AlertDialog(getActivity(),this);
                     alert.show();
                 }//then
                 else {
@@ -186,7 +199,9 @@ public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButto
     @Override
     public void onYes() {
         Requests requests = new Requests();
-        //stonieren
+        boolean erfolg = requests.logout(String.valueOf(nutzer.getNutzerID()));
+        if (erfolg)onLogoutListener.onLogout();
+        else Toast.makeText(getContext(), "Logout failed.", Toast.LENGTH_SHORT).show();
     }//onYes
 
 
@@ -208,5 +223,7 @@ public class LogoutFragment extends Fragment implements AlertDialog.OnAlertButto
     public interface OnLogoutListener {
         ArrayList<Buchung> onLogoutGetRes();
         void onLogout();
+        Nutzer onLogoutGetNutzer ();
     }//interface
+
 }
