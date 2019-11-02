@@ -520,17 +520,5 @@ public class Requests {
         return Boolean.parseBoolean(erg);
     }//setNewPassword
 
-    public void hashAll(){
-        String a = "julie.pines@atos.net";
-        String b ="nils.falkenrich@atos.net";
-        String c = "lukas.blank@atos.net";
-        ArrayList<Nutzer> list = new ArrayList<Nutzer>();
-        list.add(getNutzer(a));
-        list.add(getNutzer(b));
-        list.add(getNutzer(c));
-        for (int i = 0;i<list.size();i++){
-            setNetPassword(list.get(i).getNutzerID()+"",list.get(i).getPasswort());
-        }
-    }
 
 }//class
