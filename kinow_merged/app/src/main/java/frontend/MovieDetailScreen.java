@@ -112,7 +112,10 @@ public class MovieDetailScreen extends AppCompatActivity implements Serializable
 
         movieImage = findViewById(R.id.movieImageDetail);
         String imgURL = film.getBildLink();
-        Picasso.get().load(imgURL).into(movieImage);
+        //Picasso.get().load(imgURL).resize(700,935).centerCrop().into(movieImage);
+        Picasso.get().load(imgURL).resize(700,935).centerCrop().into(movieImage);
+
+        // resize(700,935).centerCrop().
 
         //movieImage.setImageBitmap(bitmap);
 
