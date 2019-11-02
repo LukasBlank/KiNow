@@ -181,5 +181,12 @@ public class MainActivity extends AppCompatActivity implements LogoutFragment.On
         return nutzer;
     }//onLogoutGetNutzer
 
+    // Show FinishDialog if BackButton is pressed
+    @Override
+    public void onBackPressed(){
+        FinishDialog finisher = new FinishDialog(MainActivity.this);
+        finisher.show();
+        super.onBackPressed();
+    }
 
 }//class

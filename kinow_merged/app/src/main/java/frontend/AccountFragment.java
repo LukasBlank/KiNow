@@ -257,6 +257,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener, C
         }
     }
 
+    public void onBackPressed(){
+        FinishDialog finisher = new FinishDialog(getActivity());
+        finisher.show();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

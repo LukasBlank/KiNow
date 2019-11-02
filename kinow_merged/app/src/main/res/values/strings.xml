@@ -100,6 +100,11 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!-- Strings for Finish Dialog Content -->
+    <string name="finish">CLOSE APP</string>
+    <string name="finish_text">This will close the app. \nAre you sure?</string>
+    <string name="cancel">Cancel</string>
+
     <!-- Terms Of Service -->
     <string name="terms_of_service">Datenschutzerklärung
 \n
