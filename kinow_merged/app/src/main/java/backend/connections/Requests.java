@@ -542,16 +542,28 @@ public class Requests {
         return erg;
     }//getVorZeit
 
-    public boolean stonieren (String buchungsID){
+    public boolean stonieren (String buchungsID, String nutzerID){
         if (buchungsID==null)return false;
         ThreadRequest tr = new ThreadRequest();
         String url = "http://94.16.123.237:8080/vorStonieren";
         Request request = new Request.Builder()
                 .addHeader("buchungsID",buchungsID)
+                .addHeader("nutzerID",nutzerID)
                 .url(url).build();
         String erg = getRequestErg(request);
         return Boolean.parseBoolean(erg);
     }//stonieren
+
+    public boolean buchen (String nutzerID){
+        if (nutzerID==null)return false;
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/buchen";
+        Request request = new Request.Builder()
+                .addHeader("nutzerID",nutzerID)
+                .url(url).build();
+        String erg = getRequestErg(request);
+        return erg.equals("Success");
+    }//buchen
 
 
 }//class

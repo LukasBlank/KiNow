@@ -52,6 +52,8 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
     private RecyclerView reservierugsList;
     private ReservierungAdapter resAdapter;
 
+    private Button buyallBtn;
+
     public ShoppingCartFragment() {
         // Required empty public constructor
     }
@@ -101,7 +103,7 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
         nutzer = onLoadCartListener.onLoadGetNutzer();
         reservierungen = new ArrayList<>();
         bestellungen = new ArrayList<>();
-        Requests request = new Requests();
+        final Requests request = new Requests();
         if (nutzer.getNutzerID()!=0){
             reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
             bestellungen = request.getBestellungen(String.valueOf(nutzer.getNutzerID()));
@@ -112,10 +114,33 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
         reservierugsList.setAdapter(resAdapter);
         reservierugsList.getAdapter().notifyDataSetChanged();
 
+        //initialize button
+        buyallBtn = view.findViewById(R.id.buy_all_btn);
         if (reservierungen.size()>0){
-            Button buyallBtn = view.findViewById(R.id.buy_all_btn);
             buyallBtn.setVisibility(View.VISIBLE);
         }//then
+        buyallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (reservierungen.size()>0){
+                    Requests r = new Requests();
+                    boolean erfolg = r.buchen(String.valueOf(nutzer.getNutzerID()));
+                    if (erfolg){
+                        for (Buchung b : reservierungen){
+                            reservierungen.remove(b);
+                        }//for
+                        bestellungen = r.getBestellungen(String.valueOf(nutzer.getNutzerID()));
+                        reservierugsList.getAdapter().notifyDataSetChanged();
+                        buyallBtn.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+                    }//then
+                    else Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                }//then
+                else{
+                    Toast.makeText(getContext(), "Your shopping cart is empty...", Toast.LENGTH_SHORT).show();
+                }//else
+            }//onClick
+        });
 
         // Inflate the layout for this fragment
         return view;
@@ -148,15 +173,16 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
     @Override
     public void onDelete(Buchung buchung) {
         Requests r = new Requests();
-        boolean erfolg = r.stonieren(buchung.getBuchungID());
+        boolean erfolg = r.stonieren(buchung.getBuchungID(),String.valueOf(nutzer.getNutzerID()));
         if (erfolg){
             reservierungen.remove(buchung);
+            if (reservierungen.size()==0)buyallBtn.setVisibility(View.GONE);
+            reservierugsList.getAdapter().notifyDataSetChanged();
             Toast.makeText(getContext(), "Deleted successfully.", Toast.LENGTH_SHORT).show();
         }//then
         else {
             Toast.makeText(getContext(), "Deletion failed.", Toast.LENGTH_SHORT).show();
         }//else
-
     }//onDelete
 
     /**

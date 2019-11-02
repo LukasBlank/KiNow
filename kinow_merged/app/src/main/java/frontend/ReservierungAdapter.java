@@ -45,7 +45,6 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
             @Override
             public void onClick(View view) {
                 onDeleteListener.onDelete(reservierungen.get(i));
-                reservierungen.remove(i);
             }//onClick
         });
         return viewHolder;
