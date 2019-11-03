@@ -8,6 +8,7 @@ public class Bestellung {
   private double gesamtpreis;
   private String besetellungsnummer;
   private ArrayList<Buchung> buchungen;
+  private long timestamp;
 
   public Bestellung (){}
 
@@ -16,6 +17,10 @@ public class Bestellung {
     this.buchungen = buchungen;
     setGesamtpreis();
   }//K
+
+  public void setTimestamp (long time) {timestamp = time;}
+
+  public long getTimestamp () {return timestamp;}
 
   public String getBesetellungsnummer() {
     return besetellungsnummer;

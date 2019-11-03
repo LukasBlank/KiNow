@@ -229,7 +229,7 @@ public class DemoApplication {
       Map<String,Map<String,Object>> map = new HashMap<>();
       if (Long.parseLong(nutzerID)>=1){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
-            .collection("Bestellungen").get();
+            .collection("Bestellungen").orderBy("timestamp").get();
         map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
@@ -252,7 +252,7 @@ public class DemoApplication {
       if (bestellungsnummer.length()!=0){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Bestellungen").document(bestellungsnummer)
-            .collection("Buchungen").get();
+            .collection("Buchungen").orderBy("timestamp").get();
         map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
@@ -706,9 +706,11 @@ public class DemoApplication {
       //reservierungen zu bestellungen machen
       Bestellung bestellung = new Bestellung();
       bestellung.setBesetellungsnummer(getBestellungsnummer(nutzer));
+      bestellung.setTimestamp(System.currentTimeMillis());
       bestellung.setBuchungen(reservierungen);
       //bestellung hinzufügen
       Map<String,Object> bestellungMap = new HashMap<>(); bestellungMap.put("bestellungsnummer",bestellung.getBesetellungsnummer()); bestellungMap.put("gesamtpreis",bestellung.getGesamtpreis());
+      bestellungMap.put("timestamp",bestellung.getTimestamp());
       nutzer.collection("Bestellungen").document(bestellung.getBesetellungsnummer()).set(bestellungMap);
       //buchungen hinzufügen
       int i = 1;
@@ -716,6 +718,7 @@ public class DemoApplication {
         //buchungsID updaten und buchungen hinzufügen
         String buchungsID = bestellung.getBesetellungsnummer() + "_" + i;
         b.setBuchungID(buchungsID);
+        b.setTimestamp(System.currentTimeMillis());
         Map<String,Object> buchungMap = buchungToMap(b);
         nutzer.collection("Bestellungen").document(b.getBestellungsnummer())
             .collection("Buchungen").document(b.getBuchungID()).set(buchungMap);
@@ -747,6 +750,7 @@ public class DemoApplication {
         buchungMap.put("buchungsID",buchung.getBuchungID());
         buchungMap.put("buchungspreis",buchung.getBuchungspreis());
         buchungMap.put("vorführungsID",buchung.getVorführungsID());
+        if (buchung.getTimestamp()>0)buchungMap.put("timestamp",buchung.getTimestamp());
         if (buchung.getFilmtitel()!=null)buchungMap.put("filmtitel",buchung.getFilmtitel());
         return buchungMap;
       }///then

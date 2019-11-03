@@ -16,9 +16,7 @@ import java.util.ArrayList;
 
 import backend.classes.Bestellung;
 import backend.classes.Buchung;
-import backend.classes.Film;
 import backend.classes.Nutzer;
-import backend.classes.Vorführung;
 import backend.connections.Requests;
 
 
@@ -42,15 +40,18 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
 
     private OnFragmentInteractionListener mListener;
     private OnLoadCartListener onLoadCartListener;
+    private ReservierungAdapter.OnDeleteListener onDeleteListener = this;
 
     private Nutzer nutzer;
-    private Vorführung vor;
-    private ArrayList<Film> filme;
     private ArrayList<Buchung>reservierungen;
     private ArrayList<Bestellung>bestellungen;
+    private ArrayList<Buchung> buchungen;
 
     private RecyclerView reservierugsList;
     private ReservierungAdapter resAdapter;
+
+    private RecyclerView bestellungsList;
+    private BestellungAdapter besAdapter;
 
     private Button buyallBtn;
 
@@ -93,9 +94,14 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
         reservierugsList = view.findViewById(R.id.cart_item_list);
         reservierugsList.setHasFixedSize(true);
 
+        bestellungsList = view.findViewById(R.id.purchases_item_list);
+        bestellungsList.setHasFixedSize(true);
+
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         reservierugsList.setLayoutManager(layoutManager);
+        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getActivity());
+        bestellungsList.setLayoutManager(layoutManager1);
 
 
 
@@ -103,16 +109,21 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
         nutzer = onLoadCartListener.onLoadGetNutzer();
         reservierungen = new ArrayList<>();
         bestellungen = new ArrayList<>();
-        final Requests request = new Requests();
+        Requests request = new Requests();
         if (nutzer.getNutzerID()!=0){
             reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
             bestellungen = request.getBestellungen(String.valueOf(nutzer.getNutzerID()));
+            buchungen = getBestellungsBuchungen();
         }//then
 
-        resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity(),this);
+        resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity(),onDeleteListener);
+        besAdapter = new BestellungAdapter(nutzer,buchungen,getActivity());
 
         reservierugsList.setAdapter(resAdapter);
         reservierugsList.getAdapter().notifyDataSetChanged();
+
+        bestellungsList.setAdapter(besAdapter);
+        bestellungsList.getAdapter().notifyDataSetChanged();
 
         //initialize button
         buyallBtn = view.findViewById(R.id.buy_all_btn);
@@ -128,9 +139,10 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
                     if (erfolg){
                         for (Buchung b : reservierungen){
                             reservierungen.remove(b);
+                            buchungen.add(b);
                         }//for
-                        bestellungen = r.getBestellungen(String.valueOf(nutzer.getNutzerID()));
                         reservierugsList.getAdapter().notifyDataSetChanged();
+                        bestellungsList.getAdapter().notifyDataSetChanged();
                         buyallBtn.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
                     }//then
@@ -184,6 +196,18 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
             Toast.makeText(getContext(), "Deletion failed.", Toast.LENGTH_SHORT).show();
         }//else
     }//onDelete
+
+    public ArrayList<Buchung> getBestellungsBuchungen (){
+        ArrayList<Buchung> buchungen = new ArrayList<>();
+        if (bestellungen!=null){
+            for (Bestellung b : bestellungen){
+                for (Buchung buchung : b.getBuchungen()){
+                    buchungen.add(buchung);
+                }//for
+            }//for
+        }//then
+        return buchungen;
+    }//getBestellungsBuchungen
 
     /**
      * This interface must be implemented by activities that contain this

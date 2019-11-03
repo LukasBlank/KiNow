@@ -8,6 +8,7 @@ public class Buchung {
   private String vorführungsID,buchungsID,filmtitel;
   private ArrayList<Sitz> sitze;
   private ArrayList<Preisvariation> preisvariationen;
+  private  long timestamp;
 
   public Buchung() {}
 
@@ -25,6 +26,10 @@ public class Buchung {
   public double getVorführungspreis() {
     return vorführungspreis;
   }
+
+  public void setTimestamp(long time){timestamp=time;}
+
+  public long getTimestamp () {return timestamp;}
 
   public void setVorführungspreis(Double vorführungspreis) {
     this.vorführungspreis = vorführungspreis;
