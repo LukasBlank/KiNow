@@ -230,7 +230,7 @@ public class DemoApplication {
       Map<String,Map<String,Object>> map = new HashMap<>();
       if (Long.parseLong(nutzerID)>=1){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
-            .collection("Bestellungen").orderBy("timestamp", Direction.DESCENDING).get();
+            .collection("Bestellungen").orderBy("timestamp", Direction.ASCENDING).get();
         map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
@@ -253,7 +253,7 @@ public class DemoApplication {
       if (bestellungsnummer.length()!=0){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Bestellungen").document(bestellungsnummer)
-            .collection("Buchungen").orderBy("timestamp",Direction.DESCENDING).get();
+            .collection("Buchungen").orderBy("timestamp",Direction.ASCENDING).get();
         map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
