@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
     private BestellungAdapter besAdapter;
 
     private Button buyallBtn;
+    private TextView cartTV,purchasesTV;
 
     public ShoppingCartFragment() {
         // Required empty public constructor
@@ -91,6 +93,30 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
 
+        //Lade den ausgewählten Nutzer
+        nutzer = onLoadCartListener.onLoadGetNutzer();
+        reservierungen = new ArrayList<>();
+        bestellungen = new ArrayList<>();
+        buchungen = new ArrayList<>();
+        Requests request = new Requests();
+        if (nutzer.getNutzerID()!=0){
+            reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
+            bestellungen = request.getBestellungen(String.valueOf(nutzer.getNutzerID()));
+            buchungen = getBestellungsBuchungen();
+        }//then
+
+        cartTV = view.findViewById(R.id.header_cart);
+        purchasesTV = view.findViewById(R.id.header_pruchases);
+
+        if(reservierungen.size()==0 && buchungen.size()==0){
+            cartTV.setVisibility(View.GONE);
+            purchasesTV.setVisibility(View.GONE);
+        }//then
+        if(reservierungen.size()==0)cartTV.setVisibility(View.GONE);
+        else cartTV.setVisibility(View.VISIBLE);
+        if(buchungen.size()==0)purchasesTV.setVisibility(View.GONE);
+        else purchasesTV.setVisibility(View.VISIBLE);
+
         reservierugsList = view.findViewById(R.id.cart_item_list);
         reservierugsList.setHasFixedSize(true);
 
@@ -105,16 +131,7 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
 
 
 
-        //Lade den ausgewählten Nutzer
-        nutzer = onLoadCartListener.onLoadGetNutzer();
-        reservierungen = new ArrayList<>();
-        bestellungen = new ArrayList<>();
-        Requests request = new Requests();
-        if (nutzer.getNutzerID()!=0){
-            reservierungen = request.getReservierungen(String.valueOf(nutzer.getNutzerID()));
-            bestellungen = request.getBestellungen(String.valueOf(nutzer.getNutzerID()));
-            buchungen = getBestellungsBuchungen();
-        }//then
+
 
         resAdapter = new ReservierungAdapter(nutzer,reservierungen,getActivity(),onDeleteListener);
         besAdapter = new BestellungAdapter(nutzer,buchungen,getActivity());
@@ -145,6 +162,8 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
                         bestellungsList.getAdapter().notifyDataSetChanged();
                         buyallBtn.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+                        cartTV.setVisibility(View.GONE);
+                        purchasesTV.setVisibility(View.VISIBLE);
                     }//then
                     else Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
                 }//then
@@ -188,7 +207,10 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
         boolean erfolg = r.stonieren(buchung.getBuchungID(),String.valueOf(nutzer.getNutzerID()));
         if (erfolg){
             reservierungen.remove(buchung);
-            if (reservierungen.size()==0)buyallBtn.setVisibility(View.GONE);
+            if (reservierungen.size()==0){
+                buyallBtn.setVisibility(View.GONE);
+                cartTV.setVisibility(View.GONE);
+            }//then
             reservierugsList.getAdapter().notifyDataSetChanged();
             Toast.makeText(getContext(), "Deleted successfully.", Toast.LENGTH_SHORT).show();
         }//then

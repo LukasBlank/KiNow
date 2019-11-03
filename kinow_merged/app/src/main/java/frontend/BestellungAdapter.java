@@ -41,7 +41,9 @@ public class BestellungAdapter extends RecyclerView.Adapter<BestellungAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Requests r = new Requests();
-        Buchung b = buchungen.get(i);
+        int size = getItemCount();
+        int index = size-1-i;
+        Buchung b = buchungen.get(index);
         String zeit = r.getVorZeit(b.getVorführungsID());
         String filmID = b.getVorführungsID().substring(0,b.getVorführungsID().lastIndexOf('_'));
         filmID = filmID.substring(filmID.lastIndexOf('_')+1);
