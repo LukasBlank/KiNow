@@ -137,9 +137,9 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
                     Requests r = new Requests();
                     boolean erfolg = r.buchen(String.valueOf(nutzer.getNutzerID()));
                     if (erfolg){
-                        for (Buchung b : reservierungen){
-                            reservierungen.remove(b);
-                            buchungen.add(b);
+                        for (int i = reservierungen.size()-1;i>=0;i--){
+                            buchungen.add(reservierungen.get(i));
+                            reservierungen.remove(i);
                         }//for
                         reservierugsList.getAdapter().notifyDataSetChanged();
                         bestellungsList.getAdapter().notifyDataSetChanged();

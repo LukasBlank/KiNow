@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.Query.Direction;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -229,7 +230,7 @@ public class DemoApplication {
       Map<String,Map<String,Object>> map = new HashMap<>();
       if (Long.parseLong(nutzerID)>=1){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
-            .collection("Bestellungen").orderBy("timestamp").get();
+            .collection("Bestellungen").orderBy("timestamp", Direction.DESCENDING).get();
         map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
@@ -252,7 +253,7 @@ public class DemoApplication {
       if (bestellungsnummer.length()!=0){
         ApiFuture<QuerySnapshot> query = db.collection("Nutzer").document(nutzerID)
             .collection("Bestellungen").document(bestellungsnummer)
-            .collection("Buchungen").orderBy("timestamp").get();
+            .collection("Buchungen").orderBy("timestamp",Direction.DESCENDING).get();
         map = getMapQuerySnapshot(query);
       }//then
       return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
