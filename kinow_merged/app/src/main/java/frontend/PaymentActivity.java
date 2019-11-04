@@ -9,11 +9,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import backend.classes.Buchung;
 import backend.classes.Nutzer;
+import backend.connections.Requests;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -45,14 +47,10 @@ public class PaymentActivity extends AppCompatActivity {
     Nutzer nutzer;
     ArrayList<Buchung> reservierungen;
 
-    OnPayListener onPayListener;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payment_activity);
-
-        onPayListener = (OnPayListener) getBaseContext();
 
         nutzer = (Nutzer) getIntent().getSerializableExtra("nutzer");
         reservierungen = (ArrayList<Buchung>) getIntent().getSerializableExtra("reservierungen");
@@ -121,7 +119,15 @@ public class PaymentActivity extends AppCompatActivity {
                a = true;
            }
            if(!a){
-               onPayListener.onPay("Paypal");
+               Requests r = new Requests();
+               boolean erfolg = r.buchen(String.valueOf(nutzer.getNutzerID()),"Paypal");
+               if (erfolg){
+                   Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+                   setResult(1);
+                   finish();
+               }
+               else Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+               setResult(0);
                finish();
            }
        }
@@ -153,14 +159,21 @@ public class PaymentActivity extends AppCompatActivity {
                 b = true;
             }
             if(!b){
-                onPayListener.onPay("Creditcard");
-                finish();
+                Requests r = new Requests();
+                boolean erfolg = r.buchen(String.valueOf(nutzer.getNutzerID()),"Paypal");
+                if (erfolg){
+                    Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+                    setResult(1);
+                    finish();
+                }
+                else {
+                    setResult(0);
+                    Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         }
     }
 
-    public interface OnPayListener{
-        void onPay(String zahlungsmethode);
-    }//inteface
 
 }
