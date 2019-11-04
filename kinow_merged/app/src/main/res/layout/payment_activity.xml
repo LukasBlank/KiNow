@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/payment_relLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/payment_header_linLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/violet"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/payment_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="22sp"
+                    app:fontFamily="sans-serif-medium"
+                    android:text="@string/method"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/payment_square"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/square"
+                android:layout_below="@+id/payment_header_linLay"
+                android:contentDescription="@string/contentDescription"
+                android:layout_centerHorizontal="true"
+                android:tint="@color/violet"
+                android:layout_marginTop="-10dp"
+                android:rotation="45"/>
+
+            <TextView
+                android:id="@+id/choose_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@id/payment_square"
+                android:text="@string/choose_method"
+                android:textSize="18sp"/>
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/choose_text"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <RadioButton
+                    android:id="@+id/rb_paypal"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:text="@string/paypal"
+                    android:layout_weight="5"/>
+
+                <RadioButton
+                    android:id="@+id/rb_mastercard"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:text="@string/mastercard"
+                    android:layout_weight="5"/>
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/paypal_linLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radio_group"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/paypal_email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/email"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/paypal_pwd_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/pwd"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mastercard_linLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radio_group"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/mastercard_cardholder_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/card_holder"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:lines="1"
+                    android:maxEms="30"
+                    android:maxLength="30"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/mastercard_cardnumber_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/cardnumber"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:lines="1"
+                    android:maxEms="16"
+                    android:maxLength="16"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                <EditText
+                    android:id="@+id/mastercard_securitycode_input"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/security_code"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:lines="1"
+                    android:maxEms="3"
+                    android:maxLength="3"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:layout_weight="5"/>
+
+                <EditText
+                    android:id="@+id/mastercard_expire_input"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/editTextField"
+                    android:hint="@string/expire"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:lines="1"
+                    android:maxEms="3"
+                    android:maxLength="3"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:layout_weight="5"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/pay_now_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/payment_relLay"
+                android:text="@string/pay"
+                android:textColor="@color/white"
+                android:background="@color/mint"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

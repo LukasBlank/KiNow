@@ -110,6 +110,17 @@
     <string name="finish_text">This will close the app. \nAre you sure?</string>
     <string name="cancel">Cancel</string>
 
+    <!-- Strings for Payment Activity Content -->
+    <string name="method">PAYMENT METHOD</string>
+    <string name="choose_method">Please choose one of the following payment methods:</string>
+    <string name="pay">Pay now</string>
+    <string name="paypal">PayPal</string>
+    <string name="mastercard">MasterCard</string>
+    <string name="cardnumber">Card Number</string>
+    <string name="security_code">Security Code</string>
+    <string name="expire">Expiration Date</string>
+    <string name="card_holder">Card Holder`s Name</string>
+
     <!-- Terms Of Service -->
     <string name="terms_of_service">Datenschutzerklärung
 \n
