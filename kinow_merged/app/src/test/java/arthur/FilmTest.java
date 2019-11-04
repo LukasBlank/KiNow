@@ -1,149 +1,187 @@
 package arthur;
 
+import backend.classes.Film;
+import backend.classes.Sitz;
+import backend.classes.Vorführung;
+import backend.classes.Werbung;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
 public class FilmTest {
+    ArrayList<Sitz> TestSitze = new ArrayList<Sitz>();
+    ArrayList<Werbung> TestWerbung = new ArrayList<Werbung>();
+    private ArrayList<String> genres =new ArrayList<String>();
+    private ArrayList<String> darsteller =new ArrayList<String>(  );
+    private ArrayList<String> regie = new ArrayList<String>(  );
 
-  /**
-  List<Film> TestFilme = new ArrayList<Film>();
-  List<String> darsteller1 = new ArrayList<String>();
-  ArrayList<String> genres1 = new ArrayList<String>();
-  ArrayList<String> regie1 = new ArrayList<String>();
-  List<String> darsteller2 = new ArrayList<String>();
-  ArrayList<String> genres2 = new ArrayList<String>();
-  ArrayList<String> regie2 = new ArrayList<String>();
-  Film TestFilm = new Film(1,"Das Erwachen der Macht", "Die Macht", 110, 16, 3, genres1,
-      (ArrayList<String>) darsteller1, regie1);
-  Film TestFilm2 = new Film(2,"Zombieland","TestB",150,18,5,genres2,
-      (ArrayList<String>) darsteller2,regie2);
+    Vorführung TestVorfuehrung = new Vorführung("1","7",90, 5L, 110L, "15:00", true, TestWerbung, TestSitze);
+    ArrayList<Vorführung> Vorfuehrung = new ArrayList<>(  );
+    Film filmtest1 = new Film(123,"filmName","theLink","Beschreibung",150,16,5,genres,darsteller,regie,Vorfuehrung,"link");
+    @Before
+    public void setUp() throws Exception {
+    }
 
-  @Before
-  public void main(){
-    darsteller1.add("Andi");
-    darsteller1.add("Leo");
-    genres1.add("Action");
-    genres1.add("Comedy");
-    regie1.add("Chris");
-    darsteller2.add("Heinrich");
-    darsteller2.add("Angi");
-    genres2.add("Blue");
-    genres2.add("Green");
-    regie2.add("Micha");
-    TestFilme.add(TestFilm);
-    TestFilme.add(TestFilm2);
+    @Test
+    public void getFilmID() {
+        Assert.assertEquals(123,filmtest1.getFilmID());
+    }
 
-  }
+    @Test
+    public void setFilmID() {
+        filmtest1.setFilmID( 222 );
+        Assert.assertEquals( 222,filmtest1.getFilmID() );
+    }
 
+    @Test
+    public void getFsk() {
+        Assert.assertEquals( 16,filmtest1.getFsk() );
+    }
 
-  @Test
-  public void setFilmID() {
-    TestFilm.setFilmID(66);
-    Assert.assertEquals(66,TestFilm.getFilmID());
-  }
+    @Test
+    public void setFsk() {
+        filmtest1.setFsk( 18 );
+        Assert.assertEquals( 18,filmtest1.getFsk() );
+    }
 
-  @Test
-  public void setFsk() {
-    TestFilm.setFsk(23);
-    Assert.assertEquals(23,TestFilm.getFsk());
-  }
+    @Test
+    public void getDauer() {
+        Assert.assertEquals( 150,filmtest1.getDauer() );
+    }
 
-  @Test
-  public void setDauer() {
-    TestFilm2.setDauer(18);
-    Assert.assertEquals(18,TestFilm2.getDauer());
-  }
+    @Test
+    public void setDauer() {
+        filmtest1.setDauer( 200 );
+        Assert.assertEquals( 200,filmtest1.getDauer() );
+    }
 
-  @Test
-  public void setBewertung() {
-    Assert.assertEquals(5,TestFilm2.getBewertung());
-    TestFilm2.setBewertung(2);
-    Assert.assertEquals(2,TestFilm2.getBewertung());
-  }
+    @Test
+    public void getBewertung() {
+        Assert.assertEquals( 5,filmtest1.getBewertung() );
+    }
 
-  @Test
-  public void setTitel() {
-    TestFilm2.setTitel("Test1337");
-    Assert.assertEquals("Test1337",TestFilm2.getTitel());
-  }
+    @Test
+    public void setBewertung() {
+        filmtest1.setBewertung( 8 );
+        Assert.assertEquals( 8,filmtest1.getBewertung() );
+    }
 
-  @Test
-  public void setBeschreibung() {
-    String besch = "Goiler Film";
-    TestFilm2.setBeschreibung(besch);
-    Assert.assertEquals(besch,TestFilm2.getBeschreibung());
-  }
+    @Test
+    public void getTitel() {
+        Assert.assertEquals( "filmName",filmtest1.getTitel() );
+    }
 
-  @Test
-  public void getFilmID() {
-    Assert.assertEquals(1,TestFilm.getFilmID());
-  }
+    @Test
+    public void setTitel() {
+        filmtest1.setTitel( "title" );
+        Assert.assertEquals( "title",filmtest1.getTitel() );
+    }
 
-  @Test
-  public void getFsk() {
-    Assert.assertEquals(16,TestFilm.getFsk());
-  }
+    @Test
+    public void getBeschreibung() {
+        Assert.assertEquals( "Beschreibung",filmtest1.getBeschreibung() );
+    }
 
-  @Test
-  public void getDauer() {
-    Assert.assertEquals(110,TestFilm.getDauer());
-  }
+    @Test
+    public void setBeschreibung() {
+        filmtest1.setBeschreibung( "good" );
+        Assert.assertEquals( "good",filmtest1.getBeschreibung() );
+    }
 
-  @Test
-  public void getBewertung() {
-    Assert.assertEquals(5,TestFilm2.getBewertung());
-  }
+    @Test
+    public void getBildLink() {
+        Assert.assertEquals( "theLink",filmtest1.getBildLink() );
 
-  @Test
-  public void getTitel() {
-    Assert.assertEquals("Zombieland",TestFilm2.getTitel());
-  }
+    }
 
-  @Test
-  public void getBeschreibung() {
-    Assert.assertEquals("TestB",TestFilm2.getBeschreibung());
-  }
+    @Test
+    public void setBildLink() {
+        filmtest1.setLink( "newLink" );
+        Assert.assertEquals( "newLink",filmtest1.getLink() );
+    }
 
-  @Test
-  public void getRegie() {
-    Assert.assertEquals(regie2,TestFilm2.getRegie());
-  }
+    @Test
+    public void getGenres() {
+        Assert.assertEquals( genres,filmtest1.getGenres() );
+    }
 
-  @Test
-  public void getGenres() {
-    Assert.assertEquals(genres1,TestFilm.getGenres());
-  }
+    @Test
+    public void setGenres() {
+         ArrayList<String> genres2 =new ArrayList<String>();
+         filmtest1.setGenres( genres2 );
+         Assert.assertEquals( genres2,filmtest1.getGenres() );
+    }
 
-  @Test
-  public void getDarsteller() {
-    Assert.assertEquals(darsteller1,TestFilm.getDarsteller());
-  }
+    @Test
+    public void getDarsteller() {
+        Assert.assertEquals( darsteller,filmtest1.getDarsteller() );
+    }
 
-  @Test
-  public void equals() {
-   Film TestFilm3 = new Film(1,"Das Erwachen der Macht", "Die Macht", 110, 16, 3, genres1,
-        (ArrayList<String>) darsteller1, regie1);
-    Assert.assertEquals(true,TestFilm.equals(TestFilm));
-    Assert.assertEquals(true,TestFilm3.equals(TestFilm));
-  }
+    @Test
+    public void setDarsteller() {
+         ArrayList<String> darsteller2 =new ArrayList<String>(  );
+        filmtest1.setDarsteller( darsteller2 );
+        Assert.assertEquals( darsteller2,filmtest1.getDarsteller() );
 
-  @Test
-  public void set() {
-    TestFilm.set("titel","Fast5");
-    TestFilm.set("beschreibung","Ein guter Film sieht anders aus");
-    TestFilm.set("regie",regie2);
-    TestFilm.set("darsteller",darsteller2);
-    TestFilm.set("genres",genres2);
-    TestFilm.set("filmID",7);
-    TestFilm.set("dauer",333);
-    TestFilm.set("fsk",90);
-    TestFilm.set("bewertung",10);
-    Assert.assertEquals("Fast5",TestFilm.getTitel());
-    Assert.assertEquals("Ein guter Film sieht anders aus",TestFilm.getBeschreibung());
-    Assert.assertEquals(regie2,TestFilm.getRegie());
-    Assert.assertEquals(darsteller2,TestFilm.getDarsteller());
-    Assert.assertEquals(genres2,TestFilm.getGenres());
-    Assert.assertEquals(7,TestFilm.getFilmID());
-    Assert.assertEquals(333,TestFilm.getDauer());
-    Assert.assertEquals(90,TestFilm.getFsk());
-    Assert.assertEquals(10,TestFilm.getBewertung());
-  }
-  **/
+    }
+
+    @Test
+    public void getRegie() {
+        Assert.assertEquals( regie,filmtest1.getRegie() );
+    }
+
+    @Test
+    public void setRegie() {
+         ArrayList<String> regie2 = new ArrayList<String>(  );
+         filmtest1.setRegie( regie2 );
+         Assert.assertEquals( regie2,filmtest1.getRegie() );
+    }
+
+    @Test
+    public void getVorführungen() {
+        Assert.assertEquals( Vorfuehrung,filmtest1.getVorführungen() );
+    }
+
+    @Test
+    public void setVorführungen() {
+        ArrayList<Vorführung> Vorfuehrung2 = new ArrayList<>(  );
+        filmtest1.setVorführungen( Vorfuehrung2 );
+        Assert.assertEquals( Vorfuehrung2,filmtest1.getVorführungen() );
+
+    }
+
+    @Test
+    public void getVorführung() {
+    }
+
+    @Test
+    public void addVorführung() {
+    }
+
+    @Test
+    public void removeVorführung() {
+    }
+
+    @Test
+    public void getLink() {
+        Assert.assertEquals( "link",filmtest1.getLink() );
+    }
+
+    @Test
+    public void setLink() {
+        filmtest1.setLink( "newLink" );
+        Assert.assertEquals( "newLink",filmtest1.getLink() );
+    }
+
+    @Test
+    public void equals() {
+    }
+
+    @Test
+    public void set() {
+    }
 }
