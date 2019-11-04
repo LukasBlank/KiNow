@@ -1,5 +1,6 @@
 package frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -79,6 +80,12 @@ public class SmallCinemaHall extends AppCompatActivity {
 
     public void bookSeats(View v2){
         if (selected.size()==0) Toast.makeText(this, "No seats selected.", Toast.LENGTH_SHORT).show();
+        else if (nutzer.getNutzerID()==0){
+            Intent intent = new Intent(getBaseContext(),PaymentActivity.class);
+            intent.putExtra("nutzer", nutzer);
+            intent.putExtra("sitze",selected);
+            startActivityForResult(intent,1);
+        }//elseif
         else {
             boolean möglich = r.reservieren(selected,String.valueOf(nutzer.getNutzerID()));
             if (möglich){

@@ -566,5 +566,24 @@ public class Requests {
         return erg.equals("Success");
     }//buchen
 
+    public boolean gastBuchen (ArrayList<Sitz> sitze){
+        String head =sitzeToString(sitze);
+        ThreadRequest tr = new ThreadRequest();
+        String url = "http://94.16.123.237:8080/gastBuchen";
+        Request request = new Request.Builder()
+                .addHeader("sitze",head)
+                .url(url).build();
+        String erg = getRequestErg(request);
+        try {
+            if (erg==null)return false;
+            else {
+                return erg.equals("Success");
+            }//else
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }//catch
+    }//getBuchen
+
 
 }//class

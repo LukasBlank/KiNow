@@ -491,10 +491,8 @@ public class DemoApplication {
     }//vorStonieren
 
     @RequestMapping(value = "/gastBuchen")
-    public ResponseEntity<Object> gastBuchen (@RequestHeader("email") String email, @RequestHeader("sitze") String sitze){
+    public ResponseEntity<Object> gastBuchen ( @RequestHeader("sitze") String sitze){
       String erg = "Success";
-      if(email==null)erg = "Error.";
-      else {
         try {
           //Header zu ArrayListe von Sitzen umwandeln
           Map<String,Map<String,Object>> map = new ObjectMapper().readValue(sitze,Map.class);
@@ -526,7 +524,6 @@ public class DemoApplication {
           e.printStackTrace();
           erg = "Error.";
         }//catch
-      }//else
       return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
     }//gastBuchen
 

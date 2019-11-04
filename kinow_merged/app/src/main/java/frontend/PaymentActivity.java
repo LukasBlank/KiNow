@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import backend.classes.Buchung;
 import backend.classes.Nutzer;
+import backend.classes.Sitz;
 import backend.connections.Requests;
 
 public class PaymentActivity extends AppCompatActivity {
@@ -46,6 +47,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     Nutzer nutzer;
     ArrayList<Buchung> reservierungen;
+    ArrayList<Sitz> sitze;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +55,18 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.payment_activity);
 
         nutzer = (Nutzer) getIntent().getSerializableExtra("nutzer");
-        reservierungen = (ArrayList<Buchung>) getIntent().getSerializableExtra("reservierungen");
+        if (nutzer.getNutzerID()!=0)reservierungen = (ArrayList<Buchung>) getIntent().getSerializableExtra("reservierungen");
+        else reservierungen = new ArrayList<>();
+        if (nutzer.getNutzerID()==0)sitze = (ArrayList<Sitz>) getIntent().getSerializableExtra("sitze");
+        else sitze = new ArrayList<>();
 
         pay_btn = findViewById(R.id.pay_now_btn);
 
         pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pay();
+                 if (nutzer.getNutzerID()!=0)pay();
+                 else payGuest();
             }
         });
 
@@ -86,6 +92,7 @@ public class PaymentActivity extends AppCompatActivity {
                     rb_paypal.setTextColor(Color.BLACK);
                     rb_mastercard.setTextColor(Color.GRAY);
                     paypalLinLay.setVisibility(View.VISIBLE);
+                    mastercardLinLay.setVisibility(View.GONE);
                     pay_btn.setVisibility(View.VISIBLE);
                     paypal_bool = true;
                     if(nutzer.getNutzerID()!=0)pEmailInput.setText(nutzer.getEmail());
@@ -94,6 +101,7 @@ public class PaymentActivity extends AppCompatActivity {
                     rb_mastercard.setTextColor(Color.BLACK);
                     rb_paypal.setTextColor(Color.GRAY);
                     mastercardLinLay.setVisibility(View.VISIBLE);
+                    paypalLinLay.setVisibility(View.GONE);
                     pay_btn.setVisibility(View.VISIBLE);
                     mastercard_bool = true;
                 }
@@ -126,9 +134,12 @@ public class PaymentActivity extends AppCompatActivity {
                    setResult(1);
                    finish();
                }
-               else Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
-               setResult(0);
-               finish();
+               else {
+                   Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+                   setResult(0);
+                   finish();
+               }
+
            }
        }
 
@@ -174,6 +185,83 @@ public class PaymentActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void payGuest(){
+        if(paypal_bool) {
+            paypalEmail = pEmailInput.getText().toString();
+            paypalPwd = pPwdInput.getText().toString();
+            if (paypalEmail.matches("") || paypalEmail.contains(" ")) {
+                pEmailInput.setHint("E-Mail *");
+                pEmailInput.setHintTextColor(getResources().getColor(R.color.red));
+                a = true;
+            }
+            if (paypalPwd.matches("") || paypalPwd.contains(" ")) {
+                pPwdInput.setHint("Password *");
+                pPwdInput.setHintTextColor(getResources().getColor(R.color.red));
+                a = true;
+            }
+            if (paypalEmail.indexOf('@')==-1) Toast.makeText(this, "Email incorrect.", Toast.LENGTH_SHORT).show();
+            else {
+                if (!a) {
+                    Requests r = new Requests();
+                    boolean erfolg = r.gastBuchen(sitze);
+                    if (erfolg) {
+                        Toast.makeText(this, "Tickets were send to + " + pEmailInput + ".", Toast.LENGTH_SHORT).show();
+                        setResult(1);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+                        setResult(0);
+                        finish();
+                    }
+
+                }//then
+            }//else
+
+        }//then
+
+        if(mastercard_bool){
+            mastercardHolder = cardHolder.getText().toString();
+            mastercardNumber = cardNumber.getText().toString();
+            mastercardSecurityCode = securityCode.getText().toString();
+            mastercardExpiration = expirationDate.getText().toString();
+            if(mastercardHolder.matches("") || mastercardHolder.contains(" ")){
+                cardHolder.setHint("Card Holder`s Name *");
+                cardHolder.setHintTextColor(getResources().getColor(R.color.red));
+                b = true;
+            }
+            if(mastercardNumber.matches("") || mastercardNumber.contains(" ")){
+                cardNumber.setHint("Card Number *");
+                cardNumber.setHintTextColor(getResources().getColor(R.color.red));
+                b = true;
+            }
+            if(mastercardSecurityCode.matches("") || mastercardSecurityCode.contains(" ")){
+                securityCode.setHint("Security Code *");
+                securityCode.setHintTextColor(getResources().getColor(R.color.red));
+                b = true;
+            }
+            if(mastercardExpiration.matches("") || mastercardExpiration.contains(" ")){
+                expirationDate.setHint("Expiration Date *");
+                expirationDate.setHintTextColor(getResources().getColor(R.color.red));
+                b = true;
+            }
+            if(!b){
+                Requests r = new Requests();
+                boolean erfolg = r.gastBuchen(sitze);
+                if (erfolg){
+                    Toast.makeText(this, "\"Tickets were send to + \" + pEmailInput + \".\"", Toast.LENGTH_SHORT).show();
+                    setResult(1);
+                    finish();
+                }
+                else {
+                    setResult(0);
+                    Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        }//mastercard
+
+    }//payGuest
 
 
 }
