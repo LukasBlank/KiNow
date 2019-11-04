@@ -206,7 +206,7 @@ public class PaymentActivity extends AppCompatActivity {
                     Requests r = new Requests();
                     boolean erfolg = r.gastBuchen(sitze);
                     if (erfolg) {
-                        Toast.makeText(this, "Tickets were send to + " + pEmailInput + ".", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Tickets were send to " + paypalEmail + ".", Toast.LENGTH_SHORT).show();
                         setResult(1);
                         finish();
                     } else {
@@ -249,7 +249,7 @@ public class PaymentActivity extends AppCompatActivity {
                 Requests r = new Requests();
                 boolean erfolg = r.gastBuchen(sitze);
                 if (erfolg){
-                    Toast.makeText(this, "\"Tickets were send to + \" + pEmailInput + \".\"", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Success.", Toast.LENGTH_SHORT).show();
                     setResult(1);
                     finish();
                 }

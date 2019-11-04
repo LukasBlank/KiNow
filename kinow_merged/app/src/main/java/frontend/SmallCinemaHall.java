@@ -99,6 +99,14 @@ public class SmallCinemaHall extends AppCompatActivity {
         }//else
     }//bookSeats
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1){
+            finish();
+        }//then
+    }//onActivityResult
+
     public void onBtnClick(View view) {
 
         Button btn_a1 = findViewById(R.id.a1);Button btn_a2 = findViewById(R.id.a2);Button btn_a3 = findViewById(R.id.a3);

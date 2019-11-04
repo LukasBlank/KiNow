@@ -25,6 +25,7 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
     private ArrayList<Buchung> reservierungen;
     private Context context;
     private OnDeleteListener onDeleteListener;
+    int pos;
 
     public ReservierungAdapter (Nutzer nutzer, ArrayList<Buchung> reservierungen, Context context, OnDeleteListener onDeleteListener){
         this.nutzer = nutzer;
@@ -38,20 +39,21 @@ public class ReservierungAdapter extends RecyclerView.Adapter<ReservierungAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(context).inflate(R.layout.cart_view, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
-        viewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onDeleteListener.onDelete(reservierungen.get(i));
-            }//onClick
-        });
         return viewHolder;
     }//onCreateViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        pos = i;
+        viewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDeleteListener.onDelete(reservierungen.get(pos));
+            }//onClick
+        });
         Requests r = new Requests();
         Buchung b = reservierungen.get(i);
         String zeit = r.getVorZeit(b.getVorführungsID());
