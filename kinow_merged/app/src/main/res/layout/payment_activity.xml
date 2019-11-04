@@ -269,12 +269,12 @@
                 android:id="@+id/pay_now_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/payment_relLay"
+                android:layout_marginTop="10dp"
+                android:background="@color/violet"
                 android:text="@string/pay"
                 android:textColor="@color/white"
-                android:background="@color/mint"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </RelativeLayout>
 

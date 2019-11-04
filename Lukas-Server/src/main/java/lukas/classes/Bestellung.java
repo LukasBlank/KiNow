@@ -6,7 +6,7 @@ import java.util.List;
 public class Bestellung {
 
   private double gesamtpreis;
-  private String besetellungsnummer;
+  private String besetellungsnummer,zahlungsmethode;
   private ArrayList<Buchung> buchungen;
   private long timestamp;
 
@@ -21,6 +21,10 @@ public class Bestellung {
   public void setTimestamp (long time) {timestamp = time;}
 
   public long getTimestamp () {return timestamp;}
+
+  public void setZahlungsmethode (String zahlungsmethode) {this.zahlungsmethode = zahlungsmethode;}
+
+  public String getZahlungsmethode() { return zahlungsmethode; }
 
   public String getBesetellungsnummer() {
     return besetellungsnummer;
@@ -79,6 +83,8 @@ public class Bestellung {
       case "bestellungsnummer": this.besetellungsnummer = (String) o;
       break;
       case "gesamtpreis": this.gesamtpreis = Long.parseLong(o.toString());
+      break;
+      case "zahlungsmethode": this.zahlungsmethode = (String) o;
       break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch

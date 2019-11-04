@@ -9,12 +9,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import backend.classes.Buchung;
+import backend.classes.Nutzer;
 
 public class PaymentActivity extends AppCompatActivity {
 
-    LinearLayout paypalLinLay = findViewById(R.id.paypal_linLay);
-    LinearLayout mastercardLinLay = findViewById(R.id.mastercard_linLay);
+    LinearLayout paypalLinLay;
+    LinearLayout mastercardLinLay;
 
     Boolean paypal_bool = false;
     Boolean mastercard_bool = false;
@@ -22,27 +26,38 @@ public class PaymentActivity extends AppCompatActivity {
     Boolean b = false;
 
     // PayPal
-    EditText pEmailInput = findViewById(R.id.paypal_email_input);
+    EditText pEmailInput;
     String paypalEmail;
-    EditText pPwdInput = findViewById(R.id.paypal_pwd_input);
+    EditText pPwdInput;
     String paypalPwd;
 
     // MasterCard
-    EditText cardHolder = findViewById(R.id.mastercard_cardholder_input);
+    EditText cardHolder;
     String mastercardHolder;
-    EditText cardNumber = findViewById(R.id.mastercard_cardnumber_input);
+    EditText cardNumber;
     String mastercardNumber;
-    EditText expirationDate = findViewById(R.id.mastercard_expire_input);
+    EditText expirationDate;
     String mastercardExpiration;
-    EditText securityCode = findViewById(R.id.mastercard_securitycode_input);
+    EditText securityCode;
     String mastercardSecurityCode;
+    Button pay_btn;
 
-    Button pay_btn = findViewById(R.id.pay_now_btn);
+    Nutzer nutzer;
+    ArrayList<Buchung> reservierungen;
+
+    OnPayListener onPayListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payment_activity);
+
+        onPayListener = (OnPayListener) getBaseContext();
+
+        nutzer = (Nutzer) getIntent().getSerializableExtra("nutzer");
+        reservierungen = (ArrayList<Buchung>) getIntent().getSerializableExtra("reservierungen");
+
+        pay_btn = findViewById(R.id.pay_now_btn);
 
         pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +70,17 @@ public class PaymentActivity extends AppCompatActivity {
         final RadioButton rb_paypal = findViewById(R.id.rb_paypal);
         final RadioButton rb_mastercard = findViewById(R.id.rb_mastercard);
 
+        paypalLinLay = findViewById(R.id.paypal_linLay);
+        mastercardLinLay = findViewById(R.id.mastercard_linLay);
+
+        //finde Textfelder etc
+        pEmailInput = findViewById(R.id.paypal_email_input);
+        pPwdInput = findViewById(R.id.paypal_pwd_input);
+        cardHolder = findViewById(R.id.mastercard_cardholder_input);
+        cardNumber = findViewById(R.id.mastercard_cardnumber_input);
+        securityCode = findViewById(R.id.mastercard_securitycode_input);
+        expirationDate = findViewById(R.id.mastercard_expire_input);
+
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -64,7 +90,8 @@ public class PaymentActivity extends AppCompatActivity {
                     paypalLinLay.setVisibility(View.VISIBLE);
                     pay_btn.setVisibility(View.VISIBLE);
                     paypal_bool = true;
-                }
+                    if(nutzer.getNutzerID()!=0)pEmailInput.setText(nutzer.getEmail());
+                }//then
                 if (checkedId == R.id.rb_mastercard){
                     rb_mastercard.setTextColor(Color.BLACK);
                     rb_paypal.setTextColor(Color.GRAY);
@@ -78,6 +105,7 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     public void pay() {
+
         // PayPal
        if(paypal_bool){
            paypalEmail = pEmailInput.getText().toString();
@@ -93,7 +121,7 @@ public class PaymentActivity extends AppCompatActivity {
                a = true;
            }
            if(!a){
-               Toast.makeText(this, "Payment completed.", Toast.LENGTH_SHORT).show();
+               onPayListener.onPay("Paypal");
                finish();
            }
        }
@@ -125,10 +153,14 @@ public class PaymentActivity extends AppCompatActivity {
                 b = true;
             }
             if(!b){
-                Toast.makeText(this, "Payment completed.", Toast.LENGTH_SHORT).show();
+                onPayListener.onPay("Creditcard");
                 finish();
             }
         }
     }
+
+    public interface OnPayListener{
+        void onPay(String zahlungsmethode);
+    }//inteface
 
 }

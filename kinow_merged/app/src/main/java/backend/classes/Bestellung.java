@@ -6,7 +6,7 @@ import java.util.List;
 public class Bestellung {
 
   private double gesamtpreis;
-  private String besetellungsnummer;
+  private String besetellungsnummer,zahlungsmethode;
   private ArrayList<Buchung> buchungen;
 
   public Bestellung (){}
@@ -20,6 +20,10 @@ public class Bestellung {
   public String getBesetellungsnummer() {
     return besetellungsnummer;
   }
+
+  public void setZahlungsmethode (String z) {this.zahlungsmethode = z;}
+
+  public String getZahlungsmethode() {return zahlungsmethode; }
 
   public double getGesamtpreis() {
     return gesamtpreis;
@@ -74,6 +78,8 @@ public class Bestellung {
       case "bestellungsnummer": this.besetellungsnummer = (String) o;
         break;
       case "gesamtpreis": this.gesamtpreis = Double.parseDouble(o.toString());
+        break;
+      case "zahlungsmethode": this.zahlungsmethode = (String) o;
         break;
       default: System.out.println("Attribut existiert nicht.");
     }//switch

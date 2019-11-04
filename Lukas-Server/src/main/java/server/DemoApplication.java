@@ -340,7 +340,7 @@ public class DemoApplication {
     }//reservieren
 
     @RequestMapping(value = "/buchen")
-    public ResponseEntity<Object> buchen(@RequestHeader("nutzerID") String nutzerID){
+    public ResponseEntity<Object> buchen(@RequestHeader("nutzerID") String nutzerID, @RequestHeader("zahlungsmethode") String zahlungsmethode){
       long id = Long.parseLong(nutzerID);
       DocumentReference nutzer = db.collection("Nutzer").document(nutzerID);
       String erg = "Success";
@@ -356,7 +356,7 @@ public class DemoApplication {
             //wenn nutzer existiert, dann
            ArrayList<Buchung> reservierungen = getRes(nutzerID);
            if (reservierungen.size()>0){
-             if (!verbucheReservierungen(nutzer,reservierungen))erg = "Error.";
+             if (!verbucheReservierungen(nutzer,reservierungen,zahlungsmethode))erg = "Error.";
            }//then
           }//else
         } catch (InterruptedException e) {
@@ -489,6 +489,46 @@ public class DemoApplication {
       }//catch
       return new ResponseEntity<>(erfolg,HttpStatus.ACCEPTED);
     }//vorStonieren
+
+    @RequestMapping(value = "/gastBuchen")
+    public ResponseEntity<Object> gastBuchen (@RequestHeader("email") String email, @RequestHeader("sitze") String sitze){
+      String erg = "Success";
+      if(email==null)erg = "Error.";
+      else {
+        try {
+          //Header zu ArrayListe von Sitzen umwandeln
+          Map<String,Map<String,Object>> map = new ObjectMapper().readValue(sitze,Map.class);
+          ArrayList<Sitz> sitzListe = mapToSitze(map);
+          //prüfen ob auch sitze mitgegeben wurden
+          if (sitzListe.size()>0){
+            Sitz tmp = sitzListe.get(0);
+            DocumentReference vorführungRef = db.collection("Kino").document(tmp.getKinoID()).collection("spieltFilme")
+                .document(tmp.getFilmID()).collection("Vorstellungen").document(tmp.getVorID());
+            //sitze auf freiheit überprüfen
+            boolean frei = sitzeFrei(sitzListe);
+            if (frei){
+              //sitze aus der passendne vorführung entfernen und zu reservierten sitzen packen
+              for (Map.Entry<String,Map<String,Object>> en : map.entrySet()){
+                vorführungRef.collection("FreieSitze").document(en.getKey()).delete();
+                vorführungRef.collection("BelegteSitze").document(en.getKey()).set(en.getValue());
+              }//for
+            }//then
+            else erg = "Error.";
+          }//then
+          else erg = "Error.";
+        } catch (JsonParseException e) {
+          e.printStackTrace();
+          erg = "Error.";
+        } catch (JsonMappingException e) {
+          e.printStackTrace();
+          erg = "Error.";
+        } catch (IOException e) {
+          e.printStackTrace();
+          erg = "Error.";
+        }//catch
+      }//else
+      return new ResponseEntity<>(erg,HttpStatus.ACCEPTED);
+    }//gastBuchen
 
     private void stonieren (DocumentReference documentReference){
       ApiFuture<DocumentSnapshot> res = documentReference.get();
@@ -679,7 +719,7 @@ public class DemoApplication {
       return buchungen;
     }//getRes
 
-    private boolean verbucheReservierungen (DocumentReference nutzer, ArrayList<Buchung> reservierungen){
+    private boolean verbucheReservierungen (DocumentReference nutzer, ArrayList<Buchung> reservierungen, String zahlungsmethode){
       //sitze in vorführung umbuchen
       for (Buchung buchung : reservierungen){
         ArrayList<Sitz> sitze = buchung.getSitze();
@@ -707,11 +747,12 @@ public class DemoApplication {
       //reservierungen zu bestellungen machen
       Bestellung bestellung = new Bestellung();
       bestellung.setBesetellungsnummer(getBestellungsnummer(nutzer));
+      bestellung.setZahlungsmethode(zahlungsmethode);
       bestellung.setTimestamp(System.currentTimeMillis());
       bestellung.setBuchungen(reservierungen);
       //bestellung hinzufügen
       Map<String,Object> bestellungMap = new HashMap<>(); bestellungMap.put("bestellungsnummer",bestellung.getBesetellungsnummer()); bestellungMap.put("gesamtpreis",bestellung.getGesamtpreis());
-      bestellungMap.put("timestamp",bestellung.getTimestamp());
+      bestellungMap.put("timestamp",bestellung.getTimestamp());bestellungMap.put("zahlungsmethode",zahlungsmethode);
       nutzer.collection("Bestellungen").document(bestellung.getBesetellungsnummer()).set(bestellungMap);
       //buchungen hinzufügen
       int i = 1;

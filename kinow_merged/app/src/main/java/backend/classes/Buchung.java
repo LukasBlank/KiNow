@@ -1,8 +1,9 @@
 package backend.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Buchung {
+public class Buchung implements Serializable {
 
   private double buchungspreis,vorführungspreis;
   private String vorführungsID,buchungsID,filmtitel;

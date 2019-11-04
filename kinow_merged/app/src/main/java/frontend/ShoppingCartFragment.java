@@ -1,6 +1,7 @@
 package frontend;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +30,7 @@ import backend.connections.Requests;
  * Use the {@link ShoppingCartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingCartFragment extends Fragment implements ReservierungAdapter.OnDeleteListener {
+public class ShoppingCartFragment extends Fragment implements ReservierungAdapter.OnDeleteListener, PaymentActivity.OnPayListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -151,21 +152,11 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
             @Override
             public void onClick(View view) {
                 if (reservierungen.size()>0){
-                    Requests r = new Requests();
-                    boolean erfolg = r.buchen(String.valueOf(nutzer.getNutzerID()));
-                    if (erfolg){
-                        for (int i = reservierungen.size()-1;i>=0;i--){
-                            buchungen.add(reservierungen.get(i));
-                            reservierungen.remove(i);
-                        }//for
-                        reservierugsList.getAdapter().notifyDataSetChanged();
-                        bestellungsList.getAdapter().notifyDataSetChanged();
-                        buyallBtn.setVisibility(View.GONE);
-                        Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
-                        cartTV.setVisibility(View.GONE);
-                        purchasesTV.setVisibility(View.VISIBLE);
-                    }//then
-                    else Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(),PaymentActivity.class);
+                    intent.putExtra("nutzer", nutzer);
+                    intent.putExtra("reservierungen", reservierungen);
+                    getContext().startActivity(intent);
+
                 }//then
                 else{
                     Toast.makeText(getContext(), "Your shopping cart is empty...", Toast.LENGTH_SHORT).show();
@@ -230,6 +221,25 @@ public class ShoppingCartFragment extends Fragment implements ReservierungAdapte
         }//then
         return buchungen;
     }//getBestellungsBuchungen
+
+    @Override
+    public void onPay(String zahlungsmethode) {
+        Requests r = new Requests();
+        boolean erfolg = r.buchen(String.valueOf(nutzer.getNutzerID()),zahlungsmethode);
+        if (erfolg){
+            for (int i = reservierungen.size()-1;i>=0;i--){
+                buchungen.add(reservierungen.get(i));
+                reservierungen.remove(i);
+            }//for
+            reservierugsList.getAdapter().notifyDataSetChanged();
+            bestellungsList.getAdapter().notifyDataSetChanged();
+            buyallBtn.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+            cartTV.setVisibility(View.GONE);
+            purchasesTV.setVisibility(View.VISIBLE);
+        }//then
+        else Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+    }//onPay
 
     /**
      * This interface must be implemented by activities that contain this

@@ -1,7 +1,9 @@
 package backend.classes;
 
 
-public class Sitz {
+import java.io.Serializable;
+
+public class Sitz implements Serializable {
 
   private String sitzID;
   private boolean loge,barrierefrei;
