@@ -125,12 +125,14 @@ public class KinoTest {
 
   @Test
   public void getSaal() {
+    TestSaelle.add(TestSaal1);
+    TestSaelle.add(TestSaal2);
     Assert.assertEquals(TestSaal1, TestKino.getSaal("1"));
   }
 
   @Test
   public void set() {
-    TestKino.set("KinoID", 3);
+    TestKino.set("kinoID", 3);
     TestKino.set("name", "Hella");
     TestKino.set("ort", "Mannheim");
     Assert.assertEquals(3, TestKino.getKinoID());
