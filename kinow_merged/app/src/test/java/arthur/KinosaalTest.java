@@ -26,7 +26,7 @@ public class KinosaalTest {
       (ArrayList<String>) darsteller2, regie2);
    **/
   ArrayList<Sitz> TestSitze = new ArrayList<Sitz>();
-  Kinosaal TestSaal1 = new Kinosaal("1", 50, true, TestSitze);
+  Kinosaal TestSaal1 = new Kinosaal("1_", 50, true, TestSitze);
   ArrayList<Kinosaal> TestSaelle = new ArrayList<Kinosaal>();
   Kino TestKino = new Kino(1, "KiNOW", "Paderborn", TestFilme, TestSaelle);
 
@@ -42,7 +42,7 @@ public class KinosaalTest {
 
   @Test
   public void getSaalnummer() {
-    Assert.assertEquals("1",TestSaal1.getSaalnummer());
+    Assert.assertEquals("1_",TestSaal1.getSaalnummer());
   }
 
   @Test
@@ -88,13 +88,13 @@ public class KinosaalTest {
   @Test
   public void getKinoID() {
     main();
-    Assert.assertEquals(1,TestSaal1.getKinoID());
+    Assert.assertEquals("1",TestSaal1.getKinoID());
   }
 
   @Test
   public void equals() {
     Assert.assertEquals(true,TestSaal1.equals(TestSaal1));
-    Assert.assertEquals(true,TestSaal1.equals(new Kinosaal("1", 50, true, TestSitze)));
+    Assert.assertEquals(false,TestSaal1.equals(new Kinosaal("1", 50, true, TestSitze)));
   }
 
   @Test
