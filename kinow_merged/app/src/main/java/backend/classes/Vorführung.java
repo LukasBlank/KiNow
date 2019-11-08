@@ -1,7 +1,6 @@
 package backend.classes;
 
 import java.io.Serializable;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class Vorführung implements Serializable {
@@ -77,6 +76,8 @@ public class Vorführung implements Serializable {
     this.grundpreis = grundpreis;
     setGesamtpreis();
   }//setGrundpreis
+
+  public double getGrundpreis(){ return this.grundpreis; }
 
   public void setGesamtpreis(){
     if (grundpreis != 0){
